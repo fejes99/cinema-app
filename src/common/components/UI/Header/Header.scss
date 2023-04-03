@@ -1,0 +1,15 @@
+.header {
+  background-color: aqua;
+  height: 50px;
+
+  &-container {
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: inherit;
+    max-width: 1400px;
+    margin: auto;
+  }
+}

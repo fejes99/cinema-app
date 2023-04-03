@@ -1,0 +1,30 @@
+.navbar-item {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  height: inherit;
+  background-color: antiquewhite;
+  font-size: 20px;
+
+  &:hover {
+    background-color: powderblue;
+  }
+
+  & a {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    &:hover {
+      color: yellowgreen;
+    }
+
+    &:active {
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
