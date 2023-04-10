@@ -1,8 +1,7 @@
 import React from 'react';
+import './HomePage.scss';
 
-type Props = {};
-
-const HomePage = (props: Props) => {
+const HomePage: React.FC = () => {
   return <div>HomePage</div>;
 };
 

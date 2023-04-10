@@ -2,14 +2,13 @@
   background-color: aqua;
   height: 50px;
 
-  &-container {
-    background-color: red;
+  &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: inherit;
-    max-width: 1400px;
+    max-width: 1130px;
     margin: auto;
   }
 }
