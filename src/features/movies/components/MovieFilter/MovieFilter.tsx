@@ -11,7 +11,8 @@ interface Props {
   maxDuration: number;
   minYear: number;
   maxYear: number;
-  onFiltersChange: (filters: object) => void;
+  onFiltersChange: (filterName: string, value: any) => void;
+  resetFilters: () => void;
 }
 
 const MovieFilter: React.FC<Props> = ({
@@ -22,16 +23,15 @@ const MovieFilter: React.FC<Props> = ({
   minYear,
   maxYear,
   onFiltersChange,
+  resetFilters,
 }) => {
-  const handleFiltersChange = (filter: string, value: string) =>
-    onFiltersChange({ [filter]: value });
+  const handleFiltersChange = (filterName: string, value: any) => {
+    onFiltersChange(filterName, value);
+  };
 
-  const handleSliderChange = (filter: string, minValue: number, maxValue: number) => {
-    const filters = {
-      [`min${filter}`]: minValue,
-      [`max${filter}`]: maxValue,
-    };
-    onFiltersChange(filters);
+  const handleSliderChange = (filterName: string, minValue: number, maxValue: number) => {
+    onFiltersChange(`min${filterName}`, minValue);
+    onFiltersChange(`max${filterName}`, maxValue);
   };
 
   return (
@@ -83,6 +83,12 @@ const MovieFilter: React.FC<Props> = ({
             minDistance={0}
             onChange={(min, max) => handleSliderChange('Year', min, max)}
           />
+        </div>
+        <div className='movie-filter__buttons'>
+          <div className='movie-filter__button' onClick={resetFilters}>
+            Reset filters
+          </div>
+          <div className='movie-filter__button'>Sort</div>
         </div>
       </div>
     </div>

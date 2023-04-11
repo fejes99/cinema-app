@@ -7,7 +7,8 @@ import { fetchMovies } from '../state/movieActions';
 import { Movie } from '../types/Movie';
 import { Error } from 'common/types/Error';
 import Loader from 'common/components/UI/Loader/Loader';
-import { movieSearchFilter, Filters } from '../helpers/movieSearchFilter';
+import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieSearchFilter';
+import { MovieFilters } from '../types/MovieFilters';
 
 interface Props {
   movies: Movie[];
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMovies }) => {
-  const [filters, setFilters] = useState<Filters>({});
+  const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
 
   useEffect(() => {
     onFetchMovies();
@@ -25,14 +26,23 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
 
   const distributors = [...new Set(movies.map((movie) => movie.distributor))];
   const countries = [...new Set(movies.map((movie) => movie.country))];
+
+  if (loading) return <Loader />;
+
   const minDuration = Math.min(...movies.map((movie) => movie.duration));
   const maxDuration = Math.max(...movies.map((movie) => movie.duration));
   const minYear = Math.min(...movies.map((movie) => movie.year));
   const maxYear = Math.max(...movies.map((movie) => movie.year));
 
-  if (loading) return <Loader />;
+  const handleFiltersChange = (filterName: string, value: any) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: value,
+    }));
+  };
 
-  const handleFiltersChange = (newFilters: Filters) => setFilters(newFilters);
+  const resetFilters = () => setFilters(defaultMovieFilters);
+
   const filteredMovies = movieSearchFilter(movies, filters);
 
   return (
@@ -45,6 +55,7 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
         minYear={minYear}
         maxYear={maxYear}
         onFiltersChange={handleFiltersChange}
+        resetFilters={resetFilters}
       />
       <MovieList loading={loading} movies={filteredMovies} error={error} />
     </div>

@@ -1,46 +1,26 @@
 import { Movie } from '../types/Movie';
+import { MovieFilters } from '../types/MovieFilters';
 
-export interface Filters {
-  query?: string;
-  minDuration?: number;
-  maxDuration?: number;
-  minYear?: number;
-  maxYear?: number;
-  country?: string;
-  distributor?: string;
-  // genre: string;
-}
+export const defaultMovieFilters: MovieFilters = {
+  query: '',
+  minDuration: 0,
+  maxDuration: 1000,
+  minYear: 1900,
+  maxYear: 2100,
+  country: '',
+  distributor: '',
+};
 
-export const movieSearchFilter = (movies: Movie[], filters: Filters): Movie[] => {
-  console.log('🚀 ~ file: movieSearchFilter.ts:15 ~ movieSearchFilter ~ filters:', filters);
-  let filteredMovies = [...movies];
-
-  if (filters.query)
-    filteredMovies = filteredMovies.filter((movie) =>
-      movie.name.toLowerCase().includes(filters.query!.toLowerCase())
+export const movieSearchFilter = (movies: Movie[], filters: MovieFilters): Movie[] => {
+  return movies.filter((movie) => {
+    return (
+      (filters.query === '' || movie.name.toLowerCase().includes(filters.query.toLowerCase())) &&
+      (filters.minDuration === 0 || movie.duration >= filters.minDuration) &&
+      (filters.maxDuration === 1000 || movie.duration <= filters.maxDuration) &&
+      (filters.minYear === 1900 || movie.year >= filters.minYear) &&
+      (filters.maxYear === 2100 || movie.year <= filters.maxYear) &&
+      (filters.country === '' || movie.country === filters.country) &&
+      (filters.distributor === '' || movie.distributor === filters.distributor)
     );
-
-  if (filters.minDuration)
-    filteredMovies = filteredMovies.filter((movie) => movie.duration >= filters.minDuration!);
-
-  if (filters.maxDuration)
-    filteredMovies = filteredMovies.filter((movie) => movie.duration <= filters.maxDuration!);
-
-  if (filters.minYear)
-    filteredMovies = filteredMovies.filter((movie) => movie.year >= filters.minYear!);
-
-  if (filters.maxYear)
-    filteredMovies = filteredMovies.filter((movie) => movie.year <= filters.maxYear!);
-
-  if (filters.country)
-    filteredMovies = filteredMovies.filter((movie) => movie.country === filters.country);
-
-  if (filters.distributor)
-    filteredMovies = filteredMovies.filter((movie) => movie.distributor === filters.distributor);
-
-  // if (filters.genre)
-  //   filteredMovies = filteredMovies.filter((movie) => movie.genre === filters.genre
-  //   );
-
-  return filteredMovies;
+  });
 };

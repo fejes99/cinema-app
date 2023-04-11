@@ -20,9 +20,7 @@ const RangeSlider: React.FC<Props> = ({ label, min, max, step, minDistance, onCh
   ];
 
   const handleChange = (event: Event, newValue: number | number[], activeThumb: number) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
+    if (!Array.isArray(newValue)) return;
 
     if (activeThumb === 0) {
       setValue([Math.min(newValue[0], max - minDistance), value[1]]);
@@ -30,6 +28,7 @@ const RangeSlider: React.FC<Props> = ({ label, min, max, step, minDistance, onCh
       setValue([value[0], Math.max(newValue[1], min + minDistance)]);
     }
 
+    console.log('🚀 ~ file: RangeSlider.tsx:35 ~ handleChange ~ value:', value);
     onChange(value[0], value[1]);
   };
 
