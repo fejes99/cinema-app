@@ -8,7 +8,7 @@ import { Movie } from '../types/Movie';
 import { Error } from 'common/types/Error';
 import Loader from 'common/components/UI/Loader/Loader';
 import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieSearchFilter';
-import { MovieFilters } from '../types/MovieFilters';
+import { FilterName, FilterValue, MovieFilters } from '../types/MovieFilters';
 
 interface Props {
   movies: Movie[];
@@ -24,24 +24,50 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
     onFetchMovies();
   }, [onFetchMovies]);
 
+  useEffect(() => {
+    if (movies.length > 0 && loading === false) {
+      const minDuration = Math.min(...movies.map((movie) => movie.duration));
+      const maxDuration = Math.max(...movies.map((movie) => movie.duration));
+      const minYear = Math.min(...movies.map((movie) => movie.year));
+      const maxYear = Math.max(...movies.map((movie) => movie.year));
+
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        minDuration: minDuration,
+        minDurationFixed: minDuration,
+        maxDuration: maxDuration,
+        maxDurationFixed: maxDuration,
+        minYear: minYear,
+        minYearFixed: minYear,
+        maxYear: maxYear,
+        maxYearFixed: maxYear,
+      }));
+    }
+  }, [loading, movies]);
+
+  if (loading) return <Loader />;
+  if (error) return <div>{error}</div>;
+
   const distributors = [...new Set(movies.map((movie) => movie.distributor))];
   const countries = [...new Set(movies.map((movie) => movie.country))];
 
-  if (loading) return <Loader />;
-
-  const minDuration = Math.min(...movies.map((movie) => movie.duration));
-  const maxDuration = Math.max(...movies.map((movie) => movie.duration));
-  const minYear = Math.min(...movies.map((movie) => movie.year));
-  const maxYear = Math.max(...movies.map((movie) => movie.year));
-
-  const handleFiltersChange = (filterName: string, value: any) => {
+  const handleFiltersChange = (filterName: FilterName, value: FilterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterName]: value,
     }));
   };
 
-  const resetFilters = () => setFilters(defaultMovieFilters);
+  const resetFilters = () => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      query: defaultMovieFilters.query,
+      country: defaultMovieFilters.country,
+      distributor: defaultMovieFilters.distributor,
+      minDuration: prevFilters.minDurationFixed,
+      maxDuration: prevFilters.maxDurationFixed,
+    }));
+  };
 
   const filteredMovies = movieSearchFilter(movies, filters);
 
@@ -50,10 +76,7 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
       <MovieFilter
         countries={countries}
         distributors={distributors}
-        minDuration={minDuration}
-        maxDuration={maxDuration}
-        minYear={minYear}
-        maxYear={maxYear}
+        filters={filters}
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />

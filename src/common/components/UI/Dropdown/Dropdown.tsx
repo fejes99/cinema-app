@@ -3,19 +3,22 @@ import './Dropdown.scss';
 
 interface Props {
   title: string;
+  value: string;
   options: string[];
   onChange: (value: string) => void;
 }
 
-const Dropdown: React.FC<Props> = ({ title, options, onChange }) => {
+const Dropdown: React.FC<Props> = ({ title, value, options, onChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     onChange(value);
   };
 
   return (
-    <select name={title} onChange={handleChange}>
-      <option value=''>{title}</option>
+    <select name={title} value={value} onChange={handleChange}>
+      <option value='' disabled hidden>
+        Select a {title}...
+      </option>
       {options.map((option: string) => (
         <option key={option} value={option}>
           {option}

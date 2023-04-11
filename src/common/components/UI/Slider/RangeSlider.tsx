@@ -1,35 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from '@mui/material/Slider';
 import './RangeSlider.scss';
 
 interface Props {
   label: string;
   min: number;
+  minFixed: number;
   max: number;
+  maxFixed: number;
   step: number;
   minDistance: number;
   onChange: (min: number, max: number) => void;
 }
 
-const RangeSlider: React.FC<Props> = ({ label, min, max, step, minDistance, onChange }) => {
-  const [value, setValue] = useState<number[]>([min, max]);
-
+const RangeSlider: React.FC<Props> = ({
+  label,
+  min,
+  minFixed,
+  max,
+  maxFixed,
+  step,
+  minDistance,
+  onChange,
+}) => {
   const marks = [
     { value: min, label: min },
     { value: max, label: max },
   ];
 
+  let newMin: number = min;
+  let newMax: number = max;
+
   const handleChange = (event: Event, newValue: number | number[], activeThumb: number) => {
     if (!Array.isArray(newValue)) return;
 
     if (activeThumb === 0) {
-      setValue([Math.min(newValue[0], max - minDistance), value[1]]);
+      newMin = Math.min(newValue[0], max - minDistance);
     } else {
-      setValue([value[0], Math.max(newValue[1], min + minDistance)]);
+      newMax = Math.max(newValue[1], min + minDistance);
     }
 
-    console.log('🚀 ~ file: RangeSlider.tsx:35 ~ handleChange ~ value:', value);
-    onChange(value[0], value[1]);
+    onChange(newMin, newMax);
   };
 
   return (
@@ -37,13 +48,13 @@ const RangeSlider: React.FC<Props> = ({ label, min, max, step, minDistance, onCh
       {label}
       <Slider
         getAriaLabel={() => 'Minimum distance'}
-        value={value}
+        value={[newMin, newMax]}
         step={step}
         marks={marks}
         onChange={handleChange}
         valueLabelDisplay='auto'
-        min={min}
-        max={max}
+        min={minFixed}
+        max={maxFixed}
         disableSwap
       />
     </div>

@@ -6,7 +6,7 @@ const initialState: MovieState = {
   movies: [],
   selectedMovie: null,
   loading: false,
-  error: '',
+  error: null,
 };
 
 const moviesReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
@@ -19,6 +19,13 @@ const moviesReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
     case actionTypes.FETCH_MOVIES_SUCCESS:
       return { ...state, loading: false, movies: action.movies };
     case actionTypes.FETCH_MOVIES_FAIL:
+      return { ...state, loading: false, error: action.error };
+
+    case actionTypes.FETCH_MOVIE_REQUEST:
+      return { ...state, loading: true, selectedMovie: null, error: null };
+    case actionTypes.FETCH_MOVIE_SUCCESS:
+      return { ...state, loading: false, selectedMovie: action.selectedMovie };
+    case actionTypes.FETCH_MOVIE_FAIL:
       return { ...state, loading: false, error: action.error };
     default:
       return state;

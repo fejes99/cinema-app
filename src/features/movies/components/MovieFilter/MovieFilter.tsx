@@ -3,63 +3,64 @@ import Dropdown from 'common/components/UI/Dropdown/Dropdown';
 import Search from 'common/components/UI/Search/Search';
 import RangeSlider from 'common/components/UI/Slider/RangeSlider';
 import './MovieFilter.scss';
+import { MovieFilters, FilterName, FilterValue } from 'features/movies/types/MovieFilters.d';
 
 interface Props {
   countries: string[];
   distributors: string[];
-  minDuration: number;
-  maxDuration: number;
-  minYear: number;
-  maxYear: number;
-  onFiltersChange: (filterName: string, value: any) => void;
+  filters: MovieFilters;
+  onFiltersChange: (filterName: FilterName, value: FilterValue) => void;
   resetFilters: () => void;
 }
 
 const MovieFilter: React.FC<Props> = ({
   countries,
   distributors,
-  minDuration,
-  maxDuration,
-  minYear,
-  maxYear,
+  filters: {
+    country,
+    distributor,
+    minDuration,
+    minDurationFixed,
+    maxDuration,
+    maxDurationFixed,
+    minYear,
+    minYearFixed,
+    maxYear,
+    maxYearFixed,
+  },
   onFiltersChange,
   resetFilters,
 }) => {
-  const handleFiltersChange = (filterName: string, value: any) => {
-    onFiltersChange(filterName, value);
-  };
-
-  const handleSliderChange = (filterName: string, minValue: number, maxValue: number) => {
-    onFiltersChange(`min${filterName}`, minValue);
-    onFiltersChange(`max${filterName}`, maxValue);
-  };
-
   return (
     <div className='movie-filter'>
       <div className='movie-filter__title'>Movies</div>
       <div className='movie-filter__search'>
-        <Search onChange={(value) => handleFiltersChange('query', value)} />
+        <Search onChange={(value) => onFiltersChange(FilterName.Query, value)} />
       </div>
       <div className='movie-filter__filters'>
         <div className='movie-filter__filter'>
           <Dropdown
-            title={'Gender'}
+            title={'Gendre'}
+            value={''}
             options={['drama', 'comedy', 'horror']}
-            onChange={(value) => handleFiltersChange('gender', value)}
+            // onChange={(value) => onFiltersChange(FilterName.Genre, value)}
+            onChange={() => {}}
           />
         </div>
         <div className='movie-filter__filter'>
           <Dropdown
-            title={'Distributor'}
+            title={FilterName.Distributor}
+            value={distributor}
             options={distributors}
-            onChange={(value) => handleFiltersChange('distributor', value)}
+            onChange={(value) => onFiltersChange(FilterName.Distributor, value)}
           />
         </div>
         <div className='movie-filter__filter'>
           <Dropdown
-            title={'Country'}
+            title={FilterName.Country}
+            value={country}
             options={countries}
-            onChange={(value) => handleFiltersChange('country', value)}
+            onChange={(value) => onFiltersChange(FilterName.Country, value)}
           />
         </div>
       </div>
@@ -68,20 +69,30 @@ const MovieFilter: React.FC<Props> = ({
           <RangeSlider
             label='Duration'
             min={minDuration}
+            minFixed={minDurationFixed}
             max={maxDuration}
+            maxFixed={maxDurationFixed}
             step={1}
             minDistance={1}
-            onChange={(min, max) => handleSliderChange('Duration', min, max)}
+            onChange={(minDuration, maxDuration) => {
+              onFiltersChange(FilterName.MinDuration, minDuration);
+              onFiltersChange(FilterName.MaxDuration, maxDuration);
+            }}
           />
         </div>
         <div className='movie-filter__slider'>
           <RangeSlider
             label='Year'
             min={minYear}
+            minFixed={minYearFixed}
             max={maxYear}
+            maxFixed={maxYearFixed}
             step={1}
             minDistance={0}
-            onChange={(min, max) => handleSliderChange('Year', min, max)}
+            onChange={(minYear, maxYear) => {
+              onFiltersChange(FilterName.MinYear, minYear);
+              onFiltersChange(FilterName.MaxYear, maxYear);
+            }}
           />
         </div>
         <div className='movie-filter__buttons'>

@@ -3,12 +3,16 @@ import { MovieFilters } from '../types/MovieFilters';
 
 export const defaultMovieFilters: MovieFilters = {
   query: '',
-  minDuration: 0,
-  maxDuration: 1000,
-  minYear: 1900,
-  maxYear: 2100,
   country: '',
   distributor: '',
+  minDuration: 0,
+  maxDuration: 1000,
+  minDurationFixed: 0,
+  maxDurationFixed: 1000,
+  minYear: 1900,
+  minYearFixed: 1900,
+  maxYear: 2100,
+  maxYearFixed: 2100,
 };
 
 export const movieSearchFilter = (movies: Movie[], filters: MovieFilters): Movie[] => {
