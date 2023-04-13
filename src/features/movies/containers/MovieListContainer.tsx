@@ -13,16 +13,14 @@ import { FilterName, FilterValue, MovieFilters } from '../types/MovieFilters';
 interface Props {
   movies: Movie[];
   loading: boolean;
-  error: Error | null | boolean;
+  error: Error;
   onFetchMovies: () => void;
 }
 
 const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMovies }) => {
   const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
 
-  useEffect(() => {
-    onFetchMovies();
-  }, [onFetchMovies]);
+  useEffect(() => onFetchMovies(), [onFetchMovies]);
 
   useEffect(() => {
     if (movies.length > 0 && loading === false) {
@@ -72,7 +70,7 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
   const filteredMovies = movieSearchFilter(movies, filters);
 
   return (
-    <div>
+    <>
       <MovieFilter
         countries={countries}
         distributors={distributors}
@@ -81,14 +79,14 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
         resetFilters={resetFilters}
       />
       <MovieList loading={loading} movies={filteredMovies} error={error} />
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state: StoreState) => ({
   movies: state.movies.movies,
   loading: state.movies.loading,
-  error: state.movies.loading,
+  error: state.movies.error,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({

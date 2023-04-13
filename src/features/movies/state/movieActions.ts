@@ -44,9 +44,6 @@ export const fetchMovie = (id: string) => (dispatch: AppDispatch) => {
   dispatch(fetchMovieRequest());
   axios
     .get(`/movies/${id}`)
-    .then((response) => {
-      console.log('🚀 ~ file: movieActions.ts:48 ~ .then ~ response:', response.data);
-      dispatch(fetchMovieSuccess(response.data));
-    })
+    .then((response) => dispatch(fetchMovieSuccess(response.data)))
     .catch((error) => dispatch(fetchMovieFail(error)));
 };

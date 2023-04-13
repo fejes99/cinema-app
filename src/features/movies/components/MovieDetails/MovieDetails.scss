@@ -1,0 +1,13 @@
+.movie-details {
+  background-color: wheat;
+
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  &__content {
+    text-align: left;
+  }
+}

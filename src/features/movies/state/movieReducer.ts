@@ -9,7 +9,7 @@ const initialState: MovieState = {
   error: null,
 };
 
-const moviesReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
+const movieReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
   state = initialState,
   action
 ): MovieState => {
@@ -32,4 +32,4 @@ const moviesReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
   }
 };
 
-export default moviesReducer;
+export default movieReducer;

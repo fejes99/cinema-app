@@ -7,6 +7,7 @@ const Navbar: React.FC = () => {
   const navbarItems: NavbarItemProps[] = [
     { name: 'Projections', url: '/projections' },
     { name: 'Movies', url: '/movies' },
+    { name: 'Users', url: '/users' },
     { name: 'Login', url: '/login' },
     { name: 'Register', url: '/register' },
     { name: 'Profile', url: '/profile' },

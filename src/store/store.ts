@@ -1,6 +1,9 @@
-import moviesReducer from 'features/movies/state/movieReducer';
+import movieReducer from 'features/movies/state/movieReducer';
+import projectionReducer from 'features/projections/state/projectionReducer';
 import { MovieState } from 'features/movies/state/movieState';
 import { MovieActionTypes } from 'features/movies/state/movieTypes';
+import { ProjectionState } from 'features/projections/state/projectionState';
+import { ProjectionActionTypes } from 'features/projections/state/projectionTypes';
 import {
   applyMiddleware,
   combineReducers,
@@ -12,13 +15,15 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 
 export interface StoreState {
   movies: MovieState;
+  projections: ProjectionState;
 }
 
-export type StoreAction = MovieActionTypes;
+export type StoreAction = MovieActionTypes | ProjectionActionTypes;
 export type AppDispatch = typeof store.dispatch;
 
 const rootReducer: Reducer<StoreState, StoreAction> = combineReducers<StoreState>({
-  movies: moviesReducer,
+  movies: movieReducer,
+  projections: projectionReducer,
 });
 
 declare global {
