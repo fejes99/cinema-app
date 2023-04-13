@@ -22,10 +22,7 @@ export const fetchProjections = () => (dispatch: AppDispatch) => {
   dispatch(fetchProjectionsRequest());
   axios
     .get('/projections')
-    .then((response) => {
-      console.log('🚀 ~ file: projectionActions.ts:26 ~ .then ~ response:', response);
-      dispatch(fetchProjectionsSuccess(response.data));
-    })
+    .then((response) => dispatch(fetchProjectionsSuccess(response.data)))
     .catch((error) => dispatch(fetchProjectionsFail(error)));
 };
 

@@ -5,6 +5,7 @@ import ProjectionList from '../components/ProjectionList/ProjectionList';
 import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 import { fetchProjections } from '../state/projectionActions';
 import { Projection } from '../types/Projection';
+import Loader from 'common/components/UI/Loader/Loader';
 
 interface Props {
   projections: Projection[];
@@ -20,10 +21,14 @@ const ProjectionListContainer: React.FC<Props> = ({
   onFetchProjections,
 }) => {
   useEffect(() => onFetchProjections(), [onFetchProjections]);
+
+  if (loading) return <Loader />;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <>
       <ProjectionFilter />
-      <ProjectionList loading={loading} projections={projections} error={error} />
+      <ProjectionList projections={projections} />
     </>
   );
 };

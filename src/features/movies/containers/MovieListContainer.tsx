@@ -78,7 +78,7 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
-      <MovieList loading={loading} movies={filteredMovies} error={error} />
+      <MovieList movies={filteredMovies} />
     </>
   );
 };

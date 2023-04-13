@@ -12,18 +12,23 @@ import {
   Reducer,
 } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
+import { AuthActionTypes } from 'features/auth/state/authTypes';
+import { AuthState } from 'features/auth/state/authState';
+import authReducer from 'features/auth/state/authReducer';
 
 export interface StoreState {
   movies: MovieState;
   projections: ProjectionState;
+  auth: AuthState;
 }
 
-export type StoreAction = MovieActionTypes | ProjectionActionTypes;
+export type StoreAction = MovieActionTypes | ProjectionActionTypes | AuthActionTypes;
 export type AppDispatch = typeof store.dispatch;
 
 const rootReducer: Reducer<StoreState, StoreAction> = combineReducers<StoreState>({
   movies: movieReducer,
   projections: projectionReducer,
+  auth: authReducer,
 });
 
 declare global {

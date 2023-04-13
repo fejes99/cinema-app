@@ -8,7 +8,6 @@ interface Props {
 }
 
 const ProjectionDetails: React.FC<Props> = ({ projection }) => {
-  console.log('🚀 ~ file: ProjectionDetails.tsx:10 ~ projection:', projection);
   const buyCardButton = projection.isSold ? <></> : <button>Buy Card</button>;
   const ticketsTable =
     projection.tickets && projection.tickets.length > 0 ? (
