@@ -10,10 +10,10 @@ export interface MovieFilters {
   minYearFixed: number;
   maxYear: number;
   maxYearFixed: number;
-  // genre: string;
+  [key: string]: string | number;
 }
 
-export enum FilterName {
+export enum MovieFilterName {
   Query = 'query',
   Distributor = 'distributor',
   Country = 'country',
@@ -24,4 +24,4 @@ export enum FilterName {
   // Gendre = 'gendre',
 }
 
-export type FilterValue = string | number;
+export type MovieFilterValue = string | number;

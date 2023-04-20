@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+
 import { connect } from 'react-redux';
 import { AppDispatch, StoreState } from 'store/store';
-import MovieFilter from '../components/MovieFilter/MovieFilter';
-import MovieList from '../components/MovieList/MovieList';
 import { fetchMovies } from '../state/movieActions';
+
 import { Movie } from '../types/Movie';
 import { Error } from 'common/types/Error';
+import { MovieFilterName, MovieFilterValue, MovieFilters } from '../types/MovieFilters';
+
+import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieFilters';
+
+import MovieFilter from '../components/MovieFilter/MovieFilter';
+import MovieList from '../components/MovieList/MovieList';
 import Loader from 'common/components/UI/Loader/Loader';
-import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieSearchFilter';
-import { FilterName, FilterValue, MovieFilters } from '../types/MovieFilters';
 
 interface Props {
   movies: Movie[];
@@ -49,10 +53,10 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
   const distributors = [...new Set(movies.map((movie) => movie.distributor))];
   const countries = [...new Set(movies.map((movie) => movie.country))];
 
-  const handleFiltersChange = (filterName: FilterName, value: FilterValue) => {
+  const handleFiltersChange = (movieFilterName: MovieFilterName, value: MovieFilterValue) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [filterName]: value,
+      [movieFilterName]: value,
     }));
   };
 
