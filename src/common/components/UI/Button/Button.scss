@@ -1,0 +1,75 @@
+@import 'App.scss';
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &-small {
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+  }
+
+  &-medium {
+    height: 50px;
+    padding: 0 25px;
+    font-size: 16px;
+  }
+
+  &-large {
+    height: 60px;
+    padding: 0 35px;
+    font-size: 18px;
+  }
+
+  &-primary {
+    background-color: $button-color-primary;
+    color: $text-color;
+    border: none;
+  }
+
+  &-success {
+    background-color: $button-color-success;
+    color: $text-color;
+    border: none;
+  }
+
+  &-warning {
+    background-color: $button-color-warning;
+    color: black;
+    border: none;
+  }
+
+  &-error {
+    background-color: $button-color-error;
+    color: $text-color;
+    border: none;
+  }
+
+  &-disabled {
+    background-color: $button-color-disabled;
+    color: $text-color-disabled;
+    cursor: not-allowed;
+    border: none;
+  }
+
+  &:hover:not(.button--disabled) {
+    transform: translateY(-2px);
+    box-shadow: $button-shadow-hover;
+  }
+
+  &:active:not(.button--disabled) {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}

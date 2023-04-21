@@ -12,7 +12,10 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   return (
     <div className='movie-card' onClick={() => redirectToMovieDetails(movie.id)}>
       <div className='movie-card__column movie-card__column-image'>
-        <div className='movie-card__image'></div>
+        <div
+          className=' movie-card__image'
+          // style={{ backgroundImage: `url(${movie.image})` }}
+        ></div>
       </div>
       <div className='movie-card__column movie-card__column-content'>
         <div className='movie-card__name'>{movie.name}</div>

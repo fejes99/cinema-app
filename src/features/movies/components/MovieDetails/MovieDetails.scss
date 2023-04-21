@@ -1,13 +1,27 @@
 .movie-details {
-  background-color: wheat;
+  background-color: #f2f2f2;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
   &__title {
-    text-transform: uppercase;
+    font-size: 48px;
     font-weight: bold;
-    font-size: 40px;
+    margin-bottom: 20px;
   }
 
   &__content {
-    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    .bold {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease-in-out;
   }
 }

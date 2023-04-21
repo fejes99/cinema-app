@@ -8,6 +8,7 @@ import {
   MovieFilterName,
   MovieFilterValue,
 } from 'features/movies/types/MovieFilters.d';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   countries: string[];
@@ -100,10 +101,12 @@ const MovieFilter: React.FC<Props> = ({
           />
         </div>
         <div className='movie-filter__buttons'>
-          <div className='movie-filter__button' onClick={resetFilters}>
-            Reset filters
-          </div>
-          <div className='movie-filter__button'>Sort</div>
+          <Button size='medium' type='primary' onClick={resetFilters}>
+            Reset Filters
+          </Button>
+          <Button size='medium' type='primary'>
+            Sort
+          </Button>
         </div>
       </div>
     </div>

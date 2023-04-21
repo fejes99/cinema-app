@@ -9,6 +9,10 @@ export const FETCH_MOVIE_REQUEST = 'FETCH_MOVIE_REQUEST';
 export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIE_FAIL = 'FETCH_MOVIE_FAIL';
 
+export const CREATE_MOVIE_REQUEST = 'CREATE_MOVIE_REQUEST';
+export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS';
+export const CREATE_MOVIE_FAIL = 'CREATE_MOVIE_FAIL';
+
 interface FetchMoviesRequestAction {
   type: typeof FETCH_MOVIES_REQUEST;
 }
@@ -37,10 +41,27 @@ interface FetchMovieFailAction {
   error: Error;
 }
 
+interface CreateMovieRequestAction {
+  type: typeof CREATE_MOVIE_REQUEST;
+}
+
+interface CreateMovieSuccessAction {
+  type: typeof CREATE_MOVIE_SUCCESS;
+  newMovie: Movie;
+}
+
+interface CreateMovieFailAction {
+  type: typeof CREATE_MOVIE_FAIL;
+  error: Error;
+}
+
 export type MovieActionTypes =
   | FetchMoviesRequestAction
   | FetchMoviesSuccessAction
   | FetchMoviesFailAction
   | FetchMovieRequestAction
   | FetchMovieSuccessAction
-  | FetchMovieFailAction;
+  | FetchMovieFailAction
+  | CreateMovieRequestAction
+  | CreateMovieSuccessAction
+  | CreateMovieFailAction;

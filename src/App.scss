@@ -1,11 +1,18 @@
-.App {
-  text-align: center;
-}
+/// Variables///
+$button-color-primary: #007bff;
+$button-color-success: #28a745;
+$button-color-warning: #ffc107;
+$button-color-error: #dc3545;
+$button-color-disabled: #e9ecef;
+$button-shadow-hover: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+$text-color: white;
+$text-color-disabled: #6c757d;
 
 .main {
   width: 100%;
   max-width: 1130px;
-  margin: 50px auto;
+  margin: 120px auto;
 }
 
 .bold {
@@ -37,7 +44,6 @@ td a {
 
 th {
   font-weight: 100;
-  background-color: white;
 }
 
 tr:nth-child(odd) {

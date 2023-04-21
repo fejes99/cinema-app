@@ -23,6 +23,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
   onFetchMovie,
 }) => {
   const { id } = useParams();
+
   useEffect(() => {
     if (id) onFetchMovie(id);
   }, [id, onFetchMovie]);

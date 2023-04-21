@@ -1,29 +1,30 @@
 .navbar-item {
   display: flex;
   align-items: center;
-  width: 140px;
-  height: inherit;
-  font-size: 20px;
+  height: 100%;
+  padding: 0 20px;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.2s ease;
 
   &:hover {
-    background-color: red;
+    border-bottom: 10px solid white;
+    border-radius: 5px 5px 0 0;
   }
 
   & a {
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    color: #f5f5f5;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
 
-    &:hover {
-      color: yellowgreen;
-    }
-
-    &:active {
-      color: red;
-      font-weight: bold;
+    &.active {
+      color: #007bff;
     }
   }
 }

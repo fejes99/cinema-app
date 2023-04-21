@@ -27,6 +27,14 @@ const movieReducer: Reducer<MovieState, actionTypes.MovieActionTypes> = (
       return { ...state, loading: false, selectedMovie: action.selectedMovie };
     case actionTypes.FETCH_MOVIE_FAIL:
       return { ...state, loading: false, error: action.error };
+
+    case actionTypes.CREATE_MOVIE_REQUEST:
+      return { ...state, loading: true, selectedMovie: null, error: null };
+    case actionTypes.CREATE_MOVIE_SUCCESS:
+      return { ...state, loading: false, selectedMovie: action.newMovie };
+    case actionTypes.CREATE_MOVIE_FAIL:
+      return { ...state, loading: false, error: action.error };
+
     default:
       return state;
   }

@@ -13,6 +13,8 @@ import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieFilters'
 import MovieFilter from '../components/MovieFilter/MovieFilter';
 import MovieList from '../components/MovieList/MovieList';
 import Loader from 'common/components/UI/Loader/Loader';
+import Button from 'common/components/UI/Button/Button';
+import { useMovieRedirect } from '../helpers/movieRedirects';
 
 interface Props {
   movies: Movie[];
@@ -23,6 +25,7 @@ interface Props {
 
 const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMovies }) => {
   const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
+  const { redirectToMovieCreate } = useMovieRedirect();
 
   useEffect(() => onFetchMovies(), [onFetchMovies]);
 
@@ -82,6 +85,9 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
+      <Button size='large' type='primary' onClick={redirectToMovieCreate}>
+        Add Movie
+      </Button>
       <MovieList movies={filteredMovies} />
     </>
   );

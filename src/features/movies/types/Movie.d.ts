@@ -4,8 +4,8 @@ export interface Movie {
   id: string;
   name: string;
   director: string;
-  distributor: string;
   duration: number;
+  distributor: string;
   description?: string;
   country: string;
   year: number;

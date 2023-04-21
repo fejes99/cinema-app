@@ -1,9 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { AppDispatch } from 'store/store';
+import { createMovie } from '../state/movieActions';
+import MovieCreate from '../components/MovieCreate/MovieCreate';
+import { CreateMovieDto } from '../types/MovieCreateDto';
 
-type Props = {};
+interface Props {
+  onCreateMovie: (createMovieDto: CreateMovieDto) => void;
+}
 
-const MovieCreateContainer = (props: Props) => {
-  return <div>MovieCreateContainer</div>;
+const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
+  return (
+    <>
+      <MovieCreate create={onCreateMovie} />
+    </>
+  );
 };
 
-export default MovieCreateContainer;
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  onCreateMovie: (createMovieDto: CreateMovieDto) => dispatch(createMovie(createMovieDto)),
+});
+
+export default connect(null, mapDispatchToProps)(MovieCreateContainer);
