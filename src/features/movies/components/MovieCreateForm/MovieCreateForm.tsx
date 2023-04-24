@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import './MovieCreate.scss';
+import './MovieCreateForm.scss';
 import Input from 'common/components/UI/Input/Input';
 import { CreateMovieDto } from 'features/movies/types/MovieCreateDto';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   create: (createMovieDto: CreateMovieDto) => void;
 }
 
-const MovieCreate: React.FC<Props> = ({ create }) => {
+const MovieCreateForm: React.FC<Props> = ({ create }) => {
   const [movie, setMovie] = useState<CreateMovieDto>({
     name: '',
     director: '',
@@ -21,7 +22,6 @@ const MovieCreate: React.FC<Props> = ({ create }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
-    console.log('🚀 ~ file: MovieCreate.tsx:24 ~ handleChange ~ target:', event.target);
     setMovie((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -100,9 +100,11 @@ const MovieCreate: React.FC<Props> = ({ create }) => {
           onChange={handleChange}
         />
       </div>
-      <button type='submit'>Create Movie</button>
+      <Button size='medium' type='success'>
+        Create
+      </Button>
     </form>
   );
 };
 
-export default MovieCreate;
+export default MovieCreateForm;

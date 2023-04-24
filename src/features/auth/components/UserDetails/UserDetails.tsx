@@ -9,11 +9,24 @@ interface Props {
 
 const UserDetails: React.FC<Props> = ({ user }) => (
   <div className='user-details'>
-    <div className='user-details__content'>Name: {user.firstName + user.lastName}</div>
-    <div className='user-details__content'>Username: {user.username}</div>
-    <div className='user-details__content'>Email: {user.email}</div>
-    <div className='user-details__content'>Created: {formatDate(user.created)}</div>
-    <div className='user-details__content'>Role: {user.role}</div>
+    <div className='user-details__content'>
+      <span className='bold'>Name:</span>
+      {user.firstName} {user.lastName}
+    </div>
+    <div className='user-details__content'>
+      <span className='bold'>Username:</span>
+      {user.username}
+    </div>
+    <div className='user-details__content'>
+      <span className='bold'>Email:</span> {user.email}
+    </div>
+    <div className='user-details__content'>
+      <span className='bold'>Created:</span> {formatDate(user.created)}
+    </div>
+    <div className='user-details__content'>
+      <span className='bold'>Role:</span>
+      {user.role}
+    </div>
   </div>
 );
 

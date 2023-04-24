@@ -3,6 +3,7 @@ import './UserFilter.scss';
 import { UserFilterName, UserFilterValue, UserFilters } from 'features/auth/types/UserFilters.d';
 import Search from 'common/components/UI/Search/Search';
 import Dropdown from 'common/components/UI/Dropdown/Dropdown';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   roles: string[];
@@ -34,9 +35,9 @@ const UserFilter: React.FC<Props> = ({
         </div>
       </div>
       <div className='user-filter__buttons'>
-        <div className='user-filter__button' onClick={resetFilters}>
-          Reset filters
-        </div>
+        <Button size='medium' type='primary' onClick={resetFilters}>
+          Reset Filters
+        </Button>
       </div>
     </div>
   );

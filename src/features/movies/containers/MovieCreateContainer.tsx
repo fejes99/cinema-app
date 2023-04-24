@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppDispatch } from 'store/store';
 import { createMovie } from '../state/movieActions';
-import MovieCreate from '../components/MovieCreate/MovieCreate';
+import MovieCreateForm from '../components/MovieCreateForm/MovieCreateForm';
 import { CreateMovieDto } from '../types/MovieCreateDto';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
   return (
     <>
-      <MovieCreate create={onCreateMovie} />
+      <MovieCreateForm create={onCreateMovie} />
     </>
   );
 };

@@ -1,27 +1,24 @@
 .movie-details {
-  background-color: #f2f2f2;
-  padding: 40px;
+  background-color: white;
+  padding: 40px 60px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
   &__title {
     font-size: 48px;
+    text-align: center;
     font-weight: bold;
     margin-bottom: 20px;
   }
 
   &__content {
     margin-top: 20px;
+    line-height: 1.5;
     margin-bottom: 10px;
 
     .bold {
       font-weight: bold;
       margin-right: 10px;
     }
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    transition: transform 0.2s ease-in-out;
   }
 }

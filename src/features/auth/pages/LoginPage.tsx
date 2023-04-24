@@ -1,7 +1,8 @@
 import React from 'react';
+import LoginContainer from '../containers/LoginContainer';
 
-const LoginPage = () => {
-  return <div>LoginPage</div>;
-};
+interface Props {}
+
+const LoginPage: React.FC<Props> = () => <LoginContainer />;
 
 export default LoginPage;

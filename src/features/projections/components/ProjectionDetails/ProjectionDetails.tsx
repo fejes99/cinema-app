@@ -2,13 +2,20 @@ import { formatDate } from 'common/helpers/dateFormater';
 import { Projection } from 'features/projections/types/Projection';
 import React from 'react';
 import TicketsTable from './TicketsTable/TicketsTable';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   projection: Projection;
 }
 
 const ProjectionDetails: React.FC<Props> = ({ projection }) => {
-  const buyCardButton = projection.isSold ? <></> : <button>Buy Card</button>;
+  const buyCardButton = projection.isSold ? (
+    <></>
+  ) : (
+    <Button size='medium' type='success'>
+      Buy Card
+    </Button>
+  );
   const ticketsTable =
     projection.tickets && projection.tickets.length > 0 ? (
       <TicketsTable tickets={projection.tickets} />

@@ -12,27 +12,27 @@ const MovieDetails: React.FC<Props> = ({
   <div className='movie-details'>
     <div className='movie-details__title'>{name}</div>
     <div className='movie-details__content'>
-      <span className='bold'>Director: </span>
+      <span className='bold'>Director:</span>
       {director}
     </div>
     <div className='movie-details__content'>
-      <span className='bold'>Distributor: </span>
+      <span className='bold'>Distributor:</span>
       {distributor}
     </div>
     <div className='movie-details__content'>
-      <span className='bold'>Duration: </span>
+      <span className='bold'>Duration:</span>
       {duration}
     </div>
     <div className='movie-details__content'>
-      <span className='bold'>Description: </span>
+      <span className='bold'>Description:</span>
       {description}
     </div>
     <div className='movie-details__content'>
-      <span className='bold'>Country: </span>
+      <span className='bold'>Country:</span>
       {country}
     </div>
     <div className='movie-details__content'>
-      <span className='bold'>Released: </span>
+      <span className='bold'>Released:</span>
       {year}
     </div>
   </div>

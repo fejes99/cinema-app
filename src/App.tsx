@@ -8,7 +8,7 @@ import LoginPage from 'features/auth/pages/LoginPage';
 import ProfilePage from 'features/auth/pages/ProfilePage';
 import RegisterPage from 'features/auth/pages/RegisterPage';
 import ProjectionPage from 'features/projections/pages/ProjectionPage';
-import UsersPage from 'features/auth/pages/UsersPage';
+import UserPage from 'features/auth/pages/UserPage';
 
 const App: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const App: React.FC = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/movies/*' element={<MoviePage />} />
           <Route path='/projections/*' element={<ProjectionPage />} />
-          <Route path='/users/*' element={<UsersPage />} />
+          <Route path='/users/*' element={<UserPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />

@@ -7,6 +7,7 @@ import {
   ProjectionFilterValue,
 } from 'features/projections/types/ProjectionFilters.d';
 import RangeSlider from 'common/components/UI/Slider/RangeSlider';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   movies: string[];
@@ -72,9 +73,9 @@ const ProjectionFilter: React.FC<Props> = ({
         </div>
       </div>
       <div className='projection-filter__buttons'>
-        <div className='projection-filter__button' onClick={resetFilters}>
-          Reset filters
-        </div>
+        <Button size='medium' type='primary' onClick={resetFilters}>
+          Reset Filters
+        </Button>
       </div>
     </div>
   );

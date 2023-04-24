@@ -1,11 +1,13 @@
 export const formatDate = (stringDate: string) => {
   const date = new Date(stringDate);
 
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
+  const formattedMonth = formatter.format(date);
+
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
 
-  return `${minutes}:${hours} ${day}/${month}/${year}`;
+  return `${hours}:${minutes} ${day} ${formattedMonth} ${year}`;
 };

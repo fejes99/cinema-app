@@ -30,7 +30,6 @@ const ProjectionListContainer: React.FC<Props> = ({
   onFetchProjections,
 }) => {
   const [filters, setFilters] = useState<ProjectionFilters>(defaultProjectionFilters);
-  console.log('🚀 ~ file: ProjectionListContainer.tsx:33 ~ filters:', filters);
 
   useEffect(() => onFetchProjections(), [onFetchProjections]);
 
