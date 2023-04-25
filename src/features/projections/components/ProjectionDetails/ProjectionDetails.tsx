@@ -3,18 +3,19 @@ import { Projection } from 'features/projections/types/Projection';
 import React from 'react';
 import TicketsTable from './TicketsTable/TicketsTable';
 import Button from 'common/components/UI/Button/Button';
+import './ProjectionDetails.scss';
 
 interface Props {
   projection: Projection;
 }
 
 const ProjectionDetails: React.FC<Props> = ({ projection }) => {
-  const buyCardButton = projection.isSold ? (
-    <></>
-  ) : (
-    <Button size='medium' type='success'>
-      Buy Card
-    </Button>
+  const buyCardButton = projection.isSold ? null : (
+    <div className='projection-details__button'>
+      <Button size='medium' type='success'>
+        Buy Card
+      </Button>
+    </div>
   );
   const ticketsTable =
     projection.tickets && projection.tickets.length > 0 ? (
@@ -25,13 +26,23 @@ const ProjectionDetails: React.FC<Props> = ({ projection }) => {
 
   return (
     <div className='projection-details'>
-      <div className='projection-details__content'>Movie: {projection.movie?.name}</div>
-      <div className='projection-details__content'>Time: {formatDate(projection.time)}</div>
+      <div className='projection-details__title'>{projection.movie?.name}</div>
       <div className='projection-details__content'>
-        Projection type: {projection.projectionType}
+        <span className='bold'>Time:</span>
+        {formatDate(projection.time)}
       </div>
-      <div className='projection-details__content'>Theater: {projection.theater}</div>
-      <div className='projection-details__content'>Price: {projection.price}</div>
+      <div className='projection-details__content'>
+        <span className='bold'>Projection type:</span>
+        {projection.projectionType}
+      </div>
+      <div className='projection-details__content'>
+        <span className='bold'>Theater:</span>
+        {projection.theater}
+      </div>
+      <div className='projection-details__content'>
+        <span className='bold'>Price:</span>
+        {projection.price}
+      </div>
       {buyCardButton}
       {ticketsTable}
     </div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './MovieCreateForm.scss';
-import Input from 'common/components/UI/Input/Input';
 import { CreateMovieDto } from 'features/movies/types/MovieCreateDto';
+import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+import Input from 'common/components/UI/Input/Input';
 import Button from 'common/components/UI/Button/Button';
 import TextArea from 'common/components/UI/TextArea/TextArea';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
-import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
 
 interface Props {
   create: (createMovieDto: CreateMovieDto) => void;

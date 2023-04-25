@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './MovieUpdateForm.scss';
-import Input from 'common/components/UI/Input/Input';
-import Button from 'common/components/UI/Button/Button';
 import { Movie } from 'features/movies/types/Movie';
 import { MovieUpdateDto } from 'features/movies/types/MovieUpdateDto';
+import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+import Input from 'common/components/UI/Input/Input';
+import Button from 'common/components/UI/Button/Button';
 import TextArea from 'common/components/UI/TextArea/TextArea';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
-import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
 
 interface Props {
   movie: Movie;

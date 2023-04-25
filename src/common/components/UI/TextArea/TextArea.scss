@@ -20,6 +20,8 @@
     transition: border-color 0.2s ease-in-out;
     resize: none;
     overflow-y: hidden;
+    text-align: justify;
+    text-justify: inter-word;
 
     &:focus {
       outline: none;
