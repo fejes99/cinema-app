@@ -1,7 +1,10 @@
+import React from 'react';
+import './UsersTable.scss';
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { formatDate } from 'common/helpers/dateFormater';
 import { useUserRedirect } from 'features/auth/helpers/userRedirects';
 import { User } from 'features/auth/types/User';
-import React from 'react';
 
 interface Props {
   users: User[];
@@ -17,6 +20,7 @@ const UsersTable: React.FC<Props> = ({ users }) => {
           <th>Username</th>
           <th>Created</th>
           <th>Role</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -26,10 +30,15 @@ const UsersTable: React.FC<Props> = ({ users }) => {
               <td>{user.username}</td>
               <td>{formatDate(user.created)}</td>
               <td>{user.role}</td>
+              <td>
+                <ModeEditOutlinedIcon className='edit-icon' />
+                <DeleteOutlinedIcon className='delete-icon' />
+              </td>
             </tr>
           ))}
       </tbody>
     </table>
   );
 };
+
 export default UsersTable;
