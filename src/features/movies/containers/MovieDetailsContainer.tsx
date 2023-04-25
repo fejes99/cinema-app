@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Movie } from '../types/Movie';
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchMovie } from '../state/movieActions';
@@ -8,7 +8,7 @@ import MovieDetails from '../components/MovieDetails/MovieDetails';
 import Loader from 'common/components/UI/Loader/Loader';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 import { extractYoutubeVideoId } from '../helpers/movieGetVideoIdFromTrailer';
-import Button from 'common/components/UI/Button/Button';
+import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
 
 interface Props {
   selectedMovie: Movie | null;
@@ -24,10 +24,17 @@ const MovieDetailsContainer: React.FC<Props> = ({
   onFetchMovie,
 }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) onFetchMovie(id);
   }, [id, onFetchMovie]);
+
+  const handleEditClick = () => {
+    navigate(`/movies/${id}/edit`);
+  };
+
+  const handleDeleteClick = () => {};
 
   if (loading) return <Loader />;
   if (selectedMovie === null) return <div>No movie</div>;
@@ -36,9 +43,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
   return (
     <>
       <YoutubeEmbed videoId={extractYoutubeVideoId(selectedMovie.trailerUrl!)} />
-      <Button size='medium' type='primary' onClick={() => {}}>
-        Edit
-      </Button>
+      <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
       <MovieDetails movie={selectedMovie} />
     </>
   );

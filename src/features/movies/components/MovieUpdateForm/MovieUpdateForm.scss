@@ -1,4 +1,4 @@
-.login {
+.movie-update {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,24 +29,8 @@
     padding: 10px;
   }
 
-  &__register {
-    cursor: default;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 25px;
-    transition: all 0.2s ease-in-out;
-    border-radius: 5px;
-    &-link {
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-      border-bottom: 1px solid #28a745;
-      margin: 10px;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        color: #28a745;
-      }
-    }
+  &__video {
+    width: 100%;
+    max-width: 600px;
   }
 }
