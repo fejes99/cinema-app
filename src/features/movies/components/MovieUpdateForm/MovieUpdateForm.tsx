@@ -24,6 +24,15 @@ const MovieUpdateForm: React.FC<Props> = ({ movie, update }) => {
     year: movie.year,
     trailerUrl: movie.trailerUrl || '',
   });
+  const isFormValid =
+    movieUpdate.name &&
+    movieUpdate.director &&
+    movieUpdate.distributor &&
+    movieUpdate.country &&
+    movieUpdate.description !== undefined &&
+    movieUpdate.trailerUrl !== undefined &&
+    Number(movieUpdate.duration) > 1 &&
+    Number(movieUpdate.year) >= 2023;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
@@ -64,6 +73,7 @@ const MovieUpdateForm: React.FC<Props> = ({ movie, update }) => {
             name='duration'
             value={movieUpdate.duration}
             onChange={handleChange}
+            min={1}
           />
         </div>
         <div className='movie-update__field'>
@@ -117,7 +127,7 @@ const MovieUpdateForm: React.FC<Props> = ({ movie, update }) => {
             <YoutubeEmbed videoId={extractYoutubeVideoId(movie.trailerUrl)} />
           </div>
         ) : null}
-        <Button size='medium' type='success'>
+        <Button size='medium' type='success' disabled={!isFormValid}>
           Update
         </Button>
       </form>

@@ -30,10 +30,10 @@ const ProjectionsTable: React.FC<Props> = ({ projections, redirect }) => (
               <span className='bold'>{projection.movie?.name}</span>
             </td>
             <td>{formatDate(projection.time)}</td>
-            <td>{projection.projectionType}</td>
-            <td>{projection.theater}</td>
+            <td>{projection.projectionType.name}</td>
+            <td>{projection.theater.name}</td>
             <td>
-              <span className='bold'>{projection.price}</span>
+              <span className='bold'>{projection.price} RSD</span>
             </td>
             <td>
               <ModeEditOutlinedIcon className='edit-icon' />

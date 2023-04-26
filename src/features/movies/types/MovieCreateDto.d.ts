@@ -1,4 +1,4 @@
-export interface CreateMovieDto {
+export interface MovieCreateDto {
   name: string;
   director: string;
   duration: number;

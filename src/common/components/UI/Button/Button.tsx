@@ -13,8 +13,9 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ size, type, disabled, onClick, children }) => {
-  const buttonClass = `button button-${size} button-${type}`;
   const isDisabled = disabled || type === 'disabled';
+  const buttonClass = `button button-${size} ${isDisabled ? 'button-disabled' : ''} button-${type}`;
+
   const handleClick = () => {
     if (!isDisabled && onClick) {
       onClick();

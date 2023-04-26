@@ -6,5 +6,10 @@ export const useProjectionRedirect = () => {
   const redirectToProjectionDetails = (projectionId: string) =>
     navigate(`/projections/${projectionId}`);
 
-  return { redirectToProjectionDetails };
+  const redirectToProjectionCreate = () => navigate('/projections/create');
+
+  const redirectToProjectionUpdate = (projectionId: string) =>
+    navigate(`/projections/${projectionId}/edit`);
+
+  return { redirectToProjectionDetails, redirectToProjectionCreate, redirectToProjectionUpdate };
 };

@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import './MovieCreateForm.scss';
-import { CreateMovieDto } from 'features/movies/types/MovieCreateDto';
+import { MovieCreateDto } from 'features/movies/types/MovieCreateDto';
 import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
 import Input from 'common/components/UI/Input/Input';
 import Button from 'common/components/UI/Button/Button';
 import TextArea from 'common/components/UI/TextArea/TextArea';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
+import { useNavigate } from 'react-router';
 
 interface Props {
-  create: (createMovieDto: CreateMovieDto) => void;
+  create: (movieCreateDto: MovieCreateDto) => void;
 }
 
 const MovieCreateForm: React.FC<Props> = ({ create }) => {
-  const [movie, setMovie] = useState<CreateMovieDto>({
+  const navigate = useNavigate();
+  const [newMovie, setNewMovie] = useState<MovieCreateDto>({
     name: '',
     director: '',
     duration: 0,
@@ -22,30 +24,37 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
     year: 0,
     trailerUrl: '',
   });
+  const isFormValid = Object.values(newMovie).every((value) => value !== '' && value !== 0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
-    setMovie((prevState) => ({ ...prevState, [name]: value }));
+    setNewMovie((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    create(movie);
+  const handleSubmit = (): void => {
+    create(newMovie);
+    navigate('/movies');
   };
 
   return (
     <div className='movie-create'>
       <div className='movie-create__title'>Create Movie</div>
-      <form className='movie-create__form' onSubmit={handleSubmit}>
+      <div className='movie-create__form'>
         <div className='movie-create__field'>
-          <Input label='Name' type='text' name='name' value={movie.name} onChange={handleChange} />
+          <Input
+            label='Name'
+            type='text'
+            name='name'
+            value={newMovie.name}
+            onChange={handleChange}
+          />
         </div>
         <div className='movie-create__field'>
           <Input
             label='Director'
             type='text'
             name='director'
-            value={movie.director}
+            value={newMovie.director}
             onChange={handleChange}
           />
         </div>
@@ -54,7 +63,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             label='Duration'
             type='number'
             name='duration'
-            value={movie.duration}
+            value={newMovie.duration}
             onChange={handleChange}
           />
         </div>
@@ -63,7 +72,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             label='Distributor'
             type='text'
             name='distributor'
-            value={movie.distributor}
+            value={newMovie.distributor}
             onChange={handleChange}
           />
         </div>
@@ -71,7 +80,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
           <TextArea
             label='Description'
             name='description'
-            value={movie.description}
+            value={newMovie.description}
             onChange={handleChange}
           />
         </div>
@@ -80,7 +89,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             label='Country'
             type='text'
             name='country'
-            value={movie.country}
+            value={newMovie.country}
             onChange={handleChange}
           />
         </div>
@@ -89,7 +98,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             label='Year'
             type='number'
             name='year'
-            value={movie.year}
+            value={newMovie.year}
             min={1900}
             max={2100}
             onChange={handleChange}
@@ -100,19 +109,19 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             label='Trailer URL'
             type='text'
             name='trailerUrl'
-            value={movie.trailerUrl!}
+            value={newMovie.trailerUrl!}
             onChange={handleChange}
           />
         </div>
-        {movie.trailerUrl ? (
+        {newMovie.trailerUrl ? (
           <div className='movie-create__video'>
-            <YoutubeEmbed videoId={extractYoutubeVideoId(movie.trailerUrl)} />
+            <YoutubeEmbed videoId={extractYoutubeVideoId(newMovie.trailerUrl)} />
           </div>
         ) : null}
-        <Button size='medium' type='success'>
+        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Create
         </Button>
-      </form>
+      </div>
     </div>
   );
 };

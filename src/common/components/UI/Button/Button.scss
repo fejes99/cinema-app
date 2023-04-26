@@ -78,6 +78,10 @@
     color: $text-color-disabled;
     cursor: not-allowed;
     border: none;
+
+    &:hover {
+      background-color: darken($button-color-disabled, 10%);
+    }
   }
 
   &:active:not(.button--disabled) {

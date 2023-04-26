@@ -1,5 +1,7 @@
 import { Movie } from 'features/movies/types/Movie';
 import { Ticket } from 'features/tickets/types/Ticket';
+import { Theater } from 'features/theaters/types/Theater';
+import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
 
 export interface Projection {
   id: string;
@@ -7,10 +9,8 @@ export interface Projection {
   time: string;
   price: number;
   movie?: Movie;
-  // Todo: Should change projectionType type?
-  projectionType: string;
-  // Todo: Should change theater type?
-  theater: string;
+  projectionType: ProjectionType;
+  theater: Theater;
   isSold: boolean;
   tickets?: Ticket[];
 }

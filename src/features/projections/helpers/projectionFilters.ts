@@ -20,9 +20,9 @@ export const projectionSearchFilter = (
       (filters.movie === defaultProjectionFilters.movie ||
         projection.movie?.name === filters.movie) &&
       (filters.theater === defaultProjectionFilters.theater ||
-        projection.theater === filters.theater) &&
+        projection.theater.name === filters.theater) &&
       (filters.projectionType === defaultProjectionFilters.projectionType ||
-        projection.projectionType === filters.projectionType) &&
+        projection.projectionType.name === filters.projectionType) &&
       (filters.minPrice === defaultProjectionFilters.minPriceFixed ||
         projection.price >= filters.minPrice) &&
       (filters.maxPrice === defaultProjectionFilters.maxPriceFixed ||

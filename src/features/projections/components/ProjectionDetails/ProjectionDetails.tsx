@@ -33,15 +33,15 @@ const ProjectionDetails: React.FC<Props> = ({ projection }) => {
       </div>
       <div className='projection-details__content'>
         <span className='bold'>Projection type:</span>
-        {projection.projectionType}
+        {projection.projectionType.name}
       </div>
       <div className='projection-details__content'>
         <span className='bold'>Theater:</span>
-        {projection.theater}
+        {projection.theater.name}
       </div>
       <div className='projection-details__content'>
         <span className='bold'>Price:</span>
-        {projection.price}
+        {projection.price} RSD
       </div>
       {buyCardButton}
       {ticketsTable}

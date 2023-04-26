@@ -15,6 +15,8 @@ import {
   ProjectionFilters,
 } from '../types/ProjectionFilters';
 import { defaultProjectionFilters, projectionSearchFilter } from '../helpers/projectionFilters';
+import Button from 'common/components/UI/Button/Button';
+import { useProjectionRedirect } from '../helpers/projectionRedirects';
 
 interface Props {
   projections: Projection[];
@@ -30,6 +32,7 @@ const ProjectionListContainer: React.FC<Props> = ({
   onFetchProjections,
 }) => {
   const [filters, setFilters] = useState<ProjectionFilters>(defaultProjectionFilters);
+  const { redirectToProjectionCreate } = useProjectionRedirect();
 
   useEffect(() => onFetchProjections(), [onFetchProjections]);
 
@@ -50,8 +53,10 @@ const ProjectionListContainer: React.FC<Props> = ({
   if (error) return <div>{error.message}</div>;
 
   const movies = [...new Set(projections.map((projection) => projection.movie!.name))];
-  const theaters = [...new Set(projections.map((projection) => projection.theater))];
-  const projectionTypes = [...new Set(projections.map((projection) => projection.projectionType))];
+  const theaters = [...new Set(projections.map((projection) => projection.theater.name))];
+  const projectionTypes = [
+    ...new Set(projections.map((projection) => projection.projectionType.name)),
+  ];
 
   const handleFiltersChange = (
     projectionFilterName: ProjectionFilterName,
@@ -86,6 +91,9 @@ const ProjectionListContainer: React.FC<Props> = ({
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
+      <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
+        Add Projection
+      </Button>
       <ProjectionList projections={filteredProjections} />
     </>
   );

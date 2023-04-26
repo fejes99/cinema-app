@@ -1,3 +1,4 @@
+import { TheaterActionTypes } from './../features/theaters/state/theaterTypes';
 import movieReducer from 'features/movies/state/movieReducer';
 import projectionReducer from 'features/projections/state/projectionReducer';
 import { MovieState } from 'features/movies/state/movieState';
@@ -15,20 +16,35 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { AuthActionTypes } from 'features/auth/state/authTypes';
 import { AuthState } from 'features/auth/state/authState';
 import authReducer from 'features/auth/state/authReducer';
+import { ProjectionTypeState } from 'features/projectionTypes/state/projectionTypeState';
+import { ProjectionTypeActionTypes } from 'features/projectionTypes/state/projectionTypeTypes';
+import projectionTypeReducer from 'features/projectionTypes/state/projectionTypeReducer';
+import { TheaterState } from 'features/theaters/state/theaterState';
+import theaterReducer from 'features/theaters/state/theaterReducer';
 
 export interface StoreState {
+  auth: AuthState;
   movies: MovieState;
   projections: ProjectionState;
-  auth: AuthState;
+  projectionTypes: ProjectionTypeState;
+  theaters: TheaterState;
 }
 
-export type StoreAction = MovieActionTypes | ProjectionActionTypes | AuthActionTypes;
+export type StoreAction =
+  | AuthActionTypes
+  | MovieActionTypes
+  | ProjectionActionTypes
+  | ProjectionTypeActionTypes
+  | TheaterActionTypes;
+
 export type AppDispatch = typeof store.dispatch;
 
 const rootReducer: Reducer<StoreState, StoreAction> = combineReducers<StoreState>({
+  auth: authReducer,
   movies: movieReducer,
   projections: projectionReducer,
-  auth: authReducer,
+  projectionTypes: projectionTypeReducer,
+  theaters: theaterReducer,
 });
 
 declare global {

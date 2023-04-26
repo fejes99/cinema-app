@@ -13,6 +13,14 @@ export const CREATE_MOVIE_REQUEST = 'CREATE_MOVIE_REQUEST';
 export const CREATE_MOVIE_SUCCESS = 'CREATE_MOVIE_SUCCESS';
 export const CREATE_MOVIE_FAIL = 'CREATE_MOVIE_FAIL';
 
+export const UPDATE_MOVIE_REQUEST = 'UPDATE_MOVIE_REQUEST';
+export const UPDATE_MOVIE_SUCCESS = 'UPDATE_MOVIE_SUCCESS';
+export const UPDATE_MOVIE_FAIL = 'UPDATE_MOVIE_FAIL';
+
+export const DELETE_MOVIE_REQUEST = 'DELETE_MOVIE_REQUEST';
+export const DELETE_MOVIE_SUCCESS = 'DELETE_MOVIE_SUCCESS';
+export const DELETE_MOVIE_FAIL = 'DELETE_MOVIE_FAIL';
+
 interface FetchMoviesRequestAction {
   type: typeof FETCH_MOVIES_REQUEST;
 }
@@ -55,6 +63,33 @@ interface CreateMovieFailAction {
   error: Error;
 }
 
+interface UpdateMovieRequestAction {
+  type: typeof UPDATE_MOVIE_REQUEST;
+}
+
+interface UpdateMovieSuccessAction {
+  type: typeof UPDATE_MOVIE_SUCCESS;
+  updatedMovie: Movie;
+}
+
+interface UpdateMovieFailAction {
+  type: typeof UPDATE_MOVIE_FAIL;
+  error: Error;
+}
+
+interface DeleteMovieRequestAction {
+  type: typeof DELETE_MOVIE_REQUEST;
+}
+
+interface DeleteMovieSuccessAction {
+  type: typeof DELETE_MOVIE_SUCCESS;
+}
+
+interface DeleteMovieFailAction {
+  type: typeof DELETE_MOVIE_FAIL;
+  error: Error;
+}
+
 export type MovieActionTypes =
   | FetchMoviesRequestAction
   | FetchMoviesSuccessAction
@@ -64,4 +99,10 @@ export type MovieActionTypes =
   | FetchMovieFailAction
   | CreateMovieRequestAction
   | CreateMovieSuccessAction
-  | CreateMovieFailAction;
+  | CreateMovieFailAction
+  | UpdateMovieRequestAction
+  | UpdateMovieSuccessAction
+  | UpdateMovieFailAction
+  | DeleteMovieRequestAction
+  | DeleteMovieSuccessAction
+  | DeleteMovieFailAction;
