@@ -24,7 +24,15 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
     year: 0,
     trailerUrl: '',
   });
-  const isFormValid = Object.values(newMovie).every((value) => value !== '' && value !== 0);
+  const isFormValid =
+    newMovie.name &&
+    newMovie.director &&
+    newMovie.distributor &&
+    newMovie.country &&
+    newMovie.description !== undefined &&
+    newMovie.trailerUrl !== undefined &&
+    Number(newMovie.duration) > 1 &&
+    Number(newMovie.year) >= 2023;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
