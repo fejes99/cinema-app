@@ -63,6 +63,17 @@ td {
   border-bottom: 1px solid #ccc;
 }
 
+td {
+  .icon {
+    display: inline-block;
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 td:first-child {
   font-weight: bold;
 }

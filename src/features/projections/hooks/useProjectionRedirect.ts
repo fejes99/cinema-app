@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 export const useProjectionRedirect = () => {
   const navigate = useNavigate();
 
+  const redirectToProjectionList = () => navigate('/projections');
+
   const redirectToProjectionDetails = (projectionId: string) =>
     navigate(`/projections/${projectionId}`);
 
@@ -11,5 +13,10 @@ export const useProjectionRedirect = () => {
   const redirectToProjectionUpdate = (projectionId: string) =>
     navigate(`/projections/${projectionId}/edit`);
 
-  return { redirectToProjectionDetails, redirectToProjectionCreate, redirectToProjectionUpdate };
+  return {
+    redirectToProjectionList,
+    redirectToProjectionDetails,
+    redirectToProjectionCreate,
+    redirectToProjectionUpdate,
+  };
 };

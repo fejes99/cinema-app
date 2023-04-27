@@ -8,9 +8,11 @@ import './ProjectionsTable.scss';
 interface Props {
   projections: Projection[];
   redirect: (id: string) => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-const ProjectionsTable: React.FC<Props> = ({ projections, redirect }) => (
+const ProjectionsTable: React.FC<Props> = ({ projections, redirect, onEdit, onDelete }) => (
   <table>
     <thead>
       <tr>
@@ -25,8 +27,8 @@ const ProjectionsTable: React.FC<Props> = ({ projections, redirect }) => (
     <tbody>
       {projections &&
         projections.map((projection: Projection) => (
-          <tr key={projection.id} onClick={() => redirect(projection.id)}>
-            <td>
+          <tr key={projection.id}>
+            <td onClick={() => redirect(projection.id)}>
               <span className='bold'>{projection.movie?.name}</span>
             </td>
             <td>{formatDate(projection.time)}</td>
@@ -36,8 +38,12 @@ const ProjectionsTable: React.FC<Props> = ({ projections, redirect }) => (
               <span className='bold'>{projection.price} RSD</span>
             </td>
             <td>
-              <ModeEditOutlinedIcon className='edit-icon' />
-              <DeleteOutlinedIcon className='delete-icon' />
+              <div className='icon' onClick={() => onEdit(projection.id)}>
+                <ModeEditOutlinedIcon className='edit-icon' />
+              </div>
+              <div className='icon' onClick={() => onDelete(projection.id)}>
+                <DeleteOutlinedIcon className='delete-icon' />
+              </div>
             </td>
           </tr>
         ))}

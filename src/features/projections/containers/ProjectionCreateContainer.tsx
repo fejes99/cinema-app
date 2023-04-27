@@ -10,6 +10,8 @@ import { Movie } from 'features/movies/types/Movie';
 import { fetchTheaters } from 'features/theaters/state/theaterActions';
 import { Theater } from 'features/theaters/types/Theater';
 import Loader from 'common/components/UI/Loader/Loader';
+import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import { createProjection } from '../state/projectionActions';
 
 interface Props {
   movies: Movie[];
@@ -34,6 +36,8 @@ const ProjectionCreateContainer: React.FC<Props> = ({
   onFetchTheaters,
   onCreateProjection,
 }) => {
+  const { redirectToProjectionList } = useProjectionRedirect();
+
   useEffect(() => {
     onFetchMovies();
     onFetchProjectionTypes();
@@ -43,8 +47,9 @@ const ProjectionCreateContainer: React.FC<Props> = ({
   if (isLoading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const handleCreateProjection = (projectionCreateDto: ProjectionCreateDto) => {
+  const handleProjectionCreate = (projectionCreateDto: ProjectionCreateDto) => {
     onCreateProjection(projectionCreateDto);
+    redirectToProjectionList();
   };
 
   return (
@@ -53,7 +58,7 @@ const ProjectionCreateContainer: React.FC<Props> = ({
         movies={movies}
         projectionTypes={projectionTypes}
         theaters={theaters}
-        create={onCreateProjection}
+        create={handleProjectionCreate}
       />
     </>
   );
@@ -85,7 +90,8 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchMovies: () => dispatch(fetchMovies()),
   onFetchProjectionTypes: () => dispatch(fetchProjectionTypes()),
   onFetchTheaters: () => dispatch(fetchTheaters()),
-  onCreateProjection: (projectionCreateDto: ProjectionCreateDto) => {},
+  onCreateProjection: (projectionCreateDto: ProjectionCreateDto) =>
+    dispatch(createProjection(projectionCreateDto)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectionCreateContainer);

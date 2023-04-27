@@ -1,6 +1,6 @@
 export interface ProjectionUpdateDto {
-  Time: string;
-  Price: number;
-  ProjectionTypeId: string;
-  TheaterId: string;
+  time: string;
+  price: number;
+  projectionTypeId: string;
+  theaterId: string;
 }

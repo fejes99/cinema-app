@@ -60,7 +60,7 @@ const createMovieSuccess = (newMovie: Movie) => ({
 
 const createMovieFail = (error: Error) => ({
   type: actionTypes.CREATE_MOVIE_FAIL,
-  error: Error,
+  error: error,
 });
 
 const addMovie = (movieCreateDto: MovieCreateDto) => (dispatch: AppDispatch) => {
@@ -87,7 +87,7 @@ const updateMovieSuccess = (editedMovie: Movie) => ({
 
 const updateMovieFail = (error: Error) => ({
   type: actionTypes.UPDATE_MOVIE_FAIL,
-  error: Error,
+  error: error,
 });
 
 const editMovie = (movieId: string, movieUpdateDto: MovieUpdateDto) => (dispatch: AppDispatch) => {
@@ -114,11 +114,11 @@ const deleteMovieSuccess = () => ({
 
 const deleteMovieFail = (error: Error) => ({
   type: actionTypes.DELETE_MOVIE_FAIL,
-  error: Error,
+  error: error,
 });
 
 const removeMovie = (movieId: string) => (dispatch: AppDispatch) => {
-  dispatch(dispatch(deleteMovieRequest()));
+  dispatch(deleteMovieRequest());
   return axios
     .delete(`/movies/${movieId}`)
     .then((response) => {

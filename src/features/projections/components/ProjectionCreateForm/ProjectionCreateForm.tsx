@@ -23,6 +23,7 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
     projectionTypeId: '',
     theaterId: '',
   });
+  console.log('🚀 ~ file: ProjectionCreateForm.tsx:26 ~ newProjection:', newProjection);
   const isFormValid = Object.values(newProjection).every((value) => value !== '' && value !== 0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -31,20 +32,14 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
   };
 
   const handleDropdownChange = (name: string, value: string): void => {
-    let id: string;
-    switch (name) {
-      case 'movieId':
-        id = movies.find((movie) => movie.name === value)?.id || '';
-        break;
-      case 'projectionTypeId':
-        id = projectionTypes.find((projectionType) => projectionType.name === value)?.id || '';
-        break;
-      case 'theaterId':
-        id = theaters.find((theater) => theater.name === value)?.id || '';
-        break;
-      default:
-        id = '';
-    }
+    const id = {
+      movieId: movies.find((movie) => movie.name === value)?.id || '',
+      projectionTypeId:
+        projectionTypes.find((projectionType) => projectionType.name === value)?.id || '',
+      theaterId: theaters.find((theater) => theater.name === value)?.id || '',
+    }[name];
+    console.log('🚀 ~ file: ProjectionCreateForm.tsx:41 ~ handleDropdownChange ~ id:', id);
+
     setNewProjection((prevState) => ({ ...prevState, [name]: id }));
   };
 
@@ -76,7 +71,7 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
         <div className='projection-create__field'>
           <Dropdown
             title='Movies'
-            value={newProjection.movieId}
+            value={movies.find((movie) => movie.id === newProjection.movieId)?.name || ''}
             options={movies.map((movie) => movie.name)}
             onChange={(value) => handleDropdownChange('movieId', value)}
           />

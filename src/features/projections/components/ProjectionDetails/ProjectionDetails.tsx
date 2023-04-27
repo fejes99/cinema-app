@@ -10,6 +10,7 @@ interface Props {
 }
 
 const ProjectionDetails: React.FC<Props> = ({ projection }) => {
+  console.log('🚀 ~ file: ProjectionDetails.tsx:13 ~ projection:', projection);
   const buyCardButton = projection.isSold ? null : (
     <div className='projection-details__button'>
       <Button size='medium' type='success'>

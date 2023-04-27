@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 
 import { AppDispatch, StoreState } from 'store/store';
 
-import { fetchProjections } from '../state/projectionActions';
+import { deleteProjection, fetchProjection, fetchProjections } from '../state/projectionActions';
 import { Projection } from '../types/Projection';
 
 import Loader from 'common/components/UI/Loader/Loader';
-import ProjectionList from '../components/ProjectionList/ProjectionList';
 import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 import {
   ProjectionFilterName,
@@ -16,23 +15,38 @@ import {
 } from '../types/ProjectionFilters';
 import { defaultProjectionFilters, projectionSearchFilter } from '../helpers/projectionFilters';
 import Button from 'common/components/UI/Button/Button';
-import { useProjectionRedirect } from '../helpers/projectionRedirects';
+import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import useModal from 'common/hooks/useModal';
+import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';
 
 interface Props {
   projections: Projection[];
   loading: boolean;
   error: Error;
+  onFetchProjection: (id: string) => void;
   onFetchProjections: () => void;
+  onDeleteProjection: (id: string) => Promise<void>;
 }
 
 const ProjectionListContainer: React.FC<Props> = ({
   projections,
   loading,
   error,
+  onFetchProjection,
   onFetchProjections,
+  onDeleteProjection,
 }) => {
+  const [projectionToDeleteId, setprojectionToDeleteId] = useState<string>('');
   const [filters, setFilters] = useState<ProjectionFilters>(defaultProjectionFilters);
-  const { redirectToProjectionCreate } = useProjectionRedirect();
+  const {
+    redirectToProjectionList,
+    redirectToProjectionDetails,
+    redirectToProjectionCreate,
+    redirectToProjectionUpdate,
+  } = useProjectionRedirect();
+
+  const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => onFetchProjections(), [onFetchProjections]);
 
@@ -45,6 +59,8 @@ const ProjectionListContainer: React.FC<Props> = ({
         ...prevFilters,
         minPrice: minPrice,
         maxPrice: maxPrice,
+        minPriceFixed: minPrice,
+        maxPriceFixed: maxPrice,
       }));
     }
   }, [loading, projections]);
@@ -79,6 +95,22 @@ const ProjectionListContainer: React.FC<Props> = ({
     }));
   };
 
+  const handleEditClick = (id: string) => {
+    onFetchProjection(id);
+    redirectToProjectionUpdate(id);
+  };
+
+  const handleDeleteClick = (id: string) => {
+    setprojectionToDeleteId(id);
+    openDeleteModal();
+  };
+
+  const deleteModalConfirmation = async () => {
+    await onDeleteProjection(projectionToDeleteId);
+    closeAllModals();
+    redirectToProjectionList();
+  };
+
   const filteredProjections = projectionSearchFilter(projections, filters);
 
   return (
@@ -94,7 +126,18 @@ const ProjectionListContainer: React.FC<Props> = ({
       <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
         Add Projection
       </Button>
-      <ProjectionList projections={filteredProjections} />
+      <ProjectionsTable
+        projections={filteredProjections}
+        redirect={redirectToProjectionDetails}
+        onEdit={(id: string) => handleEditClick(id)}
+        onDelete={(id: string) => handleDeleteClick(id)}
+      />
+      <DeleteModal
+        title='projection'
+        show={showDeleteModal}
+        onDelete={deleteModalConfirmation}
+        onClose={closeAllModals}
+      />
     </>
   );
 };
@@ -106,7 +149,9 @@ const mapStateToProps = (state: StoreState) => ({
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  onFetchProjection: (id: string) => dispatch(fetchProjection(id)),
   onFetchProjections: () => dispatch(fetchProjections()),
+  onDeleteProjection: async (id: string) => await dispatch(deleteProjection(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectionListContainer);

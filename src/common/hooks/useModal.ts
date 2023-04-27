@@ -17,6 +17,7 @@ const useModal = () => {
   }, []);
 
   const openDeleteModal = useCallback(() => {
+    console.log('🚀 ~ file: useModal.ts:23 ~ openDeleteModal ~ openDeleteModal:', openDeleteModal);
     closeAllModals();
     setShowDeleteModal(true);
   }, [closeAllModals]);
