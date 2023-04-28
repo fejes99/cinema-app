@@ -7,7 +7,7 @@ export const useMovieRedirect = () => {
 
   const redirectToMovieDetails = (movieId: string) => navigate(`/movies/${movieId}`);
 
-  const redirectToMovieCreate = () => navigate('/movies/create');
+  const redirectToMovieCreate = () => navigate('/movies/new');
 
   const redirectToMovieUpdate = (movieId: string) => navigate(`/movies/${movieId}/edit`);
 

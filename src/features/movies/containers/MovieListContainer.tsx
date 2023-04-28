@@ -14,7 +14,7 @@ import MovieFilter from '../components/MovieFilter/MovieFilter';
 import MovieList from '../components/MovieList/MovieList';
 import Loader from 'common/components/UI/Loader/Loader';
 import Button from 'common/components/UI/Button/Button';
-import { useMovieRedirect } from '../helpers/movieRedirects';
+import { useMovieRedirect } from '../hooks/movieRedirects';
 
 interface Props {
   movies: Movie[];

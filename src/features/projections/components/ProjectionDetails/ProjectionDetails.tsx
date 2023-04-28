@@ -7,14 +7,14 @@ import './ProjectionDetails.scss';
 
 interface Props {
   projection: Projection;
+  buyTicket: () => void;
 }
 
-const ProjectionDetails: React.FC<Props> = ({ projection }) => {
-  console.log('🚀 ~ file: ProjectionDetails.tsx:13 ~ projection:', projection);
+const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
   const buyCardButton = projection.isSold ? null : (
     <div className='projection-details__button'>
-      <Button size='medium' type='success'>
-        Buy Card
+      <Button size='medium' type='success' onClick={buyTicket}>
+        Buy Ticket
       </Button>
     </div>
   );

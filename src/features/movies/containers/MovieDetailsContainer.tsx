@@ -9,7 +9,7 @@ import Loader from 'common/components/UI/Loader/Loader';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 import { extractYoutubeVideoId } from '../helpers/movieGetVideoIdFromTrailer';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
-import { useMovieRedirect } from '../helpers/movieRedirects';
+import { useMovieRedirect } from '../hooks/movieRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 

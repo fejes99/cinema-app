@@ -3,8 +3,8 @@ import './UsersTable.scss';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { formatDate } from 'common/helpers/dateFormater';
-import { useUserRedirect } from 'features/auth/helpers/userRedirects';
 import { User } from 'features/auth/types/User';
+import { useUserRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   users: User[];

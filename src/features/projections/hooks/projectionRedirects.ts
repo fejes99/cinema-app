@@ -8,7 +8,7 @@ export const useProjectionRedirect = () => {
   const redirectToProjectionDetails = (projectionId: string) =>
     navigate(`/projections/${projectionId}`);
 
-  const redirectToProjectionCreate = () => navigate('/projections/create');
+  const redirectToProjectionCreate = () => navigate('/projections/new');
 
   const redirectToProjectionUpdate = (projectionId: string) =>
     navigate(`/projections/${projectionId}/edit`);

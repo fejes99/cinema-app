@@ -4,7 +4,7 @@ import { AppDispatch } from 'store/store';
 import { createMovie } from '../state/movieActions';
 import MovieCreateForm from '../components/MovieCreateForm/MovieCreateForm';
 import { MovieCreateDto } from '../types/MovieCreateDto';
-import { useMovieRedirect } from '../helpers/movieRedirects';
+import { useMovieRedirect } from '../hooks/movieRedirects';
 
 interface Props {
   onCreateMovie: (movieCreateDto: MovieCreateDto) => void;

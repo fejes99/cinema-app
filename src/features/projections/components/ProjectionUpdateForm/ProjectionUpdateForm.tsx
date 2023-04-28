@@ -21,7 +21,6 @@ const ProjectionUpdateForm: React.FC<Props> = ({
   theaters,
   update,
 }) => {
-  console.log('🚀 ~ file: ProjectionUpdateForm.tsx:24 ~ projection:', projection);
   const [projectionUpdate, setProjectionUpdate] = useState<ProjectionUpdateDto>({
     time: projection.time,
     price: projection.price,
@@ -45,7 +44,6 @@ const ProjectionUpdateForm: React.FC<Props> = ({
         projectionTypes.find((projectionType) => projectionType.name === value)?.id || '',
       theaterId: theaters.find((theater) => theater.name === value)?.id || '',
     }[name];
-    console.log('🚀 ~ file: ProjectionCreateForm.tsx:41 ~ handleDropdownChange ~ id:', id);
 
     setProjectionUpdate((prevState) => ({ ...prevState, [name]: id }));
   };

@@ -10,7 +10,7 @@ const ProjectionPage: React.FC = () => (
     <Route path='/' element={<ProjectionListContainer />} />
     <Route path=':id' element={<ProjectionDetailsContainer />} />
     <Route path=':id/edit' element={<ProjectionUpdateContainer />} />
-    <Route path='/create' element={<ProjectionCreateContainer />} />
+    <Route path='/new' element={<ProjectionCreateContainer />} />
   </Routes>
 );
 

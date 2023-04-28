@@ -9,6 +9,7 @@ import ProfilePage from 'features/auth/pages/ProfilePage';
 import RegisterPage from 'features/auth/pages/RegisterPage';
 import ProjectionPage from 'features/projections/pages/ProjectionPage';
 import UserPage from 'features/auth/pages/UserPage';
+import TicketPage from 'features/tickets/pages/TicketPage';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/movies/*' element={<MoviePage />} />
           <Route path='/projections/*' element={<ProjectionPage />} />
+          <Route path='/tickets/*' element={<TicketPage />} />
           <Route path='/users/*' element={<UserPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/login' element={<LoginPage />} />

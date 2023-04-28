@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie } from 'features/movies/types/Movie';
 import './MovieCard.scss';
-import { useMovieRedirect } from 'features/movies/helpers/movieRedirects';
+import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
 
 interface Props {
   movie: Movie;

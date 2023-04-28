@@ -15,7 +15,7 @@ import {
 } from '../types/ProjectionFilters';
 import { defaultProjectionFilters, projectionSearchFilter } from '../helpers/projectionFilters';
 import Button from 'common/components/UI/Button/Button';
-import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';

@@ -23,7 +23,6 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
     projectionTypeId: '',
     theaterId: '',
   });
-  console.log('🚀 ~ file: ProjectionCreateForm.tsx:26 ~ newProjection:', newProjection);
   const isFormValid = Object.values(newProjection).every((value) => value !== '' && value !== 0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -38,7 +37,6 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
         projectionTypes.find((projectionType) => projectionType.name === value)?.id || '',
       theaterId: theaters.find((theater) => theater.name === value)?.id || '',
     }[name];
-    console.log('🚀 ~ file: ProjectionCreateForm.tsx:41 ~ handleDropdownChange ~ id:', id);
 
     setNewProjection((prevState) => ({ ...prevState, [name]: id }));
   };

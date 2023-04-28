@@ -10,7 +10,7 @@ import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
 import { Theater } from 'features/theaters/types/Theater';
 import { Projection } from '../types/Projection';
 import ProjectionUpdateForm from '../components/ProjectionUpdateForm/ProjectionUpdateForm';
-import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import Loader from 'common/components/UI/Loader/Loader';
 
 interface Props {
@@ -37,7 +37,6 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   onUpdateProjection,
 }) => {
   const { id } = useParams();
-  console.log('🚀 ~ file: ProjectionUpdateContainer.tsx:40 ~ id:', id);
   const { redirectToProjectionList } = useProjectionRedirect();
 
   useEffect(() => {
@@ -50,7 +49,6 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
     onFetchProjectionTypes();
     onFetchTheaters();
   }, [onFetchProjection, onFetchProjectionTypes, onFetchTheaters]);
-  console.log('🚀 ~ file: ProjectionUpdateContainer.tsx:47 ~ useEffect ~ projection:', projection);
 
   if (!projection || isLoading) return <Loader />;
   if (error) return <div>{error}</div>;

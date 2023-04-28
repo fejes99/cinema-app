@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 import { fetchMovie, updateMovie } from '../state/movieActions';
 import { Error } from 'common/types/Error';
 import Loader from 'common/components/UI/Loader/Loader';
-import { useMovieRedirect } from '../helpers/movieRedirects';
+import { useMovieRedirect } from '../hooks/movieRedirects';
 
 interface Props {
   movie: Movie | null;

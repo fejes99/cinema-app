@@ -10,7 +10,7 @@ const MoviePage: React.FC = () => (
     <Route path='/' element={<MovieListContainer />} />
     <Route path=':id' element={<MovieDetailsContainer />} />
     <Route path=':id/edit' element={<MovieUpdateContainer />} />
-    <Route path='/create' element={<MovieCreateContainer />} />
+    <Route path='/new' element={<MovieCreateContainer />} />
   </Routes>
 );
 

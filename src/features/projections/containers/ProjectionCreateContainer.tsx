@@ -10,7 +10,7 @@ import { Movie } from 'features/movies/types/Movie';
 import { fetchTheaters } from 'features/theaters/state/theaterActions';
 import { Theater } from 'features/theaters/types/Theater';
 import Loader from 'common/components/UI/Loader/Loader';
-import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import { createProjection } from '../state/projectionActions';
 
 interface Props {

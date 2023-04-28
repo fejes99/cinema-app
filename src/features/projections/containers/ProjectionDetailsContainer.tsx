@@ -7,9 +7,10 @@ import { useParams } from 'react-router';
 import Loader from 'common/components/UI/Loader/Loader';
 import ProjectionDetails from '../components/ProjectionDetails/ProjectionDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
-import { useProjectionRedirect } from '../hooks/useProjectionRedirect';
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 
 interface Props {
   selectedProjection: Projection | null;
@@ -28,6 +29,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 }) => {
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
+  const { redirectToTicketCreate } = useTicketRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   return (
     <>
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
-      <ProjectionDetails projection={selectedProjection} />
+      <ProjectionDetails projection={selectedProjection} buyTicket={redirectToTicketCreate} />
       <DeleteModal
         title='projection'
         show={showDeleteModal}

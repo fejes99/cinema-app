@@ -7,7 +7,7 @@ import UserList from '../components/UserList/UserList';
 import Loader from 'common/components/UI/Loader/Loader';
 import UserFilter from '../components/UserFilter/UserFilter';
 import { UserFilterName, UserFilterValue, UserFilters } from '../types/UserFilters';
-import { defaultUserFilters, userSearchFilter } from '../helpers/userFilters';
+import { defaultUserFilters, userSearchFilter } from '../helpers/authFilters';
 
 interface Props {
   users: User[];
