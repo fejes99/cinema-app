@@ -126,7 +126,7 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
             <YoutubeEmbed videoId={extractYoutubeVideoId(newMovie.trailerUrl)} />
           </div>
         ) : null}
-        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
+        <Button size='medium' type='primary' disabled={!isFormValid} onClick={handleSubmit}>
           Create
         </Button>
       </div>

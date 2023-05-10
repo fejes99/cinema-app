@@ -1,5 +1,8 @@
+@import 'variables.scss';
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: $spacing-large;
+  justify-content: space-between;
 }

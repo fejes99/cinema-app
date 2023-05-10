@@ -90,8 +90,8 @@ const ProjectionListContainer: React.FC<Props> = ({
       movie: defaultProjectionFilters.movie,
       theater: defaultProjectionFilters.theater,
       projectionType: defaultProjectionFilters.projectionType,
-      minPrice: defaultProjectionFilters.minPrice,
-      maxPrice: defaultProjectionFilters.maxPrice,
+      minPrice: prevFilters.minPriceFixed,
+      maxPrice: prevFilters.maxPriceFixed,
     }));
   };
 

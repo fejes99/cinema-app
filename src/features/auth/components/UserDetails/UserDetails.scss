@@ -1,27 +1,29 @@
+@import 'variables.scss';
+
 .user-details {
   background-color: white;
   padding: 40px 60px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
 
   &__content {
-    margin-top: 20px;
+    margin-top: $spacing-medium;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: $spacing-small;
 
     .bold {
-      margin-right: 10px;
+      margin-right: $spacing-small;
     }
   }
 
   &__content:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: $spacing-medium;
   }
 
   &__title {
     font-size: 48px;
     text-align: center;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: $spacing-medium;
   }
 }

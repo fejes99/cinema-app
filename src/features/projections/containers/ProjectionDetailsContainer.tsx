@@ -54,6 +54,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
     <>
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
       <ProjectionDetails projection={selectedProjection} buyTicket={redirectToTicketCreate} />
+      {/* TODO Add tickets list */}
       <DeleteModal
         title='projection'
         show={showDeleteModal}

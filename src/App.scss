@@ -1,18 +1,10 @@
-/// Variables///
-$button-color-primary: #007bff;
-$button-color-success: #28a745;
-$button-color-warning: #ffc107;
-$button-color-error: #dc3545;
-$button-color-disabled: #e9ecef;
-$button-shadow-hover: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
-$text-color: white;
-$text-color-disabled: #6c757d;
+@import 'variables.scss';
 
 .main {
   width: 100%;
-  max-width: 1130px;
-  margin: 120px auto;
+  max-width: 1300px;
+  padding: 120px 0;
+  margin: 0 auto;
 }
 
 .bold {
@@ -29,7 +21,7 @@ $text-color-disabled: #6c757d;
 table {
   margin-top: 30px;
   width: 100%;
-  max-width: 1130px;
+  max-width: 1300px;
   border-radius: 5px;
   background-color: white;
   border-spacing: 0;

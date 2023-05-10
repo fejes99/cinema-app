@@ -1,26 +1,27 @@
+@import 'variables.scss';
+
 .projection-details {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto;
-  padding: 50px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  background-color: $background-color-secondary;
+  padding: 40px 60px;
+  border-radius: $border-radius-large;
+  box-shadow: $box-shadow;
 
   &__title {
     font-size: 48px;
     text-align: center;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: $spacing-large;
   }
 
   &__content {
     width: 100%;
-    text-align: center;
-    margin-top: 20px;
+    margin-top: $spacing-medium;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: $spacing-small;
 
     .bold {
       margin-right: 5px;
@@ -29,6 +30,6 @@
 
   &__button {
     text-align: center;
-    margin-top: 30px;
+    margin-top: $spacing-large;
   }
 }

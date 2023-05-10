@@ -1,9 +1,34 @@
+@import 'variables.scss';
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-  background-color: #e9efff;
+  font-family: $font-text;
+  color: $text-color;
+
+  /* Background image */
+  padding: 0;
+  margin: 0;
+  background-image: url('/common/assets/background-image.jpg');
+  background-color: $background-color-primary;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: -100;
+
+  /* Overlay layer */
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -99;
+    background-color: rgba($background-color-primary, 0.96);
+  }
 }
 
 code {

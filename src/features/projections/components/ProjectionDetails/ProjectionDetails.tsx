@@ -13,7 +13,7 @@ interface Props {
 const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
   const buyCardButton = projection.isSold ? null : (
     <div className='projection-details__button'>
-      <Button size='medium' type='success' onClick={buyTicket}>
+      <Button size='medium' type='primary' onClick={buyTicket}>
         Buy Ticket
       </Button>
     </div>
@@ -26,27 +26,29 @@ const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
     );
 
   return (
-    <div className='projection-details'>
-      <div className='projection-details__title'>{projection.movie?.name}</div>
-      <div className='projection-details__content'>
-        <span className='bold'>Time:</span>
-        {formatDate(projection.time)}
+    <>
+      <div className='projection-details'>
+        <div className='projection-details__title'>{projection.movie?.name}</div>
+        <div className='projection-details__content'>
+          <span className='bold'>Time:</span>
+          {formatDate(projection.time)}
+        </div>
+        <div className='projection-details__content'>
+          <span className='bold'>Projection type:</span>
+          {projection.projectionType.name}
+        </div>
+        <div className='projection-details__content'>
+          <span className='bold'>Theater:</span>
+          {projection.theater.name}
+        </div>
+        <div className='projection-details__content'>
+          <span className='bold'>Price:</span>
+          {projection.price} RSD
+        </div>
+        {buyCardButton}
       </div>
-      <div className='projection-details__content'>
-        <span className='bold'>Projection type:</span>
-        {projection.projectionType.name}
-      </div>
-      <div className='projection-details__content'>
-        <span className='bold'>Theater:</span>
-        {projection.theater.name}
-      </div>
-      <div className='projection-details__content'>
-        <span className='bold'>Price:</span>
-        {projection.price} RSD
-      </div>
-      {buyCardButton}
       {ticketsTable}
-    </div>
+    </>
   );
 };
 

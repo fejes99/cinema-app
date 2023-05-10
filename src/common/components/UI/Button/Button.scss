@@ -1,4 +1,9 @@
-@import 'App.scss';
+@import 'variables.scss';
+
+// Height
+$button-height-small: 40px;
+$button-height-medium: 50px;
+$button-height-large: 60px;
 
 .button {
   display: inline-flex;
@@ -14,73 +19,64 @@
   text-decoration: none;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
+  color: $color-white;
 
   &-small {
-    height: 40px;
+    height: $button-height-small;
     padding: 0 15px;
     font-size: 14px;
   }
 
   &-medium {
-    height: 50px;
-    padding: 0 25px;
+    height: $button-height-medium;
+    padding: 0 $spacing-medium;
     font-size: 16px;
   }
 
   &-large {
-    height: 60px;
-    padding: 0 35px;
+    height: $button-height-large;
+    padding: 0 $spacing-large;
     font-size: 18px;
   }
 
   &-primary {
-    background-color: $button-color-primary;
-    color: $text-color;
+    background-color: $color-primary;
+    color: $color-white;
     border: none;
 
     &:hover {
-      background-color: darken($button-color-primary, 10%);
+      background-color: darken($color-primary, 10%);
     }
   }
 
   &-success {
-    background-color: $button-color-success;
-    color: $text-color;
+    background-color: $color-success;
+    color: $color-white;
     border: none;
 
     &:hover {
-      background-color: darken($button-color-success, 10%);
-    }
-  }
-
-  &-warning {
-    background-color: $button-color-warning;
-    color: black;
-    border: none;
-
-    &:hover {
-      background-color: darken($button-color-warning, 10%);
+      background-color: darken($color-success, 10%);
     }
   }
 
   &-error {
-    background-color: $button-color-error;
-    color: $text-color;
+    background-color: $color-error;
+    color: $color-white;
     border: none;
 
     &:hover {
-      background-color: darken($button-color-error, 10%);
+      background-color: darken($color-error, 10%);
     }
   }
 
   &-disabled {
-    background-color: $button-color-disabled;
+    background-color: $color-disabled;
     color: $text-color-disabled;
     cursor: not-allowed;
     border: none;
 
     &:hover {
-      background-color: darken($button-color-disabled, 10%);
+      background-color: darken($color-disabled, 10%);
     }
   }
 

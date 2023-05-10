@@ -1,10 +1,12 @@
+@import 'variables.scss';
+
 .navbar-item {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 $spacing-medium;
   border-bottom: 2px solid transparent;
-  transition: border-bottom 0.2s ease;
+  transition: $transition;
 
   &:hover {
     border-bottom: 10px solid white;
@@ -24,7 +26,7 @@
     text-transform: uppercase;
 
     &.active {
-      color: #007bff;
+      color: $color-primary;
     }
   }
 }

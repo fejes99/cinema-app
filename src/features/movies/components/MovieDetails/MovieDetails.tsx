@@ -1,6 +1,7 @@
 import React from 'react';
 import './MovieDetails.scss';
 import { Movie } from 'features/movies/types/Movie';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   movie: Movie;
@@ -10,30 +11,34 @@ const MovieDetails: React.FC<Props> = ({
   movie: { name, director, distributor, duration, description, country, year },
 }) => (
   <div className='movie-details'>
-    <div className='movie-details__title'>{name}</div>
-    <div className='movie-details__content'>
-      <span className='bold'>Director:</span>
-      {director}
+    <div className='movie-details__header'>{name}</div>
+    <div className='movie-details__row'>
+      <div className='movie-details__row-content'>
+        <span className='bold'>Director: </span>
+        {director}
+      </div>
+      <div className='movie-details__row-content'>
+        <span className='bold'>Distributor: </span>
+        {distributor}
+      </div>
+      <div className='movie-details__row-content'>
+        <span className='bold'>Duration: </span>
+        {duration}
+      </div>
     </div>
-    <div className='movie-details__content'>
-      <span className='bold'>Distributor:</span>
-      {distributor}
-    </div>
-    <div className='movie-details__content'>
-      <span className='bold'>Duration:</span>
-      {duration}
-    </div>
-    <div className='movie-details__content'>
-      <span className='bold'>Description:</span>
-      {description}
-    </div>
-    <div className='movie-details__content'>
-      <span className='bold'>Country:</span>
-      {country}
-    </div>
-    <div className='movie-details__content'>
-      <span className='bold'>Released:</span>
-      {year}
+
+    <div className='movie-details__content'>{description}</div>
+    <div className='movie-details__row'>
+      <div className='movie-details__content'>
+        <span className='bold'>
+          {country} {year}
+        </span>
+      </div>
+      <div className='movie-details_button'>
+        <Button size='large' type='primary'>
+          Buy Ticket
+        </Button>
+      </div>
     </div>
   </div>
 );
