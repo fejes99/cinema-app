@@ -45,7 +45,7 @@ const MovieFilter: React.FC<Props> = ({
         <div className='movie-filter__filters'>
           <div className='movie-filter__filter'>
             <Dropdown
-              title={'Gendre'}
+              title={'Genre'}
               value={''}
               options={['drama', 'comedy', 'horror']}
               // onChange={(value) => onFiltersChange(MovieFilterName.Genre, value)}

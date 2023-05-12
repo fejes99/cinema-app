@@ -2,59 +2,31 @@
 
 .user-filter {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: $spacing-large;
   padding: 50px;
   background-color: $background-color-secondary;
   border-radius: $border-radius-large;
   box-shadow: $box-shadow;
 
-  &__title {
-    font-size: 30px;
-    text-transform: uppercase;
-    margin-bottom: $spacing-large;
-  }
-
   &__search {
     margin-bottom: $spacing-medium;
-    width: 80%;
+    width: 100%;
     max-width: 400px;
   }
 
-  &__filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: $spacing-large;
-  }
-
   &__filter {
-    width: 100%;
+    width: 400px;
     margin-bottom: $spacing-small;
     display: flex;
     justify-content: center;
-  }
-
-  &__sliders {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: $spacing-large;
   }
 
   &__slider {
     width: calc(50% - 10px);
     display: flex;
     justify-content: center;
-  }
-
-  &__buttons {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    gap: $spacing-medium;
   }
 }

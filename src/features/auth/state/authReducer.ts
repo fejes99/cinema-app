@@ -5,6 +5,8 @@ import * as actionTypes from './authTypes';
 const initialState: AuthState = {
   users: [],
   selectedUser: null,
+  loggedUser: null,
+  token: null,
   loading: false,
   error: null,
 };
@@ -27,6 +29,24 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
       return { ...state, loading: false, selectedUser: action.selectedUser };
     case actionTypes.FETCH_USER_FAIL:
       return { ...state, loading: false, error: action.error };
+
+    case actionTypes.REGISTER_REQUEST:
+      return { ...state, loading: true, loggedUser: null, error: null };
+    case actionTypes.REGISTER_SUCCESS:
+      return { ...state, loading: false };
+    case actionTypes.REGISTER_FAIL:
+      return { ...state, loading: false, error: action.error };
+
+    case actionTypes.LOGIN_REQUEST:
+      return { ...state, loading: true, loggedUser: null, error: null };
+    case actionTypes.LOGIN_SUCCESS:
+      return { ...state, loading: false, loggedUser: action.loggedUser };
+    case actionTypes.LOGIN_FAIL:
+      return { ...state, loading: false, error: action.error };
+
+    case actionTypes.LOGOUT:
+      return { ...state, loggedUser: null };
+
     default:
       return state;
   }

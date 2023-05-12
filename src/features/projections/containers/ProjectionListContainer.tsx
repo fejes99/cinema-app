@@ -37,7 +37,7 @@ const ProjectionListContainer: React.FC<Props> = ({
   onFetchProjections,
   onDeleteProjection,
 }) => {
-  const [projectionToDeleteId, setprojectionToDeleteId] = useState<string>('');
+  const [projectionToDeleteId, setProjectionToDeleteId] = useState<string>('');
   const [filters, setFilters] = useState<ProjectionFilters>(defaultProjectionFilters);
   const {
     redirectToProjectionList,
@@ -101,7 +101,7 @@ const ProjectionListContainer: React.FC<Props> = ({
   };
 
   const handleDeleteClick = (id: string) => {
-    setprojectionToDeleteId(id);
+    setProjectionToDeleteId(id);
     openDeleteModal();
   };
 

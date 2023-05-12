@@ -11,6 +11,8 @@ import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
+import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
 
 interface Props {
   selectedProjection: Projection | null;
@@ -52,6 +54,9 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 
   return (
     <>
+      {selectedProjection.movie?.trailerUrl && (
+        <YoutubeEmbed videoId={extractYoutubeVideoId(selectedProjection.movie?.trailerUrl)} />
+      )}
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
       <ProjectionDetails projection={selectedProjection} buyTicket={redirectToTicketCreate} />
       {/* TODO Add tickets list */}

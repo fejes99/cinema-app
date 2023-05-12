@@ -17,7 +17,7 @@ const Dropdown: React.FC<Props> = ({ title, value, options, onChange }) => {
   return (
     <select name={title} value={value} onChange={handleChange}>
       <option value='' disabled hidden>
-        Select a {title}...
+        {title}...
       </option>
       {options.map((option: string) => (
         <option key={option} value={option}>

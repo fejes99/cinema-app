@@ -6,6 +6,7 @@ import { User } from '../types/User';
 import { useParams } from 'react-router';
 import Loader from 'common/components/UI/Loader/Loader';
 import UserDetails from '../components/UserDetails/UserDetails';
+import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
 
 interface Props {
   selectedUser: User | null;
@@ -24,8 +25,12 @@ const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, o
   if (selectedUser === null) return <div>No user</div>;
   if (error) return <div>error</div>;
 
+  const handleEditClick = () => {};
+  const handleDeleteClick = () => {};
+
   return (
     <>
+      <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
       <UserDetails user={selectedUser} />
     </>
   );

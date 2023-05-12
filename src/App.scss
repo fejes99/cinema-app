@@ -17,61 +17,77 @@
   align-items: center;
 }
 
+/* Icons */
+.edit-icon {
+  color: darken(#28a745, 10%);
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: darken(#dc3545, 10%);
+  cursor: pointer;
+}
+
 /* Table styles */
 table {
   margin-top: 30px;
   width: 100%;
   max-width: 1300px;
-  border-radius: 5px;
-  background-color: white;
+  border-radius: $border-radius;
+  background-color: $background-color-secondary;
   border-spacing: 0;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: $box-shadow-large;
+  cursor: default;
 }
 
 th {
-  background-color: rgba(0, 123, 255, 0.2);
+  background-color: $background-color-primary;
   font-weight: bold;
   text-align: left;
   padding: 10px 50px;
   height: 40px;
-  color: black;
+
+  &:first-child {
+    border-top-left-radius: $border-radius;
+  }
+
+  &:last-child {
+    text-align: center;
+    border-top-right-radius: $border-radius;
+  }
 }
 
-th:first-child {
-  border-top-left-radius: 5px;
-}
-
-th:last-child {
-  border-top-right-radius: 5px;
-}
-
-td {
-  padding: 10px 50px;
-  text-align: left;
-  height: 40px;
-}
 tr th,
 td {
   border-bottom: 1px solid #ccc;
 }
 
-td:first-child {
-  font-weight: bold;
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-td {
-  .icon {
-    display: inline-block;
+tr {
+  &:last-child {
+    td {
+      border-bottom: none;
+    }
   }
 }
 
-tr:hover td {
-  background-color: #f5f5f5;
-  cursor: pointer;
+td {
+  padding: 10px 50px;
+  text-align: left;
+  height: 40px;
+
+  &.icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  &:first-child {
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 /* Modals */
@@ -81,20 +97,20 @@ tr:hover td {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
   display: none;
-}
 
-.modal-container.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  &.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .modal {
-  background-color: #ffffff;
-  border-radius: 8px;
+  background-color: $background-color-secondary;
+  border-radius: $border-radius-large;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   padding: 50px;
   width: 550px;

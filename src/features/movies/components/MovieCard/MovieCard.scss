@@ -3,17 +3,17 @@
 .movie-card {
   padding: 30px;
   width: calc(50% - 7%);
-  height: 250px;
+  height: 240px;
   background-color: $background-color-secondary;
   display: flex;
   border-radius: 10px;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-large;
   transition: $transition;
   margin-bottom: 70px;
 
   &:hover {
     cursor: pointer;
-    box-shadow: $box-shadow-hover;
+    box-shadow: $box-shadow-large-hover;
   }
 
   &__column {

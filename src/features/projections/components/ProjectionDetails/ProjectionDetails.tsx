@@ -29,21 +29,23 @@ const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
     <>
       <div className='projection-details'>
         <div className='projection-details__title'>{projection.movie?.name}</div>
-        <div className='projection-details__content'>
-          <span className='bold'>Time:</span>
-          {formatDate(projection.time)}
-        </div>
-        <div className='projection-details__content'>
-          <span className='bold'>Projection type:</span>
-          {projection.projectionType.name}
-        </div>
-        <div className='projection-details__content'>
-          <span className='bold'>Theater:</span>
-          {projection.theater.name}
-        </div>
-        <div className='projection-details__content'>
-          <span className='bold'>Price:</span>
-          {projection.price} RSD
+        <div className='projection-details__row'>
+          <div className='projection-details__content'>
+            <span className='bold'>Time:</span>
+            {formatDate(projection.time)}
+          </div>
+          <div className='projection-details__content'>
+            <span className='bold'>Projection type:</span>
+            {projection.projectionType.name}
+          </div>
+          <div className='projection-details__content'>
+            <span className='bold'>Theater:</span>
+            {projection.theater.name}
+          </div>
+          <div className='projection-details__content'>
+            <span className='bold'>Price:</span>
+            {projection.price} RSD
+          </div>
         </div>
         {buyCardButton}
       </div>

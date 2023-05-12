@@ -6,9 +6,11 @@ import Button from 'common/components/UI/Button/Button';
 import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
 import { Link } from 'react-router-dom';
 
-interface Props {}
+interface Props {
+  onSubmit: (loginData: LoginDto) => void;
+}
 
-const LoginForm: React.FC<Props> = () => {
+const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const [login, setLogin] = useState<LoginDto>({
     email: '',
     password: '',
@@ -19,15 +21,12 @@ const LoginForm: React.FC<Props> = () => {
     setLogin((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    console.log(login);
-  };
+  const handleSubmit = (): void => onSubmit(login);
 
   return (
     <div className='login'>
       <div className='login__title'>Login</div>
-      <form className='login__form' onSubmit={handleSubmit}>
+      <div className='login__form'>
         <div className='login__field'>
           <Input
             label='Email'
@@ -40,10 +39,10 @@ const LoginForm: React.FC<Props> = () => {
         <div className='login__field'>
           <InputPassword value={login.password} onChange={handleChange} />
         </div>
-        <Button size='medium' type='success'>
+        <Button size='medium' type='success' onClick={handleSubmit}>
           Login
         </Button>
-      </form>
+      </div>
 
       <div className='login__register'>
         Don't have an account?

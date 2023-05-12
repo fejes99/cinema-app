@@ -21,7 +21,7 @@ export enum MovieFilterName {
   MaxDuration = 'maxDuration',
   MinYear = 'minYear',
   MaxYear = 'maxYear',
-  // Gendre = 'gendre',
+  // Genre = 'genre',
 }
 
 export type MovieFilterValue = string | number;
