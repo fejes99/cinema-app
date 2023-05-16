@@ -55,7 +55,7 @@ const UserListContainer: React.FC<Props> = ({
     }));
   };
 
-  const handleEditClick = (id: string) => {};
+  // const handleEditClick = (id: string) => {};
 
   const handleDeleteClick = (id: string) => {
     const userToDelete = filteredUsers.find((user) => user.id === id);

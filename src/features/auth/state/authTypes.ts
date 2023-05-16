@@ -71,6 +71,7 @@ interface LoginRequestAction {
 }
 interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
+  token: string;
   loggedUser: User;
 }
 interface LoginFailAction {

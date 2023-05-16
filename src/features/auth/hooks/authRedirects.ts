@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router';
 
-export const useUserRedirect = () => {
+export const useAuthRedirect = () => {
   const navigate = useNavigate();
 
-  const redirectToUserDetails = (userId: string) => navigate(`/users/${userId}`);
+  const redirectToLogin = () => navigate('/login');
 
-  return { redirectToUserDetails };
+  return { redirectToLogin };
 };

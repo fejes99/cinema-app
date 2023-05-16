@@ -7,6 +7,9 @@ import * as actionTypes from './authTypes';
 import { AppDispatch } from 'store/store';
 import { UserRoleDto } from '../types/UserRoleDto';
 import { UserUpdateDto } from '../types/UserUpdateDto';
+import { LoginResponseDto } from '../types/LoginResponseDto';
+import { parseJwt } from '../helpers/parseJwt';
+import { Jwt } from '../types/Jwt';
 
 const fetchUsersRequest = () => ({
   type: actionTypes.FETCH_USERS_REQUEST,
@@ -77,8 +80,9 @@ const loginRequest = () => ({
   type: actionTypes.LOGIN_REQUEST,
 });
 
-const loginSuccess = (user: User) => ({
+const loginSuccess = ({ token, user }: LoginResponseDto) => ({
   type: actionTypes.LOGIN_SUCCESS,
+  token: token,
   loggedUser: user,
 });
 
@@ -91,8 +95,62 @@ export const login = (loginData: LoginDto) => (dispatch: AppDispatch) => {
   dispatch(loginRequest());
   axios
     .post(`/auth/login`, loginData)
-    .then((response) => dispatch(loginSuccess(response.data)))
+    .then((response) => {
+      const { userId, firstName, lastName, username, email, created, role, exp }: Jwt = parseJwt(
+        response.data.token
+      );
+      const expirationDate: string = new Date(exp * 1000).toString();
+
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+      localStorage.setItem('created', created);
+      localStorage.setItem('role', role);
+      localStorage.setItem('expirationDate', expirationDate);
+
+      dispatch(loginSuccess(response.data));
+    })
     .catch((error) => dispatch(loginFail(error)));
+};
+
+export const authCheck = () => (dispatch: AppDispatch) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    dispatch(logout());
+  } else {
+    const expirationDate = localStorage.getItem('expirationDate');
+    if (new Date(expirationDate!) < new Date()) {
+    } else {
+      const userId = localStorage.getItem('userId');
+      const firstName = localStorage.getItem('firstName');
+      const lastName = localStorage.getItem('lastName');
+      const username = localStorage.getItem('username');
+      const email = localStorage.getItem('email');
+      const created = localStorage.getItem('created');
+      const role = localStorage.getItem('role');
+
+      const user: User = {
+        id: userId!,
+        firstName: firstName!,
+        lastName: lastName!,
+        username: username!,
+        email: email!,
+        created: created!,
+        role: role!,
+      };
+
+      const loginResponse: LoginResponseDto = {
+        token: token,
+        user: user,
+      };
+
+      dispatch(loginSuccess(loginResponse));
+      dispatch(checkAuthTimeout(expirationDate!));
+    }
+  }
 };
 
 const logoutAction = () => ({
@@ -100,7 +158,19 @@ const logoutAction = () => ({
 });
 
 export const logout = () => (dispatch: AppDispatch) => {
+  localStorage.clear();
+  console.log('🚀 ~ file: authActions.ts:163 ~ logout ~ localStorage:', localStorage);
+
   dispatch(logoutAction());
+};
+
+export const checkAuthTimeout = (expirationDate: string) => (dispatch: AppDispatch) => {
+  const expirationTimestamp = new Date(expirationDate).getTime();
+  const currentTimestamp = Date.now();
+
+  if (expirationTimestamp < currentTimestamp) {
+    dispatch(logout());
+  }
 };
 
 const updateUserRoleRequest = () => ({

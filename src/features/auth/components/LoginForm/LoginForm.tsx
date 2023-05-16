@@ -16,12 +16,16 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     password: '',
   });
 
+  const isFormValid = Object.values(login).every((value) => value !== '');
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setLogin((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (): void => onSubmit(login);
+  const handleSubmit = (): void => {
+    onSubmit(login);
+  };
 
   return (
     <div className='login'>
@@ -37,9 +41,9 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
           />
         </div>
         <div className='login__field'>
-          <InputPassword value={login.password} onChange={handleChange} />
+          <InputPassword confirmPassword={false} value={login.password} onChange={handleChange} />
         </div>
-        <Button size='medium' type='success' onClick={handleSubmit}>
+        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Login
         </Button>
       </div>

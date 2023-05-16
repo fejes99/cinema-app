@@ -2,16 +2,30 @@ import React from 'react';
 import './Navbar.scss';
 import NavbarItem from './NavbarItem/NavbarItem';
 import { NavbarItemProps } from './NavbarItem/NavbarItem.d';
+import { connect } from 'react-redux';
+import { StoreState } from 'store/store';
+import { User } from 'features/auth/types/User';
 
-const Navbar: React.FC = () => {
+interface Props {
+  user: User | null;
+}
+
+const Navbar: React.FC<Props> = ({ user }) => {
   const navbarItems: NavbarItemProps[] = [
     { name: 'Projections', url: '/projections' },
     { name: 'Movies', url: '/movies' },
-    { name: 'Users', url: '/users' },
-    { name: 'Login', url: '/login' },
-    { name: 'Register', url: '/register' },
-    { name: 'Profile', url: '/profile' },
   ];
+
+  if (user !== null) {
+    if (user.role === 'Admin') navbarItems.push({ name: 'Users', url: '/users' });
+    navbarItems.push({
+      name: 'Profile',
+      url: '/profile',
+    });
+  } else {
+    navbarItems.push({ name: 'Login', url: '/login' });
+    navbarItems.push({ name: 'Register', url: '/register' });
+  }
 
   return (
     <div className='navbar'>
@@ -22,4 +36,8 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
+});
+
+export default connect(mapStateToProps)(Navbar);

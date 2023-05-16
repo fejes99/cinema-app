@@ -40,12 +40,12 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
     case actionTypes.LOGIN_REQUEST:
       return { ...state, loading: true, loggedUser: null, error: null };
     case actionTypes.LOGIN_SUCCESS:
-      return { ...state, loading: false, loggedUser: action.loggedUser };
+      return { ...state, loading: false, loggedUser: action.loggedUser, token: action.token };
     case actionTypes.LOGIN_FAIL:
       return { ...state, loading: false, error: action.error };
 
     case actionTypes.LOGOUT:
-      return { ...state, loggedUser: null };
+      return { ...state, loggedUser: null, token: null };
 
     default:
       return state;

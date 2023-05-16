@@ -43,18 +43,18 @@ const MovieFilter: React.FC<Props> = ({
           <Search onChange={(value) => onFiltersChange(MovieFilterName.Query, value)} />
         </div>
         <div className='movie-filter__filters'>
-          <div className='movie-filter__filter'>
+          {/* <div className='movie-filter__filter'>
             <Dropdown
               title={'Genre'}
               value={''}
               options={['drama', 'comedy', 'horror']}
-              // onChange={(value) => onFiltersChange(MovieFilterName.Genre, value)}
+              onChange={(value) => onFiltersChange(MovieFilterName.Genre, value)}
               onChange={() => {}}
             />
-          </div>
+          </div> */}
           <div className='movie-filter__filter'>
             <Dropdown
-              title={MovieFilterName.Distributor}
+              title='Distributors'
               value={distributor}
               options={distributors}
               onChange={(value) => onFiltersChange(MovieFilterName.Distributor, value)}
@@ -62,7 +62,7 @@ const MovieFilter: React.FC<Props> = ({
           </div>
           <div className='movie-filter__filter'>
             <Dropdown
-              title={MovieFilterName.Country}
+              title='Countries'
               value={country}
               options={countries}
               onChange={(value) => onFiltersChange(MovieFilterName.Country, value)}

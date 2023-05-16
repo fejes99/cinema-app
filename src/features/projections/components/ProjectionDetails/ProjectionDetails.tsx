@@ -44,7 +44,7 @@ const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
           </div>
           <div className='projection-details__content'>
             <span className='bold'>Price:</span>
-            {projection.price} RSD
+            RSD {projection.price},00
           </div>
         </div>
         {buyCardButton}

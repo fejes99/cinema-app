@@ -34,7 +34,7 @@ const ProjectionsTable: React.FC<Props> = ({ projections, redirect, onEdit, onDe
             <td>{projection.projectionType.name}</td>
             <td>{projection.theater.name}</td>
             <td>
-              <span className='bold'>{projection.price} RSD</span>
+              <span className='bold'>{projection.price},00 RSD</span>
             </td>
             <td className='icons'>
               <div onClick={() => onEdit(projection.id)}>

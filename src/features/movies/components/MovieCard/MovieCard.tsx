@@ -40,7 +40,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
         <div className='movie-card__row align-self'>
           <div className='movie-card__button'>
             <Button size='small' type='primary'>
-              Watch Movie
+              Buy Ticket
             </Button>
           </div>
         </div>

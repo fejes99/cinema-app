@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 import './App.scss';
 import Header from 'common/components/UI/Header/Header';
@@ -10,8 +10,17 @@ import RegisterPage from 'features/auth/pages/RegisterPage';
 import ProjectionPage from 'features/projections/pages/ProjectionPage';
 import UserPage from 'features/auth/pages/UserPage';
 import TicketPage from 'features/tickets/pages/TicketPage';
+import { connect } from 'react-redux';
+import { AppDispatch } from 'store/store';
+import { authCheck } from 'features/auth/state/authActions';
 
-const App: React.FC = () => {
+interface Props {
+  onTryAutoLogin: () => void;
+}
+
+const App: React.FC<Props> = ({ onTryAutoLogin }) => {
+  useEffect(() => onTryAutoLogin(), [onTryAutoLogin]);
+
   return (
     <div className='App'>
       <Header />
@@ -32,4 +41,8 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  onTryAutoLogin: () => dispatch(authCheck()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

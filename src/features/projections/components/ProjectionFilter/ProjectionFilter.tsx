@@ -32,7 +32,7 @@ const ProjectionFilter: React.FC<Props> = ({
         <div className='projection-filter__filters'>
           <div className='projection-filter__filter'>
             <Dropdown
-              title={ProjectionFilterName.Movie}
+              title='Movies'
               value={movie}
               options={movies}
               onChange={(value) => onFiltersChange(ProjectionFilterName.Movie, value)}
@@ -40,7 +40,7 @@ const ProjectionFilter: React.FC<Props> = ({
           </div>
           <div className='projection-filter__filter'>
             <Dropdown
-              title={ProjectionFilterName.Theater}
+              title='Theaters'
               value={theater}
               options={theaters}
               onChange={(value) => onFiltersChange(ProjectionFilterName.Theater, value)}
@@ -48,7 +48,7 @@ const ProjectionFilter: React.FC<Props> = ({
           </div>
           <div className='projection-filter__filter'>
             <Dropdown
-              title={ProjectionFilterName.ProjectionType}
+              title='Projection Types'
               value={projectionType}
               options={projectionTypes}
               onChange={(value) => onFiltersChange(ProjectionFilterName.ProjectionType, value)}

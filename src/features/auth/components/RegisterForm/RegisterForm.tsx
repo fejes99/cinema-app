@@ -5,6 +5,7 @@ import './RegisterForm.scss';
 import Button from 'common/components/UI/Button/Button';
 import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
 import { Link } from 'react-router-dom';
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   onSubmit: (registerData: RegisterDto) => void;
@@ -19,6 +20,10 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     password: '',
   });
 
+  const isFormValid = Object.values(register).every((value) => value !== '');
+
+  const { redirectToLogin } = useAuthRedirect();
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setRegister((prevState) => ({ ...prevState, [name]: value }));
@@ -26,6 +31,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
 
   const handleSubmit = (): void => {
     onSubmit(register);
+    redirectToLogin();
   };
 
   return (
@@ -71,9 +77,16 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
           />
         </div>
         <div className='register__field'>
-          <InputPassword value={register.password} onChange={handleChange} />
+          <InputPassword
+            confirmPassword={false}
+            value={register.password}
+            onChange={handleChange}
+          />
         </div>
-        <Button size='medium' type='success' onClick={handleSubmit}>
+        {/* <div className='register__field'>
+          <InputPassword confirmPassword={true} value={confirmPassword} onChange={handleChange} />
+        </div> */}
+        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Register
         </Button>
       </div>
