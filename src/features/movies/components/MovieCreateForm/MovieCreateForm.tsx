@@ -7,12 +7,14 @@ import Button from 'common/components/UI/Button/Button';
 import TextArea from 'common/components/UI/TextArea/TextArea';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 import { useNavigate } from 'react-router';
+import Dropdown from 'common/components/UI/Dropdown/Dropdown';
 
 interface Props {
+  countries: string[];
   create: (movieCreateDto: MovieCreateDto) => void;
 }
 
-const MovieCreateForm: React.FC<Props> = ({ create }) => {
+const MovieCreateForm: React.FC<Props> = ({ countries, create }) => {
   const navigate = useNavigate();
   const [newMovie, setNewMovie] = useState<MovieCreateDto>({
     name: '',
@@ -37,6 +39,10 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
     setNewMovie((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleDropdownChange = (value: string): void => {
+    setNewMovie((prevState) => ({ ...prevState, country: value }));
   };
 
   const handleSubmit = (): void => {
@@ -93,12 +99,11 @@ const MovieCreateForm: React.FC<Props> = ({ create }) => {
           />
         </div>
         <div className='movie-create__field'>
-          <Input
-            label='Country'
-            type='text'
-            name='country'
+          <Dropdown
+            title='Country'
             value={newMovie.country}
-            onChange={handleChange}
+            options={countries}
+            onChange={(value) => handleDropdownChange(value)}
           />
         </div>
         <div className='movie-create__field'>

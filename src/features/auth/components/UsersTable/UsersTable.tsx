@@ -1,7 +1,7 @@
 import React from 'react';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { formatDate } from 'common/helpers/dateFormater';
+import { formatDate } from 'common/helpers/formatDate';
 import { User } from 'features/auth/types/User';
 import { useUserRedirect } from 'features/auth/hooks/userRedirects';
 

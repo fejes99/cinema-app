@@ -11,10 +11,12 @@ import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
-import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
-import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
+import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
+import { User } from 'features/auth/types/User';
 
 interface Props {
+  user: User | null;
   selectedProjection: Projection | null;
   loading: boolean;
   error: Error;
@@ -23,6 +25,7 @@ interface Props {
 }
 
 const ProjectionDetailsContainer: React.FC<Props> = ({
+  user,
   selectedProjection,
   loading,
   error,
@@ -52,14 +55,21 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
     redirectToProjectionList();
   };
 
+  const ticketsTable =
+    user && isAdmin(user) && selectedProjection.tickets && selectedProjection.tickets.length > 0 ? (
+      <TicketsTable tickets={selectedProjection.tickets} />
+    ) : null;
+
+  const adminButtons =
+    user && isAdmin(user) ? (
+      <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
+    ) : null;
+
   return (
     <>
-      {selectedProjection.movie?.trailerUrl && (
-        <YoutubeEmbed videoId={extractYoutubeVideoId(selectedProjection.movie?.trailerUrl)} />
-      )}
-      <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
+      {adminButtons}
       <ProjectionDetails projection={selectedProjection} buyTicket={redirectToTicketCreate} />
-      {/* TODO Add tickets list */}
+      {ticketsTable}
       <DeleteModal
         title='projection'
         show={showDeleteModal}
@@ -71,6 +81,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
   selectedProjection: state.projections.selectedProjection,
   loading: state.projections.loading,
   error: state.movies.error,

@@ -15,7 +15,7 @@ const AdminButtonGroup: React.FC<Props> = ({ onEdit, onDelete }) => (
       Edit
       <ModeEditOutlinedIcon fontSize='small' />
     </Button>
-    <Button size='large' type='error' onClick={onDelete}>
+    <Button size='large' type='secondary' onClick={onDelete}>
       Delete
       <DeleteOutlinedIcon fontSize='small' />
     </Button>

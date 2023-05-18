@@ -31,7 +31,7 @@ const UserFilter: React.FC<Props> = ({
           onChange={(value) => onFiltersChange(UserFilterName.Role, value)}
         />
       </div>
-      <Button size='medium' type='primary' onClick={resetFilters}>
+      <Button size='medium' type='secondary' onClick={resetFilters}>
         Reset Filters
       </Button>
     </div>

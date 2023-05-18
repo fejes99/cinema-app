@@ -6,6 +6,7 @@ $button-height-medium: 50px;
 $button-height-large: 60px;
 
 .button {
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -49,6 +50,16 @@ $button-height-large: 60px;
     }
   }
 
+  &-secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+    border: none;
+
+    &:hover {
+      background-color: darken($color-secondary, 10%);
+    }
+  }
+
   &-success {
     background-color: $color-success;
     color: $color-white;
@@ -72,7 +83,7 @@ $button-height-large: 60px;
   &-disabled {
     background-color: $color-disabled;
     color: $text-color-disabled;
-    cursor: not-allowed;
+    cursor: default;
     border: none;
 
     &:hover {

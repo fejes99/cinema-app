@@ -1,9 +1,8 @@
-import { formatDate } from 'common/helpers/dateFormater';
-import { Projection } from 'features/projections/types/Projection';
 import React from 'react';
-import TicketsTable from './TicketsTable/TicketsTable';
-import Button from 'common/components/UI/Button/Button';
 import './ProjectionDetails.scss';
+import { formatDate } from 'common/helpers/formatDate';
+import { Projection } from 'features/projections/types/Projection';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   projection: Projection;
@@ -18,39 +17,30 @@ const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
       </Button>
     </div>
   );
-  const ticketsTable =
-    projection.tickets && projection.tickets.length > 0 ? (
-      <TicketsTable tickets={projection.tickets} />
-    ) : (
-      <></>
-    );
 
   return (
-    <>
-      <div className='projection-details'>
-        <div className='projection-details__title'>{projection.movie?.name}</div>
-        <div className='projection-details__row'>
-          <div className='projection-details__content'>
-            <span className='bold'>Time:</span>
-            {formatDate(projection.time)}
-          </div>
-          <div className='projection-details__content'>
-            <span className='bold'>Projection type:</span>
-            {projection.projectionType.name}
-          </div>
-          <div className='projection-details__content'>
-            <span className='bold'>Theater:</span>
-            {projection.theater.name}
-          </div>
-          <div className='projection-details__content'>
-            <span className='bold'>Price:</span>
-            RSD {projection.price},00
-          </div>
+    <div className='projection-details'>
+      <div className='projection-details__title'>{projection.movie?.name}</div>
+      <div className='projection-details__row'>
+        <div className='projection-details__content'>
+          <span className='bold'>Time:</span>
+          {formatDate(projection.time)}
         </div>
-        {buyCardButton}
+        <div className='projection-details__content'>
+          <span className='bold'>Projection type:</span>
+          {projection.projectionType.name}
+        </div>
+        <div className='projection-details__content'>
+          <span className='bold'>Theater:</span>
+          {projection.theater.name}
+        </div>
+        <div className='projection-details__content'>
+          <span className='bold'>Price:</span>
+          {projection.price},00 RSD
+        </div>
       </div>
-      {ticketsTable}
-    </>
+      {buyCardButton}
+    </div>
   );
 };
 

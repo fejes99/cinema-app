@@ -12,7 +12,7 @@
   margin-bottom: 70px;
 
   &:hover {
-    cursor: pointer;
+    cursor: default;
     box-shadow: $box-shadow-large-hover;
   }
 
@@ -79,7 +79,11 @@
     }
   }
 
-  &__button {
-    margin-left: auto;
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: $spacing-medium;
+    width: 100%;
   }
 }

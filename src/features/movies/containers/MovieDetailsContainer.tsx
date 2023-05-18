@@ -12,8 +12,11 @@ import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonG
 import { useMovieRedirect } from '../hooks/movieRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import { User } from 'features/auth/types/User';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 interface Props {
+  user: User | null;
   selectedMovie: Movie | null;
   loading: boolean;
   error: Error;
@@ -22,6 +25,7 @@ interface Props {
 }
 
 const MovieDetailsContainer: React.FC<Props> = ({
+  user,
   selectedMovie,
   loading,
   error,
@@ -50,12 +54,17 @@ const MovieDetailsContainer: React.FC<Props> = ({
   if (selectedMovie === null) return <div>No movie</div>;
   if (error) return <div>error</div>;
 
+  const adminButtons =
+    user && isAdmin(user) ? (
+      <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
+    ) : null;
+
   return (
     <>
       {selectedMovie && (
         <>
           <YoutubeEmbed videoId={extractYoutubeVideoId(selectedMovie.trailerUrl!)} />
-          <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
+          {adminButtons}
           <MovieDetails movie={selectedMovie} />
           <DeleteModal
             title={selectedMovie.name}
@@ -70,6 +79,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
   selectedMovie: state.movies.selectedMovie,
   loading: state.movies.loading,
   error: state.movies.error,

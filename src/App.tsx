@@ -11,14 +11,17 @@ import ProjectionPage from 'features/projections/pages/ProjectionPage';
 import UserPage from 'features/auth/pages/UserPage';
 import TicketPage from 'features/tickets/pages/TicketPage';
 import { connect } from 'react-redux';
-import { AppDispatch } from 'store/store';
+import { AppDispatch, StoreState } from 'store/store';
 import { authCheck } from 'features/auth/state/authActions';
+import { User } from 'features/auth/types/User';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 interface Props {
+  user: User | null;
   onTryAutoLogin: () => void;
 }
 
-const App: React.FC<Props> = ({ onTryAutoLogin }) => {
+const App: React.FC<Props> = ({ user, onTryAutoLogin }) => {
   useEffect(() => onTryAutoLogin(), [onTryAutoLogin]);
 
   return (
@@ -30,7 +33,7 @@ const App: React.FC<Props> = ({ onTryAutoLogin }) => {
           <Route path='/movies/*' element={<MoviePage />} />
           <Route path='/projections/*' element={<ProjectionPage />} />
           <Route path='/tickets/*' element={<TicketPage />} />
-          <Route path='/users/*' element={<UserPage />} />
+          {user && isAdmin(user) ? <Route path='/users/*' element={<UserPage />} /> : null}
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
@@ -41,8 +44,12 @@ const App: React.FC<Props> = ({ onTryAutoLogin }) => {
   );
 };
 
+const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
+});
+
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onTryAutoLogin: () => dispatch(authCheck()),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

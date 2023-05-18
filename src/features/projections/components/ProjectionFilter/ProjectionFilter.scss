@@ -20,13 +20,13 @@
   &__filters {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: $spacing-small;
   }
 
   &__filter {
     width: 180px;
-    margin-bottom: $spacing-small;
     display: flex;
     justify-content: center;
   }

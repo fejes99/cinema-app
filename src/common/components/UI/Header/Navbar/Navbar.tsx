@@ -5,6 +5,7 @@ import { NavbarItemProps } from './NavbarItem/NavbarItem.d';
 import { connect } from 'react-redux';
 import { StoreState } from 'store/store';
 import { User } from 'features/auth/types/User';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 interface Props {
   user: User | null;
@@ -17,7 +18,7 @@ const Navbar: React.FC<Props> = ({ user }) => {
   ];
 
   if (user !== null) {
-    if (user.role === 'Admin') navbarItems.push({ name: 'Users', url: '/users' });
+    if (isAdmin(user)) navbarItems.push({ name: 'Users', url: '/users' });
     navbarItems.push({
       name: 'Profile',
       url: '/profile',

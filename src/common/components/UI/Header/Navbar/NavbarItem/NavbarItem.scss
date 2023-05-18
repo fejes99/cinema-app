@@ -3,14 +3,22 @@
 .navbar-item {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: calc(100% - 5px);
   padding: 0 $spacing-medium;
-  border-bottom: 2px solid transparent;
-  transition: $transition;
+  transition: transform 0.1s linear;
 
   &:hover {
-    border-bottom: 10px solid white;
-    border-radius: 5px 5px 0 0;
+    transform: translateY(-5px);
+  }
+
+  &:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: white;
   }
 
   & a {

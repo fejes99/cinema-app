@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
 import { AppDispatch, StoreState } from 'store/store';
-
 import { deleteProjection, fetchProjection, fetchProjections } from '../state/projectionActions';
 import { Projection } from '../types/Projection';
-
 import Loader from 'common/components/UI/Loader/Loader';
 import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 import {
@@ -19,8 +16,11 @@ import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';
+import { User } from 'features/auth/types/User';
+import { isAdmin } from '../../auth/helpers/isAdmin';
 
 interface Props {
+  user: User | null;
   projections: Projection[];
   loading: boolean;
   error: Error;
@@ -30,6 +30,7 @@ interface Props {
 }
 
 const ProjectionListContainer: React.FC<Props> = ({
+  user,
   projections,
   loading,
   error,
@@ -39,6 +40,7 @@ const ProjectionListContainer: React.FC<Props> = ({
 }) => {
   const [projectionToDeleteId, setProjectionToDeleteId] = useState<string>('');
   const [filters, setFilters] = useState<ProjectionFilters>(defaultProjectionFilters);
+
   const {
     redirectToProjectionList,
     redirectToProjectionDetails,
@@ -111,6 +113,13 @@ const ProjectionListContainer: React.FC<Props> = ({
     redirectToProjectionList();
   };
 
+  const addButton =
+    user && isAdmin(user) ? (
+      <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
+        Add Projection
+      </Button>
+    ) : null;
+
   const filteredProjections = projectionSearchFilter(projections, filters);
 
   return (
@@ -123,10 +132,9 @@ const ProjectionListContainer: React.FC<Props> = ({
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
-      <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
-        Add Projection
-      </Button>
+      {addButton}
       <ProjectionsTable
+        isAdmin={user! && isAdmin(user)}
         projections={filteredProjections}
         redirect={redirectToProjectionDetails}
         onEdit={(id: string) => handleEditClick(id)}
@@ -143,6 +151,7 @@ const ProjectionListContainer: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
   projections: state.projections.projections,
   loading: state.projections.loading,
   error: state.projections.error,

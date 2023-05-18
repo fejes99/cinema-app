@@ -23,9 +23,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     setLogin((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (): void => {
-    onSubmit(login);
-  };
+  const handleSubmit = (): void => onSubmit(login);
 
   return (
     <div className='login'>

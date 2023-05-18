@@ -18,10 +18,10 @@ const DeleteModal: React.FC<Props> = ({ title, show, onDelete, onClose }) => {
       <div className='modal' onClick={(event) => event.stopPropagation()}>
         <div className='modal__title'>Delete {title}?</div>
         <div className='modal__row'>
-          <Button size='medium' type='primary' onClick={onClose}>
+          <Button size='medium' type='secondary' onClick={onClose}>
             Cancel
           </Button>
-          <Button size='medium' type='error' onClick={handleSubmit}>
+          <Button size='medium' type='primary' onClick={handleSubmit}>
             Delete
           </Button>
         </div>

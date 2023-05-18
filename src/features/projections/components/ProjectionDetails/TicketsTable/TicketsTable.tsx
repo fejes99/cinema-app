@@ -1,4 +1,4 @@
-import { formatDate } from 'common/helpers/dateFormater';
+import { formatDate } from 'common/helpers/formatDate';
 import { Ticket } from 'features/tickets/types/Ticket';
 import React from 'react';
 

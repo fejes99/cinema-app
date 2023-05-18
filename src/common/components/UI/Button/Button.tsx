@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.scss';
 
 type ButtonSizeType = 'small' | 'medium' | 'large';
-type ButtonType = 'primary' | 'success' | 'error' | 'disabled';
+type ButtonType = 'primary' | 'secondary' | 'success' | 'error' | 'disabled';
 
 interface Props {
   size: ButtonSizeType;

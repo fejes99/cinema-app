@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserDetails.scss';
 import { User } from 'features/auth/types/User';
-import { formatDate } from 'common/helpers/dateFormater';
+import { formatDate } from 'common/helpers/formatDate';
 
 interface Props {
   user: User;
@@ -9,8 +9,7 @@ interface Props {
 
 const UserDetails: React.FC<Props> = ({ user }) => (
   <div className='user-details'>
-    <div className='user-details__content'>
-      <span className='bold'>Name:</span>
+    <div className='user-details__title'>
       {user.firstName} {user.lastName}
     </div>
     <div className='user-details__content'>

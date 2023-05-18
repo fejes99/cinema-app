@@ -15,15 +15,18 @@ import MovieList from '../components/MovieList/MovieList';
 import Loader from 'common/components/UI/Loader/Loader';
 import Button from 'common/components/UI/Button/Button';
 import { useMovieRedirect } from '../hooks/movieRedirects';
+import { User } from 'features/auth/types/User';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 interface Props {
+  user: User | null;
   movies: Movie[];
   loading: boolean;
   error: Error;
   onFetchMovies: () => void;
 }
 
-const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMovies }) => {
+const MovieListContainer: React.FC<Props> = ({ user, movies, loading, error, onFetchMovies }) => {
   const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
   const { redirectToMovieCreate } = useMovieRedirect();
 
@@ -74,6 +77,13 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
     }));
   };
 
+  const addButton =
+    user && isAdmin(user) ? (
+      <Button size='large' type='primary' onClick={redirectToMovieCreate}>
+        Add Movie
+      </Button>
+    ) : null;
+
   const filteredMovies = movieSearchFilter(movies, filters);
 
   return (
@@ -85,15 +95,14 @@ const MovieListContainer: React.FC<Props> = ({ movies, loading, error, onFetchMo
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
-      <Button size='large' type='primary' onClick={redirectToMovieCreate}>
-        Add Movie
-      </Button>
+      {addButton}
       <MovieList movies={filteredMovies} />
     </>
   );
 };
 
 const mapStateToProps = (state: StoreState) => ({
+  user: state.auth.loggedUser,
   movies: state.movies.movies,
   loading: state.movies.loading,
   error: state.movies.error,

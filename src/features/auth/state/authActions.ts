@@ -159,7 +159,6 @@ const logoutAction = () => ({
 
 export const logout = () => (dispatch: AppDispatch) => {
   localStorage.clear();
-  console.log('🚀 ~ file: authActions.ts:163 ~ logout ~ localStorage:', localStorage);
 
   dispatch(logoutAction());
 };
