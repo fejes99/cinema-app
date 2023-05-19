@@ -17,6 +17,7 @@ import Button from 'common/components/UI/Button/Button';
 import { useMovieRedirect } from '../hooks/movieRedirects';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
+import { ticketInit } from 'features/tickets/state/ticketActions';
 
 interface Props {
   user: User | null;
@@ -24,10 +25,19 @@ interface Props {
   loading: boolean;
   error: Error;
   onFetchMovies: () => void;
+  onBuyTicket: (movie: Movie) => void;
 }
 
-const MovieListContainer: React.FC<Props> = ({ user, movies, loading, error, onFetchMovies }) => {
+const MovieListContainer: React.FC<Props> = ({
+  user,
+  movies,
+  loading,
+  error,
+  onFetchMovies,
+  onBuyTicket,
+}) => {
   const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
+
   const { redirectToMovieCreate } = useMovieRedirect();
 
   useEffect(() => onFetchMovies(), [onFetchMovies]);
@@ -96,7 +106,7 @@ const MovieListContainer: React.FC<Props> = ({ user, movies, loading, error, onF
         resetFilters={resetFilters}
       />
       {addButton}
-      <MovieList movies={filteredMovies} />
+      <MovieList movies={filteredMovies} buyTicket={onBuyTicket} />
     </>
   );
 };
@@ -110,6 +120,7 @@ const mapStateToProps = (state: StoreState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchMovies: () => dispatch(fetchMovies()),
+  onBuyTicket: (movie: Movie) => dispatch(ticketInit(movie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieListContainer);

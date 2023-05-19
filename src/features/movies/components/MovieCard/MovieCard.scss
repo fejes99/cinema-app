@@ -1,15 +1,17 @@
 @import 'variables.scss';
 
 .movie-card {
-  padding: 30px;
-  width: calc(50% - 7%);
-  height: 240px;
+  padding: 35px;
+  width: 47.5%;
+  box-sizing: border-box;
+  height: 320px;
   background-color: $background-color-secondary;
   display: flex;
+  justify-content: space-evenly;
   border-radius: 10px;
   box-shadow: $box-shadow-large;
   transition: $transition;
-  margin-bottom: 70px;
+  margin-bottom: $spacing-large;
 
   &:hover {
     cursor: default;
@@ -26,11 +28,10 @@
     &-image {
       width: 40%;
       border-radius: 10px;
-      margin-bottom: 20px;
     }
 
     &-content {
-      width: 60%;
+      width: 50%;
       display: flex;
       justify-content: space-between;
     }

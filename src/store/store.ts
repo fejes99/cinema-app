@@ -21,11 +21,15 @@ import { ProjectionTypeActionTypes } from 'features/projectionTypes/state/projec
 import projectionTypeReducer from 'features/projectionTypes/state/projectionTypeReducer';
 import { TheaterState } from 'features/theaters/state/theaterState';
 import theaterReducer from 'features/theaters/state/theaterReducer';
+import { TicketState } from 'features/tickets/state/ticketState';
+import { TicketActionTypes } from 'features/tickets/state/ticketTypes';
+import ticketReducer from 'features/tickets/state/ticketReducer';
 
 export interface StoreState {
   auth: AuthState;
   movies: MovieState;
   projections: ProjectionState;
+  tickets: TicketState;
   projectionTypes: ProjectionTypeState;
   theaters: TheaterState;
 }
@@ -34,6 +38,7 @@ export type StoreAction =
   | AuthActionTypes
   | MovieActionTypes
   | ProjectionActionTypes
+  | TicketActionTypes
   | ProjectionTypeActionTypes
   | TheaterActionTypes;
 
@@ -43,6 +48,7 @@ const rootReducer: Reducer<StoreState, StoreAction> = combineReducers<StoreState
   auth: authReducer,
   movies: movieReducer,
   projections: projectionReducer,
+  tickets: ticketReducer,
   projectionTypes: projectionTypeReducer,
   theaters: theaterReducer,
 });

@@ -5,7 +5,6 @@ import { Error } from 'common/types/Error';
 import { User } from '../types/User';
 import * as actionTypes from './authTypes';
 import { AppDispatch } from 'store/store';
-import { UserRoleDto } from '../types/UserRoleDto';
 import { UserUpdateDto } from '../types/UserUpdateDto';
 import { LoginResponseDto } from '../types/LoginResponseDto';
 import { parseJwt } from '../helpers/parseJwt';
@@ -172,48 +171,26 @@ export const checkAuthTimeout = (expirationDate: string) => (dispatch: AppDispat
   }
 };
 
-const updateUserRoleRequest = () => ({
-  type: actionTypes.UPDATE_USER_ROLE_REQUEST,
+const updateUserRequest = () => ({
+  type: actionTypes.UPDATE_USER_REQUEST,
 });
 
-const updateUserRoleSuccess = () => ({
-  type: actionTypes.UPDATE_USER_ROLE_SUCCESS,
+const updateUserSuccess = () => ({
+  type: actionTypes.UPDATE_USER_SUCCESS,
 });
 
-const updateUserRoleFail = (error: Error) => ({
-  type: actionTypes.UPDATE_USER_ROLE_FAIL,
+const updateUserFail = (error: Error) => ({
+  type: actionTypes.UPDATE_USER_FAIL,
   error: error,
 });
 
-export const updateUserRole =
-  (userId: string, editedUserRole: UserRoleDto) => (dispatch: AppDispatch) => {
-    dispatch(updateUserRoleRequest());
-    return axios
-      .put(`/users/role/${userId}`, editedUserRole)
-      .then((response) => dispatch(updateUserRoleSuccess()))
-      .catch((error) => dispatch(updateUserRoleFail(error)));
-  };
-
-const updatePersonalDataRequest = () => ({
-  type: actionTypes.UPDATE_PERSONAL_DATA_REQUEST,
-});
-
-const updatePersonalDataSuccess = () => ({
-  type: actionTypes.UPDATE_PERSONAL_DATA_SUCCESS,
-});
-
-const updatePersonalDataFail = (error: Error) => ({
-  type: actionTypes.UPDATE_PERSONAL_DATA_FAIL,
-  error: error,
-});
-
-export const updatePersonalData =
+export const updateUser =
   (userId: string, userUpdateDto: UserUpdateDto) => (dispatch: AppDispatch) => {
-    dispatch(updatePersonalDataRequest());
+    dispatch(updateUserRequest());
     return axios
-      .put(`/users/${userId}/edit`, userUpdateDto)
-      .then((response) => dispatch(updatePersonalDataSuccess()))
-      .catch((error) => dispatch(updatePersonalDataFail(error)));
+      .put(`/users/${userId}`, userUpdateDto)
+      .then((response) => dispatch(updateUserSuccess()))
+      .catch((error) => dispatch(updateUserFail(error)));
   };
 
 const deleteUserRequest = () => ({

@@ -3,6 +3,7 @@ import './ProjectionDetails.scss';
 import { formatDate } from 'common/helpers/formatDate';
 import { Projection } from 'features/projections/types/Projection';
 import Button from 'common/components/UI/Button/Button';
+import { formatPrice } from 'common/helpers/formatPrice';
 
 interface Props {
   projection: Projection;
@@ -36,7 +37,7 @@ const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
         </div>
         <div className='projection-details__content'>
           <span className='bold'>Price:</span>
-          {projection.price},00 RSD
+          {formatPrice(projection.price)}
         </div>
       </div>
       {buyCardButton}

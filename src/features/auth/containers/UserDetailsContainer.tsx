@@ -23,7 +23,7 @@ const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, o
 
   if (loading) return <Loader />;
   if (selectedUser === null) return <div>No user</div>;
-  if (error) return <div>error</div>;
+  if (error) return <div>{error.message}</div>;
 
   const handleEditClick = () => {};
   const handleDeleteClick = () => {};

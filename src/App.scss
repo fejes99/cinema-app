@@ -11,6 +11,17 @@
   font-weight: bold;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
+  &:hover {
+    color: blue;
+  }
+}
+
 .flex-space-between {
   display: flex;
   justify-content: space-between;
@@ -83,10 +94,6 @@ td {
 
   &:first-child {
     font-weight: bold;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 }
 

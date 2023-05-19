@@ -15,7 +15,7 @@ const MovieDetails: React.FC<Props> = ({
 
   return (
     <div className='movie-details'>
-      <div className='movie-details__header'>{name}</div>
+      <div className='movie-details__title'>{name}</div>
       <div className='movie-details__row'>
         <div className='movie-details__row-content'>
           <span className='bold'>Director: </span>

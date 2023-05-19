@@ -4,9 +4,11 @@ import React from 'react';
 
 interface Props {
   tickets: Ticket[];
+  onTicketClick: (ticketId: string) => void;
+  onUserClick: (userId: string) => void;
 }
 
-const TicketsTable: React.FC<Props> = ({ tickets }) => (
+const TicketsTable: React.FC<Props> = ({ tickets, onTicketClick, onUserClick }) => (
   <table>
     <thead>
       <tr>
@@ -17,8 +19,12 @@ const TicketsTable: React.FC<Props> = ({ tickets }) => (
     <tbody>
       {tickets.map((ticket: Ticket) => (
         <tr key={ticket.id}>
-          <td>{formatDate(ticket.created)}</td>
-          <td>{ticket.user.username}</td>
+          <td className='pointer' onClick={() => onTicketClick(ticket.id)}>
+            {formatDate(ticket.created)}
+          </td>
+          <td className='pointer' onClick={() => onUserClick(ticket.user.id)}>
+            {ticket.user.username}
+          </td>
         </tr>
       ))}
     </tbody>

@@ -1,0 +1,61 @@
+@import 'variables.scss';
+
+.ticket-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background-color-secondary;
+  padding: 40px 60px;
+  border-radius: $border-radius-large;
+  box-shadow: $box-shadow;
+  cursor: default;
+
+  &__row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__section {
+    width: 100%;
+    position: relative;
+    padding-right: 20px;
+  }
+
+  &__section:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: $text-color;
+  }
+
+  &__title {
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+
+  &__subtitle {
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: $spacing-medium;
+  }
+
+  &__content {
+    width: 100%;
+    margin-top: $spacing-small;
+    line-height: 1.5;
+    margin-bottom: $spacing-small;
+    padding-left: 30px;
+    text-align: left;
+
+    .bold {
+      margin-right: 5px;
+    }
+  }
+}

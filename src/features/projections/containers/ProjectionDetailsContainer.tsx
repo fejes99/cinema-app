@@ -14,6 +14,7 @@ import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
 import { User } from 'features/auth/types/User';
+import { useUserRedirect } from 'features/auth/hooks/userRedirects';
 
 interface Props {
   user: User | null;
@@ -34,7 +35,8 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 }) => {
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
-  const { redirectToTicketCreate } = useTicketRedirect();
+  const { redirectToTicketDetails, redirectToTicketCreate } = useTicketRedirect();
+  const { redirectToUserDetails } = useUserRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => {
@@ -43,11 +45,15 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (selectedProjection === null) return <div>No projection</div>;
-  if (error) return <div>error</div>;
+  if (error) return <div>{error.message}</div>;
 
   const handleEditClick = () => redirectToProjectionUpdate(selectedProjection.id);
 
   const handleDeleteClick = () => openDeleteModal();
+
+  const handleTicketRedirect = (ticketId: string) => redirectToTicketDetails(ticketId);
+
+  const handleUserRedirect = (userId: string) => redirectToUserDetails(userId);
 
   const deleteModalConfirmation = () => {
     onDeleteProjection(selectedProjection.id);
@@ -57,7 +63,11 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 
   const ticketsTable =
     user && isAdmin(user) && selectedProjection.tickets && selectedProjection.tickets.length > 0 ? (
-      <TicketsTable tickets={selectedProjection.tickets} />
+      <TicketsTable
+        tickets={selectedProjection.tickets}
+        onTicketClick={(ticketId: string) => handleTicketRedirect(ticketId)}
+        onUserClick={(userId: string) => handleUserRedirect(userId)}
+      />
     ) : null;
 
   const adminButtons =

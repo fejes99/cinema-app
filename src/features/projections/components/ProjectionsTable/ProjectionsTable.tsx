@@ -3,6 +3,7 @@ import { Projection } from 'features/projections/types/Projection';
 import React from 'react';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { formatPrice } from 'common/helpers/formatPrice';
 
 interface Props {
   isAdmin: boolean;
@@ -34,14 +35,14 @@ const ProjectionsTable: React.FC<Props> = ({
       {projections &&
         projections.map((projection: Projection) => (
           <tr key={projection.id}>
-            <td onClick={() => redirect(projection.id)}>
+            <td className='pointer' onClick={() => redirect(projection.id)}>
               <span className='bold'>{projection.movie?.name}</span>
             </td>
             <td>{formatDate(projection.time)}</td>
             <td>{projection.projectionType.name}</td>
             <td>{projection.theater.name}</td>
             <td>
-              <span className='bold'>{projection.price},00 RSD</span>
+              <span className='bold'>{formatPrice(projection.price)}</span>
             </td>
             {isAdmin ? (
               <td className='icons'>

@@ -52,7 +52,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (selectedMovie === null) return <div>No movie</div>;
-  if (error) return <div>error</div>;
+  if (error) return <div>{error.message}</div>;
 
   const adminButtons =
     user && isAdmin(user) ? (

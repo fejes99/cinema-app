@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router';
 import './App.scss';
 import Header from 'common/components/UI/Header/Header';
@@ -10,19 +12,24 @@ import RegisterPage from 'features/auth/pages/RegisterPage';
 import ProjectionPage from 'features/projections/pages/ProjectionPage';
 import UserPage from 'features/auth/pages/UserPage';
 import TicketPage from 'features/tickets/pages/TicketPage';
-import { connect } from 'react-redux';
 import { AppDispatch, StoreState } from 'store/store';
 import { authCheck } from 'features/auth/state/authActions';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 interface Props {
+  token: string | null;
   user: User | null;
   onTryAutoLogin: () => void;
 }
 
-const App: React.FC<Props> = ({ user, onTryAutoLogin }) => {
-  useEffect(() => onTryAutoLogin(), [onTryAutoLogin]);
+const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+    onTryAutoLogin();
+  }, [token, onTryAutoLogin]);
 
   return (
     <div className='App'>
@@ -37,7 +44,7 @@ const App: React.FC<Props> = ({ user, onTryAutoLogin }) => {
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route path='*' element={<Navigate to={'/'} replace />} />
+          {/* <Route path='*' element={<Navigate to={'/'} replace />} /> */}
         </Routes>
       </div>
     </div>
@@ -46,6 +53,7 @@ const App: React.FC<Props> = ({ user, onTryAutoLogin }) => {
 
 const mapStateToProps = (state: StoreState) => ({
   user: state.auth.loggedUser,
+  token: state.auth.token,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({

@@ -19,13 +19,9 @@ export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const FETCH_USER_FAIL = 'FETCH_USER_FAIL';
 
-export const UPDATE_USER_ROLE_REQUEST = 'UPDATE_USER_ROLE_REQUEST';
-export const UPDATE_USER_ROLE_SUCCESS = 'UPDATE_USER_ROLE_SUCCESS';
-export const UPDATE_USER_ROLE_FAIL = 'UPDATE_USER_ROLE_FAIL';
-
-export const UPDATE_PERSONAL_DATA_REQUEST = 'UPDATE_PERSONAL_DATA_REQUEST';
-export const UPDATE_PERSONAL_DATA_SUCCESS = 'UPDATE_PERSONAL_DATA_SUCCESS';
-export const UPDATE_PERSONAL_DATA_FAIL = 'UPDATE_PERSONAL_DATA_FAIL';
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAIL = 'UPDATE_USER_FAIL';
 
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
@@ -83,27 +79,14 @@ interface Logout {
   type: typeof LOGOUT;
 }
 
-interface UpdateUserRoleRequestAction {
-  type: typeof UPDATE_USER_ROLE_REQUEST;
+interface UpdateUserRequestAction {
+  type: typeof UPDATE_USER_REQUEST;
 }
-interface UpdateUserRoleSuccessAction {
-  type: typeof UPDATE_USER_ROLE_SUCCESS;
+interface UpdateUserSuccessAction {
+  type: typeof UPDATE_USER_SUCCESS;
 }
-interface UpdateUserRoleFailAction {
-  type: typeof UPDATE_USER_ROLE_FAIL;
-  error: Error;
-}
-
-interface UpdatePersonalDataRequestAction {
-  type: typeof UPDATE_PERSONAL_DATA_REQUEST;
-}
-
-interface UpdatePersonalDataSuccessAction {
-  type: typeof UPDATE_PERSONAL_DATA_SUCCESS;
-}
-
-interface UpdatePersonalDataFailAction {
-  type: typeof UPDATE_PERSONAL_DATA_FAIL;
+interface UpdateUserFailAction {
+  type: typeof UPDATE_USER_FAIL;
   error: Error;
 }
 
@@ -134,12 +117,9 @@ export type AuthActionTypes =
   | FetchUserRequestAction
   | FetchUserSuccessAction
   | FetchUserFailAction
-  | UpdateUserRoleRequestAction
-  | UpdateUserRoleSuccessAction
-  | UpdateUserRoleFailAction
-  | UpdatePersonalDataRequestAction
-  | UpdatePersonalDataSuccessAction
-  | UpdatePersonalDataFailAction
+  | UpdateUserRequestAction
+  | UpdateUserSuccessAction
+  | UpdateUserFailAction
   | DeleteUserRequestAction
   | DeleteUserSuccessAction
   | DeleteUserFailAction;

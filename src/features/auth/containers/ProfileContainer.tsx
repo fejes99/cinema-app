@@ -20,7 +20,7 @@ const ProfileContainer: React.FC<Props> = ({ user, loading, error, onLogout }) =
 
   if (loading) return <Loader />;
   if (user === null) return <div>No user</div>;
-  if (error) return <div>error</div>;
+  if (error) return <div>{error.message}</div>;
 
   const handleLogoutClick = () => {
     onLogout();

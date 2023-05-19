@@ -4,17 +4,23 @@ import './MovieCard.scss';
 import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
 import Button from 'common/components/UI/Button/Button';
 import { formatDuration } from 'common/helpers/formatDuration';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 
 interface Props {
   movie: Movie;
+  buyTicket: (movie: Movie) => void;
 }
 
-const MovieCard: React.FC<Props> = ({ movie }) => {
+const MovieCard: React.FC<Props> = ({ movie, buyTicket }) => {
   const { redirectToMovieDetails } = useMovieRedirect();
+  const { redirectToTicketCreate } = useTicketRedirect();
 
   const handleDetailsClick = () => redirectToMovieDetails(movie.id);
 
-  const handleTicketClick = () => {};
+  const handleTicketClick = (movie: Movie) => {
+    buyTicket(movie);
+    redirectToTicketCreate();
+  };
 
   return (
     <div className='movie-card'>
@@ -55,8 +61,8 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
               </Button>
             </div>
             <div className='movie-card__button'>
-              <Button size='small' type='primary'>
-                Tickets
+              <Button size='small' type='primary' onClick={() => handleTicketClick(movie)}>
+                Buy ticket
               </Button>
             </div>
           </div>
