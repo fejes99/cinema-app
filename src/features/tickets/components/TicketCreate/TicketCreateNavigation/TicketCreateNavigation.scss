@@ -1,0 +1,11 @@
+.ticket-create-navigation {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+
+  &__title {
+    font-weight: bold;
+    font-size: 48px;
+  }
+}

@@ -1,16 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './TicketCreateMovie.scss';
 import { Movie } from 'features/movies/types/Movie';
 import { formatDuration } from 'common/helpers/formatDuration';
+import { formatDate } from 'common/helpers/formatDate';
+import { Projection } from 'features/projections/types/Projection';
 
 interface Props {
   movie: Movie;
+  selectProjection: (projection: Projection) => void;
 }
 
 const TicketCreateMovie: React.FC<Props> = ({
-  movie: { name, director, distributor, duration, description, country, year },
+  movie: { name, director, distributor, duration, country, year, projections },
+  selectProjection,
 }) => {
-  const formattedDescription = description!.replace(/\n/g, '<br>');
+  const [activeProjection, setActiveProjection] = useState<Projection | null>(null);
+
+  const handleProjectionClick = (projection: Projection) => {
+    setActiveProjection(projection);
+  };
+
+  useEffect(() => {
+    activeProjection && selectProjection(activeProjection);
+  }, [activeProjection]);
+
+  const projectionList =
+    projections &&
+    projections.map((projection) => (
+      <div
+        key={projection.id}
+        className={`ticket-create-movie__projection pointer ${
+          projection === activeProjection ? 'active' : ''
+        }`}
+        onClick={() => handleProjectionClick(projection)}
+      >
+        {formatDate(projection.time)}
+      </div>
+    ));
 
   return (
     <div className='ticket-create-movie'>
@@ -30,6 +56,9 @@ const TicketCreateMovie: React.FC<Props> = ({
             {country} {year}
           </span>
         </div>
+      </div>
+      <div className='ticket-create-movie__row'>
+        <div className='ticket-create-movie__projections'>{projectionList}</div>
       </div>
     </div>
   );

@@ -99,12 +99,22 @@ const MovieCreateForm: React.FC<Props> = ({ countries, create }) => {
           />
         </div>
         <div className='movie-create__field'>
-          <Dropdown
-            title='Country'
-            value={newMovie.country}
-            options={countries}
-            onChange={(value) => handleDropdownChange(value)}
-          />
+          {countries.length > 0 ? (
+            <Dropdown
+              title='Country'
+              value={newMovie.country}
+              options={countries}
+              onChange={(value) => handleDropdownChange(value)}
+            />
+          ) : (
+            <Input
+              label='Country'
+              type='text'
+              name='country'
+              value={newMovie.country}
+              onChange={handleChange}
+            />
+          )}
         </div>
         <div className='movie-create__field'>
           <Input

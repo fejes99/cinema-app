@@ -1,3 +1,4 @@
+import { TicketCreateDto } from './../types/TicketCreateDto.d';
 import { Error } from 'common/types/Error';
 import { Ticket } from '../types/Ticket';
 import * as actionTypes from './ticketTypes';
@@ -64,3 +65,25 @@ export const ticketSeats =
     dispatch(ticketAddProjection(projection));
     dispatch(ticketAddSeats(seats));
   };
+
+const createTicketRequest = () => ({
+  type: actionTypes.CREATE_TICKET_REQUEST,
+});
+
+const createTicketSuccess = () => ({
+  type: actionTypes.CREATE_TICKET_SUCCESS,
+});
+
+const createTicketFail = (error: Error) => ({
+  type: actionTypes.CREATE_TICKET_FAIL,
+  error: error,
+});
+
+export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: AppDispatch) => {
+  console.log('🚀 ~ file: ticketActions.ts:83 ~ createTicket ~ ticketCreateDto:', ticketCreateDto);
+  dispatch(createTicketRequest());
+  return axios
+    .post('/tickets', ticketCreateDto)
+    .then((response) => dispatch(createTicketSuccess()))
+    .catch((error) => dispatch(createTicketFail(error)));
+};

@@ -12,7 +12,7 @@ const Logo: React.FC = () => {
   return (
     <img
       className='header__logo'
-      src={require('../../../../assets/logo-image.png')}
+      src={require('common/assets/logo-image.png')}
       alt='Logo'
       onClick={handleClick}
     />

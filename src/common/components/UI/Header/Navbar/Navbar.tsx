@@ -18,14 +18,10 @@ const Navbar: React.FC<Props> = ({ user }) => {
   ];
 
   if (user !== null) {
-    if (isAdmin(user)) navbarItems.push({ name: 'Users', url: '/users' });
-    navbarItems.push({
-      name: 'Profile',
-      url: '/profile',
-    });
+    isAdmin(user) && navbarItems.push({ name: 'Users', url: '/users' });
+    navbarItems.push({ name: 'Profile', url: '/profile' });
   } else {
-    navbarItems.push({ name: 'Login', url: '/login' });
-    navbarItems.push({ name: 'Register', url: '/register' });
+    navbarItems.push({ name: 'Login', url: '/login' }, { name: 'Register', url: '/register' });
   }
 
   return (

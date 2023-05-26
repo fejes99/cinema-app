@@ -77,7 +77,10 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
         <div className='projection-create__field'>
           <Dropdown
             title='Projection Type'
-            value={newProjection.projectionTypeId}
+            value={
+              projectionTypes.find((projection) => projection.id === newProjection.projectionTypeId)
+                ?.name || ''
+            }
             options={projectionTypes.map((projectionType) => projectionType.name)}
             onChange={(value) => handleDropdownChange('projectionTypeId', value)}
           />
@@ -85,7 +88,7 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
         <div className='projection-create__field'>
           <Dropdown
             title='Theater'
-            value={newProjection.theaterId}
+            value={theaters.find((theater) => theater.id === newProjection.theaterId)?.name || ''}
             options={theaters.map((theater) => theater.name)}
             onChange={(value) => handleDropdownChange('theaterId', value)}
           />

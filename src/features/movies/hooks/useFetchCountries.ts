@@ -8,17 +8,16 @@ const useFetchCountries = (): FetchCountriesResult => {
     loading: true,
   });
 
+  const apiUrl =
+    'https://raw.githubusercontent.com/iamspruce/search-filter-painate-reactjs/main/data/countries.json';
+
   useEffect(() => {
-    axios
-      .get(
-        'https://raw.githubusercontent.com/iamspruce/search-filter-painate-reactjs/main/data/countries.json'
-      )
-      .then((response) =>
-        setResult({
-          countries: Object.values(response.data).map((country: any) => country.name),
-          loading: false,
-        })
-      );
+    axios.get(apiUrl).then((response) =>
+      setResult({
+        countries: Object.values(response.data).map((country: any) => country.name),
+        loading: false,
+      })
+    );
   }, []);
 
   return result;

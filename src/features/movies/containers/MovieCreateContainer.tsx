@@ -15,6 +15,7 @@ interface Props {
 const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
   const { redirectToMovieList } = useMovieRedirect();
 
+  // TODO: Fix CORS policy error
   const { countries, loading } = useFetchCountries();
 
   const handleMovieCreate = (movieCreateDto: MovieCreateDto) => {
@@ -22,11 +23,11 @@ const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
     redirectToMovieList();
   };
 
-  if (loading) return <Loader />;
+  // if (loading) return <Loader />;
 
   return (
     <>
-      <MovieCreateForm countries={countries} create={handleMovieCreate} />
+      <MovieCreateForm countries={countries ?? []} create={handleMovieCreate} />
     </>
   );
 };

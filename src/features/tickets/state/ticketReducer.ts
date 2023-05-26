@@ -31,6 +31,13 @@ const ticketReducer: Reducer<TicketState, actionTypes.TicketActionTypes> = (
     case actionTypes.TICKET_ADD_SEATS:
       return { ...state, createTicket: { ...state.createTicket, seats: action.seats } };
 
+    case actionTypes.CREATE_TICKET_REQUEST:
+      return { ...state, loading: true };
+    case actionTypes.CREATE_TICKET_SUCCESS:
+      return { ...state, loading: false };
+    case actionTypes.CREATE_TICKET_FAIL:
+      return { ...state, loading: false, error: action.error };
+
     default:
       return state;
   }

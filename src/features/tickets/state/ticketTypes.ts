@@ -14,6 +14,10 @@ export const TICKET_ADD_MOVIE = 'TICKET_ADD_MOVIE';
 export const TICKET_ADD_PROJECTION = 'TICKET_ADD_PROJECTION';
 export const TICKET_ADD_SEATS = 'TICKET_ADD_SEATS';
 
+export const CREATE_TICKET_REQUEST = 'CREATE_TICKET_REQUEST';
+export const CREATE_TICKET_SUCCESS = 'CREATE_TICKET_SUCCESS';
+export const CREATE_TICKET_FAIL = 'CREATE_TICKET_FAIL';
+
 interface FetchTicketRequestAction {
   type: typeof FETCH_TICKET_REQUEST;
 }
@@ -48,6 +52,19 @@ interface TicketAddSeatsAction {
   seats: Seat[];
 }
 
+interface CreateTicketRequestAction {
+  type: typeof CREATE_TICKET_REQUEST;
+}
+
+interface CreateTicketSuccessAction {
+  type: typeof CREATE_TICKET_SUCCESS;
+}
+
+interface CreateTicketFailAction {
+  type: typeof CREATE_TICKET_FAIL;
+  error: Error;
+}
+
 export type TicketActionTypes =
   | FetchTicketRequestAction
   | FetchTicketSuccessAction
@@ -55,4 +72,7 @@ export type TicketActionTypes =
   | CreateTicketInitAction
   | TicketAddMovieAction
   | TicketAddProjectionAction
-  | TicketAddSeatsAction;
+  | TicketAddSeatsAction
+  | CreateTicketRequestAction
+  | CreateTicketSuccessAction
+  | CreateTicketFailAction;

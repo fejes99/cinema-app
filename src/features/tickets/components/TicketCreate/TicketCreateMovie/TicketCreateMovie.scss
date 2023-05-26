@@ -21,9 +21,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: $spacing-large;
 
     &:last-child {
-      margin-top: 50px;
+      margin-bottom: 0px;
     }
 
     &-content {
@@ -34,16 +35,42 @@
   &__title {
     font-size: 64px;
     font-weight: bold;
-    margin-bottom: $spacing-medium;
+    text-align: center;
+    margin-bottom: $spacing-large;
   }
 
   &__content {
-    margin-top: $spacing-medium;
-    line-height: 1.5;
-    margin-bottom: 10px;
-
     .bold {
       margin-right: 5px;
+    }
+  }
+  &__projections {
+    display: flex;
+    gap: $spacing-large;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__projection {
+    border: 1px solid $background-color-primary;
+    background-color: white;
+    width: 55px;
+    text-align: center;
+    font-weight: 600;
+    padding: 20px;
+    border-radius: $border-radius;
+
+    &:hover {
+      background-color: lighten($background-color-primary, 10%);
+    }
+
+    &.active {
+      background-color: $background-color-primary;
+
+      &:hover {
+        background-color: darken($background-color-primary, 10%);
+      }
     }
   }
 }
