@@ -37,10 +37,7 @@ const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
         <Routes>
           <Route path='/movies/*' element={<MoviePage />} />
           <Route path='/projections/*' element={<ProjectionPage />} />
-          <Route
-            path='/tickets/*'
-            element={user ? <TicketPage /> : <Navigate to='/login' replace />}
-          />
+          <Route path='/tickets/*' element={<TicketPage user={user} />} />
           {user && isAdmin(user) ? <Route path='/users/*' element={<UserPage />} /> : null}
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/login' element={<LoginPage />} />

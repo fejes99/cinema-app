@@ -5,7 +5,6 @@ import { createTicket, ticketProjection, ticketSeats } from '../state/ticketActi
 import { Movie } from 'features/movies/types/Movie';
 import { Projection } from 'features/projections/types/Projection';
 import { Seat } from 'features/theaters/types/Seat';
-import { fetchProjection } from 'features/projections/state/projectionActions';
 import TicketCreateMovie from '../components/TicketCreate/TicketCreateMovie/TicketCreateMovie';
 import TicketCreateNavigation from '../components/TicketCreate/TicketCreateNavigation/TicketCreateNavigation';
 import TicketCreateSeats from '../components/TicketCreate/TicketCreateSeats/TicketCreateSeats';
@@ -18,12 +17,10 @@ interface Props {
   user: User | null;
   movie: Movie | null | undefined;
   pickedProjection: Projection | undefined | null;
-  fetchedProjection: Projection | null;
   loading: boolean;
   pickedSeats: Seat[] | undefined | null;
-  onFetchProjection: (projectionId: string) => void;
-  onTicketProjection: (movie: Movie, projection: Projection) => void;
-  onTicketSeats: (movie: Movie, projection: Projection, seats: Seat[]) => void;
+  onTicketProjection: (projection: Projection) => void;
+  onTicketSeats: (projection: Projection, seats: Seat[]) => void;
   onCreateTicket: (ticketCreateDto: TicketCreateDto) => void;
 }
 
@@ -31,10 +28,7 @@ const TicketCreateContainer: React.FC<Props> = ({
   user,
   movie,
   pickedProjection,
-  fetchedProjection,
-  loading,
   pickedSeats,
-  onFetchProjection,
   onTicketProjection,
   onTicketSeats,
   onCreateTicket,
@@ -47,13 +41,14 @@ const TicketCreateContainer: React.FC<Props> = ({
   const { redirectToProjectionList } = useProjectionRedirect();
 
   useEffect(() => {
+    pickedProjection ? setStep(2) : setStep(1);
+  }, [pickedProjection]);
+
+  useEffect(() => {
     setIsEmptySeats(pickedSeats === null || pickedSeats!.length === 0);
   }, [pickedSeats]);
 
-  const handleProjectionSelect = (projection: Projection) => {
-    pickedProjection && onFetchProjection(pickedProjection.id);
-    onTicketProjection(movie!, projection);
-  };
+  const handleProjectionSelect = (projection: Projection) => onTicketProjection(projection);
 
   const handleNext = () => {
     if (step === 1) {
@@ -64,11 +59,7 @@ const TicketCreateContainer: React.FC<Props> = ({
   };
 
   const handleBack = () => {
-    if (step === 2) {
-      setStep(1);
-    } else if (step === 3) {
-      setStep(2);
-    }
+    setStep(step === 3 ? 2 : step - 1);
   };
 
   const handleBuyTickets = () => {
@@ -96,16 +87,17 @@ const TicketCreateContainer: React.FC<Props> = ({
             : 'Buy Tickets'
         }
         nextDisabled={
-          (step === 1 && !pickedProjection) || (step === 2 && (!fetchedProjection || isEmptySeats))
+          (step === 1 && !pickedProjection) || (step === 2 && (!pickedProjection || isEmptySeats))
         }
         onNext={step === 3 ? handleBuyTickets : handleNext}
       />
       {step === 1 && movie && (
         <TicketCreateMovie movie={movie} selectProjection={handleProjectionSelect} />
       )}
-      {step === 2 && fetchedProjection && (
-        <TicketCreateSeats projection={fetchedProjection} setSeats={onTicketSeats} />
+      {step === 2 && pickedProjection && (
+        <TicketCreateSeats projection={pickedProjection as Projection} setSeats={onTicketSeats} />
       )}
+
       {step === 3 && pickedProjection && pickedSeats && (
         <TicketCreateDetails projection={pickedProjection} seats={pickedSeats} />
       )}
@@ -117,17 +109,14 @@ const mapStateToProps = (state: StoreState) => ({
   user: state.auth.loggedUser,
   movie: state.tickets.createTicket?.movie,
   pickedProjection: state.tickets.createTicket?.projection,
-  fetchedProjection: state.projections.selectedProjection,
   loading: state.projections.loading,
   pickedSeats: state.tickets.createTicket?.seats,
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  onTicketProjection: (movie: Movie, projection: Projection) =>
-    dispatch(ticketProjection(movie, projection)),
-  onTicketSeats: (movie: Movie, projection: Projection, seats: Seat[]) =>
-    dispatch(ticketSeats(movie, projection, seats)),
-  onFetchProjection: (projectionId: string) => dispatch(fetchProjection(projectionId)),
+  onTicketProjection: (projection: Projection) => dispatch(ticketProjection(projection)),
+  onTicketSeats: (projection: Projection, seats: Seat[]) =>
+    dispatch(ticketSeats(projection, seats)),
   onCreateTicket: (ticketCreateDto: TicketCreateDto) => dispatch(createTicket(ticketCreateDto)),
 });
 

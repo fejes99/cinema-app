@@ -106,7 +106,7 @@ const MovieListContainer: React.FC<Props> = ({
         resetFilters={resetFilters}
       />
       {addButton}
-      <MovieList movies={filteredMovies} buyTicket={onBuyTicket} />
+      <MovieList movies={filteredMovies} onBuyTicket={onBuyTicket} />
     </>
   );
 };

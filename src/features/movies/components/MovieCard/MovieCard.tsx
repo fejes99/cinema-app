@@ -8,17 +8,17 @@ import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 
 interface Props {
   movie: Movie;
-  buyTicket: (movie: Movie) => void;
+  onBuyTicket: (movie: Movie) => void;
 }
 
-const MovieCard: React.FC<Props> = ({ movie, buyTicket }) => {
+const MovieCard: React.FC<Props> = ({ movie, onBuyTicket }) => {
   const { redirectToMovieDetails } = useMovieRedirect();
   const { redirectToTicketCreate } = useTicketRedirect();
 
   const handleDetailsClick = () => redirectToMovieDetails(movie.id);
 
-  const handleTicketClick = (movie: Movie) => {
-    buyTicket(movie);
+  const handleBuyTicketClick = () => {
+    onBuyTicket(movie);
     redirectToTicketCreate();
   };
 
@@ -61,8 +61,8 @@ const MovieCard: React.FC<Props> = ({ movie, buyTicket }) => {
               </Button>
             </div>
             <div className='movie-card__button'>
-              <Button size='small' type='primary' onClick={() => handleTicketClick(movie)}>
-                Buy ticket
+              <Button size='small' type='primary' onClick={handleBuyTicketClick}>
+                Buy Ticket
               </Button>
             </div>
           </div>

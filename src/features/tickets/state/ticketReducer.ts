@@ -27,7 +27,10 @@ const ticketReducer: Reducer<TicketState, actionTypes.TicketActionTypes> = (
     case actionTypes.TICKET_ADD_MOVIE:
       return { ...state, createTicket: { ...state.createTicket, movie: action.movie } };
     case actionTypes.TICKET_ADD_PROJECTION:
-      return { ...state, createTicket: { ...state.createTicket, projection: action.projection } };
+      return {
+        ...state,
+        createTicket: { ...state.createTicket, projection: action.projection, seats: null },
+      };
     case actionTypes.TICKET_ADD_SEATS:
       return { ...state, createTicket: { ...state.createTicket, seats: action.seats } };
 

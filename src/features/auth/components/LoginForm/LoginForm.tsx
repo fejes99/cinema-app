@@ -28,7 +28,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <div className='login'>
       <div className='login__title'>Login</div>
-      <form className='login__form' onSubmit={handleSubmit}>
+      <div className='login__form'>
         <div className='login__field'>
           <Input
             label='Email'
@@ -41,10 +41,10 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
         <div className='login__field'>
           <InputPassword confirmPassword={false} value={login.password} onChange={handleChange} />
         </div>
-        <Button size='medium' type='success' disabled={!isFormValid}>
+        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Login
         </Button>
-      </form>
+      </div>
 
       <div className='login__register'>
         Don't have an account?

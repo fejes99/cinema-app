@@ -15,6 +15,8 @@ import { isAdmin } from 'features/auth/helpers/isAdmin';
 import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
 import { User } from 'features/auth/types/User';
 import { useUserRedirect } from 'features/auth/hooks/userRedirects';
+import { Movie } from 'features/movies/types/Movie';
+import { ticketProjection } from 'features/tickets/state/ticketActions';
 
 interface Props {
   user: User | null;
@@ -23,6 +25,7 @@ interface Props {
   error: Error;
   onFetchProjection: (id: string) => void;
   onDeleteProjection: (id: string) => void;
+  onTicketProjection: (projection: Projection) => void;
 }
 
 const ProjectionDetailsContainer: React.FC<Props> = ({
@@ -32,6 +35,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   error,
   onFetchProjection,
   onDeleteProjection,
+  onTicketProjection,
 }) => {
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
@@ -50,6 +54,11 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   const handleEditClick = () => redirectToProjectionUpdate(selectedProjection.id);
 
   const handleDeleteClick = () => openDeleteModal();
+
+  const handleBuyTicketClick = () => {
+    onTicketProjection(selectedProjection);
+    redirectToTicketCreate();
+  };
 
   const handleTicketRedirect = (ticketId: string) => redirectToTicketDetails(ticketId);
 
@@ -78,7 +87,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   return (
     <>
       {adminButtons}
-      <ProjectionDetails projection={selectedProjection} buyTicket={redirectToTicketCreate} />
+      <ProjectionDetails projection={selectedProjection} onBuyTicket={handleBuyTicketClick} />
       {ticketsTable}
       <DeleteModal
         title='projection'
@@ -100,6 +109,7 @@ const mapStateToProps = (state: StoreState) => ({
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchProjection: (id: string) => dispatch(fetchProjection(id)),
   onDeleteProjection: (id: string) => dispatch(deleteProjection(id)),
+  onTicketProjection: (projection: Projection) => dispatch(ticketProjection(projection)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectionDetailsContainer);

@@ -48,23 +48,21 @@ const ticketAddProjection = (projection: Projection) => ({
   projection: projection,
 });
 
-export const ticketProjection =
-  (movie: Movie, projection: Projection) => (dispatch: AppDispatch) => {
-    dispatch(ticketAddMovie(movie));
-    dispatch(ticketAddProjection(projection));
-  };
+export const ticketProjection = (projection: Projection) => (dispatch: AppDispatch) => {
+  dispatch(ticketAddMovie(projection.movie!));
+  dispatch(ticketAddProjection(projection));
+};
 
 const ticketAddSeats = (seats: Seat[]) => ({
   type: actionTypes.TICKET_ADD_SEATS,
   seats: seats,
 });
 
-export const ticketSeats =
-  (movie: Movie, projection: Projection, seats: Seat[]) => (dispatch: AppDispatch) => {
-    dispatch(ticketAddMovie(movie));
-    dispatch(ticketAddProjection(projection));
-    dispatch(ticketAddSeats(seats));
-  };
+export const ticketSeats = (projection: Projection, seats: Seat[]) => (dispatch: AppDispatch) => {
+  dispatch(ticketAddMovie(projection.movie!));
+  dispatch(ticketAddProjection(projection));
+  dispatch(ticketAddSeats(seats));
+};
 
 const createTicketRequest = () => ({
   type: actionTypes.CREATE_TICKET_REQUEST,
@@ -80,7 +78,6 @@ const createTicketFail = (error: Error) => ({
 });
 
 export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: AppDispatch) => {
-  console.log('🚀 ~ file: ticketActions.ts:83 ~ createTicket ~ ticketCreateDto:', ticketCreateDto);
   dispatch(createTicketRequest());
   return axios
     .post('/tickets', ticketCreateDto)

@@ -3,12 +3,11 @@ import './TicketCreateSeats.scss';
 import { Projection } from 'features/projections/types/Projection';
 import Input from 'common/components/UI/Input/Input';
 import { formatDate } from 'common/helpers/formatDate';
-import { Movie } from 'features/movies/types/Movie';
 import { Seat } from 'features/theaters/types/Seat';
 
 interface Props {
   projection: Projection;
-  setSeats: (movie: Movie, projection: Projection, seats: Seat[]) => void;
+  setSeats: (projection: Projection, seats: Seat[]) => void;
 }
 
 const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
@@ -21,7 +20,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
   const handleTicketClick = (num: number) => {
     setNumTickets(num);
     setSelectedSeats([]);
-    setSeats(projection.movie!, projection, selectedSeats);
+    setSeats(projection, selectedSeats);
   };
 
   const handleSeatClick = (seat: Seat) => {
@@ -33,13 +32,11 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
       let startIndex = seatIndex;
       let endIndex = seatIndex + numTickets - 1;
 
-      // Adjust endIndex if it exceeds the row boundary
       const rowEndIndex = (rowIndex + 1) * seatsPerRow - 1;
       if (endIndex > rowEndIndex) {
         endIndex = rowEndIndex;
       }
 
-      // Adjust startIndex if it goes beyond the available seats in the row
       const rowStartIndex = rowIndex * seatsPerRow;
       if (startIndex > rowStartIndex) {
         startIndex = endIndex - numTickets + 1;
@@ -49,7 +46,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
       const pickedSeats = selectedRange.map((seat) => seat);
 
       setSelectedSeats(pickedSeats);
-      setSeats(projection.movie!, projection, pickedSeats);
+      setSeats(projection, pickedSeats);
     }
   };
 

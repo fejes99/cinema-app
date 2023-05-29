@@ -5,14 +5,14 @@ import './MovieList.scss';
 
 interface Props {
   movies: Movie[];
-  buyTicket: (movie: Movie) => void;
+  onBuyTicket: (movie: Movie) => void;
 }
 
-const MovieList: React.FC<Props> = ({ movies, buyTicket }) => (
+const MovieList: React.FC<Props> = ({ movies, onBuyTicket }) => (
   <div className='movie-list'>
     {movies &&
       movies.map((movie: Movie) => (
-        <MovieCard key={movie.id} movie={movie} buyTicket={buyTicket} />
+        <MovieCard key={movie.id} movie={movie} onBuyTicket={onBuyTicket} />
       ))}
   </div>
 );

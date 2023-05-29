@@ -16,7 +16,6 @@ interface Props {
 }
 
 const ProfileContainer: React.FC<Props> = ({ user, loading, error, onLogout }) => {
-  console.log('🚀 ~ file: ProfileContainer.tsx:19 ~ user:', user);
   const { redirectToProjectionList } = useProjectionRedirect();
 
   if (loading) return <Loader />;

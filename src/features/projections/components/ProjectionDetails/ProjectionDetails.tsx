@@ -7,13 +7,13 @@ import { formatPrice } from 'common/helpers/formatPrice';
 
 interface Props {
   projection: Projection;
-  buyTicket: () => void;
+  onBuyTicket: () => void;
 }
 
-const ProjectionDetails: React.FC<Props> = ({ projection, buyTicket }) => {
+const ProjectionDetails: React.FC<Props> = ({ projection, onBuyTicket }) => {
   const buyCardButton = projection.isSold ? null : (
     <div className='projection-details__button'>
-      <Button size='medium' type='primary' onClick={buyTicket}>
+      <Button size='medium' type='primary' onClick={onBuyTicket}>
         Buy Ticket
       </Button>
     </div>

@@ -14,6 +14,8 @@ import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import { ticketInit } from 'features/tickets/state/ticketActions';
 
 interface Props {
   user: User | null;
@@ -22,6 +24,7 @@ interface Props {
   error: Error;
   onFetchMovie: (id: string) => void;
   onDeleteMovie: (id: string) => void;
+  onBuyTicket: (movie: Movie) => void;
 }
 
 const MovieDetailsContainer: React.FC<Props> = ({
@@ -31,9 +34,11 @@ const MovieDetailsContainer: React.FC<Props> = ({
   error,
   onFetchMovie,
   onDeleteMovie,
+  onBuyTicket,
 }) => {
   const { id } = useParams();
   const { redirectToMovieList, redirectToMovieUpdate } = useMovieRedirect();
+  const { redirectToTicketCreate } = useTicketRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => {
@@ -54,6 +59,11 @@ const MovieDetailsContainer: React.FC<Props> = ({
   if (selectedMovie === null) return <div>No movie</div>;
   if (error) return <div>{error.message}</div>;
 
+  const handleBuyTicketClick = (movie: Movie) => {
+    onBuyTicket(movie);
+    redirectToTicketCreate();
+  };
+
   const adminButtons =
     user && isAdmin(user) ? (
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
@@ -65,7 +75,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
         <>
           <YoutubeEmbed videoId={extractYoutubeVideoId(selectedMovie.trailerUrl!)} />
           {adminButtons}
-          <MovieDetails movie={selectedMovie} />
+          <MovieDetails movie={selectedMovie} onBuyTicket={handleBuyTicketClick} />
           <DeleteModal
             title={selectedMovie.name}
             show={showDeleteModal}
@@ -88,6 +98,7 @@ const mapStateToProps = (state: StoreState) => ({
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchMovie: (id: string) => dispatch(fetchMovie(id)),
   onDeleteMovie: (id: string) => dispatch(deleteMovie(id)),
+  onBuyTicket: (movie: Movie) => dispatch(ticketInit(movie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetailsContainer);

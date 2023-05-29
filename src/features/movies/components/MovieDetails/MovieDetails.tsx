@@ -6,28 +6,29 @@ import { formatDuration } from 'common/helpers/formatDuration';
 
 interface Props {
   movie: Movie;
+  onBuyTicket: (movie: Movie) => void;
 }
 
-const MovieDetails: React.FC<Props> = ({
-  movie: { name, director, distributor, duration, description, country, year },
-}) => {
-  const formattedDescription = description!.replace(/\n/g, '<br>');
+const MovieDetails: React.FC<Props> = ({ movie, onBuyTicket }) => {
+  const formattedDescription = movie.description!.replace(/\n/g, '<br>');
+
+  const handleBuyTicketClick = () => onBuyTicket(movie);
 
   return (
     <div className='movie-details'>
-      <div className='movie-details__title'>{name}</div>
+      <div className='movie-details__title'>{movie.name}</div>
       <div className='movie-details__row'>
         <div className='movie-details__row-content'>
           <span className='bold'>Director: </span>
-          {director}
+          {movie.director}
         </div>
         <div className='movie-details__row-content'>
           <span className='bold'>Distributor: </span>
-          {distributor}
+          {movie.distributor}
         </div>
         <div className='movie-details__row-content'>
           <span className='bold'>Duration: </span>
-          {formatDuration(duration)}
+          {formatDuration(movie.duration)}
         </div>
       </div>
       <div
@@ -37,11 +38,11 @@ const MovieDetails: React.FC<Props> = ({
       <div className='movie-details__row'>
         <div className='movie-details__content'>
           <span className='bold'>
-            {country} {year}
+            {movie.country} {movie.year}
           </span>
         </div>
         <div className='movie-details_button'>
-          <Button size='large' type='primary'>
+          <Button size='large' type='primary' onClick={handleBuyTicketClick}>
             Buy Ticket
           </Button>
         </div>
