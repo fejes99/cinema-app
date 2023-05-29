@@ -11,8 +11,11 @@ interface Props {
 }
 
 const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
+  console.log('🚀 ~ file: TicketCreateSeats.tsx:14 ~ projection:', projection);
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
   const [numTickets, setNumTickets] = useState(1);
+
+  const rowLength = Math.min(5, projection.theater.seats.length);
 
   const handleTicketChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setNumTickets(Number(event.target.value));
@@ -26,18 +29,17 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
   const handleSeatClick = (seat: Seat) => {
     const seatIndex = projection.theater.seats.findIndex((arraySeat) => arraySeat.id === seat.id);
     if (seatIndex !== -1) {
-      const seatsPerRow = 5;
-      const rowIndex = Math.floor(seatIndex / seatsPerRow);
+      const rowIndex = Math.floor(seatIndex / rowLength);
 
       let startIndex = seatIndex;
       let endIndex = seatIndex + numTickets - 1;
 
-      const rowEndIndex = (rowIndex + 1) * seatsPerRow - 1;
+      const rowEndIndex = (rowIndex + 1) * rowLength - 1;
       if (endIndex > rowEndIndex) {
         endIndex = rowEndIndex;
       }
 
-      const rowStartIndex = rowIndex * seatsPerRow;
+      const rowStartIndex = rowIndex * rowLength;
       if (startIndex > rowStartIndex) {
         startIndex = endIndex - numTickets + 1;
       }
@@ -52,7 +54,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
 
   const renderTickets = () => {
     const tickets = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= rowLength; i++) {
       const ticketImage =
         i <= numTickets
           ? require('common/assets/chair-selected.png')
@@ -90,7 +92,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
         />
       );
 
-      if (currentRow.length === 5 || index === seats.length - 1) {
+      if (currentRow.length === rowLength || index === seats.length - 1) {
         rows.push(
           <div key={index} className='ticket-create-seats__row'>
             {currentRow}
@@ -122,7 +124,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
             name={''}
             value={numTickets}
             min={1}
-            max={5}
+            max={rowLength}
             onChange={handleTicketChange}
           />
           <div className='ticket-create-seats__tickets'>{renderTickets()}</div>

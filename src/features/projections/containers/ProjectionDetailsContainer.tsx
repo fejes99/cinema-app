@@ -15,7 +15,6 @@ import { isAdmin } from 'features/auth/helpers/isAdmin';
 import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
 import { User } from 'features/auth/types/User';
 import { useUserRedirect } from 'features/auth/hooks/userRedirects';
-import { Movie } from 'features/movies/types/Movie';
 import { ticketProjection } from 'features/tickets/state/ticketActions';
 
 interface Props {
