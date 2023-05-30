@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AppDispatch, StoreState } from 'store/store';
 import { ProjectionCreateDto } from '../types/ProjectionCreateDto';
@@ -36,6 +36,8 @@ const ProjectionCreateContainer: React.FC<Props> = ({
   onFetchTheaters,
   onCreateProjection,
 }) => {
+  const [updatedProjectionTypes, setUpdatedProjectionTypes] =
+    useState<ProjectionType[]>(projectionTypes);
   const { redirectToProjectionList } = useProjectionRedirect();
 
   useEffect(() => {
@@ -52,12 +54,23 @@ const ProjectionCreateContainer: React.FC<Props> = ({
     redirectToProjectionList();
   };
 
+  const updateProjectionTypes = (theaterName: string) => {
+    const theater = theaters.find((theater) => theater.name === theaterName);
+    if (theater) {
+      const updatedTypes = projectionTypes.filter((projectionType) =>
+        theater.projectionTypes.some((type) => type.name === projectionType.name)
+      );
+      setUpdatedProjectionTypes(updatedTypes);
+    }
+  };
+
   return (
     <>
       <ProjectionCreateForm
         movies={movies}
-        projectionTypes={projectionTypes}
+        projectionTypes={updatedProjectionTypes}
         theaters={theaters}
+        theaterClick={updateProjectionTypes}
         create={handleProjectionCreate}
       />
     </>

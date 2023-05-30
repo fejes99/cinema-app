@@ -57,7 +57,7 @@ const TicketCreateDetails: React.FC<Props> = ({ projection, seats }) => {
           <div className='ticket-create-details__subtitle'>Price:</div>
           <div className='ticket-create-details__content'>
             <span className='bold'>Total price:</span>
-            {formatPrice(projection.price)}
+            {formatPrice(projection.price * seats.length)}
           </div>
         </div>
       </div>

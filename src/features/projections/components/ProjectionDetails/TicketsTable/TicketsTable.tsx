@@ -14,6 +14,7 @@ const TicketsTable: React.FC<Props> = ({ tickets, onTicketClick, onUserClick }) 
       <tr>
         <th>Projection Time</th>
         <th>User</th>
+        <th>Seat</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@ const TicketsTable: React.FC<Props> = ({ tickets, onTicketClick, onUserClick }) 
           <td className='pointer' onClick={() => onUserClick(ticket.user.id)}>
             {ticket.user.username}
           </td>
+          <td>{ticket.seat.number}</td>
         </tr>
       ))}
     </tbody>

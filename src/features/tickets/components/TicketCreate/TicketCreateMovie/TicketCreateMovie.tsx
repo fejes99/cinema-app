@@ -25,18 +25,25 @@ const TicketCreateMovie: React.FC<Props> = ({
   }, [activeProjection]);
 
   const projectionList =
-    projections &&
-    projections.map((projection) => (
-      <div
-        key={projection.id}
-        className={`ticket-create-movie__projection pointer ${
-          projection === activeProjection ? 'active' : ''
-        }`}
-        onClick={() => handleProjectionClick(projection)}
-      >
-        {formatDate(projection.time)}
-      </div>
-    ));
+    projections && projections.length > 0 ? (
+      projections.map((projection) => (
+        <div
+          key={projection.id}
+          className={
+            !projection.isSold
+              ? `ticket-create-movie__projection pointer ${
+                  projection === activeProjection ? 'active' : ''
+                } :  ''`
+              : 'ticket-create-movie__projection pointer ticket-create-movie__projection-sold'
+          }
+          onClick={() => !projection.isSold && handleProjectionClick(projection)}
+        >
+          {formatDate(projection.time)}
+        </div>
+      ))
+    ) : (
+      <div className='bold'>There are no projections at the moment.</div>
+    );
 
   return (
     <div className='ticket-create-movie'>

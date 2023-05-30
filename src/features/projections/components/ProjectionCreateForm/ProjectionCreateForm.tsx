@@ -12,10 +12,17 @@ interface Props {
   movies: Movie[];
   projectionTypes: ProjectionType[];
   theaters: Theater[];
+  theaterClick: (theater: string) => void;
   create: (projectionCreateDto: ProjectionCreateDto) => void;
 }
 
-const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theaters, create }) => {
+const ProjectionCreateForm: React.FC<Props> = ({
+  movies,
+  projectionTypes,
+  theaters,
+  theaterClick,
+  create,
+}) => {
   const [newProjection, setNewProjection] = useState<ProjectionCreateDto>({
     time: '',
     price: 0,
@@ -76,6 +83,17 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
         </div>
         <div className='projection-create__field'>
           <Dropdown
+            title='Theater'
+            value={theaters.find((theater) => theater.id === newProjection.theaterId)?.name || ''}
+            options={theaters.map((theater) => theater.name)}
+            onChange={(value) => {
+              theaterClick(value);
+              handleDropdownChange('theaterId', value);
+            }}
+          />
+        </div>
+        <div className='projection-create__field'>
+          <Dropdown
             title='Projection Type'
             value={
               projectionTypes.find((projection) => projection.id === newProjection.projectionTypeId)
@@ -83,14 +101,6 @@ const ProjectionCreateForm: React.FC<Props> = ({ movies, projectionTypes, theate
             }
             options={projectionTypes.map((projectionType) => projectionType.name)}
             onChange={(value) => handleDropdownChange('projectionTypeId', value)}
-          />
-        </div>
-        <div className='projection-create__field'>
-          <Dropdown
-            title='Theater'
-            value={theaters.find((theater) => theater.id === newProjection.theaterId)?.name || ''}
-            options={theaters.map((theater) => theater.name)}
-            onChange={(value) => handleDropdownChange('theaterId', value)}
           />
         </div>
         <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>

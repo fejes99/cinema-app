@@ -61,6 +61,20 @@
     padding: 20px;
     border-radius: $border-radius;
 
+    &-sold {
+      color: white;
+      background-color: $color-error;
+
+      &.ticket-create-movie__projection {
+        // Correct nesting order
+        &:hover {
+          background-color: lighten($color-error, 10%);
+          color: white;
+          cursor: not-allowed;
+        }
+      }
+    }
+
     &:hover {
       background-color: lighten($background-color-primary, 10%);
     }

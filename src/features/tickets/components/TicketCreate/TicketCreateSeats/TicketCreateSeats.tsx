@@ -11,11 +11,11 @@ interface Props {
 }
 
 const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
-  console.log('🚀 ~ file: TicketCreateSeats.tsx:14 ~ projection:', projection);
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
   const [numTickets, setNumTickets] = useState(1);
 
   const rowLength = Math.min(5, projection.theater.seats.length);
+  const usedSeats = projection.tickets?.map((ticket) => ticket.seat);
 
   const handleTicketChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setNumTickets(Number(event.target.value));
@@ -47,8 +47,16 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
       const selectedRange = projection.theater.seats.slice(startIndex, endIndex + 1);
       const pickedSeats = selectedRange.map((seat) => seat);
 
-      setSelectedSeats(pickedSeats);
-      setSeats(projection, pickedSeats);
+      const isAnySeatUsed = pickedSeats.some((pickedSeat) =>
+        usedSeats?.some(
+          (usedSeat) => usedSeat.id === pickedSeat.id && usedSeat.number === pickedSeat.number
+        )
+      );
+
+      if (!isAnySeatUsed) {
+        setSelectedSeats(pickedSeats);
+        setSeats(projection, pickedSeats);
+      }
     }
   };
 
@@ -73,22 +81,37 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
   };
 
   const renderSeats = () => {
-    const seats = projection.theater.seats;
-    const rows: any = [];
-    let currentRow: any = [];
+    const seats = projection.theater.seats.sort(
+      (a: Seat, b: Seat) => Number(a.number) - Number(b.number)
+    );
+    const rows: any[] = [];
+    let currentRow: any[] = [];
 
     seats.forEach((seat, index) => {
+      const isUsed = usedSeats?.find(
+        (usedSeat) => usedSeat.id === seat.id && usedSeat.number === seat.number
+      );
+
+      const isSelected = selectedSeats.includes(seat);
+
+      const seatClassName = isUsed
+        ? 'ticket-create-seats__seat disabled'
+        : 'ticket-create-seats__seat';
+      const onClickHandler = isUsed ? undefined : () => handleSeatClick(seat);
+
       currentRow.push(
         <img
           key={seat.id}
           src={
-            selectedSeats.includes(seat)
+            isUsed
+              ? require('common/assets/chair-taken.png')
+              : isSelected
               ? require('common/assets/chair-selected.png')
               : require('common/assets/chair.png')
           }
-          alt='Seat'
-          onClick={() => handleSeatClick(seat)}
-          className='ticket-create-seats__seat'
+          alt={`Seat ${seat.number}`}
+          onClick={onClickHandler}
+          className={seatClassName}
         />
       );
 
@@ -134,6 +157,32 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
         <div className='ticket-create-seats__theater-details'>
           <div className='ticket-create-seats__theater-content'>{projection.theater.name}</div>
           <div className='ticket-create-seats__theater-content'>{formatDate(projection.time)}</div>
+        </div>
+        <div className='ticket-create-seats__theater-details'>
+          <div className='ticket-create-seats__theater-content'>
+            <img
+              src={require('common/assets/chair.png')}
+              alt='Available Seat'
+              className='ticket-create-seats__theater-image'
+            />
+            <div className='ticket-create-seats__theater-content-text'>Available Seat</div>
+          </div>
+          <div className='ticket-create-seats__theater-content'>
+            <img
+              src={require('common/assets/chair-selected.png')}
+              alt='Available Seat'
+              className='ticket-create-seats__theater-image'
+            />
+            <div className='ticket-create-seats__theater-content-text'>Selected Seat</div>
+          </div>
+          <div className='ticket-create-seats__theater-content'>
+            <img
+              src={require('common/assets/chair-taken.png')}
+              alt='Available Seat'
+              className='ticket-create-seats__theater-image'
+            />
+            <div className='ticket-create-seats__theater-content-text'>Taken Seat</div>
+          </div>
         </div>
 
         <div className='ticket-create-seats__theater-layout'>

@@ -34,7 +34,7 @@ const ProjectionsTable: React.FC<Props> = ({
     <tbody>
       {projections &&
         projections.map((projection: Projection) => (
-          <tr key={projection.id}>
+          <tr key={projection.id} className={projection.isSold ? 'sold' : ''}>
             <td className='pointer' onClick={() => redirect(projection.id)}>
               <span className='bold'>{projection.movie?.name}</span>
             </td>

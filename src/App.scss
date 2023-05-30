@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.disabled {
+  cursor: not-allowed;
+}
+
 .underline {
   text-decoration: underline;
   &:hover {
@@ -74,6 +78,10 @@ td {
 }
 
 tr {
+  &.sold {
+    background-color: lightgray;
+  }
+
   &:last-child {
     td {
       border-bottom: none;
