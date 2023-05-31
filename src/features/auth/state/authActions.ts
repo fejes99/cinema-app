@@ -175,8 +175,9 @@ const updateUserRequest = () => ({
   type: actionTypes.UPDATE_USER_REQUEST,
 });
 
-const updateUserSuccess = () => ({
+const updateUserSuccess = (user: User) => ({
   type: actionTypes.UPDATE_USER_SUCCESS,
+  updatedUser: user,
 });
 
 const updateUserFail = (error: Error) => ({
@@ -189,7 +190,7 @@ export const updateUser =
     dispatch(updateUserRequest());
     return axios
       .put(`/users/${userId}`, userUpdateDto)
-      .then((response) => dispatch(updateUserSuccess()))
+      .then((response) => dispatch(updateUserSuccess(response.data)))
       .catch((error) => dispatch(updateUserFail(error)));
   };
 
@@ -208,8 +209,8 @@ const deleteUserFail = (error: Error) => ({
 
 export const deleteUser = (userId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteUserRequest());
-  return axios
+  axios
     .delete(`/users/${userId}`)
-    .then((response) => dispatch(deleteUserSuccess()))
+    .then(() => dispatch(deleteUserSuccess()))
     .catch((error) => dispatch(deleteUserFail(error)));
 };

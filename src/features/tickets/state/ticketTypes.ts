@@ -18,6 +18,10 @@ export const CREATE_TICKET_REQUEST = 'CREATE_TICKET_REQUEST';
 export const CREATE_TICKET_SUCCESS = 'CREATE_TICKET_SUCCESS';
 export const CREATE_TICKET_FAIL = 'CREATE_TICKET_FAIL';
 
+export const DELETE_TICKET_REQUEST = 'DELETE_TICKET_REQUEST';
+export const DELETE_TICKET_SUCCESS = 'DELETE_TICKET_SUCCESS';
+export const DELETE_TICKET_FAIL = 'DELETE_TICKET_FAIL';
+
 export const FETCH_USER_TICKETS_REQUEST = 'FETCH_USER_TICKETS_REQUEST';
 export const FETCH_USER_TICKETS_SUCCESS = 'FETCH_USER_TICKETS_SUCCESS';
 export const FETCH_USER_TICKETS_FAIL = 'FETCH_USER_TICKETS_FAIL';
@@ -69,6 +73,19 @@ interface CreateTicketFailAction {
   error: Error;
 }
 
+interface DeleteTicketRequestAction {
+  type: typeof DELETE_TICKET_REQUEST;
+}
+
+interface DeleteTicketSuccessAction {
+  type: typeof DELETE_TICKET_SUCCESS;
+}
+
+interface DeleteTicketFailAction {
+  type: typeof DELETE_TICKET_FAIL;
+  error: Error;
+}
+
 interface FetchUserTicketsRequestAction {
   type: typeof FETCH_USER_TICKETS_REQUEST;
 }
@@ -94,6 +111,9 @@ export type TicketActionTypes =
   | CreateTicketRequestAction
   | CreateTicketSuccessAction
   | CreateTicketFailAction
+  | DeleteTicketRequestAction
+  | DeleteTicketSuccessAction
+  | DeleteTicketFailAction
   | FetchUserTicketsRequestAction
   | FetchUserTicketsSuccessAction
   | FetchUserTicketsFailAction;

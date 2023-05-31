@@ -71,7 +71,7 @@ table {
 th {
   background-color: $background-color-primary;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   padding: 10px 50px;
   height: 40px;
 
@@ -102,9 +102,17 @@ tr {
 }
 
 td {
-  padding: 10px 50px;
-  text-align: left;
+  padding: 10px 15px;
+  text-align: center;
   height: 40px;
+
+  &:first-of-type {
+    padding-left: 50px;
+  }
+
+  &:last-of-type {
+    padding-right: 50px;
+  }
 
   &.icons {
     display: flex;

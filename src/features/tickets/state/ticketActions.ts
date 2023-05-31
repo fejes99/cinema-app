@@ -79,10 +79,31 @@ const createTicketFail = (error: Error) => ({
 
 export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: AppDispatch) => {
   dispatch(createTicketRequest());
-  return axios
+  axios
     .post('/tickets', ticketCreateDto)
     .then((response) => dispatch(createTicketSuccess()))
     .catch((error) => dispatch(createTicketFail(error)));
+};
+
+const deleteTicketRequest = () => ({
+  type: actionTypes.DELETE_TICKET_REQUEST,
+});
+
+const deleteTicketSuccess = () => ({
+  type: actionTypes.DELETE_TICKET_SUCCESS,
+});
+
+const deleteTicketFail = (error: Error) => ({
+  type: actionTypes.DELETE_TICKET_FAIL,
+  error: error,
+});
+
+export const deleteTicket = (ticketId: string) => (dispatch: AppDispatch) => {
+  dispatch(deleteTicketRequest());
+  axios
+    .delete(`/tickets/${ticketId}`)
+    .then(() => dispatch(deleteTicketSuccess()))
+    .catch((error) => dispatch(deleteTicketFail(error)));
 };
 
 const fetchUserTicketsRequest = () => ({

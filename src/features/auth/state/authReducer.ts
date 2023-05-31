@@ -47,6 +47,26 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
     case actionTypes.LOGOUT:
       return { ...state, loggedUser: null, token: null };
 
+    case actionTypes.UPDATE_USER_REQUEST:
+      return { ...state, loading: true, selectedUser: null, error: null };
+    case actionTypes.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loggedUser: action.updatedUser,
+        selectedUser: action.updatedUser,
+        error: null,
+      };
+    case actionTypes.UPDATE_USER_FAIL:
+      return { ...state, loading: false, error: action.error };
+
+    case actionTypes.DELETE_USER_REQUEST:
+      return { ...state, loading: true, error: null };
+    case actionTypes.DELETE_USER_SUCCESS:
+      return { ...state, loading: false };
+    case actionTypes.DELETE_USER_FAIL:
+      return { ...state, loading: false, error: action.error };
+
     default:
       return state;
   }

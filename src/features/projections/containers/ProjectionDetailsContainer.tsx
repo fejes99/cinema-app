@@ -37,6 +37,10 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   onDeleteProjection,
   onTicketProjection,
 }) => {
+  console.log(
+    '🚀 ~ file: ProjectionDetailsContainer.tsx:40 ~ selectedProjection:',
+    selectedProjection
+  );
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
   const { redirectToMovieDetails } = useMovieRedirect();

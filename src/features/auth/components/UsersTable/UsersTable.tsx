@@ -18,7 +18,7 @@ const UsersTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
     <table>
       <thead>
         <tr>
-          <th>Username</th>
+          <th className='align-left'>Username</th>
           <th>Created</th>
           <th>Role</th>
           <th>Action</th>
@@ -28,13 +28,13 @@ const UsersTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
         {users &&
           users.map((user: User) => (
             <tr key={user.id}>
-              <td>
+              <td className='align-left '>
                 <span className='pointer' onClick={() => redirectToUserDetails(user.id)}>
                   {user.username}
                 </span>
               </td>
               <td>{formatDate(user.created)}</td>
-              <td>{user.role}</td>
+              <td className='align-center'>{user.role}</td>
               <td className='icons'>
                 <div onClick={() => onEdit(user.id)}>
                   <ModeEditOutlinedIcon className='edit-icon' />

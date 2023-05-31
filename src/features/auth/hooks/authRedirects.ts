@@ -5,5 +5,9 @@ export const useAuthRedirect = () => {
 
   const redirectToLogin = () => navigate('/login');
 
-  return { redirectToLogin };
+  const redirectToProfile = () => navigate('/profile');
+
+  const redirectToUserUpdate = (userId: string) => navigate(`/users/${userId}/edit`);
+
+  return { redirectToLogin, redirectToProfile, redirectToUserUpdate };
 };

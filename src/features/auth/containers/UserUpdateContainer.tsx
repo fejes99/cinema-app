@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchUser, updateUser } from '../state/authActions';
 import { UserUpdateDto } from '../types/UserUpdateDto';
 import { User } from '../types/User';
 import { Error } from 'common/types/Error';
+import { useParams } from 'react-router';
+import { useAuthRedirect } from '../hooks/authRedirects';
+import Loader from 'common/components/UI/Loader/Loader';
+import UserUpdateForm from '../components/UserUpdateForm/UserUpdateForm';
 
 interface Props {
   user: User | null;
@@ -21,7 +25,22 @@ const UserUpdateContainer: React.FC<Props> = ({
   onFetchUser,
   onUpdateUser,
 }) => {
-  return <div>UserUpdateContainer</div>;
+  const { id } = useParams();
+  const { redirectToProfile } = useAuthRedirect();
+
+  useEffect(() => {
+    if (!user) onFetchUser(id!);
+  }, [id, onFetchUser, user]);
+
+  if (loading) return <Loader />;
+  if (error) return <div>{error}</div>;
+
+  const handleUserUpdate = (id: string, userUpdateDto: UserUpdateDto) => {
+    onUpdateUser(id, userUpdateDto);
+    redirectToProfile();
+  };
+
+  return user && <UserUpdateForm user={user} update={handleUserUpdate} />;
 };
 
 const mapStateToProps = (state: StoreState) => ({

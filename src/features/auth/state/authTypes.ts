@@ -84,6 +84,7 @@ interface UpdateUserRequestAction {
 }
 interface UpdateUserSuccessAction {
   type: typeof UPDATE_USER_SUCCESS;
+  updatedUser: User;
 }
 interface UpdateUserFailAction {
   type: typeof UPDATE_USER_FAIL;

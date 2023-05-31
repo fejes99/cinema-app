@@ -42,6 +42,13 @@ const ticketReducer: Reducer<TicketState, actionTypes.TicketActionTypes> = (
     case actionTypes.CREATE_TICKET_FAIL:
       return { ...state, loading: false, error: action.error };
 
+    case actionTypes.DELETE_TICKET_REQUEST:
+      return { ...state, loading: true };
+    case actionTypes.DELETE_TICKET_SUCCESS:
+      return { ...state, loading: false };
+    case actionTypes.DELETE_TICKET_FAIL:
+      return { ...state, loading: false, error: action.error };
+
     case actionTypes.FETCH_USER_TICKETS_REQUEST:
       return { ...state, loading: true, userTickets: null };
     case actionTypes.FETCH_USER_TICKETS_SUCCESS:

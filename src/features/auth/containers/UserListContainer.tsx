@@ -55,7 +55,7 @@ const UserListContainer: React.FC<Props> = ({
     }));
   };
 
-  // const handleEditClick = (id: string) => {};
+  const handleEditClick = (id: string) => {};
 
   const handleDeleteClick = (id: string) => {
     const userToDelete = filteredUsers.find((user) => user.id === id);
@@ -80,11 +80,7 @@ const UserListContainer: React.FC<Props> = ({
         onFiltersChange={handleFiltersChange}
         resetFilters={resetFilters}
       />
-      <UsersTable
-        users={filteredUsers}
-        onEdit={(id: string) => {}}
-        onDelete={(id: string) => handleDeleteClick(id)}
-      />
+      <UsersTable users={filteredUsers} onEdit={handleEditClick} onDelete={handleDeleteClick} />
       <DeleteModal
         title={userToDelete?.username!}
         show={showDeleteModal}
