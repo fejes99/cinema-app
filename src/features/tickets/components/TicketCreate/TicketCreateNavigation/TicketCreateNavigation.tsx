@@ -26,7 +26,7 @@ const TicketCreateNavigation: React.FC<Props> = ({
       {backTitle}
     </Button>
     <div className='ticket-create-navigation__title'>{title}</div>
-    <Button size='large' type='success' disabled={nextDisabled} onClick={onNext}>
+    <Button size='large' type='primary' disabled={nextDisabled} onClick={onNext}>
       {nextTitle}
     </Button>
   </div>

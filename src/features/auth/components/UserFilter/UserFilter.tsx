@@ -25,7 +25,7 @@ const UserFilter: React.FC<Props> = ({
       </div>
       <div className='user-filter__filter'>
         <Dropdown
-          title={UserFilterName.Role}
+          title='Role'
           value={role}
           options={roles}
           onChange={(value) => onFiltersChange(UserFilterName.Role, value)}

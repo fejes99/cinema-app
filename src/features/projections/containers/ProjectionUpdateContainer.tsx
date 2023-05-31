@@ -17,7 +17,7 @@ interface Props {
   projection: Projection | null;
   projectionTypes: ProjectionType[];
   theaters: Theater[];
-  isLoading: boolean;
+  loading: boolean;
   error: string | null;
   onFetchProjectionTypes: () => void;
   onFetchTheaters: () => void;
@@ -29,7 +29,7 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   projection,
   projectionTypes,
   theaters,
-  isLoading,
+  loading,
   error,
   onFetchProjectionTypes,
   onFetchTheaters,
@@ -50,7 +50,7 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
     onFetchTheaters();
   }, [onFetchProjection, onFetchProjectionTypes, onFetchTheaters]);
 
-  if (!projection || isLoading) return <Loader />;
+  if (!projection || loading) return <Loader />;
   if (error) return <div>{error}</div>;
 
   const handleProjectionUpdate = (id: string, projectionUpdateDto: ProjectionUpdateDto) => {
@@ -77,14 +77,14 @@ const mapStateToProps = (state: StoreState) => {
   const { theaters, loading: theatersLoading, error: theatersError } = state.theaters;
   const projection = state.projections.selectedProjection;
 
-  let isLoading = projectionTypesLoading || theatersLoading;
+  let loading = projectionTypesLoading || theatersLoading;
   let error = projectionTypesError?.message || theatersError?.message || null;
 
   return {
     projection,
     projectionTypes,
     theaters,
-    isLoading,
+    loading,
     error,
   };
 };

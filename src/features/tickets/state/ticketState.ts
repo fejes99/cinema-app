@@ -6,6 +6,7 @@ import { Seat } from 'features/theaters/types/Seat';
 
 export interface TicketState {
   selectedTicket: Ticket | null;
+  userTickets: Ticket[] | null;
   createTicket: {
     projection?: Projection | null | undefined;
     movie?: Movie | null | undefined;

@@ -16,6 +16,7 @@ import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTa
 import { User } from 'features/auth/types/User';
 import { useUserRedirect } from 'features/auth/hooks/userRedirects';
 import { ticketProjection } from 'features/tickets/state/ticketActions';
+import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
 
 interface Props {
   user: User | null;
@@ -38,6 +39,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 }) => {
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
+  const { redirectToMovieDetails } = useMovieRedirect();
   const { redirectToTicketDetails, redirectToTicketCreate } = useTicketRedirect();
   const { redirectToUserDetails } = useUserRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
@@ -86,7 +88,11 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   return (
     <>
       {adminButtons}
-      <ProjectionDetails projection={selectedProjection} onBuyTicket={handleBuyTicketClick} />
+      <ProjectionDetails
+        projection={selectedProjection}
+        movieDetails={redirectToMovieDetails}
+        onBuyTicket={handleBuyTicketClick}
+      />
       {ticketsTable}
       <DeleteModal
         title='projection'

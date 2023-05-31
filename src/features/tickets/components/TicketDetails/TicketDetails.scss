@@ -28,7 +28,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 1px;
+    width: 0.5px;
     background-color: $text-color;
   }
 
@@ -47,12 +47,15 @@
   }
 
   &__content {
-    width: 100%;
     margin-top: $spacing-small;
     line-height: 1.5;
     margin-bottom: $spacing-small;
     padding-left: 30px;
     text-align: left;
+
+    span {
+      word-wrap: break-word;
+    }
 
     .bold {
       margin-right: 5px;

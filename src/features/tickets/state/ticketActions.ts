@@ -84,3 +84,25 @@ export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: App
     .then((response) => dispatch(createTicketSuccess()))
     .catch((error) => dispatch(createTicketFail(error)));
 };
+
+const fetchUserTicketsRequest = () => ({
+  type: actionTypes.FETCH_USER_TICKETS_REQUEST,
+});
+
+const fetchUserTicketsSuccess = (tickets: Ticket[]) => ({
+  type: actionTypes.FETCH_USER_TICKETS_SUCCESS,
+  userTickets: tickets,
+});
+
+const fetchUserTicketsFail = (error: Error) => ({
+  type: actionTypes.FETCH_USER_TICKETS_FAIL,
+  error: error,
+});
+
+export const fetchUserTickets = (userId: string) => (dispatch: AppDispatch) => {
+  dispatch(fetchUserTicketsRequest());
+  axios
+    .get(`/tickets/user/${userId}`)
+    .then((response) => dispatch(fetchUserTicketsSuccess(response.data)))
+    .catch((error) => dispatch(fetchUserTicketsFail(error)));
+};

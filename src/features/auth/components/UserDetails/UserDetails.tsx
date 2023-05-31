@@ -22,10 +22,12 @@ const UserDetails: React.FC<Props> = ({ user }) => (
     <div className='user-details__content'>
       <span className='bold'>Created:</span> {formatDate(user.created)}
     </div>
-    <div className='user-details__content'>
-      <span className='bold'>Role:</span>
-      {user.role}
-    </div>
+    {user.role === 'Admin' && (
+      <div className='user-details__content'>
+        <span className='bold'>Role:</span>
+        {user.role}
+      </div>
+    )}
   </div>
 );
 

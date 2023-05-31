@@ -7,10 +7,11 @@ import { formatPrice } from 'common/helpers/formatPrice';
 
 interface Props {
   projection: Projection;
+  movieDetails: (movieId: string) => void;
   onBuyTicket: () => void;
 }
 
-const ProjectionDetails: React.FC<Props> = ({ projection, onBuyTicket }) => {
+const ProjectionDetails: React.FC<Props> = ({ projection, movieDetails, onBuyTicket }) => {
   const buyCardButton = projection.isSold ? (
     <div className='projection-details__button'>
       <Button size='medium' type='disabled' onClick={onBuyTicket}>
@@ -27,7 +28,12 @@ const ProjectionDetails: React.FC<Props> = ({ projection, onBuyTicket }) => {
 
   return (
     <div className='projection-details'>
-      <div className='projection-details__title'>{projection.movie?.name}</div>
+      <div
+        className='projection-details__title pointer'
+        onClick={() => projection.movie && movieDetails(projection.movie.id)}
+      >
+        {projection.movie?.name}
+      </div>
       <div className='projection-details__row'>
         <div className='projection-details__content'>
           <span className='bold'>Time:</span>

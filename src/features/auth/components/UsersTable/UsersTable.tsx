@@ -28,7 +28,11 @@ const UsersTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
         {users &&
           users.map((user: User) => (
             <tr key={user.id}>
-              <td onClick={() => redirectToUserDetails(user.id)}>{user.username}</td>
+              <td>
+                <span className='pointer' onClick={() => redirectToUserDetails(user.id)}>
+                  {user.username}
+                </span>
+              </td>
               <td>{formatDate(user.created)}</td>
               <td>{user.role}</td>
               <td className='icons'>

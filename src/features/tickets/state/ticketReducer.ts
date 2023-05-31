@@ -4,6 +4,7 @@ import * as actionTypes from './ticketTypes';
 
 const initialState: TicketState = {
   selectedTicket: null,
+  userTickets: null,
   createTicket: null,
   loading: false,
   error: null,
@@ -39,6 +40,13 @@ const ticketReducer: Reducer<TicketState, actionTypes.TicketActionTypes> = (
     case actionTypes.CREATE_TICKET_SUCCESS:
       return { ...state, loading: false };
     case actionTypes.CREATE_TICKET_FAIL:
+      return { ...state, loading: false, error: action.error };
+
+    case actionTypes.FETCH_USER_TICKETS_REQUEST:
+      return { ...state, loading: true, userTickets: null };
+    case actionTypes.FETCH_USER_TICKETS_SUCCESS:
+      return { ...state, loading: false, userTickets: action.userTickets };
+    case actionTypes.FETCH_USER_TICKETS_FAIL:
       return { ...state, loading: false, error: action.error };
 
     default:
