@@ -25,6 +25,7 @@
   &__name-wrapper {
     width: 100%;
     max-width: 600px;
+    gap: 10px;
     display: flex;
     justify-content: space-between;
   }
@@ -33,7 +34,6 @@
     width: 100%;
     max-width: 600px;
     border-radius: $border-radius;
-    padding: $spacing-small;
 
     &-name {
       padding: 0;
