@@ -17,6 +17,7 @@ import { User } from 'features/auth/types/User';
 import { useUserRedirect } from 'features/auth/hooks/userRedirects';
 import { ticketProjection } from 'features/tickets/state/ticketActions';
 import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   user: User | null;
@@ -37,15 +38,12 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   onDeleteProjection,
   onTicketProjection,
 }) => {
-  console.log(
-    '🚀 ~ file: ProjectionDetailsContainer.tsx:40 ~ selectedProjection:',
-    selectedProjection
-  );
   const { id } = useParams();
   const { redirectToProjectionList, redirectToProjectionUpdate } = useProjectionRedirect();
   const { redirectToMovieDetails } = useMovieRedirect();
   const { redirectToTicketDetails, redirectToTicketCreate } = useTicketRedirect();
   const { redirectToUserDetails } = useUserRedirect();
+  const { redirectToLogin } = useAuthRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => {
@@ -61,8 +59,12 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   const handleDeleteClick = () => openDeleteModal();
 
   const handleBuyTicketClick = () => {
-    onTicketProjection(selectedProjection);
-    redirectToTicketCreate();
+    if (!user) {
+      redirectToLogin();
+    } else {
+      onTicketProjection(selectedProjection);
+      redirectToTicketCreate();
+    }
   };
 
   const handleTicketRedirect = (ticketId: string) => redirectToTicketDetails(ticketId);

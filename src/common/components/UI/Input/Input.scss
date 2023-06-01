@@ -3,8 +3,10 @@
 .input {
   display: flex;
   flex-direction: column;
+  height: 70px; // Set a fixed height for the component
   margin-bottom: $spacing-medium;
   color: $text-color;
+
   &__label {
     margin-bottom: $spacing-small;
   }
@@ -20,9 +22,19 @@
     font-size: 16px;
     transition: $transition;
 
+    &.error {
+      border-color: red;
+    }
+
     &:focus {
       outline: none;
       border-color: darken($background-color-primary, 10%);
     }
+  }
+
+  &__error {
+    color: red;
+    font-size: 14px;
+    margin-top: $spacing-small;
   }
 }

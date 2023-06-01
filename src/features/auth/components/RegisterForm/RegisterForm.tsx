@@ -3,9 +3,6 @@ import Input from 'common/components/UI/Input/Input';
 import { RegisterDto } from 'features/auth/types/RegisterDto';
 import './RegisterForm.scss';
 import Button from 'common/components/UI/Button/Button';
-import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
-import { Link } from 'react-router-dom';
-import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   onSubmit: (registerData: RegisterDto) => void;
@@ -36,21 +33,12 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     register.lastName.trim() !== '' &&
     register.email.trim() !== '' &&
     register.username.trim() !== '' &&
-    register.password.trim() !== '' &&
-    register.password === confirmPassword;
-
-  const { redirectToLogin } = useAuthRedirect();
+    register.password.trim() !== '';
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setRegister((prevState) => ({ ...prevState, [name]: value }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-  };
-
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = event.target;
-    setConfirmPassword(value);
-    setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: '' }));
   };
 
   const handleSubmit = (): void => {
@@ -67,26 +55,11 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         confirmPassword: '',
       });
       onSubmit(register);
-      redirectToLogin();
     }
   };
 
-  const validateForm = (): {
-    firstName: string;
-    lastName: string;
-    email: string;
-    username: string;
-    password: string;
-    confirmPassword: string;
-  } => {
-    const validationErrors: {
-      firstName: string;
-      lastName: string;
-      email: string;
-      username: string;
-      password: string;
-      confirmPassword: string;
-    } = {
+  const validateForm = (): RegisterDto & { confirmPassword: string } => {
+    const validationErrors: RegisterDto & { confirmPassword: string } = {
       firstName: '',
       lastName: '',
       email: '',
@@ -96,11 +69,11 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     };
 
     if (!register.firstName.trim()) {
-      validationErrors.firstName = 'First Name is required';
+      validationErrors.firstName = 'First name is required';
     }
 
     if (!register.lastName.trim()) {
-      validationErrors.lastName = 'Last Name is required';
+      validationErrors.lastName = 'Last name is required';
     }
 
     if (!register.email.trim()) {
@@ -117,15 +90,14 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
       validationErrors.password = 'Password is required';
     }
 
-    if (register.password !== confirmPassword) {
-      validationErrors.confirmPassword = 'Passwords do not match';
+    if (register.password.trim() !== confirmPassword.trim()) {
+      validationErrors.confirmPassword = 'Passwords must match';
     }
 
     return validationErrors;
   };
 
   const isValidEmail = (email: string): boolean => {
-    // Email validation regex
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return emailRegex.test(email);
   };
@@ -142,8 +114,8 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
               name='firstName'
               value={register.firstName}
               onChange={handleChange}
+              error={errors.firstName}
             />
-            {errors.firstName && <div className='error-message'>{errors.firstName}</div>}
           </div>
           <div className={`register__field ${errors.lastName ? 'error' : ''}`}>
             <Input
@@ -152,8 +124,8 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
               name='lastName'
               value={register.lastName}
               onChange={handleChange}
+              error={errors.lastName}
             />
-            {errors.lastName && <div className='error-message'>{errors.lastName}</div>}
           </div>
         </div>
         <div className={`register__field ${errors.email ? 'error' : ''}`}>
@@ -163,8 +135,8 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
             name='email'
             value={register.email}
             onChange={handleChange}
+            error={errors.email}
           />
-          {errors.email && <div className='error-message'>{errors.email}</div>}
         </div>
         <div className={`register__field ${errors.username ? 'error' : ''}`}>
           <Input
@@ -173,34 +145,35 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
             name='username'
             value={register.username}
             onChange={handleChange}
+            error={errors.username}
           />
-          {errors.username && <div className='error-message'>{errors.username}</div>}
         </div>
         <div className={`register__field ${errors.password ? 'error' : ''}`}>
-          <InputPassword
-            confirmPassword={false}
+          <Input
+            label='Password'
+            type='password'
+            name='password'
             value={register.password}
             onChange={handleChange}
+            error={errors.password}
           />
-          {errors.password && <div className='error-message'>{errors.password}</div>}
         </div>
         <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
-          <InputPassword
-            confirmPassword={true}
+          <Input
+            label='Confirm Password'
+            type='password'
+            name='confirmPassword'
             value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            error={errors.confirmPassword}
           />
-          {errors.confirmPassword && <div className='error-message'>{errors.confirmPassword}</div>}
         </div>
         <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Register
         </Button>
-      </div>
-      <div className='register__login'>
-        Already have an Account?
-        <Link to='/login' className='register__login-link'>
-          Login Now!
-        </Link>
+        {errors.confirmPassword && (
+          <div className='register__error-message'>{errors.confirmPassword}</div>
+        )}
       </div>
     </div>
   );

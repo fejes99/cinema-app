@@ -16,6 +16,7 @@ import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 import { ticketInit } from 'features/tickets/state/ticketActions';
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   user: User | null;
@@ -39,6 +40,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
   const { id } = useParams();
   const { redirectToMovieList, redirectToMovieUpdate } = useMovieRedirect();
   const { redirectToTicketCreate } = useTicketRedirect();
+  const { redirectToLogin } = useAuthRedirect();
   const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
 
   useEffect(() => {
@@ -60,8 +62,12 @@ const MovieDetailsContainer: React.FC<Props> = ({
   if (error) return <div>{error.message}</div>;
 
   const handleBuyTicketClick = (movie: Movie) => {
-    onBuyTicket(movie);
-    redirectToTicketCreate();
+    if (!user) {
+      redirectToLogin();
+    } else {
+      onBuyTicket(movie);
+      redirectToTicketCreate();
+    }
   };
 
   const adminButtons =

@@ -22,6 +22,13 @@
     width: 100%;
   }
 
+  &__field {
+    width: 100%;
+    max-width: 600px;
+    border-radius: $border-radius;
+    padding-bottom: $spacing-medium;
+  }
+
   &__name-wrapper {
     width: 100%;
     max-width: 600px;
@@ -30,17 +37,10 @@
     justify-content: space-between;
   }
 
-  &__field {
+  &__field-name {
+    padding: 0;
     width: 100%;
-    max-width: 600px;
-    border-radius: $border-radius;
-
-    &-name {
-      padding: 0;
-      width: 100%;
-      max-width: 300px;
-      width: 49%;
-    }
+    max-width: 300px;
   }
 
   &__login {
@@ -50,6 +50,7 @@
     margin-top: $spacing-medium;
     transition: $transition;
     border-radius: $border-radius;
+
     &-link {
       cursor: pointer;
       text-decoration: none;

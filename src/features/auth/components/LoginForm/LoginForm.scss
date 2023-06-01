@@ -26,7 +26,8 @@
     width: 100%;
     max-width: 600px;
     border-radius: $border-radius;
-    padding: $spacing-small;
+
+    padding-bottom: $spacing-medium;
   }
 
   &__register {

@@ -62,7 +62,6 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   const isValidEmail = (email: string): boolean => {
-    // Email validation regex
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return emailRegex.test(email);
   };
@@ -78,12 +77,16 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
             name='email'
             value={login.email}
             onChange={handleChange}
+            error={errors.email}
           />
-          {errors.email && <div className='error-message'>{errors.email}</div>}
         </div>
         <div className={`login__field ${errors.password ? 'error' : ''}`}>
-          <InputPassword confirmPassword={false} value={login.password} onChange={handleChange} />
-          {errors.password && <div className='error-message'>{errors.password}</div>}
+          <InputPassword
+            confirmPassword={false}
+            value={login.password}
+            onChange={handleChange}
+            error={errors.password}
+          />
         </div>
         <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Login

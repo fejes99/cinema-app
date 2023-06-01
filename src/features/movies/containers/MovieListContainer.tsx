@@ -18,6 +18,8 @@ import { useMovieRedirect } from '../hooks/movieRedirects';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 import { ticketInit } from 'features/tickets/state/ticketActions';
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 
 interface Props {
   user: User | null;
@@ -38,7 +40,10 @@ const MovieListContainer: React.FC<Props> = ({
 }) => {
   const [filters, setFilters] = useState<MovieFilters>(defaultMovieFilters);
 
+  const { redirectToLogin } = useAuthRedirect();
   const { redirectToMovieCreate } = useMovieRedirect();
+  const { redirectToMovieDetails } = useMovieRedirect();
+  const { redirectToTicketCreate } = useTicketRedirect();
 
   useEffect(() => onFetchMovies(), [onFetchMovies]);
 
@@ -87,6 +92,17 @@ const MovieListContainer: React.FC<Props> = ({
     }));
   };
 
+  const handleBuyTicketClick = (movie: Movie) => {
+    if (!user) {
+      redirectToLogin();
+    } else {
+      onBuyTicket(movie);
+      redirectToTicketCreate();
+    }
+  };
+
+  const handleDetailsClick = (movieId: string) => redirectToMovieDetails(movieId);
+
   const addButton =
     user && isAdmin(user) ? (
       <Button size='large' type='primary' onClick={redirectToMovieCreate}>
@@ -106,7 +122,11 @@ const MovieListContainer: React.FC<Props> = ({
         resetFilters={resetFilters}
       />
       {addButton}
-      <MovieList movies={filteredMovies} onBuyTicket={onBuyTicket} />
+      <MovieList
+        movies={filteredMovies}
+        onBuyTicket={handleBuyTicketClick}
+        onDetails={handleDetailsClick}
+      />
     </>
   );
 };
