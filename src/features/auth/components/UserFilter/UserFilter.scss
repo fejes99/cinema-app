@@ -6,22 +6,22 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: $spacing-large;
-  padding: 50px;
-  background-color: $background-color-secondary;
+  padding: 10px 0;
   border-radius: $border-radius-large;
-  box-shadow: $box-shadow;
+
+  &__input {
+    display: flex;
+    gap: 20px;
+  }
 
   &__search {
-    margin-bottom: $spacing-medium;
-    width: 100%;
-    max-width: 400px;
+    width: 300px;
   }
 
   &__filter {
-    width: 400px;
-    margin-bottom: $spacing-small;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: $spacing-small;
   }
 
   &__slider {

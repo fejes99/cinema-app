@@ -20,16 +20,18 @@ const UserFilter: React.FC<Props> = ({
 }) => {
   return (
     <div className='user-filter'>
-      <div className='user-filter__search'>
-        <Search onChange={(value) => onFiltersChange(UserFilterName.Query, value)} />
-      </div>
-      <div className='user-filter__filter'>
-        <Dropdown
-          title='Role'
-          value={role}
-          options={roles}
-          onChange={(value) => onFiltersChange(UserFilterName.Role, value)}
-        />
+      <div className='user-filter__input'>
+        <div className='user-filter__search'>
+          <Search onChange={(value) => onFiltersChange(UserFilterName.Query, value)} />
+        </div>
+        <div className='user-filter__filter'>
+          <Dropdown
+            title='Role'
+            value={role}
+            options={roles}
+            onChange={(value) => onFiltersChange(UserFilterName.Role, value)}
+          />
+        </div>
       </div>
       <Button size='medium' type='secondary' onClick={resetFilters}>
         Reset Filters
