@@ -39,29 +39,29 @@ const MovieFilter: React.FC<Props> = ({
   return (
     <div className='movie-filter'>
       <div className='movie-filter__row'>
-        <div className='movie-filter__search'>
-          <Search onChange={(value) => onFiltersChange(MovieFilterName.Query, value)} />
-        </div>
-        <div className='movie-filter__filters'>
-          <div className='movie-filter__filter'>
-            <Dropdown
-              title='Distributors'
-              value={distributor}
-              options={distributors}
-              onChange={(value) => onFiltersChange(MovieFilterName.Distributor, value)}
-            />
+        <div className='movie-filter__input'>
+          <div className='movie-filter__search'>
+            <Search onChange={(value) => onFiltersChange(MovieFilterName.Query, value)} />
           </div>
-          <div className='movie-filter__filter'>
-            <Dropdown
-              title='Countries'
-              value={country}
-              options={countries}
-              onChange={(value) => onFiltersChange(MovieFilterName.Country, value)}
-            />
+          <div className='movie-filter__filters'>
+            <div className='movie-filter__filter'>
+              <Dropdown
+                title='Distributors'
+                value={distributor}
+                options={distributors}
+                onChange={(value) => onFiltersChange(MovieFilterName.Distributor, value)}
+              />
+            </div>
+            <div className='movie-filter__filter'>
+              <Dropdown
+                title='Countries'
+                value={country}
+                options={countries}
+                onChange={(value) => onFiltersChange(MovieFilterName.Country, value)}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className='movie-filter__row'>
         <div className='movie-filter__sliders'>
           <div className='movie-filter__slider'>
             <RangeSlider
@@ -94,14 +94,14 @@ const MovieFilter: React.FC<Props> = ({
             />
           </div>
         </div>
-        <div className='movie-filter__buttons'>
-          <Button size='medium' type='secondary' onClick={resetFilters}>
-            Reset Filters
-          </Button>
-          <Button size='medium' type='secondary'>
-            Sort
-          </Button>
-        </div>
+      </div>
+      <div className='movie-filter__buttons'>
+        <Button size='medium' type='secondary' onClick={resetFilters}>
+          Reset Filters
+        </Button>
+        <Button size='medium' type='secondary'>
+          Sort
+        </Button>
       </div>
     </div>
   );

@@ -5,53 +5,53 @@
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: $spacing-large;
-  padding: 50px;
-  background-color: $background-color-secondary;
+  padding: 10px 0;
   border-radius: $border-radius-large;
-  box-shadow: $box-shadow;
 
   &__row {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: $spacing-medium;
+  }
+
+  &__input {
+    display: flex;
+    gap: 20px;
   }
 
   &__search {
-    margin-bottom: $spacing-medium;
-    width: 400px;
-    height: 60px;
+    width: 300px;
   }
 
   &__filters {
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-small;
-    margin-bottom: $spacing-large;
   }
 
   &__filter {
     width: 180px;
-    margin-bottom: $spacing-small;
     display: flex;
     justify-content: center;
   }
 
   &__sliders {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 50px;
-    width: 100%;
+    align-items: center;
+    gap: 40px;
+    width: 450px;
   }
 
   &__slider {
-    width: calc(50% - 100px);
+    width: 100%;
     display: flex;
     justify-content: flex-start;
   }
 
   &__buttons {
+    margin-left: auto;
     display: flex;
     align-items: center;
     justify-content: flex-start;
