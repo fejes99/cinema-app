@@ -72,7 +72,7 @@ const ProjectionFilter: React.FC<Props> = ({
         </div>
         <div className='projection-filter__buttons'>
           <Button size='medium' type='secondary' onClick={resetFilters}>
-            Reset Filters
+            Reset
           </Button>
         </div>
       </div>

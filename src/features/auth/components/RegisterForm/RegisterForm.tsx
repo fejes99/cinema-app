@@ -3,6 +3,7 @@ import Input from 'common/components/UI/Input/Input';
 import { RegisterDto } from 'features/auth/types/RegisterDto';
 import './RegisterForm.scss';
 import Button from 'common/components/UI/Button/Button';
+import { Link } from 'react-router-dom';
 
 interface Props {
   onSubmit: (registerData: RegisterDto) => void;
@@ -174,6 +175,13 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         {errors.confirmPassword && (
           <div className='register__error-message'>{errors.confirmPassword}</div>
         )}
+      </div>
+
+      <div className='register__login'>
+        Already have account?
+        <Link to='/login' className='register__login-link'>
+          Login Now!
+        </Link>
       </div>
     </div>
   );

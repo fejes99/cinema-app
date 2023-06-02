@@ -34,7 +34,7 @@ const UserFilter: React.FC<Props> = ({
         </div>
       </div>
       <Button size='medium' type='secondary' onClick={resetFilters}>
-        Reset Filters
+        Reset
       </Button>
     </div>
   );

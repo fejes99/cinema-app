@@ -96,11 +96,11 @@ const MovieFilter: React.FC<Props> = ({
         </div>
       </div>
       <div className='movie-filter__buttons'>
-        <Button size='medium' type='secondary' onClick={resetFilters}>
-          Reset Filters
-        </Button>
         <Button size='medium' type='secondary'>
           Sort
+        </Button>
+        <Button size='medium' type='secondary' onClick={resetFilters}>
+          Reset
         </Button>
       </div>
     </div>

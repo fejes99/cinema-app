@@ -50,7 +50,7 @@ const MovieCard: React.FC<Props> = ({ movie, onBuyTicket, onDetails }) => (
           </div>
           <div className='movie-card__button'>
             <Button size='small' type='primary' onClick={() => onBuyTicket(movie)}>
-              Buy Ticket
+              Tickets
             </Button>
           </div>
         </div>
