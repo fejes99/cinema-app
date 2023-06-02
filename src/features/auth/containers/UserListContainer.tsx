@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AppDispatch, StoreState } from 'store/store';
-import { deleteUser, fetchUsers } from '../state/authActions';
+import { deleteUser, fetchUsers, updateUser } from '../state/authActions';
 import { connect } from 'react-redux';
 import { User } from '../types/User';
 import Loader from 'common/components/UI/Loader/Loader';
@@ -10,12 +10,15 @@ import { defaultUserFilters, userSearchFilter } from '../helpers/authFilters';
 import UsersTable from '../components/UsersTable/UsersTable';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import UserRoleChangeModal from '../components/UserRoleChangeModal/UserRoleChangeModal';
+import { UserUpdateDto } from '../types/UserUpdateDto';
 
 interface Props {
   users: User[];
   loading: boolean;
   error: Error;
   onFetchUsers: () => void;
+  onUpdateUser: (userId: string, userUpdateDto: UserUpdateDto) => void;
   onDeleteUser: (userId: string) => void;
 }
 
@@ -24,14 +27,19 @@ const UserListContainer: React.FC<Props> = ({
   loading,
   error,
   onFetchUsers,
+  onUpdateUser,
   onDeleteUser,
 }) => {
+  const [userToUpdateId, setuserToUpdateId] = useState<string>('');
+  const [userToUpdate, setUserToUpdate] = useState<User | undefined>();
+
   const [userToDeleteId, setuserToDeleteId] = useState<string>('');
   const [userToDelete, setUserToDelete] = useState<User | undefined>();
 
   const [filters, setFilters] = useState<UserFilters>(defaultUserFilters);
 
-  const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
+  const { showUpdateModal, showDeleteModal, openUpdateModal, openDeleteModal, closeAllModals } =
+    useModal();
 
   useEffect(() => onFetchUsers(), [onFetchUsers]);
 
@@ -55,7 +63,12 @@ const UserListContainer: React.FC<Props> = ({
     }));
   };
 
-  const handleEditClick = (id: string) => {};
+  const handleEditClick = (id: string) => {
+    const userToUpdate = filteredUsers.find((user) => user.id === id);
+    setUserToUpdate(userToUpdate);
+    setuserToUpdateId(id);
+    openUpdateModal();
+  };
 
   const handleDeleteClick = (id: string) => {
     const userToDelete = filteredUsers.find((user) => user.id === id);
@@ -64,8 +77,16 @@ const UserListContainer: React.FC<Props> = ({
     openDeleteModal();
   };
 
-  const deleteModalConfirmation = async () => {
-    await onDeleteUser(userToDeleteId);
+  const updateModalConfirmation = (userUpdateDto: UserUpdateDto) => {
+    console.log(
+      '🚀 ~ file: UserListContainer.tsx:82 ~ updateModalConfirmation ~ userUpdateDto:',
+      userUpdateDto
+    );
+    onUpdateUser(userToUpdateId, userUpdateDto);
+  };
+
+  const deleteModalConfirmation = () => {
+    onDeleteUser(userToDeleteId);
     closeAllModals();
     onFetchUsers();
   };
@@ -81,6 +102,13 @@ const UserListContainer: React.FC<Props> = ({
         resetFilters={resetFilters}
       />
       <UsersTable users={filteredUsers} onEdit={handleEditClick} onDelete={handleDeleteClick} />
+      <UserRoleChangeModal
+        user={userToUpdate}
+        roles={roles}
+        show={showUpdateModal}
+        onUpdate={updateModalConfirmation}
+        onClose={closeAllModals}
+      />
       <DeleteModal
         title={userToDelete?.username!}
         show={showDeleteModal}
@@ -99,6 +127,8 @@ const mapStateToProps = (state: StoreState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchUsers: () => dispatch(fetchUsers()),
+  onUpdateUser: (userId: string, userUpdateDto: UserUpdateDto) =>
+    dispatch(updateUser(userId, userUpdateDto)),
   onDeleteUser: (userId: string) => dispatch(deleteUser(userId)),
 });
 

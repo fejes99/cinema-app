@@ -11,6 +11,10 @@
   font-weight: bold;
 }
 
+.padding-right {
+  padding-right: 50px;
+}
+
 .align-left {
   text-align: left;
 }
@@ -149,7 +153,7 @@ td {
   &__title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 50px;
+    margin-bottom: $spacing-large;
     text-transform: uppercase;
   }
 
@@ -157,5 +161,6 @@ td {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: $spacing-medium;
   }
 }

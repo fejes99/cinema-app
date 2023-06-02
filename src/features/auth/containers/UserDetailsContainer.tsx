@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import Loader from 'common/components/UI/Loader/Loader';
 import UserDetails from '../components/UserDetails/UserDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
+import { useAuthRedirect } from '../hooks/authRedirects';
 
 interface Props {
   selectedUser: User | null;
@@ -17,6 +18,9 @@ interface Props {
 
 const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, onFetchUser }) => {
   const { id } = useParams();
+
+  const { redirectToUserUpdate } = useAuthRedirect();
+
   useEffect(() => {
     if (id) onFetchUser(id);
   }, [id, onFetchUser]);
@@ -25,7 +29,7 @@ const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, o
   if (selectedUser === null) return <div>No user</div>;
   if (error) return <div>{error.message}</div>;
 
-  const handleEditClick = () => {};
+  const handleEditClick = () => redirectToUserUpdate(selectedUser.id);
   const handleDeleteClick = () => {};
 
   return (

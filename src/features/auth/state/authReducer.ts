@@ -53,7 +53,6 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
       return {
         ...state,
         loading: false,
-        loggedUser: action.updatedUser,
         selectedUser: action.updatedUser,
         error: null,
       };

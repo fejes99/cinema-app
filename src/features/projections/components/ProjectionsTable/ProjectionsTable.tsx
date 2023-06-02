@@ -27,7 +27,7 @@ const ProjectionsTable: React.FC<Props> = ({
         <th>Time</th>
         <th>Projection</th>
         <th>Theater</th>
-        <th>Price</th>
+        <th className='padding-right'>Price</th>
         {isAdmin ? <th>Action</th> : null}
       </tr>
     </thead>
@@ -43,7 +43,7 @@ const ProjectionsTable: React.FC<Props> = ({
             <td className='align-right'>{formatDate(projection.time)}</td>
             <td>{projection.projectionType.name}</td>
             <td>{projection.theater.name}</td>
-            <td className='align-right'>
+            <td className='align-right padding-right'>
               <span className='bold'>{formatPrice(projection.price)}</span>
             </td>
             {isAdmin ? (
