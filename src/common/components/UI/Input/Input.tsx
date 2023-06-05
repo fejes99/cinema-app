@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Input.scss';
 
 interface Props {
@@ -15,11 +16,9 @@ interface Props {
 const Input: React.FC<Props> = ({ label, type, value, name, onChange, min, max, error }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
-    if (type === 'datetime-local') {
-      const now = new Date();
-      const selectedDateTime = new Date(value);
-      if (selectedDateTime < now) return;
-    }
+
+    if (type === 'datetime-local' && new Date(value) < new Date()) return;
+
     onChange(event);
   };
 

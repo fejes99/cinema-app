@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Dropdown.scss';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const Dropdown: React.FC<Props> = ({ title, value, options, onChange }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = event.target.value;
     onChange(value);
   };

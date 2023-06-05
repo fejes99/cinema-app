@@ -12,20 +12,20 @@ type modalFunctionsType = {
 };
 
 const useModal = () => {
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const closeAllModals = useCallback((): void => {
     setShowUpdateModal(false);
     setShowDeleteModal(false);
   }, []);
 
-  const openUpdateModal = useCallback(() => {
+  const openUpdateModal = useCallback((): void => {
     closeAllModals();
     setShowUpdateModal(true);
   }, [closeAllModals]);
 
-  const openDeleteModal = useCallback(() => {
+  const openDeleteModal = useCallback((): void => {
     closeAllModals();
     setShowDeleteModal(true);
   }, [closeAllModals]);

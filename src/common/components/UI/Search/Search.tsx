@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Search.scss';
 
 interface Props {

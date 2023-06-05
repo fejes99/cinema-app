@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '../Button/Button';
-import './AdminButtonGroup.scss';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+
+import './AdminButtonGroup.scss';
+import Button from '../Button/Button';
 
 interface Props {
   onEdit: () => void;

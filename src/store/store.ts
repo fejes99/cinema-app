@@ -1,10 +1,3 @@
-import { TheaterActionTypes } from './../features/theaters/state/theaterTypes';
-import movieReducer from 'features/movies/state/movieReducer';
-import projectionReducer from 'features/projections/state/projectionReducer';
-import { MovieState } from 'features/movies/state/movieState';
-import { MovieActionTypes } from 'features/movies/state/movieTypes';
-import { ProjectionState } from 'features/projections/state/projectionState';
-import { ProjectionActionTypes } from 'features/projections/state/projectionTypes';
 import {
   applyMiddleware,
   combineReducers,
@@ -16,14 +9,21 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { AuthActionTypes } from 'features/auth/state/authTypes';
 import { AuthState } from 'features/auth/state/authState';
 import authReducer from 'features/auth/state/authReducer';
-import { ProjectionTypeState } from 'features/projectionTypes/state/projectionTypeState';
+import { MovieActionTypes } from 'features/movies/state/movieTypes';
+import { MovieState } from 'features/movies/state/movieState';
+import movieReducer from 'features/movies/state/movieReducer';
+import { ProjectionState } from 'features/projections/state/projectionState';
+import { ProjectionActionTypes } from 'features/projections/state/projectionTypes';
+import projectionReducer from 'features/projections/state/projectionReducer';
+import { TicketActionTypes } from 'features/tickets/state/ticketTypes';
+import { TicketState } from 'features/tickets/state/ticketState';
+import ticketReducer from 'features/tickets/state/ticketReducer';
 import { ProjectionTypeActionTypes } from 'features/projectionTypes/state/projectionTypeTypes';
+import { ProjectionTypeState } from 'features/projectionTypes/state/projectionTypeState';
 import projectionTypeReducer from 'features/projectionTypes/state/projectionTypeReducer';
+import { TheaterActionTypes } from './../features/theaters/state/theaterTypes';
 import { TheaterState } from 'features/theaters/state/theaterState';
 import theaterReducer from 'features/theaters/state/theaterReducer';
-import { TicketState } from 'features/tickets/state/ticketState';
-import { TicketActionTypes } from 'features/tickets/state/ticketTypes';
-import ticketReducer from 'features/tickets/state/ticketReducer';
 
 export interface StoreState {
   auth: AuthState;

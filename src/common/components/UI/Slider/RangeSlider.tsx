@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from '@mui/material/Slider';
+
 import './RangeSlider.scss';
 
 interface Props {
@@ -23,7 +24,7 @@ const RangeSlider: React.FC<Props> = ({
   minDistance,
   onChange,
 }) => {
-  const marks = [
+  const marks: { value: number; label: number }[] = [
     { value: min, label: min },
     { value: max, label: max },
   ];
@@ -31,7 +32,7 @@ const RangeSlider: React.FC<Props> = ({
   let newMin: number = min;
   let newMax: number = max;
 
-  const handleChange = (event: Event, newValue: number | number[], activeThumb: number) => {
+  const handleChange = (event: Event, newValue: number | number[], activeThumb: number): void => {
     if (!Array.isArray(newValue)) return;
 
     if (activeThumb === 0) {

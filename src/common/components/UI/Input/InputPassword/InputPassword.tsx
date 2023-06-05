@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import './InputPassword.scss';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+import './InputPassword.scss';
 
 interface Props {
   confirmPassword: boolean;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string; // Add an optional error prop
+  error?: string;
 }
 
 const InputPassword: React.FC<Props> = ({ confirmPassword, value, onChange, error }) => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
     <div className={`input-password ${error ? 'error' : ''}`}>
@@ -28,7 +27,10 @@ const InputPassword: React.FC<Props> = ({ confirmPassword, value, onChange, erro
           value={value}
           onChange={onChange}
         />
-        <div className='input-password__field-toggle' onClick={toggleShowPassword}>
+        <div
+          className='input-password__field-toggle'
+          onClick={() => setShowPassword(!showPassword)}
+        >
           {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </div>
       </div>

@@ -1,11 +1,13 @@
 import React from 'react';
-import './Navbar.scss';
-import NavbarItem from './NavbarItem/NavbarItem';
-import { NavbarItemProps } from './NavbarItem/NavbarItem.d';
 import { connect } from 'react-redux';
+
+import './Navbar.scss';
+
 import { StoreState } from 'store/store';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
+import { NavbarItemProps } from './NavbarItem/NavbarItem.d';
+import NavbarItem from './NavbarItem/NavbarItem';
 
 interface Props {
   user: User | null;

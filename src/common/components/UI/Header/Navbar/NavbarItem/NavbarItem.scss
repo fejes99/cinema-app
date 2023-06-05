@@ -5,21 +5,7 @@
   align-items: center;
   height: calc(100% - 5px);
   padding: 0 $spacing-medium;
-  transition: transform 0.1s linear;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-
-  &:hover::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-color: white;
-  }
+  position: relative;
 
   & a {
     height: 100%;
@@ -28,13 +14,33 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #f5f5f5;
+    color: #fff;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background-color: white;
+      transition: width 0.2s ease-in-out;
+    }
+
+    &:hover::after {
+      width: 100%;
+      left: 0;
+      transform: none;
+      transition: width 0.2s ease-in-out;
+    }
 
     &.active {
-      color: $color-primary;
+      color: red;
     }
   }
 }

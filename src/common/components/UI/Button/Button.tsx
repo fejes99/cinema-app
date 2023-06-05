@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Button.scss';
 
 type ButtonSizeType = 'small' | 'medium' | 'large';
@@ -13,13 +14,13 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ size, type, disabled, onClick, children }) => {
-  const isDisabled = disabled || type === 'disabled';
-  const buttonClass = `button button-${size} ${isDisabled ? 'button-disabled' : ''} button-${type}`;
+  const isDisabled: boolean = disabled || type === 'disabled';
+  const buttonClass: string = `button button-${size} ${
+    isDisabled ? 'button-disabled' : ''
+  } button-${type}`;
 
-  const handleClick = () => {
-    if (!isDisabled && onClick) {
-      onClick();
-    }
+  const handleClick = (): void => {
+    !isDisabled && onClick && onClick();
   };
 
   return (

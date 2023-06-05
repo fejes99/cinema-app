@@ -1,13 +1,13 @@
-export const formatDate = (stringDate: string) => {
-  const date = new Date(stringDate);
+export const formatDate = (stringDate: string): string => {
+  const date: Date = new Date(stringDate);
 
-  const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
-  const formattedMonth = formatter.format(date);
+  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en', { month: 'short' });
+  const formattedMonth: string = formatter.format(date);
 
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
+  const hours: string = String(date.getHours()).padStart(2, '0');
+  const minutes: string = String(date.getMinutes()).padStart(2, '0');
+  const day: string = String(date.getDate()).padStart(2, '0');
+  const year: string = String(date.getFullYear());
 
   return `${hours}:${minutes} ${day} ${formattedMonth} ${year}`;
 };
