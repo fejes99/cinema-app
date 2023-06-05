@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
-import MovieUpdateForm from '../components/MovieUpdateForm/MovieUpdateForm';
-import { MovieUpdateDto } from '../types/MovieUpdateDto';
-import { Movie } from '../types/Movie';
 import { connect } from 'react-redux';
-import { AppDispatch, StoreState } from 'store/store';
 import { useParams } from 'react-router';
+
+import { AppDispatch, StoreState } from 'store/store';
 import { fetchMovie, updateMovie } from '../state/movieActions';
-import { Error } from 'common/types/Error';
-import Loader from 'common/components/UI/Loader/Loader';
+
 import { useMovieRedirect } from '../hooks/movieRedirects';
+
+import { Movie } from '../types/Movie';
+import { Error } from 'common/types/Error';
+import { MovieUpdateDto } from '../types/MovieUpdateDto';
+
+import Loader from 'common/components/UI/Loader/Loader';
+import MovieUpdateForm from '../components/MovieUpdateForm/MovieUpdateForm';
 
 interface Props {
   movie: Movie | null;
@@ -35,7 +39,7 @@ const MovieUpdateContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const handleMovieUpdate = (id: string, movieUpdateDto: MovieUpdateDto) => {
+  const handleMovieUpdate = (id: string, movieUpdateDto: MovieUpdateDto): void => {
     onUpdateMovie(id, movieUpdateDto);
     redirectToMovieDetails(id);
   };

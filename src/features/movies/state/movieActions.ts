@@ -19,13 +19,15 @@ const fetchMoviesFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchMovies = () => (dispatch: AppDispatch) => {
-  dispatch(fetchMoviesRequest());
-  axios
-    .get('/movies')
-    .then((response) => dispatch(fetchMoviesSuccess(response.data)))
-    .catch((error) => dispatch(fetchMoviesFail(error)));
-};
+export const fetchMovies =
+  () =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchMoviesRequest());
+    axios
+      .get('/movies')
+      .then((response) => dispatch(fetchMoviesSuccess(response.data)))
+      .catch((error) => dispatch(fetchMoviesFail(error)));
+  };
 
 const fetchMovieRequest = () => ({
   type: actionTypes.FETCH_MOVIE_REQUEST,
@@ -41,13 +43,15 @@ const fetchMovieFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchMovie = (id: string) => (dispatch: AppDispatch) => {
-  dispatch(fetchMovieRequest());
-  axios
-    .get(`/movies/${id}`)
-    .then((response) => dispatch(fetchMovieSuccess(response.data)))
-    .catch((error) => dispatch(fetchMovieFail(error)));
-};
+export const fetchMovie =
+  (id: string) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchMovieRequest());
+    axios
+      .get(`/movies/${id}`)
+      .then((response) => dispatch(fetchMovieSuccess(response.data)))
+      .catch((error) => dispatch(fetchMovieFail(error)));
+  };
 
 const createMovieRequest = () => ({
   type: actionTypes.CREATE_MOVIE_REQUEST,
@@ -71,10 +75,12 @@ const addMovie = (movieCreateDto: MovieCreateDto) => (dispatch: AppDispatch) => 
     .catch((error) => dispatch(createMovieFail(error)));
 };
 
-export const createMovie = (movieCreateDto: MovieCreateDto) => async (dispatch: AppDispatch) => {
-  await dispatch(addMovie(movieCreateDto));
-  dispatch(fetchMovies());
-};
+export const createMovie =
+  (movieCreateDto: MovieCreateDto) =>
+  async (dispatch: AppDispatch): Promise<void> => {
+    await dispatch(addMovie(movieCreateDto));
+    dispatch(fetchMovies());
+  };
 
 const updateMovieRequest = () => ({
   type: actionTypes.UPDATE_MOVIE_REQUEST,

@@ -1,14 +1,17 @@
 import React from 'react';
-import Dropdown from 'common/components/UI/Dropdown/Dropdown';
-import Search from 'common/components/UI/Search/Search';
-import RangeSlider from 'common/components/UI/Slider/RangeSlider';
+
 import './MovieFilter.scss';
+
 import {
   MovieFilters,
   MovieFilterName,
   MovieFilterValue,
 } from 'features/movies/types/MovieFilters.d';
+
+import Search from 'common/components/UI/Search/Search';
 import Button from 'common/components/UI/Button/Button';
+import Dropdown from 'common/components/UI/Dropdown/Dropdown';
+import RangeSlider from 'common/components/UI/Slider/RangeSlider';
 
 interface Props {
   countries: string[];

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import './MovieCreateForm.scss';
+
 import { MovieCreateDto } from 'features/movies/types/MovieCreateDto';
+
 import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+
 import Input from 'common/components/UI/Input/Input';
 import Button from 'common/components/UI/Button/Button';
 import TextArea from 'common/components/UI/TextArea/TextArea';
 import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
-import { useNavigate } from 'react-router';
 import Dropdown from 'common/components/UI/Dropdown/Dropdown';
 
 interface Props {
@@ -26,11 +30,12 @@ const MovieCreateForm: React.FC<Props> = ({ countries, create }) => {
     year: 0,
     trailerUrl: '',
   });
-  const isFormValid =
-    newMovie.name &&
-    newMovie.director &&
-    newMovie.distributor &&
-    newMovie.country &&
+
+  const isFormValid: boolean =
+    Boolean(newMovie.name) &&
+    Boolean(newMovie.director) &&
+    Boolean(newMovie.distributor) &&
+    Boolean(newMovie.country) &&
     newMovie.description !== undefined &&
     newMovie.trailerUrl !== undefined &&
     Number(newMovie.duration) > 1 &&

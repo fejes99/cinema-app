@@ -8,7 +8,7 @@ const useFetchCountries = (): FetchCountriesResult => {
     loading: true,
   });
 
-  const apiUrl =
+  const apiUrl: string =
     'https://raw.githubusercontent.com/iamspruce/search-filter-painate-reactjs/main/data/countries.json';
 
   useEffect(() => {

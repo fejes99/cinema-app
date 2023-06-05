@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router';
 export const useMovieRedirect = () => {
   const navigate = useNavigate();
 
-  const redirectToMovieList = () => navigate('/movies');
+  const redirectToMovieList = (): void => navigate('/movies');
 
-  const redirectToMovieDetails = (movieId: string) => navigate(`/movies/${movieId}`);
+  const redirectToMovieDetails = (movieId: string): void => navigate(`/movies/${movieId}`);
 
-  const redirectToMovieCreate = () => navigate('/movies/new');
+  const redirectToMovieCreate = (): void => navigate('/movies/new');
 
-  const redirectToMovieUpdate = (movieId: string) => navigate(`/movies/${movieId}/edit`);
+  const redirectToMovieUpdate = (movieId: string): void => navigate(`/movies/${movieId}/edit`);
 
   return {
     redirectToMovieList,

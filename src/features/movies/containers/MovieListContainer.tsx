@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
-
 import { connect } from 'react-redux';
+
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchMovies } from '../state/movieActions';
 
 import { Movie } from '../types/Movie';
 import { Error } from 'common/types/Error';
+import { User } from 'features/auth/types/User';
 import { MovieFilterName, MovieFilterValue, MovieFilters } from '../types/MovieFilters';
 
-import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieFilters';
-
-import MovieFilter from '../components/MovieFilter/MovieFilter';
-import MovieList from '../components/MovieList/MovieList';
-import Loader from 'common/components/UI/Loader/Loader';
-import Button from 'common/components/UI/Button/Button';
-import { useMovieRedirect } from '../hooks/movieRedirects';
-import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 import { ticketInit } from 'features/tickets/state/ticketActions';
+
+import { useMovieRedirect } from '../hooks/movieRedirects';
 import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import { defaultMovieFilters, movieSearchFilter } from '../helpers/movieFilters';
+
+import Loader from 'common/components/UI/Loader/Loader';
+import Button from 'common/components/UI/Button/Button';
+import MovieList from '../components/MovieList/MovieList';
+import MovieFilter from '../components/MovieFilter/MovieFilter';
 
 interface Props {
   user: User | null;
@@ -71,17 +72,17 @@ const MovieListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const distributors = [...new Set(movies.map((movie) => movie.distributor))];
-  const countries = [...new Set(movies.map((movie) => movie.country))];
+  const distributors: string[] = [...new Set(movies.map((movie) => movie.distributor))];
+  const countries: string[] = [...new Set(movies.map((movie) => movie.country))];
 
-  const handleFiltersChange = (movieFilterName: MovieFilterName, value: MovieFilterValue) => {
+  const handleFiltersChange = (movieFilterName: MovieFilterName, value: MovieFilterValue): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [movieFilterName]: value,
     }));
   };
 
-  const resetFilters = () => {
+  const resetFilters = (): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       query: defaultMovieFilters.query,
@@ -92,25 +93,19 @@ const MovieListContainer: React.FC<Props> = ({
     }));
   };
 
-  const handleBuyTicketClick = (movie: Movie) => {
-    if (!user) {
-      redirectToLogin();
-    } else {
-      onBuyTicket(movie);
-      redirectToTicketCreate();
-    }
-  };
+  const handleBuyTicketClick = (movie: Movie): void =>
+    !user ? redirectToLogin() : (onBuyTicket(movie), redirectToTicketCreate());
 
-  const handleDetailsClick = (movieId: string) => redirectToMovieDetails(movieId);
+  const handleDetailsClick = (movieId: string): void => redirectToMovieDetails(movieId);
 
-  const addButton =
+  const addButton: JSX.Element | null =
     user && isAdmin(user) ? (
       <Button size='large' type='primary' onClick={redirectToMovieCreate}>
         Add Movie
       </Button>
     ) : null;
 
-  const filteredMovies = movieSearchFilter(movies, filters);
+  const filteredMovies: Movie[] = movieSearchFilter(movies, filters);
 
   return (
     <>

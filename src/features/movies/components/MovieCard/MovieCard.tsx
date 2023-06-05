@@ -1,8 +1,10 @@
 import React from 'react';
-import { Movie } from 'features/movies/types/Movie';
+
 import './MovieCard.scss';
-import Button from 'common/components/UI/Button/Button';
+
+import { Movie } from 'features/movies/types/Movie';
 import { formatDuration } from 'common/helpers/formatDuration';
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   movie: Movie;

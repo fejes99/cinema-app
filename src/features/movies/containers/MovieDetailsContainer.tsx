@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
-import { Movie } from '../types/Movie';
+
 import { AppDispatch, StoreState } from 'store/store';
 import { deleteMovie, fetchMovie } from '../state/movieActions';
-import MovieDetails from '../components/MovieDetails/MovieDetails';
-import Loader from 'common/components/UI/Loader/Loader';
-import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
-import { extractYoutubeVideoId } from '../helpers/movieGetVideoIdFromTrailer';
-import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
+import { ticketInit } from 'features/tickets/state/ticketActions';
+
+import { Movie } from '../types/Movie';
+import { User } from 'features/auth/types/User';
+
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 import { useMovieRedirect } from '../hooks/movieRedirects';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import { extractYoutubeVideoId } from '../helpers/movieGetVideoIdFromTrailer';
+import { isAdmin } from 'features/auth/helpers/isAdmin';
+
+import Loader from 'common/components/UI/Loader/Loader';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
-import { User } from 'features/auth/types/User';
-import { isAdmin } from 'features/auth/helpers/isAdmin';
-import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
-import { ticketInit } from 'features/tickets/state/ticketActions';
-import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
+import MovieDetails from '../components/MovieDetails/MovieDetails';
+import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
+import { JsxElement } from 'typescript';
 
 interface Props {
   user: User | null;
@@ -47,11 +51,11 @@ const MovieDetailsContainer: React.FC<Props> = ({
     if (id) onFetchMovie(id);
   }, [id, onFetchMovie]);
 
-  const handleEditClick = () => redirectToMovieUpdate(selectedMovie!.id);
+  const handleEditClick = (): void => redirectToMovieUpdate(selectedMovie!.id);
 
-  const handleDeleteClick = () => openDeleteModal();
+  const handleDeleteClick = (): void => openDeleteModal();
 
-  const deleteModalConfirmation = () => {
+  const deleteModalConfirmation = (): void => {
     onDeleteMovie(selectedMovie!.id);
     closeAllModals();
     redirectToMovieList();
@@ -61,16 +65,10 @@ const MovieDetailsContainer: React.FC<Props> = ({
   if (selectedMovie === null) return <div>No movie</div>;
   if (error) return <div>{error.message}</div>;
 
-  const handleBuyTicketClick = (movie: Movie) => {
-    if (!user) {
-      redirectToLogin();
-    } else {
-      onBuyTicket(movie);
-      redirectToTicketCreate();
-    }
-  };
+  const handleBuyTicketClick = (movie: Movie): void =>
+    !user ? redirectToLogin() : (onBuyTicket(movie), redirectToTicketCreate());
 
-  const adminButtons =
+  const adminButtons: JSX.Element | null =
     user && isAdmin(user) ? (
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
     ) : null;

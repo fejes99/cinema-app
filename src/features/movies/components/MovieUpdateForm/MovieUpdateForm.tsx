@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import './MovieUpdateForm.scss';
+
 import { Movie } from 'features/movies/types/Movie';
 import { MovieUpdateDto } from 'features/movies/types/MovieUpdateDto';
 import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
@@ -24,15 +26,16 @@ const MovieUpdateForm: React.FC<Props> = ({ movie, update }) => {
     year: movie.year,
     trailerUrl: movie.trailerUrl || '',
   });
+
   const isFormValid =
-    movieUpdate.name &&
-    movieUpdate.director &&
-    movieUpdate.distributor &&
-    movieUpdate.country &&
-    movieUpdate.description !== undefined &&
-    movieUpdate.trailerUrl !== undefined &&
-    Number(movieUpdate.duration) > 1 &&
-    Number(movieUpdate.year) >= 2023;
+    Boolean(movieUpdate.name) &&
+    Boolean(movieUpdate.director) &&
+    Boolean(movieUpdate.distributor) &&
+    Boolean(movieUpdate.country) &&
+    Boolean(movieUpdate.description !== undefined) &&
+    Boolean(movieUpdate.trailerUrl !== undefined) &&
+    Boolean(Number(movieUpdate.duration) > 1) &&
+    Boolean(Number(movieUpdate.year) >= 2023);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;

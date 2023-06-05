@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { AppDispatch } from 'store/store';
 import { createMovie } from '../state/movieActions';
-import MovieCreateForm from '../components/MovieCreateForm/MovieCreateForm';
+
 import { MovieCreateDto } from '../types/MovieCreateDto';
 import { useMovieRedirect } from '../hooks/movieRedirects';
+
 import useFetchCountries from '../hooks/useFetchCountries';
+import MovieCreateForm from '../components/MovieCreateForm/MovieCreateForm';
 import Loader from 'common/components/UI/Loader/Loader';
 
 interface Props {
@@ -18,7 +21,7 @@ const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
   // TODO: Fix CORS policy error
   const { countries, loading } = useFetchCountries();
 
-  const handleMovieCreate = (movieCreateDto: MovieCreateDto) => {
+  const handleMovieCreate = (movieCreateDto: MovieCreateDto): void => {
     onCreateMovie(movieCreateDto);
     redirectToMovieList();
   };

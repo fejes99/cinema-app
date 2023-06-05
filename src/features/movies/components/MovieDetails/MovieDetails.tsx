@@ -1,10 +1,14 @@
 import React from 'react';
+
 import './MovieDetails.scss';
+
 import { Movie } from 'features/movies/types/Movie';
-import Button from 'common/components/UI/Button/Button';
+
 import { formatDuration } from 'common/helpers/formatDuration';
-import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+
+import Button from 'common/components/UI/Button/Button';
+import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 
 interface Props {
   movie: Movie;
@@ -12,9 +16,9 @@ interface Props {
 }
 
 const MovieDetails: React.FC<Props> = ({ movie, onBuyTicket }) => {
-  const formattedDescription = movie.description!.replace(/\n/g, '<br>');
+  const formattedDescription: string = movie.description!.replace(/\n/g, '<br>');
 
-  const handleBuyTicketClick = () => onBuyTicket(movie);
+  const handleBuyTicketClick = (): void => onBuyTicket(movie);
 
   return (
     <div className='movie-details'>
