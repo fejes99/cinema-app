@@ -8,6 +8,7 @@ const Header = () => {
     <header className='header'>
       <div className='header__container'>
         <Logo />
+        <div className='header__title'>CinePass</div>
         <Navbar />
       </div>
     </header>

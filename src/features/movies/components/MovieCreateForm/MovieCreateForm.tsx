@@ -52,7 +52,6 @@ const MovieCreateForm: React.FC<Props> = ({ countries, create }) => {
 
   return (
     <div className='movie-create'>
-      <div className='movie-create__title'>Create Movie</div>
       <div className='movie-create__form'>
         <div className='movie-create__field'>
           <Input

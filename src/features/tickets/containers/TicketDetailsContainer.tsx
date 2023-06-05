@@ -33,6 +33,7 @@ const TicketDetailsContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Ticket Details</div>
       <TicketDetails ticket={selectedTicket} />
     </>
   );

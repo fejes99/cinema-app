@@ -40,7 +40,12 @@ const MovieUpdateContainer: React.FC<Props> = ({
     redirectToMovieDetails(id);
   };
 
-  return movie && <MovieUpdateForm movie={movie} update={handleMovieUpdate} />;
+  return (
+    <>
+      <div className='page-header'>Update Movie</div>
+      {movie && <MovieUpdateForm movie={movie} update={handleMovieUpdate} />}
+    </>
+  );
 };
 
 const mapStateToProps = (state: StoreState) => ({

@@ -114,6 +114,7 @@ const MovieListContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Movies</div>
       <MovieFilter
         countries={countries}
         distributors={distributors}

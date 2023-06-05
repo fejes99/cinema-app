@@ -105,7 +105,6 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <div className='register'>
-      <div className='register__title'>Register</div>
       <div className='register__form'>
         <div className='register__name-wrapper'>
           <div className={`register__field ${errors.firstName ? 'error' : ''}`}>

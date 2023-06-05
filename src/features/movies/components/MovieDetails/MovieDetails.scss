@@ -1,11 +1,11 @@
 @import 'variables.scss';
 
 .movie-details {
-  margin-top: 30px;
-  background-color: $background-color-secondary;
-  padding: 40px 60px;
-  border-radius: $border-radius-large;
-  box-shadow: $box-shadow;
+  &__title {
+    font-size: 64px;
+    font-weight: bold;
+    margin-bottom: $spacing-medium;
+  }
 
   &__column {
     display: flex;
@@ -19,31 +19,79 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    &:last-child {
-      margin-top: 50px;
-    }
-
-    &-content {
-      width: 100%;
-    }
+    gap: 40px;
+    align-items: stretch;
   }
 
-  &__title {
-    font-size: 64px;
-    font-weight: bold;
-    margin-bottom: $spacing-medium;
+  &__trailer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-basis: 66%;
+  }
+
+  &__data {
+    flex-basis: 33%;
+    background-color: $background-color-secondary;
+    padding: 40px 60px;
+    border-radius: $border-radius-large;
+    box-shadow: $box-shadow;
+    height: 470px;
+    box-sizing: border-box;
+
+    &-title {
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
   }
 
   &__content {
-    margin-top: $spacing-medium;
+    margin-top: $spacing-large;
     line-height: 1.5;
-    margin-bottom: 10px;
+    padding-bottom: 9px;
+    position: relative;
 
     .bold {
       margin-right: 5px;
     }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 0.5px;
+      background-color: darkslategray;
+    }
+  }
+
+  &__description {
+    background-color: $background-color-secondary;
+    padding: 40px 60px;
+    border-radius: $border-radius-large;
+    box-shadow: $box-shadow;
+    margin-top: $spacing-medium;
+
+    &-title {
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    &-content {
+      margin-top: $spacing-large;
+      line-height: 1.6;
+      font-size: 18px;
+      position: relative;
+    }
+  }
+
+  &__buy-ticket {
+    margin-top: $spacing-large;
+    display: flex;
+    justify-content: center;
   }
 }

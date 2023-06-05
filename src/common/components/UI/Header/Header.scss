@@ -7,6 +7,14 @@
   width: 100%;
   z-index: 1000;
 
+  &__title {
+    color: white;
+    margin-left: 10px;
+    font-size: 35px;
+    font-family: $font-header;
+    cursor: default;
+  }
+
   &__container {
     display: flex;
     justify-content: space-between;

@@ -27,6 +27,7 @@ const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
 
   return (
     <>
+      <div className='page-header'>Create Movie</div>
       <MovieCreateForm countries={countries ?? []} create={handleMovieCreate} />
     </>
   );

@@ -46,7 +46,6 @@ const MovieUpdateForm: React.FC<Props> = ({ movie, update }) => {
 
   return (
     <div className='movie-update'>
-      <div className='movie-update__title'>Update Movie</div>
       <form className='movie-update__form' onSubmit={handleSubmit}>
         <div className='movie-update__field'>
           <Input

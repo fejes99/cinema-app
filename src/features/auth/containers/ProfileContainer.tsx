@@ -54,6 +54,7 @@ const ProfileContainer: React.FC<Props> = ({
   return (
     <>
       <UserControlButtonGroup onEdit={handleEditProfileClick} onLogout={handleLogoutClick} />
+      <div className='page-header'>Profile</div>
       <UserDetails user={user} />
       {userTickets && (
         <UserTicketsTable

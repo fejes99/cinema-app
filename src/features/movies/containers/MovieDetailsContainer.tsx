@@ -79,7 +79,6 @@ const MovieDetailsContainer: React.FC<Props> = ({
     <>
       {selectedMovie && (
         <>
-          <YoutubeEmbed videoId={extractYoutubeVideoId(selectedMovie.trailerUrl!)} />
           {adminButtons}
           <MovieDetails movie={selectedMovie} onBuyTicket={handleBuyTicketClick} />
           <DeleteModal

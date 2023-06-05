@@ -124,6 +124,7 @@ const ProjectionListContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Projections</div>
       <ProjectionFilter
         movies={movies}
         theaters={theaters}

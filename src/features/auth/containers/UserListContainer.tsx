@@ -95,6 +95,7 @@ const UserListContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Users</div>
       <UserFilter
         roles={roles}
         filters={filters}

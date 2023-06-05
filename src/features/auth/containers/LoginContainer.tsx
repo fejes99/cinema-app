@@ -21,7 +21,12 @@ const LoginContainer: React.FC<Props> = ({ onLogin }) => {
     // navigate(-1);
   };
 
-  return <LoginForm onSubmit={(loginData: LoginDto) => handleLogin(loginData)} />;
+  return (
+    <>
+      <div className='page-header'>Login</div>
+      <LoginForm onSubmit={(loginData: LoginDto) => handleLogin(loginData)} />;
+    </>
+  );
 };
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({

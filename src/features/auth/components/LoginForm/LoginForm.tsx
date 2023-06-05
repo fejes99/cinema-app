@@ -68,7 +68,6 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <div className='login'>
-      <div className='login__title'>Login</div>
       <div className='login__form'>
         <div className={`login__field ${errors.email ? 'error' : ''}`}>
           <Input

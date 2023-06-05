@@ -52,7 +52,6 @@ const ProjectionCreateForm: React.FC<Props> = ({
 
   return (
     <div className='projection-create'>
-      <div className='projection-create__title'>Create Projection</div>
       <div className='projection-create__form'>
         <div className='projection-create__field'>
           <Input

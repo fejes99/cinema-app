@@ -57,7 +57,6 @@ const ProjectionUpdateForm: React.FC<Props> = ({
 
   return (
     <div className='projection-update'>
-      <div className='projection-update__title'>Update Projection</div>
       <div className='projection-update__form'>
         <div className='projection-update__field'>
           <Input

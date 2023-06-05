@@ -9,9 +9,14 @@ interface Props {
   onRegister: (registerData: RegisterDto) => void;
 }
 
-const RegisterContainer: React.FC<Props> = ({ onRegister }) => (
-  <RegisterForm onSubmit={onRegister} />
-);
+const RegisterContainer: React.FC<Props> = ({ onRegister }) => {
+  return (
+    <>
+      <div className='page-header'>Register</div>
+      <RegisterForm onSubmit={onRegister} />
+    </>
+  );
+};
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onRegister: (registerData: RegisterDto) => dispatch(register(registerData)),

@@ -59,12 +59,15 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   };
 
   return (
-    <ProjectionUpdateForm
-      projection={projection!}
-      projectionTypes={projectionTypes}
-      theaters={theaters}
-      update={handleProjectionUpdate}
-    />
+    <>
+      <div className='page-header'>Update Projection</div>
+      <ProjectionUpdateForm
+        projection={projection!}
+        projectionTypes={projectionTypes}
+        theaters={theaters}
+        update={handleProjectionUpdate}
+      />
+    </>
   );
 };
 

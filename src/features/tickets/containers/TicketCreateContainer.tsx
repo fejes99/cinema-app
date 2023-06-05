@@ -72,6 +72,7 @@ const TicketCreateContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Tickets</div>
       <TicketCreateNavigation
         title={step === 1 ? 'Projections' : step === 2 ? 'Seats' : 'Details'}
         backTitle={step === 1 ? 'Back' : step === 2 ? 'Projections' : 'Seats'}
