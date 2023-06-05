@@ -171,9 +171,6 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Register
         </Button>
-        {errors.confirmPassword && (
-          <div className='register__error-message'>{errors.confirmPassword}</div>
-        )}
       </div>
 
       <div className='register__login'>

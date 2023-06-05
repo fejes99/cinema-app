@@ -8,7 +8,7 @@
   background-color: $background-color-secondary;
   display: flex;
   justify-content: space-evenly;
-  border-radius: 10px;
+  border-radius: $border-radius-large;
   box-shadow: $box-shadow-large;
   transition: $transition;
   margin-bottom: $spacing-large;

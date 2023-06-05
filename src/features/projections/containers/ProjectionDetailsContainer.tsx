@@ -93,12 +93,15 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 
   return (
     <>
+      <div className='page-header'>Projection Details</div>
       {adminButtons}
-      <ProjectionDetails
-        projection={selectedProjection}
-        movieDetails={redirectToMovieDetails}
-        onBuyTicket={handleBuyTicketClick}
-      />
+      {selectedProjection && (
+        <ProjectionDetails
+          projection={selectedProjection}
+          movieDetails={redirectToMovieDetails}
+          onBuyTicket={handleBuyTicketClick}
+        />
+      )}
       {ticketsTable}
       <DeleteModal
         title='projection'

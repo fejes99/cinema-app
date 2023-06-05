@@ -24,7 +24,7 @@ const LoginContainer: React.FC<Props> = ({ onLogin }) => {
   return (
     <>
       <div className='page-header'>Login</div>
-      <LoginForm onSubmit={(loginData: LoginDto) => handleLogin(loginData)} />;
+      <LoginForm onSubmit={handleLogin} />;
     </>
   );
 };

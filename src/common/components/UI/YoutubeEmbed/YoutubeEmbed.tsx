@@ -2,7 +2,7 @@ import React from 'react';
 import './YoutubeEmbed.scss';
 
 interface Props {
-  videoId: string;
+  videoId: string | undefined;
 }
 
 const YoutubeEmbed: React.FC<Props> = ({ videoId }) =>

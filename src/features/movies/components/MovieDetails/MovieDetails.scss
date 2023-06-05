@@ -57,14 +57,14 @@
       margin-right: 5px;
     }
 
-    &::after {
+    &:not(:last-child)::after {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
       height: 0.5px;
-      background-color: darkslategray;
+      background-color: silver;
     }
   }
 

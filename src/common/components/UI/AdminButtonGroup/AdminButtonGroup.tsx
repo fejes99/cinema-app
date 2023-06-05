@@ -13,11 +13,15 @@ const AdminButtonGroup: React.FC<Props> = ({ onEdit, onDelete }) => (
   <div className='admin-button-group'>
     <Button size='large' type='primary' onClick={onEdit}>
       Edit
-      <ModeEditOutlinedIcon fontSize='small' />
+      <div className='icon'>
+        <ModeEditOutlinedIcon fontSize='small' />
+      </div>
     </Button>
     <Button size='large' type='secondary' onClick={onDelete}>
       Delete
-      <DeleteOutlinedIcon fontSize='small' />
+      <div className='icon'>
+        <DeleteOutlinedIcon fontSize='small' />
+      </div>
     </Button>
   </div>
 );

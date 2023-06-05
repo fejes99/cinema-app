@@ -119,37 +119,40 @@ export const authCheck = () => (dispatch: AppDispatch) => {
   const token = localStorage.getItem('token');
   if (!token) {
     dispatch(logout());
-  } else {
-    const expirationDate = localStorage.getItem('expirationDate');
-    if (new Date(expirationDate!) < new Date()) {
-    } else {
-      const userId = localStorage.getItem('userId');
-      const firstName = localStorage.getItem('firstName');
-      const lastName = localStorage.getItem('lastName');
-      const username = localStorage.getItem('username');
-      const email = localStorage.getItem('email');
-      const created = localStorage.getItem('created');
-      const role = localStorage.getItem('role');
-
-      const user: User = {
-        id: userId!,
-        firstName: firstName!,
-        lastName: lastName!,
-        username: username!,
-        email: email!,
-        created: created!,
-        role: role!,
-      };
-
-      const loginResponse: LoginResponseDto = {
-        token: token,
-        user: user,
-      };
-
-      dispatch(loginSuccess(loginResponse));
-      dispatch(checkAuthTimeout(expirationDate!));
-    }
+    return;
   }
+
+  const expirationDate = localStorage.getItem('expirationDate');
+  if (new Date(expirationDate!) < new Date()) {
+    // Handle token expired case if needed
+    return;
+  }
+
+  const userId = localStorage.getItem('userId');
+  const firstName = localStorage.getItem('firstName');
+  const lastName = localStorage.getItem('lastName');
+  const username = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
+  const created = localStorage.getItem('created');
+  const role = localStorage.getItem('role');
+
+  const user: User = {
+    id: userId!,
+    firstName: firstName!,
+    lastName: lastName!,
+    username: username!,
+    email: email!,
+    created: created!,
+    role: role!,
+  };
+
+  const loginResponse: LoginResponseDto = {
+    token: token,
+    user: user,
+  };
+
+  dispatch(loginSuccess(loginResponse));
+  dispatch(checkAuthTimeout(expirationDate!));
 };
 
 const logoutAction = () => ({

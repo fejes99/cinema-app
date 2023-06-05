@@ -48,7 +48,10 @@ const MovieDetails: React.FC<Props> = ({ movie, onBuyTicket }) => {
 
       <div className='movie-details__description'>
         <div className='movie-details__description-title'>Description</div>
-        <div className='movie-details__description-content'>{movie.description}</div>
+        <div
+          className='movie-details__description-content'
+          dangerouslySetInnerHTML={{ __html: formattedDescription }}
+        />
       </div>
 
       <div className='movie-details__buy-ticket'>
