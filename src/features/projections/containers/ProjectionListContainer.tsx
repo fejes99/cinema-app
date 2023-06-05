@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import AddIcon from '@mui/icons-material/Add';
 
 import { AppDispatch, StoreState } from 'store/store';
 import { deleteProjection, fetchProjection, fetchProjections } from '../state/projectionActions';
@@ -122,6 +123,9 @@ const ProjectionListContainer: React.FC<Props> = ({
     user && isAdmin(user) ? (
       <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
         Add Projection
+        <div className='icon'>
+          <AddIcon />
+        </div>
       </Button>
     ) : null;
 

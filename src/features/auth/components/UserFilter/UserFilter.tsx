@@ -1,4 +1,5 @@
 import React from 'react';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import './UserFilter.scss';
 
@@ -37,6 +38,9 @@ const UserFilter: React.FC<Props> = ({
       </div>
       <Button size='medium' type='secondary' onClick={resetFilters}>
         Reset
+        <div className='icon'>
+          <RestartAltIcon />
+        </div>
       </Button>
     </div>
   );

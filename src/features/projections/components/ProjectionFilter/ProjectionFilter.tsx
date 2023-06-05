@@ -1,4 +1,5 @@
 import React from 'react';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import './ProjectionFilter.scss';
 
@@ -76,6 +77,9 @@ const ProjectionFilter: React.FC<Props> = ({
         <div className='projection-filter__buttons'>
           <Button size='medium' type='secondary' onClick={resetFilters}>
             Reset
+            <div className='icon'>
+              <RestartAltIcon />
+            </div>
           </Button>
         </div>
       </div>

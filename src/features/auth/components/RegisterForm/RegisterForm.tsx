@@ -4,6 +4,7 @@ import { RegisterDto } from 'features/auth/types/RegisterDto';
 import './RegisterForm.scss';
 import Button from 'common/components/UI/Button/Button';
 import { Link } from 'react-router-dom';
+import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
 
 interface Props {
   onSubmit: (registerData: RegisterDto) => void;
@@ -159,35 +160,29 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
           />
         </div>
         <div className={`register__field ${errors.password ? 'error' : ''}`}>
-          <Input
-            label='Password'
-            type='password'
-            name='password'
+          <InputPassword
+            confirmPassword={false}
             value={register.password}
             onChange={handleChange}
-            error={errors.password}
           />
+          <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
+            <InputPassword
+              confirmPassword={true}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
+            Register
+          </Button>
         </div>
-        <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
-          <Input
-            label='Confirm Password'
-            type='password'
-            name='confirmPassword'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            error={errors.confirmPassword}
-          />
-        </div>
-        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
-          Register
-        </Button>
-      </div>
 
-      <div className='register__login'>
-        Already have account?
-        <Link to='/login' className='register__login-link'>
-          Login Now!
-        </Link>
+        <div className='register__login'>
+          Already have account?
+          <Link to='/login' className='register__login-link'>
+            Login Now!
+          </Link>
+        </div>
       </div>
     </div>
   );

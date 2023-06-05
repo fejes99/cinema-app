@@ -1,4 +1,6 @@
 import React from 'react';
+import SortIcon from '@mui/icons-material/Sort';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import './MovieFilter.scss';
 
@@ -101,9 +103,15 @@ const MovieFilter: React.FC<Props> = ({
       <div className='movie-filter__buttons'>
         <Button size='medium' type='secondary'>
           Sort
+          <div className='icon'>
+            <SortIcon />
+          </div>
         </Button>
         <Button size='medium' type='secondary' onClick={resetFilters}>
           Reset
+          <div className='icon'>
+            <RestartAltIcon />
+          </div>
         </Button>
       </div>
     </div>

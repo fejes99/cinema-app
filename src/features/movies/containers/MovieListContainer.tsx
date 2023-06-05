@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import AddIcon from '@mui/icons-material/Add';
 
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchMovies } from '../state/movieActions';
@@ -102,6 +103,9 @@ const MovieListContainer: React.FC<Props> = ({
     user && isAdmin(user) ? (
       <Button size='large' type='primary' onClick={redirectToMovieCreate}>
         Add Movie
+        <div className='icon'>
+          <AddIcon />
+        </div>
       </Button>
     ) : null;
 
