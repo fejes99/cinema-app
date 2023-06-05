@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { AppDispatch, StoreState } from 'store/store';
 import { deleteProjection, fetchProjection, fetchProjections } from '../state/projectionActions';
+
+import { User } from 'features/auth/types/User';
 import { Projection } from '../types/Projection';
-import Loader from 'common/components/UI/Loader/Loader';
-import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 import {
   ProjectionFilterName,
   ProjectionFilterValue,
   ProjectionFilters,
 } from '../types/ProjectionFilters';
-import { defaultProjectionFilters, projectionSearchFilter } from '../helpers/projectionFilters';
-import Button from 'common/components/UI/Button/Button';
+
 import { useProjectionRedirect } from '../hooks/projectionRedirects';
+
+import { defaultProjectionFilters, projectionSearchFilter } from '../helpers/projectionFilters';
+
+import { isAdmin } from '../../auth/helpers/isAdmin';
+import Loader from 'common/components/UI/Loader/Loader';
+import Button from 'common/components/UI/Button/Button';
 import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';
-import { User } from 'features/auth/types/User';
-import { isAdmin } from '../../auth/helpers/isAdmin';
+import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 
 interface Props {
   user: User | null;
@@ -70,23 +75,23 @@ const ProjectionListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error.message}</div>;
 
-  const movies = [...new Set(projections.map((projection) => projection.movie!.name))];
-  const theaters = [...new Set(projections.map((projection) => projection.theater.name))];
-  const projectionTypes = [
+  const movies: string[] = [...new Set(projections.map((projection) => projection.movie!.name))];
+  const theaters: string[] = [...new Set(projections.map((projection) => projection.theater.name))];
+  const projectionTypes: string[] = [
     ...new Set(projections.map((projection) => projection.projectionType.name)),
   ];
 
   const handleFiltersChange = (
     projectionFilterName: ProjectionFilterName,
     value: ProjectionFilterValue
-  ) => {
+  ): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [projectionFilterName]: value,
     }));
   };
 
-  const resetFilters = () => {
+  const resetFilters = (): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       movie: defaultProjectionFilters.movie,
@@ -97,30 +102,30 @@ const ProjectionListContainer: React.FC<Props> = ({
     }));
   };
 
-  const handleEditClick = (id: string) => {
+  const handleEditClick = (id: string): void => {
     onFetchProjection(id);
     redirectToProjectionUpdate(id);
   };
 
-  const handleDeleteClick = (id: string) => {
+  const handleDeleteClick = (id: string): void => {
     setProjectionToDeleteId(id);
     openDeleteModal();
   };
 
-  const deleteModalConfirmation = async () => {
+  const deleteModalConfirmation = async (): Promise<void> => {
     await onDeleteProjection(projectionToDeleteId);
     closeAllModals();
     redirectToProjectionList();
   };
 
-  const addButton =
+  const addButton: JSX.Element | null =
     user && isAdmin(user) ? (
       <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
         Add Projection
       </Button>
     ) : null;
 
-  const filteredProjections = projectionSearchFilter(projections, filters);
+  const filteredProjections: Projection[] = projectionSearchFilter(projections, filters);
 
   return (
     <>

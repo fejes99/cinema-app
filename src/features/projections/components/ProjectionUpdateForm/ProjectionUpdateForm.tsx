@@ -1,12 +1,15 @@
-import Input from 'common/components/UI/Input/Input';
-import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
-import { Projection } from 'features/projections/types/Projection';
-import { ProjectionUpdateDto } from 'features/projections/types/ProjectionUpdateDto.d';
-import { Theater } from 'features/theaters/types/Theater';
 import React, { useState } from 'react';
+
 import './ProjectionUpdateForm.scss';
-import Dropdown from 'common/components/UI/Dropdown/Dropdown';
+
+import { Theater } from 'features/theaters/types/Theater';
+import { Projection } from 'features/projections/types/Projection';
+import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
+import { ProjectionUpdateDto } from 'features/projections/types/ProjectionUpdateDto.d';
+
+import Input from 'common/components/UI/Input/Input';
 import Button from 'common/components/UI/Button/Button';
+import Dropdown from 'common/components/UI/Dropdown/Dropdown';
 
 interface Props {
   projection: Projection;
@@ -27,11 +30,11 @@ const ProjectionUpdateForm: React.FC<Props> = ({
     projectionTypeId: projection.projectionType.id,
     theaterId: projection.theater.id,
   });
-  const isFormValid =
-    projectionUpdate.time &&
-    Number(projection.price) > 0 &&
-    projectionUpdate.projectionTypeId &&
-    projectionUpdate.theaterId;
+  const isFormValid: boolean =
+    Boolean(projectionUpdate.time) &&
+    Boolean(Number(projection.price) > 0) &&
+    Boolean(projectionUpdate.projectionTypeId) &&
+    Boolean(projectionUpdate.theaterId);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = event.target;
@@ -39,7 +42,7 @@ const ProjectionUpdateForm: React.FC<Props> = ({
   };
 
   const handleDropdownChange = (name: string, value: string): void => {
-    const id = {
+    const id: string | undefined = {
       projectionTypeId:
         projectionTypes.find((projectionType) => projectionType.name === value)?.id || '',
       theaterId: theaters.find((theater) => theater.name === value)?.id || '',

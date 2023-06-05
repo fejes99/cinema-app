@@ -20,13 +20,15 @@ const fetchProjectionsFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchProjections = () => (dispatch: AppDispatch) => {
-  dispatch(fetchProjectionsRequest());
-  axios
-    .get('/projections')
-    .then((response) => dispatch(fetchProjectionsSuccess(response.data)))
-    .catch((error) => dispatch(fetchProjectionsFail(error)));
-};
+export const fetchProjections =
+  () =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchProjectionsRequest());
+    axios
+      .get('/projections')
+      .then((response) => dispatch(fetchProjectionsSuccess(response.data)))
+      .catch((error) => dispatch(fetchProjectionsFail(error)));
+  };
 
 const fetchProjectionRequest = () => ({
   type: actionTypes.FETCH_PROJECTION_REQUEST,
@@ -42,13 +44,15 @@ const fetchProjectionFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchProjection = (id: string) => (dispatch: AppDispatch) => {
-  dispatch(fetchProjectionRequest());
-  axios
-    .get(`/projections/${id}`)
-    .then((response) => dispatch(fetchProjectionSuccess(response.data)))
-    .catch((error) => dispatch(fetchProjectionFail(error)));
-};
+export const fetchProjection =
+  (id: string) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchProjectionRequest());
+    axios
+      .get(`/projections/${id}`)
+      .then((response) => dispatch(fetchProjectionSuccess(response.data)))
+      .catch((error) => dispatch(fetchProjectionFail(error)));
+  };
 
 const createProjectionRequest = () => ({
   type: actionTypes.CREATE_PROJECTION_REQUEST,

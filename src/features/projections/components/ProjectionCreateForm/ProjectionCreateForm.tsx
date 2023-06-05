@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+
 import './ProjectionCreateForm.scss';
-import Dropdown from 'common/components/UI/Dropdown/Dropdown';
-import Input from 'common/components/UI/Input/Input';
+
 import { Movie } from 'features/movies/types/Movie';
+import { Theater } from 'features/theaters/types/Theater';
 import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
 import { ProjectionCreateDto } from 'features/projections/types/ProjectionCreateDto';
-import { Theater } from 'features/theaters/types/Theater';
+
+import Input from 'common/components/UI/Input/Input';
 import Button from 'common/components/UI/Button/Button';
+import Dropdown from 'common/components/UI/Dropdown/Dropdown';
 
 interface Props {
   movies: Movie[];
@@ -30,7 +33,9 @@ const ProjectionCreateForm: React.FC<Props> = ({
     projectionTypeId: '',
     theaterId: '',
   });
-  const isFormValid = Object.values(newProjection).every((value) => value !== '' && value !== 0);
+  const isFormValid: boolean = Object.values(newProjection).every(
+    (value) => value !== '' && value !== 0
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
@@ -38,7 +43,7 @@ const ProjectionCreateForm: React.FC<Props> = ({
   };
 
   const handleDropdownChange = (name: string, value: string): void => {
-    const id = {
+    const id: string | undefined = {
       movieId: movies.find((movie) => movie.name === value)?.id || '',
       projectionTypeId:
         projectionTypes.find((projectionType) => projectionType.name === value)?.id || '',

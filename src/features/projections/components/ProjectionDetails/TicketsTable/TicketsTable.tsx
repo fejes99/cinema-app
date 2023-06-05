@@ -1,6 +1,8 @@
-import { formatDate } from 'common/helpers/formatDate';
-import { Ticket } from 'features/tickets/types/Ticket';
 import React from 'react';
+
+import { Ticket } from 'features/tickets/types/Ticket';
+
+import { formatDate } from 'common/helpers/formatDate';
 
 interface Props {
   tickets: Ticket[];

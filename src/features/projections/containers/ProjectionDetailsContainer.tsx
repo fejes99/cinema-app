@@ -1,23 +1,29 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+
 import { StoreState, AppDispatch } from 'store/store';
 import { deleteProjection, fetchProjection } from '../state/projectionActions';
+
+import { User } from 'features/auth/types/User';
 import { Projection } from '../types/Projection';
-import { useParams } from 'react-router';
+import { ticketProjection } from 'features/tickets/state/ticketActions';
+
+import useModal from 'common/hooks/useModal';
+
+import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
+import { useUserRedirect } from 'features/auth/hooks/userRedirects';
+import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
+
+import { isAdmin } from 'features/auth/helpers/isAdmin';
+
 import Loader from 'common/components/UI/Loader/Loader';
+import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
 import ProjectionDetails from '../components/ProjectionDetails/ProjectionDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
-import { useProjectionRedirect } from '../hooks/projectionRedirects';
-import useModal from 'common/hooks/useModal';
-import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
-import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
-import { isAdmin } from 'features/auth/helpers/isAdmin';
-import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
-import { User } from 'features/auth/types/User';
-import { useUserRedirect } from 'features/auth/hooks/userRedirects';
-import { ticketProjection } from 'features/tickets/state/ticketActions';
-import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
-import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 
 interface Props {
   user: User | null;
@@ -54,30 +60,24 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
   if (selectedProjection === null) return <div>No projection</div>;
   if (error) return <div>{error.message}</div>;
 
-  const handleEditClick = () => redirectToProjectionUpdate(selectedProjection.id);
+  const handleEditClick = (): void => redirectToProjectionUpdate(selectedProjection.id);
 
-  const handleDeleteClick = () => openDeleteModal();
+  const handleDeleteClick = (): void => openDeleteModal();
 
-  const handleBuyTicketClick = () => {
-    if (!user) {
-      redirectToLogin();
-    } else {
-      onTicketProjection(selectedProjection);
-      redirectToTicketCreate();
-    }
-  };
+  const handleBuyTicketClick = (): void =>
+    !user ? redirectToLogin() : (onTicketProjection(selectedProjection), redirectToTicketCreate());
 
-  const handleTicketRedirect = (ticketId: string) => redirectToTicketDetails(ticketId);
+  const handleTicketRedirect = (ticketId: string): void => redirectToTicketDetails(ticketId);
 
-  const handleUserRedirect = (userId: string) => redirectToUserDetails(userId);
+  const handleUserRedirect = (userId: string): void => redirectToUserDetails(userId);
 
-  const deleteModalConfirmation = () => {
+  const deleteModalConfirmation = (): void => {
     onDeleteProjection(selectedProjection.id);
     closeAllModals();
     redirectToProjectionList();
   };
 
-  const ticketsTable =
+  const ticketsTable: JSX.Element | null =
     user && isAdmin(user) && selectedProjection.tickets && selectedProjection.tickets.length > 0 ? (
       <TicketsTable
         tickets={selectedProjection.tickets}
@@ -86,7 +86,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
       />
     ) : null;
 
-  const adminButtons =
+  const adminButtons: JSX.Element | null =
     user && isAdmin(user) ? (
       <AdminButtonGroup onEdit={handleEditClick} onDelete={handleDeleteClick} />
     ) : null;

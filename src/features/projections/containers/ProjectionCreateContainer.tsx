@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { AppDispatch, StoreState } from 'store/store';
-import { ProjectionCreateDto } from '../types/ProjectionCreateDto';
-import ProjectionCreateForm from '../components/ProjectionCreateForm/ProjectionCreateForm';
-import { fetchMovies } from 'features/movies/state/movieActions';
-import { fetchProjectionTypes } from 'features/projectionTypes/state/projectionTypeActions';
-import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
-import { Movie } from 'features/movies/types/Movie';
-import { fetchTheaters } from 'features/theaters/state/theaterActions';
-import { Theater } from 'features/theaters/types/Theater';
-import Loader from 'common/components/UI/Loader/Loader';
-import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import { createProjection } from '../state/projectionActions';
+
+import { Movie } from 'features/movies/types/Movie';
+import { Theater } from 'features/theaters/types/Theater';
+import { ProjectionType } from 'features/projectionTypes/types/ProjectionType';
+import { ProjectionCreateDto } from '../types/ProjectionCreateDto';
+
+import { useProjectionRedirect } from '../hooks/projectionRedirects';
+
+import { fetchMovies } from 'features/movies/state/movieActions';
+import { fetchTheaters } from 'features/theaters/state/theaterActions';
+import { fetchProjectionTypes } from 'features/projectionTypes/state/projectionTypeActions';
+
+import Loader from 'common/components/UI/Loader/Loader';
+import ProjectionCreateForm from '../components/ProjectionCreateForm/ProjectionCreateForm';
 
 interface Props {
   movies: Movie[];
@@ -49,17 +54,18 @@ const ProjectionCreateContainer: React.FC<Props> = ({
   if (isLoading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const handleProjectionCreate = (projectionCreateDto: ProjectionCreateDto) => {
+  const handleProjectionCreate = (projectionCreateDto: ProjectionCreateDto): void => {
     onCreateProjection(projectionCreateDto);
     redirectToProjectionList();
   };
 
-  const updateProjectionTypes = (theaterName: string) => {
-    const theater = theaters.find((theater) => theater.name === theaterName);
+  const updateProjectionTypes = (theaterName: string): void => {
+    const theater: Theater | undefined = theaters.find((theater) => theater.name === theaterName);
     if (theater) {
-      const updatedTypes = projectionTypes.filter((projectionType) =>
+      const updatedTypes: ProjectionType[] = projectionTypes.filter((projectionType) =>
         theater.projectionTypes.some((type) => type.name === projectionType.name)
       );
+
       setUpdatedProjectionTypes(updatedTypes);
     }
   };

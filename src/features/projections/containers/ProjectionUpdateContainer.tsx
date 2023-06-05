@@ -53,7 +53,7 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   if (!projection || loading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const handleProjectionUpdate = (id: string, projectionUpdateDto: ProjectionUpdateDto) => {
+  const handleProjectionUpdate = (id: string, projectionUpdateDto: ProjectionUpdateDto): void => {
     onUpdateProjection(id, projectionUpdateDto);
     redirectToProjectionList();
   };

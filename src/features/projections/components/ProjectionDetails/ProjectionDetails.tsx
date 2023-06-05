@@ -1,11 +1,15 @@
 import React from 'react';
+
 import './ProjectionDetails.scss';
-import { formatDate } from 'common/helpers/formatDate';
+
 import { Projection } from 'features/projections/types/Projection';
-import Button from 'common/components/UI/Button/Button';
+
+import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
-import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 import { extractYoutubeVideoId } from 'features/movies/helpers/movieGetVideoIdFromTrailer';
+
+import Button from 'common/components/UI/Button/Button';
+import YoutubeEmbed from 'common/components/UI/YoutubeEmbed/YoutubeEmbed';
 
 interface Props {
   projection: Projection;
@@ -14,8 +18,7 @@ interface Props {
 }
 
 const ProjectionDetails: React.FC<Props> = ({ projection, movieDetails, onBuyTicket }) => {
-  console.log('🚀 ~ file: ProjectionDetails.tsx:15 ~ projection:', projection);
-  const buyCardButton = projection.isSold ? (
+  const buyCardButton: JSX.Element = projection.isSold ? (
     <div className='projection-details__buy-ticket'>
       <Button size='medium' type='disabled' onClick={onBuyTicket}>
         Sold Out

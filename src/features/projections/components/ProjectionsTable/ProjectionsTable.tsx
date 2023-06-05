@@ -1,8 +1,10 @@
-import { formatDate } from 'common/helpers/formatDate';
-import { Projection } from 'features/projections/types/Projection';
 import React from 'react';
-import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
+
+import { Projection } from 'features/projections/types/Projection';
+
+import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
 
 interface Props {

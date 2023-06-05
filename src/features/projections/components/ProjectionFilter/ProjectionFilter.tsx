@@ -1,13 +1,16 @@
 import React from 'react';
+
 import './ProjectionFilter.scss';
-import Dropdown from 'common/components/UI/Dropdown/Dropdown';
+
 import {
   ProjectionFilters,
   ProjectionFilterName,
   ProjectionFilterValue,
 } from 'features/projections/types/ProjectionFilters.d';
-import RangeSlider from 'common/components/UI/Slider/RangeSlider';
+
 import Button from 'common/components/UI/Button/Button';
+import Dropdown from 'common/components/UI/Dropdown/Dropdown';
+import RangeSlider from 'common/components/UI/Slider/RangeSlider';
 
 interface Props {
   movies: string[];

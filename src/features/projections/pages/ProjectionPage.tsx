@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
+
 import ProjectionListContainer from '../containers/ProjectionListContainer';
-import ProjectionDetailsContainer from '../containers/ProjectionDetailsContainer';
 import ProjectionCreateContainer from '../containers/ProjectionCreateContainer';
 import ProjectionUpdateContainer from '../containers/ProjectionUpdateContainer';
+import ProjectionDetailsContainer from '../containers/ProjectionDetailsContainer';
 
 const ProjectionPage: React.FC = () => (
   <Routes>
