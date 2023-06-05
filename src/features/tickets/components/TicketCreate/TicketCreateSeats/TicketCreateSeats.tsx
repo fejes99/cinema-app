@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+
 import './TicketCreateSeats.scss';
-import { Projection } from 'features/projections/types/Projection';
-import Input from 'common/components/UI/Input/Input';
-import { formatDate } from 'common/helpers/formatDate';
+
 import { Seat } from 'features/theaters/types/Seat';
+import { Projection } from 'features/projections/types/Projection';
+
+import { formatDate } from 'common/helpers/formatDate';
+
+import Input from 'common/components/UI/Input/Input';
 
 interface Props {
   projection: Projection;
@@ -12,42 +16,44 @@ interface Props {
 
 const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
-  const [numTickets, setNumTickets] = useState(1);
+  const [numTickets, setNumTickets] = useState<number>(1);
 
-  const rowLength = Math.min(5, projection.theater.seats.length);
-  const usedSeats = projection.tickets?.map((ticket) => ticket.seat);
+  const rowLength: number = Math.min(5, projection.theater.seats.length);
+  const usedSeats: Seat[] | undefined = projection.tickets?.map((ticket) => ticket.seat);
 
   const handleTicketChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setNumTickets(Number(event.target.value));
 
-  const handleTicketClick = (num: number) => {
+  const handleTicketClick = (num: number): void => {
     setNumTickets(num);
     setSelectedSeats([]);
     setSeats(projection, selectedSeats);
   };
 
-  const handleSeatClick = (seat: Seat) => {
-    const seatIndex = projection.theater.seats.findIndex((arraySeat) => arraySeat.id === seat.id);
+  const handleSeatClick = (seat: Seat): void => {
+    const seatIndex: number = projection.theater.seats.findIndex(
+      (arraySeat) => arraySeat.id === seat.id
+    );
     if (seatIndex !== -1) {
-      const rowIndex = Math.floor(seatIndex / rowLength);
+      const rowIndex: number = Math.floor(seatIndex / rowLength);
 
-      let startIndex = seatIndex;
-      let endIndex = seatIndex + numTickets - 1;
+      let startIndex: number = seatIndex;
+      let endIndex: number = seatIndex + numTickets - 1;
 
-      const rowEndIndex = (rowIndex + 1) * rowLength - 1;
+      const rowEndIndex: number = (rowIndex + 1) * rowLength - 1;
       if (endIndex > rowEndIndex) {
         endIndex = rowEndIndex;
       }
 
-      const rowStartIndex = rowIndex * rowLength;
+      const rowStartIndex: number = rowIndex * rowLength;
       if (startIndex > rowStartIndex) {
         startIndex = endIndex - numTickets + 1;
       }
 
-      const selectedRange = projection.theater.seats.slice(startIndex, endIndex + 1);
-      const pickedSeats = selectedRange.map((seat) => seat);
+      const selectedRange: Seat[] = projection.theater.seats.slice(startIndex, endIndex + 1);
+      const pickedSeats: Seat[] = selectedRange.map((seat) => seat);
 
-      const isAnySeatUsed = pickedSeats.some((pickedSeat) =>
+      const isAnySeatUsed: boolean = pickedSeats.some((pickedSeat) =>
         usedSeats?.some(
           (usedSeat) => usedSeat.id === pickedSeat.id && usedSeat.number === pickedSeat.number
         )
@@ -60,8 +66,8 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
     }
   };
 
-  const renderTickets = () => {
-    const tickets = [];
+  const renderTickets = (): any[] => {
+    const tickets: any[] = [];
     for (let i = 1; i <= rowLength; i++) {
       const ticketImage =
         i <= numTickets
@@ -80,8 +86,8 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
     return tickets;
   };
 
-  const renderSeats = () => {
-    const seats = projection.theater.seats.sort(
+  const renderSeats = (): any[] => {
+    const seats: Seat[] = projection.theater.seats.sort(
       (a: Seat, b: Seat) => Number(a.number) - Number(b.number)
     );
     const rows: any[] = [];
@@ -92,9 +98,9 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
         (usedSeat) => usedSeat.id === seat.id && usedSeat.number === seat.number
       );
 
-      const isSelected = selectedSeats.includes(seat);
+      const isSelected: boolean = selectedSeats.includes(seat);
 
-      const seatClassName = isUsed
+      const seatClassName: string = isUsed
         ? 'ticket-create-seats__seat disabled'
         : 'ticket-create-seats__seat';
       const onClickHandler = isUsed ? undefined : () => handleSeatClick(seat);

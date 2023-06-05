@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
+
+import { User } from 'features/auth/types/User';
+
 import TicketCreateContainer from '../containers/TicketCreateContainer';
 import TicketDetailsContainer from '../containers/TicketDetailsContainer';
-import { User } from 'features/auth/types/User';
 
 interface Props {
   user: User | null;

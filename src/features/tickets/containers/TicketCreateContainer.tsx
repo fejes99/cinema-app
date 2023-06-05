@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
 import { AppDispatch, StoreState } from 'store/store';
 import { createTicket, ticketProjection, ticketSeats } from '../state/ticketActions';
+
+import { User } from 'features/auth/types/User';
+import { Seat } from 'features/theaters/types/Seat';
 import { Movie } from 'features/movies/types/Movie';
 import { Projection } from 'features/projections/types/Projection';
-import { Seat } from 'features/theaters/types/Seat';
-import TicketCreateMovie from '../components/TicketCreate/TicketCreateMovie/TicketCreateMovie';
-import TicketCreateNavigation from '../components/TicketCreate/TicketCreateNavigation/TicketCreateNavigation';
-import TicketCreateSeats from '../components/TicketCreate/TicketCreateSeats/TicketCreateSeats';
-import TicketCreateDetails from '../components/TicketCreate/TicketCreateDetails/TicketCreateDetails';
-import { useProjectionRedirect } from 'features/projections/hooks/projectionRedirects';
 import { TicketCreateDto } from '../types/TicketCreateDto';
-import { User } from 'features/auth/types/User';
+
+import { useProjectionRedirect } from 'features/projections/hooks/projectionRedirects';
+
+import TicketCreateSeats from '../components/TicketCreate/TicketCreateSeats/TicketCreateSeats';
+import TicketCreateMovie from '../components/TicketCreate/TicketCreateMovie/TicketCreateMovie';
+import TicketCreateDetails from '../components/TicketCreate/TicketCreateDetails/TicketCreateDetails';
+import TicketCreateNavigation from '../components/TicketCreate/TicketCreateNavigation/TicketCreateNavigation';
 
 interface Props {
   user: User | null;
@@ -33,8 +37,8 @@ const TicketCreateContainer: React.FC<Props> = ({
   onTicketSeats,
   onCreateTicket,
 }) => {
-  const [step, setStep] = useState(1);
-  const [isEmptySeats, setIsEmptySeats] = useState(
+  const [step, setStep] = useState<number>(1);
+  const [isEmptySeats, setIsEmptySeats] = useState<boolean>(
     pickedSeats === null || pickedSeats!.length === 0
   );
 
@@ -48,9 +52,9 @@ const TicketCreateContainer: React.FC<Props> = ({
     setIsEmptySeats(pickedSeats === null || pickedSeats!.length === 0);
   }, [pickedSeats]);
 
-  const handleProjectionSelect = (projection: Projection) => onTicketProjection(projection);
+  const handleProjectionSelect = (projection: Projection): void => onTicketProjection(projection);
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
@@ -58,11 +62,11 @@ const TicketCreateContainer: React.FC<Props> = ({
     }
   };
 
-  const handleBack = () => {
+  const handleBack = (): void => {
     setStep(step === 3 ? 2 : step - 1);
   };
 
-  const handleBuyTickets = () => {
+  const handleBuyTickets = (): void => {
     redirectToProjectionList();
 
     pickedSeats?.map((seat) =>

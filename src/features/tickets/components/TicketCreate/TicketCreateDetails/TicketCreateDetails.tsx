@@ -1,7 +1,10 @@
 import React from 'react';
+
 import './TicketCreateDetails.scss';
-import { Projection } from 'features/projections/types/Projection';
+
 import { Seat } from 'features/theaters/types/Seat';
+import { Projection } from 'features/projections/types/Projection';
+
 import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
 
@@ -11,7 +14,7 @@ interface Props {
 }
 
 const TicketCreateDetails: React.FC<Props> = ({ projection, seats }) => {
-  const formatSeats = (seats: Seat[]) => {
+  const formatSeats = (seats: Seat[]): string => {
     return seats.map((seat) => seat.number).join(', ');
   };
 

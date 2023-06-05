@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchTicket } from '../state/ticketActions';
-import { connect } from 'react-redux';
-import { Ticket } from '../types/Ticket';
+
 import { Error } from 'common/types/Error';
-import { useParams } from 'react-router';
+import { Ticket } from '../types/Ticket';
+
 import Loader from 'common/components/UI/Loader/Loader';
 import TicketDetails from '../components/TicketDetails/TicketDetails';
 

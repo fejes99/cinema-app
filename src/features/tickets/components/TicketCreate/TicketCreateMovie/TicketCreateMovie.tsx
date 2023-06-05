@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+
 import './TicketCreateMovie.scss';
+
 import { Movie } from 'features/movies/types/Movie';
-import { formatDuration } from 'common/helpers/formatDuration';
-import { formatDate } from 'common/helpers/formatDate';
 import { Projection } from 'features/projections/types/Projection';
+
+import { formatDate } from 'common/helpers/formatDate';
+import { formatDuration } from 'common/helpers/formatDuration';
 
 interface Props {
   movie: Movie;
@@ -16,7 +19,7 @@ const TicketCreateMovie: React.FC<Props> = ({
 }) => {
   const [activeProjection, setActiveProjection] = useState<Projection | null>(null);
 
-  const handleProjectionClick = (projection: Projection) => {
+  const handleProjectionClick = (projection: Projection): void => {
     setActiveProjection(projection);
   };
 

@@ -1,6 +1,9 @@
 import React from 'react';
+
 import './TicketDetails.scss';
+
 import { Ticket } from '../../types/Ticket';
+
 import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
 
