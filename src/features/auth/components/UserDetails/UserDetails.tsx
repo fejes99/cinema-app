@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './UserDetails.scss';
+
 import { User } from 'features/auth/types/User';
 import { formatDate } from 'common/helpers/formatDate';
 

@@ -46,16 +46,16 @@ const UserListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error.message}</div>;
 
-  const roles = [...new Set(users.map((user) => user.role))];
+  const roles: string[] = [...new Set(users.map((user) => user.role))];
 
-  const handleFiltersChange = (userFilterName: UserFilterName, value: UserFilterValue) => {
+  const handleFiltersChange = (userFilterName: UserFilterName, value: UserFilterValue): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [userFilterName]: value,
     }));
   };
 
-  const resetFilters = () => {
+  const resetFilters = (): void => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       query: defaultUserFilters.query,
@@ -63,35 +63,30 @@ const UserListContainer: React.FC<Props> = ({
     }));
   };
 
-  const handleEditClick = (id: string) => {
+  const handleEditClick = (id: string): void => {
     const userToUpdate = filteredUsers.find((user) => user.id === id);
     setUserToUpdate(userToUpdate);
     setuserToUpdateId(id);
     openUpdateModal();
   };
 
-  const handleDeleteClick = (id: string) => {
+  const handleDeleteClick = (id: string): void => {
     const userToDelete = filteredUsers.find((user) => user.id === id);
     setUserToDelete(userToDelete);
     setuserToDeleteId(id);
     openDeleteModal();
   };
 
-  const updateModalConfirmation = (userUpdateDto: UserUpdateDto) => {
-    console.log(
-      '🚀 ~ file: UserListContainer.tsx:82 ~ updateModalConfirmation ~ userUpdateDto:',
-      userUpdateDto
-    );
+  const updateModalConfirmation = (userUpdateDto: UserUpdateDto): void =>
     onUpdateUser(userToUpdateId, userUpdateDto);
-  };
 
-  const deleteModalConfirmation = () => {
+  const deleteModalConfirmation = (): void => {
     onDeleteUser(userToDeleteId);
     closeAllModals();
     onFetchUsers();
   };
 
-  const filteredUsers = userSearchFilter(users, filters);
+  const filteredUsers: User[] = userSearchFilter(users, filters);
 
   return (
     <>

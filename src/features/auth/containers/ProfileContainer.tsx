@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+
 import { AppDispatch, StoreState } from 'store/store';
-import { logout } from '../state/authActions';
+
 import { User } from '../types/User';
+import { Ticket } from 'features/tickets/types/Ticket';
+
+import { logout } from '../state/authActions';
+import { deleteTicket, fetchUserTickets } from 'features/tickets/state/ticketActions';
+
+import { useAuthRedirect } from '../hooks/authRedirects';
+import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
+import { useProjectionRedirect } from 'features/projections/hooks/projectionRedirects';
+
 import Loader from 'common/components/UI/Loader/Loader';
 import UserDetails from '../components/UserDetails/UserDetails';
-import { useProjectionRedirect } from 'features/projections/hooks/projectionRedirects';
 import UserTicketsTable from '../components/UserTicketsTable/UserTicketsTable';
-import { deleteTicket, fetchUserTickets } from 'features/tickets/state/ticketActions';
-import { Ticket } from 'features/tickets/types/Ticket';
-import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
 import UserControlButtonGroup from '../components/UserControlButtonGroup/UserControlButtonGroup';
-import { useAuthRedirect } from '../hooks/authRedirects';
 
 interface Props {
   user: User | null;
@@ -42,11 +47,11 @@ const ProfileContainer: React.FC<Props> = ({
   if (user === null) return <div>No user</div>;
   if (error) return <div>{error.message}</div>;
 
-  const handleEditProfileClick = () => redirectToUserUpdate(user.id);
+  const handleEditProfileClick = (): void => redirectToUserUpdate(user.id);
 
-  const handleTicketDeleteClick = (ticketId: string) => onTicketDelete(ticketId);
+  const handleTicketDeleteClick = (ticketId: string): void => onTicketDelete(ticketId);
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = (): void => {
     onLogout();
     redirectToProjectionList();
   };

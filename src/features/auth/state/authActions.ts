@@ -1,14 +1,18 @@
 import axios from 'axios';
-import { RegisterDto } from 'features/auth/types/RegisterDto';
-import { LoginDto } from 'features/auth/types/LoginDto';
-import { Error } from 'common/types/Error';
+
 import { User } from '../types/User';
-import * as actionTypes from './authTypes';
+import { Error } from 'common/types/Error';
+import { Jwt } from '../types/Jwt';
+
 import { AppDispatch } from 'store/store';
+
+import { LoginDto } from 'features/auth/types/LoginDto';
+import { RegisterDto } from 'features/auth/types/RegisterDto';
 import { UserUpdateDto } from '../types/UserUpdateDto';
 import { LoginResponseDto } from '../types/LoginResponseDto';
+
 import { parseJwt } from '../helpers/parseJwt';
-import { Jwt } from '../types/Jwt';
+import * as actionTypes from './authTypes';
 
 const fetchUsersRequest = () => ({
   type: actionTypes.FETCH_USERS_REQUEST,
@@ -24,13 +28,15 @@ const fetchUsersFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchUsers = () => (dispatch: AppDispatch) => {
-  dispatch(fetchUsersRequest());
-  axios
-    .get('/users')
-    .then((response) => dispatch(fetchUsersSuccess(response.data)))
-    .catch((error) => dispatch(fetchUsersFail(error)));
-};
+export const fetchUsers =
+  () =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchUsersRequest());
+    axios
+      .get('/users')
+      .then((response) => dispatch(fetchUsersSuccess(response.data)))
+      .catch((error) => dispatch(fetchUsersFail(error)));
+  };
 
 const fetchUserRequest = () => ({
   type: actionTypes.FETCH_USER_REQUEST,
@@ -46,13 +52,15 @@ const fetchUserFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchUser = (id: string) => (dispatch: AppDispatch) => {
-  dispatch(fetchUserRequest());
-  axios
-    .get(`/users/${id}`)
-    .then((response) => dispatch(fetchUserSuccess(response.data)))
-    .catch((error) => dispatch(fetchUserFail(error)));
-};
+export const fetchUser =
+  (id: string) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(fetchUserRequest());
+    axios
+      .get(`/users/${id}`)
+      .then((response) => dispatch(fetchUserSuccess(response.data)))
+      .catch((error) => dispatch(fetchUserFail(error)));
+  };
 
 const registerRequest = () => ({
   type: actionTypes.REGISTER_REQUEST,
@@ -67,13 +75,15 @@ const registerFail = (error: Error) => ({
   error: error,
 });
 
-export const register = (registerData: RegisterDto) => (dispatch: AppDispatch) => {
-  dispatch(registerRequest());
-  axios
-    .post(`/auth/register`, registerData)
-    .then((response) => dispatch(registerSuccess()))
-    .catch((error) => dispatch(registerFail(error)));
-};
+export const register =
+  (registerData: RegisterDto) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(registerRequest());
+    axios
+      .post(`/auth/register`, registerData)
+      .then((response) => dispatch(registerSuccess()))
+      .catch((error) => dispatch(registerFail(error)));
+  };
 
 const loginRequest = () => ({
   type: actionTypes.LOGIN_REQUEST,
@@ -90,89 +100,99 @@ const loginFail = (error: Error) => ({
   error: error,
 });
 
-export const login = (loginData: LoginDto) => (dispatch: AppDispatch) => {
-  dispatch(loginRequest());
-  axios
-    .post(`/auth/login`, loginData)
-    .then((response) => {
-      const { userId, firstName, lastName, username, email, created, role, exp }: Jwt = parseJwt(
-        response.data.token
-      );
-      const expirationDate: string = new Date(exp * 1000).toString();
+export const login =
+  (loginData: LoginDto) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(loginRequest());
+    axios
+      .post(`/auth/login`, loginData)
+      .then((response) => {
+        const { userId, firstName, lastName, username, email, created, role, exp }: Jwt = parseJwt(
+          response.data.token
+        );
+        const expirationDate: string = new Date(exp * 1000).toString();
 
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userId', userId);
-      localStorage.setItem('firstName', firstName);
-      localStorage.setItem('lastName', lastName);
-      localStorage.setItem('username', username);
-      localStorage.setItem('email', email);
-      localStorage.setItem('created', created);
-      localStorage.setItem('role', role);
-      localStorage.setItem('expirationDate', expirationDate);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('lastName', lastName);
+        localStorage.setItem('username', username);
+        localStorage.setItem('email', email);
+        localStorage.setItem('created', created);
+        localStorage.setItem('role', role);
+        localStorage.setItem('expirationDate', expirationDate);
 
-      dispatch(loginSuccess(response.data));
-    })
-    .catch((error) => dispatch(loginFail(error)));
-};
-
-export const authCheck = () => (dispatch: AppDispatch) => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    dispatch(logout());
-    return;
-  }
-
-  const expirationDate = localStorage.getItem('expirationDate');
-  if (new Date(expirationDate!) < new Date()) {
-    // Handle token expired case if needed
-    return;
-  }
-
-  const userId = localStorage.getItem('userId');
-  const firstName = localStorage.getItem('firstName');
-  const lastName = localStorage.getItem('lastName');
-  const username = localStorage.getItem('username');
-  const email = localStorage.getItem('email');
-  const created = localStorage.getItem('created');
-  const role = localStorage.getItem('role');
-
-  const user: User = {
-    id: userId!,
-    firstName: firstName!,
-    lastName: lastName!,
-    username: username!,
-    email: email!,
-    created: created!,
-    role: role!,
+        dispatch(loginSuccess(response.data));
+      })
+      .catch((error) => dispatch(loginFail(error)));
   };
 
-  const loginResponse: LoginResponseDto = {
-    token: token,
-    user: user,
-  };
+export const authCheck =
+  () =>
+  (dispatch: AppDispatch): void => {
+    const token: string | null = localStorage.getItem('token');
 
-  dispatch(loginSuccess(loginResponse));
-  dispatch(checkAuthTimeout(expirationDate!));
-};
+    if (!token) {
+      dispatch(logout());
+      return;
+    }
+
+    const expirationDate: string | null = localStorage.getItem('expirationDate');
+
+    if (new Date(expirationDate!) < new Date()) {
+      // TODO: Handle token expired case if needed
+      return;
+    }
+
+    const userId: string | null = localStorage.getItem('userId');
+    const firstName: string | null = localStorage.getItem('firstName');
+    const lastName: string | null = localStorage.getItem('lastName');
+    const username: string | null = localStorage.getItem('username');
+    const email: string | null = localStorage.getItem('email');
+    const created: string | null = localStorage.getItem('created');
+    const role: string | null = localStorage.getItem('role');
+
+    const user: User = {
+      id: userId!,
+      firstName: firstName!,
+      lastName: lastName!,
+      username: username!,
+      email: email!,
+      created: created!,
+      role: role!,
+    };
+
+    const loginResponse: LoginResponseDto = {
+      token: token,
+      user: user,
+    };
+
+    dispatch(loginSuccess(loginResponse));
+    dispatch(checkAuthTimeout(expirationDate!));
+  };
 
 const logoutAction = () => ({
   type: actionTypes.LOGOUT,
 });
 
-export const logout = () => (dispatch: AppDispatch) => {
-  localStorage.clear();
+export const logout =
+  () =>
+  (dispatch: AppDispatch): void => {
+    localStorage.clear();
 
-  dispatch(logoutAction());
-};
+    dispatch(logoutAction());
+  };
 
-export const checkAuthTimeout = (expirationDate: string) => (dispatch: AppDispatch) => {
-  const expirationTimestamp = new Date(expirationDate).getTime();
-  const currentTimestamp = Date.now();
+export const checkAuthTimeout =
+  (expirationDate: string) =>
+  (dispatch: AppDispatch): void => {
+    const expirationTimestamp: number = new Date(expirationDate).getTime();
+    const currentTimestamp: number = Date.now();
 
-  if (expirationTimestamp < currentTimestamp) {
-    dispatch(logout());
-  }
-};
+    if (expirationTimestamp < currentTimestamp) {
+      dispatch(logout());
+    }
+  };
 
 const updateUserRequest = () => ({
   type: actionTypes.UPDATE_USER_REQUEST,
@@ -189,9 +209,10 @@ const updateUserFail = (error: Error) => ({
 });
 
 export const updateUser =
-  (userId: string, userUpdateDto: UserUpdateDto) => (dispatch: AppDispatch) => {
+  (userId: string, userUpdateDto: UserUpdateDto) =>
+  (dispatch: AppDispatch): void => {
     dispatch(updateUserRequest());
-    return axios
+    axios
       .put(`/users/${userId}`, userUpdateDto)
       .then((response) => dispatch(updateUserSuccess(response.data)))
       .catch((error) => dispatch(updateUserFail(error)));
@@ -210,10 +231,12 @@ const deleteUserFail = (error: Error) => ({
   error: error,
 });
 
-export const deleteUser = (userId: string) => (dispatch: AppDispatch) => {
-  dispatch(deleteUserRequest());
-  axios
-    .delete(`/users/${userId}`)
-    .then(() => dispatch(deleteUserSuccess()))
-    .catch((error) => dispatch(deleteUserFail(error)));
-};
+export const deleteUser =
+  (userId: string) =>
+  (dispatch: AppDispatch): void => {
+    dispatch(deleteUserRequest());
+    axios
+      .delete(`/users/${userId}`)
+      .then(() => dispatch(deleteUserSuccess()))
+      .catch((error) => dispatch(deleteUserFail(error)));
+  };

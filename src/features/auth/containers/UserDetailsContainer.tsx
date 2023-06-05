@@ -29,8 +29,8 @@ const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, o
   if (selectedUser === null) return <div>No user</div>;
   if (error) return <div>{error.message}</div>;
 
-  const handleEditClick = () => redirectToUserUpdate(selectedUser.id);
-  const handleDeleteClick = () => {};
+  const handleEditClick = (): void => redirectToUserUpdate(selectedUser.id);
+  const handleDeleteClick = (): void => {};
 
   return (
     <>

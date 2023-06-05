@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router';
 export const useAuthRedirect = () => {
   const navigate = useNavigate();
 
-  const redirectToLogin = () => navigate('/login');
+  const redirectToLogin = (): void => navigate('/login');
 
-  const redirectToProfile = () => navigate('/profile');
+  const redirectToProfile = (): void => navigate('/profile');
 
-  const redirectToUserUpdate = (userId: string) => navigate(`/users/${userId}/edit`);
+  const redirectToUserUpdate = (userId: string): void => navigate(`/users/${userId}/edit`);
 
   return { redirectToLogin, redirectToProfile, redirectToUserUpdate };
 };

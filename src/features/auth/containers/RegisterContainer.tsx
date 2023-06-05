@@ -1,22 +1,21 @@
 import React from 'react';
-import RegisterForm from '../components/RegisterForm/RegisterForm';
 import { connect } from 'react-redux';
+
 import { AppDispatch } from 'store/store';
-import { RegisterDto } from '../types/RegisterDto';
 import { register } from '../state/authActions';
+import { RegisterDto } from '../types/RegisterDto';
+import RegisterForm from '../components/RegisterForm/RegisterForm';
 
 interface Props {
   onRegister: (registerData: RegisterDto) => void;
 }
 
-const RegisterContainer: React.FC<Props> = ({ onRegister }) => {
-  return (
-    <>
-      <div className='page-header'>Register</div>
-      <RegisterForm onSubmit={onRegister} />
-    </>
-  );
-};
+const RegisterContainer: React.FC<Props> = ({ onRegister }) => (
+  <>
+    <div className='page-header'>Register</div>
+    <RegisterForm onSubmit={onRegister} />
+  </>
+);
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onRegister: (registerData: RegisterDto) => dispatch(register(registerData)),

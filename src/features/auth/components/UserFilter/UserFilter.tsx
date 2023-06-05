@@ -1,9 +1,11 @@
 import React from 'react';
+
 import './UserFilter.scss';
+
 import { UserFilterName, UserFilterValue, UserFilters } from 'features/auth/types/UserFilters.d';
+import Button from 'common/components/UI/Button/Button';
 import Search from 'common/components/UI/Search/Search';
 import Dropdown from 'common/components/UI/Dropdown/Dropdown';
-import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   roles: string[];

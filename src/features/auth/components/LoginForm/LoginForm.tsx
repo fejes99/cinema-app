@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import Input from 'common/components/UI/Input/Input';
-import { LoginDto } from 'features/auth/types/LoginDto';
-import './LoginForm.scss';
-import Button from 'common/components/UI/Button/Button';
-import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
 import { Link } from 'react-router-dom';
+
+import './LoginForm.scss';
+
+import { LoginDto } from 'features/auth/types/LoginDto';
+import Button from 'common/components/UI/Button/Button';
+import Input from 'common/components/UI/Input/Input';
+import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
 
 interface Props {
   onSubmit: (loginData: LoginDto) => void;
 }
+
+type ErrorType = {
+  email: string;
+  password: string;
+};
 
 const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   const [login, setLogin] = useState<LoginDto>({
@@ -16,12 +23,12 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     password: '',
   });
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<ErrorType>({
     email: '',
     password: '',
   });
 
-  const isFormValid = login.email.trim() !== '' && login.password.trim() !== '';
+  const isFormValid: boolean = login.email.trim() !== '' && login.password.trim() !== '';
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
@@ -33,17 +40,15 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     const validationErrors = validateForm();
     if (Object.values(validationErrors).some((value) => value !== '')) {
       setErrors(validationErrors);
-    } else {
-      setErrors({
-        email: '',
-        password: '',
-      });
-      onSubmit(login);
+      return;
     }
+
+    setErrors({ email: '', password: '' });
+    onSubmit(login);
   };
 
-  const validateForm = (): { email: string; password: string } => {
-    const validationErrors: { email: string; password: string } = {
+  const validateForm = (): ErrorType => {
+    const validationErrors: ErrorType = {
       email: '',
       password: '',
     };
@@ -62,7 +67,7 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    const emailRegex: RegExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return emailRegex.test(email);
   };
 

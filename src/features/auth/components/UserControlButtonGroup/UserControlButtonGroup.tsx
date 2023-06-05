@@ -1,8 +1,10 @@
 import React from 'react';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import LogoutIcon from '@mui/icons-material/LogoutOutlined';
-import Button from 'common/components/UI/Button/Button';
+
 import './UserControlButtonGroup.scss';
+
+import Button from 'common/components/UI/Button/Button';
 
 interface Props {
   onEdit: () => void;

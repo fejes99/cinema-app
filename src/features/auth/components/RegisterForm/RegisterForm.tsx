@@ -9,6 +9,15 @@ interface Props {
   onSubmit: (registerData: RegisterDto) => void;
 }
 
+type ErrorType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
   const [register, setRegister] = useState<RegisterDto>({
     firstName: '',
@@ -18,9 +27,9 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     password: '',
   });
 
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<ErrorType>({
     firstName: '',
     lastName: '',
     email: '',
@@ -29,7 +38,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     confirmPassword: '',
   });
 
-  const isFormValid =
+  const isFormValid: boolean =
     register.firstName.trim() !== '' &&
     register.lastName.trim() !== '' &&
     register.email.trim() !== '' &&
@@ -44,6 +53,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
 
   const handleSubmit = (): void => {
     const validationErrors = validateForm();
+
     if (Object.values(validationErrors).some((value) => value !== '')) {
       setErrors(validationErrors);
     } else {
@@ -59,8 +69,8 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     }
   };
 
-  const validateForm = (): RegisterDto & { confirmPassword: string } => {
-    const validationErrors: RegisterDto & { confirmPassword: string } = {
+  const validateForm = (): ErrorType => {
+    const validationErrors: ErrorType = {
       firstName: '',
       lastName: '',
       email: '',
@@ -99,7 +109,7 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    const emailRegex: RegExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return emailRegex.test(email);
   };
 

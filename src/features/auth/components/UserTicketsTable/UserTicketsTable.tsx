@@ -1,8 +1,9 @@
 import React from 'react';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+
+import { Ticket } from 'features/tickets/types/Ticket';
 import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
-import { Ticket } from 'features/tickets/types/Ticket';
 
 interface Props {
   tickets: Ticket[];

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import './UserUpdateForm.scss';
+
 import { User } from 'features/auth/types/User';
 import { UserUpdateDto } from 'features/auth/types/UserUpdateDto';
 import Input from 'common/components/UI/Input/Input';

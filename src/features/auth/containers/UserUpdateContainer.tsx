@@ -35,7 +35,7 @@ const UserUpdateContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
 
-  const handleUserUpdate = (id: string, userUpdateDto: UserUpdateDto) => {
+  const handleUserUpdate = (id: string, userUpdateDto: UserUpdateDto): void => {
     onUpdateUser(id, userUpdateDto);
     redirectToProfile();
   };
