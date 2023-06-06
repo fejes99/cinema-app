@@ -27,7 +27,7 @@ const ProjectionDetails: React.FC<Props> = ({ projection, movieDetails, onBuyTic
   ) : (
     <div className='projection-details__buy-ticket'>
       <Button size='medium' type='primary' onClick={onBuyTicket}>
-        Tickets
+        Buy Ticket
       </Button>
     </div>
   );

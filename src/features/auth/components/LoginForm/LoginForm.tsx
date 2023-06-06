@@ -7,6 +7,7 @@ import { LoginDto } from 'features/auth/types/LoginDto';
 import Button from 'common/components/UI/Button/Button';
 import Input from 'common/components/UI/Input/Input';
 import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
+import { isValidEmail } from 'features/auth/helpers/isValidEmail';
 
 interface Props {
   onSubmit: (loginData: LoginDto) => void;
@@ -64,11 +65,6 @@ const LoginForm: React.FC<Props> = ({ onSubmit }) => {
     }
 
     return validationErrors;
-  };
-
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex: RegExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    return emailRegex.test(email);
   };
 
   return (

@@ -5,6 +5,7 @@ import './RegisterForm.scss';
 import Button from 'common/components/UI/Button/Button';
 import { Link } from 'react-router-dom';
 import InputPassword from 'common/components/UI/Input/InputPassword/InputPassword';
+import { isValidEmail } from 'features/auth/helpers/isValidEmail';
 
 interface Props {
   onSubmit: (registerData: RegisterDto) => void;
@@ -109,11 +110,6 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     return validationErrors;
   };
 
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex: RegExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    return emailRegex.test(email);
-  };
-
   return (
     <div className='register'>
       <div className='register__form'>
@@ -164,12 +160,14 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
             confirmPassword={false}
             value={register.password}
             onChange={handleChange}
+            error={errors.password}
           />
           <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
             <InputPassword
               confirmPassword={true}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              error={errors.confirmPassword}
             />
           </div>
           <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
