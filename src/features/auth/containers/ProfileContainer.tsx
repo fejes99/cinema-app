@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppDispatch, StoreState } from 'store/store';
@@ -17,6 +17,8 @@ import Loader from 'common/components/UI/Loader/Loader';
 import UserDetails from '../components/UserDetails/UserDetails';
 import UserTicketsTable from '../components/UserTicketsTable/UserTicketsTable';
 import UserControlButtonGroup from '../components/UserControlButtonGroup/UserControlButtonGroup';
+import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
+import useModal from 'common/hooks/useModal';
 
 interface Props {
   user: User | null;
@@ -37,6 +39,10 @@ const ProfileContainer: React.FC<Props> = ({
   onTicketDelete,
   onLogout,
 }) => {
+  const [ticketToDelete, setTicketToDelete] = useState<Ticket | undefined>();
+
+  const { showDeleteModal, openDeleteModal, closeAllModals } = useModal();
+
   const { redirectToProjectionList, redirectToProjectionDetails } = useProjectionRedirect();
   const { redirectToTicketDetails } = useTicketRedirect();
   const { redirectToUserUpdate } = useAuthRedirect();
@@ -49,7 +55,17 @@ const ProfileContainer: React.FC<Props> = ({
 
   const handleEditProfileClick = (): void => redirectToUserUpdate(user.id);
 
-  const handleTicketDeleteClick = (ticketId: string): void => onTicketDelete(ticketId);
+  const handleTicketDeleteClick = (ticketId: string): void => {
+    const ticketToDelete = userTickets!.find((ticket) => ticket.id === ticketId);
+    setTicketToDelete(ticketToDelete);
+    openDeleteModal();
+  };
+
+  const deleteModalConfirmation = (): void => {
+    onTicketDelete(ticketToDelete!.id);
+    closeAllModals();
+    onFetchUserTickets(user.id);
+  };
 
   const handleLogoutClick = (): void => {
     onLogout();
@@ -69,6 +85,12 @@ const ProfileContainer: React.FC<Props> = ({
           onDelete={handleTicketDeleteClick}
         />
       )}
+      <DeleteModal
+        title={'Ticket'}
+        show={showDeleteModal}
+        onDelete={deleteModalConfirmation}
+        onClose={closeAllModals}
+      />
     </>
   );
 };

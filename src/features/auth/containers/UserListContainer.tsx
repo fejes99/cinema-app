@@ -30,10 +30,7 @@ const UserListContainer: React.FC<Props> = ({
   onUpdateUser,
   onDeleteUser,
 }) => {
-  const [userToUpdateId, setuserToUpdateId] = useState<string>('');
   const [userToUpdate, setUserToUpdate] = useState<User | undefined>();
-
-  const [userToDeleteId, setuserToDeleteId] = useState<string>('');
   const [userToDelete, setUserToDelete] = useState<User | undefined>();
 
   const [filters, setFilters] = useState<UserFilters>(defaultUserFilters);
@@ -66,22 +63,20 @@ const UserListContainer: React.FC<Props> = ({
   const handleEditClick = (id: string): void => {
     const userToUpdate = filteredUsers.find((user) => user.id === id);
     setUserToUpdate(userToUpdate);
-    setuserToUpdateId(id);
     openUpdateModal();
   };
 
   const handleDeleteClick = (id: string): void => {
     const userToDelete = filteredUsers.find((user) => user.id === id);
     setUserToDelete(userToDelete);
-    setuserToDeleteId(id);
     openDeleteModal();
   };
 
   const updateModalConfirmation = (userUpdateDto: UserUpdateDto): void =>
-    onUpdateUser(userToUpdateId, userUpdateDto);
+    onUpdateUser(userToUpdate!.id, userUpdateDto);
 
   const deleteModalConfirmation = (): void => {
-    onDeleteUser(userToDeleteId);
+    onDeleteUser(userToDelete!.id);
     closeAllModals();
     onFetchUsers();
   };
