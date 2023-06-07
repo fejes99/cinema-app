@@ -60,8 +60,6 @@ const ticketAddSeats = (seats: Seat[]) => ({
 });
 
 export const ticketSeats = (projection: Projection, seats: Seat[]) => (dispatch: AppDispatch) => {
-  dispatch(ticketAddMovie(projection.movie!));
-  dispatch(ticketAddProjection(projection));
   dispatch(ticketAddSeats(seats));
 };
 

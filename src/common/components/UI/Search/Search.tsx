@@ -12,7 +12,6 @@ const Search: React.FC<Props> = ({ onChange }) => {
     onChange(value);
   };
 
-  // TODO: Use Input component
   return <input className='search' type='text' placeholder='Search...' onChange={handleChange} />;
 };
 
