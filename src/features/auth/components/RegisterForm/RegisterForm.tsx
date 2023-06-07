@@ -162,18 +162,18 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
             onChange={handleChange}
             error={errors.password}
           />
-          <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
-            <InputPassword
-              confirmPassword={true}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              error={errors.confirmPassword}
-            />
-          </div>
-          <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
-            Register
-          </Button>
         </div>
+        <div className={`register__field ${errors.confirmPassword ? 'error' : ''}`}>
+          <InputPassword
+            confirmPassword={true}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            error={errors.confirmPassword}
+          />
+        </div>
+        <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
+          Register
+        </Button>
 
         <div className='register__login'>
           Already have account?

@@ -15,6 +15,10 @@ import { AppDispatch, StoreState } from 'store/store';
 import { authCheck } from 'features/auth/state/authActions';
 import { User } from 'features/auth/types/User';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
+import PrivateRoute from 'common/components/PrivateRoute/PrivateRoute';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   token: string | null;
@@ -32,19 +36,42 @@ const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
 
   return (
     <div className='App'>
+      <ToastContainer />
       <Header />
       <div className='main'>
         <Routes>
-          <Route path='/movies/*' element={<MoviePage />} />
-          <Route path='/projections/*' element={<ProjectionPage />} />
-          <Route path='/tickets/*' element={<TicketPage user={user} />} />
-          {user && isAdmin(user) ? <Route path='/users/*' element={<UserPage />} /> : null}
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/movies/*' element={<MoviePage user={user} />} />
+          <Route path='/projections/*' element={<ProjectionPage user={user} />} />
+          <Route
+            path='/tickets/*'
+            element={
+              <PrivateRoute isAuthenticated={Boolean(user)}>
+                <TicketPage />
+              </PrivateRoute>
+            }
+          />
+          {user && isAdmin(user) ? (
+            <Route
+              path='/users/*'
+              element={
+                <PrivateRoute isAuthenticated={Boolean(user)}>
+                  <UserPage />
+                </PrivateRoute>
+              }
+            />
+          ) : null}
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute isAuthenticated={Boolean(user)}>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/' element={<Navigate to={'/projections'} replace />} />
-
-          {/* <Route path='*' element={<Navigate to={'/'} replace />} /> */}
+          <Route path='*' element={<Navigate to={'/'} replace />} />
         </Routes>
       </div>
     </div>
