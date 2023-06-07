@@ -82,15 +82,16 @@ const registerFail = (error: Error) => {
   };
 };
 
-export const register =
-  (registerData: RegisterDto) =>
-  (dispatch: AppDispatch): void => {
-    dispatch(registerRequest());
-    axios
-      .post(`/auth/register`, registerData)
-      .then(() => dispatch(registerSuccess()))
-      .catch((error) => dispatch(registerFail(error.response.data)));
-  };
+export const register = (registerData: RegisterDto) => (dispatch: AppDispatch) => {
+  dispatch(registerRequest());
+  return axios
+    .post(`/auth/register`, registerData)
+    .then(() => dispatch(registerSuccess()))
+    .catch((error) => {
+      dispatch(registerFail(error.response.data));
+      throw error;
+    });
+};
 
 const loginRequest = () => ({
   type: actionTypes.LOGIN_REQUEST,
