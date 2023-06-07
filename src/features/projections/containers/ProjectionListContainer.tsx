@@ -25,6 +25,7 @@ import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';
 import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
 import { Error } from 'common/types/Error';
+import { sort } from 'common/helpers/sort';
 
 interface Props {
   user: User | null;
@@ -77,11 +78,15 @@ const ProjectionListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error.detail}</div>;
 
-  const movies: string[] = [...new Set(projections.map((projection) => projection.movie!.name))];
-  const theaters: string[] = [...new Set(projections.map((projection) => projection.theater.name))];
-  const projectionTypes: string[] = [
+  const movies: string[] = sort([
+    ...new Set(projections.map((projection) => projection.movie!.name)),
+  ]);
+  const theaters: string[] = sort([
+    ...new Set(projections.map((projection) => projection.theater.name)),
+  ]);
+  const projectionTypes: string[] = sort([
     ...new Set(projections.map((projection) => projection.projectionType.name)),
-  ];
+  ]);
 
   const handleFiltersChange = (
     projectionFilterName: ProjectionFilterName,

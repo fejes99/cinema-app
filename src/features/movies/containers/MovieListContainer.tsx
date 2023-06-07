@@ -22,6 +22,7 @@ import Loader from 'common/components/UI/Loader/Loader';
 import Button from 'common/components/UI/Button/Button';
 import MovieList from '../components/MovieList/MovieList';
 import MovieFilter from '../components/MovieFilter/MovieFilter';
+import { sort } from 'common/helpers/sort';
 
 interface Props {
   user: User | null;
@@ -73,8 +74,8 @@ const MovieListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error.detail}</div>;
 
-  const distributors: string[] = [...new Set(movies.map((movie) => movie.distributor))];
-  const countries: string[] = [...new Set(movies.map((movie) => movie.country))];
+  const distributors: string[] = sort([...new Set(movies.map((movie) => movie.distributor))]);
+  const countries: string[] = sort([...new Set(movies.map((movie) => movie.country))]);
 
   const handleFiltersChange = (movieFilterName: MovieFilterName, value: MovieFilterValue): void => {
     setFilters((prevFilters) => ({

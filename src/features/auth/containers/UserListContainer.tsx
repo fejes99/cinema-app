@@ -13,6 +13,7 @@ import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import UserRoleChangeModal from '../components/UserRoleChangeModal/UserRoleChangeModal';
 import { UserUpdateDto } from '../types/UserUpdateDto';
 import { Error } from 'common/types/Error';
+import { sort } from 'common/helpers/sort';
 
 interface Props {
   users: User[];
@@ -44,7 +45,7 @@ const UserListContainer: React.FC<Props> = ({
   if (loading) return <Loader />;
   if (error) return <div>{error.detail}</div>;
 
-  const roles: string[] = [...new Set(users.map((user) => user.role))];
+  const roles: string[] = sort([...new Set(users.map((user) => user.role))]);
 
   const handleFiltersChange = (userFilterName: UserFilterName, value: UserFilterValue): void => {
     setFilters((prevFilters) => ({
