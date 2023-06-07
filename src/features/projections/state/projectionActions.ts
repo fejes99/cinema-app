@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import * as actionTypes from './projectionTypes';
 import { Projection } from '../types/Projection';
 import { Error } from 'common/types/Error';
@@ -58,15 +59,21 @@ const createProjectionRequest = () => ({
   type: actionTypes.CREATE_PROJECTION_REQUEST,
 });
 
-const createProjectionSuccess = (newProjection: Projection) => ({
-  type: actionTypes.CREATE_PROJECTION_SUCCESS,
-  selectedProjection: newProjection,
-});
+const createProjectionSuccess = (newProjection: Projection) => {
+  toast.success('Projection successfully created');
+  return {
+    type: actionTypes.CREATE_PROJECTION_SUCCESS,
+    selectedProjection: newProjection,
+  };
+};
 
-const createProjectionFail = (error: Error) => ({
-  type: actionTypes.CREATE_PROJECTION_FAIL,
-  error: error,
-});
+const createProjectionFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.CREATE_PROJECTION_FAIL,
+    error: error,
+  };
+};
 
 const addProjection = (projectionCreateDto: ProjectionCreateDto) => (dispatch: AppDispatch) => {
   dispatch(createProjectionRequest());
@@ -86,10 +93,13 @@ const updateProjectionRequest = () => ({
   type: actionTypes.UPDATE_PROJECTION_REQUEST,
 });
 
-const updateProjectionSuccess = (editedProjection: ProjectionUpdateDto) => ({
-  type: actionTypes.UPDATE_PROJECTION_SUCCESS,
-  selectedProjection: editedProjection,
-});
+const updateProjectionSuccess = (editedProjection: ProjectionUpdateDto) => {
+  toast.success('Projection successfully updated');
+  return {
+    type: actionTypes.UPDATE_PROJECTION_SUCCESS,
+    selectedProjection: editedProjection,
+  };
+};
 
 const updateProjectionFail = (error: Error) => ({
   type: actionTypes.UPDATE_PROJECTION_FAIL,
@@ -116,14 +126,20 @@ const deleteProjectionRequest = () => ({
   type: actionTypes.DELETE_PROJECTION_REQUEST,
 });
 
-const deleteProjectionSuccess = () => ({
-  type: actionTypes.DELETE_PROJECTION_SUCCESS,
-});
+const deleteProjectionSuccess = () => {
+  toast.success('Projection successfully deleted');
+  return {
+    type: actionTypes.DELETE_PROJECTION_SUCCESS,
+  };
+};
 
-const deleteProjectionFail = (error: Error) => ({
-  type: actionTypes.DELETE_PROJECTION_FAIL,
-  error: error,
-});
+const deleteProjectionFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.DELETE_PROJECTION_FAIL,
+    error: error,
+  };
+};
 
 const removeProjection = (projectionId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteProjectionRequest());

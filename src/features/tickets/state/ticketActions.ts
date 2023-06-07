@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Movie } from 'features/movies/types/Movie';
 import { Projection } from 'features/projections/types/Projection';
 import { Seat } from 'features/theaters/types/Seat';
+import { toast } from 'react-toastify';
 
 const fetchTicketRequest = () => ({
   type: actionTypes.FETCH_TICKET_REQUEST,
@@ -68,14 +69,20 @@ const createTicketRequest = () => ({
   type: actionTypes.CREATE_TICKET_REQUEST,
 });
 
-const createTicketSuccess = () => ({
-  type: actionTypes.CREATE_TICKET_SUCCESS,
-});
+const createTicketSuccess = () => {
+  toast.success('Ticket successfully created');
+  return {
+    type: actionTypes.CREATE_TICKET_SUCCESS,
+  };
+};
 
-const createTicketFail = (error: Error) => ({
-  type: actionTypes.CREATE_TICKET_FAIL,
-  error: error,
-});
+const createTicketFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.CREATE_TICKET_FAIL,
+    error: error,
+  };
+};
 
 export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: AppDispatch) => {
   dispatch(createTicketRequest());
@@ -89,14 +96,20 @@ const deleteTicketRequest = () => ({
   type: actionTypes.DELETE_TICKET_REQUEST,
 });
 
-const deleteTicketSuccess = () => ({
-  type: actionTypes.DELETE_TICKET_SUCCESS,
-});
+const deleteTicketSuccess = () => {
+  toast.success('Ticket successfully deleted');
+  return {
+    type: actionTypes.DELETE_TICKET_SUCCESS,
+  };
+};
 
-const deleteTicketFail = (error: Error) => ({
-  type: actionTypes.DELETE_TICKET_FAIL,
-  error: error,
-});
+const deleteTicketFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.DELETE_TICKET_FAIL,
+    error: error,
+  };
+};
 
 export const deleteTicket = (ticketId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteTicketRequest());

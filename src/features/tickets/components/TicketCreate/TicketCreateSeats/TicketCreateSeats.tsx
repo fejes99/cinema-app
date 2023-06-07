@@ -121,7 +121,7 @@ const TicketCreateSeats: React.FC<Props> = ({ projection, setSeats }) => {
         />
       );
 
-      if (currentRow.length === rowLength || index === seats.length - 1) {
+      if (currentRow.length === rowLength) {
         rows.push(
           <div key={index} className='ticket-create-seats__row'>
             {currentRow}

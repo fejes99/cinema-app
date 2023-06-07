@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import { User } from '../types/User';
 import { Error } from 'common/types/Error';
@@ -66,14 +67,20 @@ const registerRequest = () => ({
   type: actionTypes.REGISTER_REQUEST,
 });
 
-const registerSuccess = () => ({
-  type: actionTypes.REGISTER_SUCCESS,
-});
+const registerSuccess = () => {
+  toast.success('You have successfully registered');
+  return {
+    type: actionTypes.REGISTER_SUCCESS,
+  };
+};
 
-const registerFail = (error: Error) => ({
-  type: actionTypes.REGISTER_FAIL,
-  error: error,
-});
+const registerFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.REGISTER_FAIL,
+    error: error,
+  };
+};
 
 export const register =
   (registerData: RegisterDto) =>
@@ -140,7 +147,7 @@ export const authCheck =
     const expirationDate: string | null = localStorage.getItem('expirationDate');
 
     if (new Date(expirationDate!) < new Date()) {
-      // TODO: Handle token expired case if needed
+      logout();
       return;
     }
 
@@ -198,15 +205,21 @@ const updateUserRequest = () => ({
   type: actionTypes.UPDATE_USER_REQUEST,
 });
 
-const updateUserSuccess = (user: User) => ({
-  type: actionTypes.UPDATE_USER_SUCCESS,
-  updatedUser: user,
-});
+const updateUserSuccess = (user: User) => {
+  toast.success('Account updated');
+  return {
+    type: actionTypes.UPDATE_USER_SUCCESS,
+    updatedUser: user,
+  };
+};
 
-const updateUserFail = (error: Error) => ({
-  type: actionTypes.UPDATE_USER_FAIL,
-  error: error,
-});
+const updateUserFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.UPDATE_USER_FAIL,
+    error: error,
+  };
+};
 
 export const updateUser =
   (userId: string, userUpdateDto: UserUpdateDto) =>
@@ -222,14 +235,20 @@ const deleteUserRequest = () => ({
   type: actionTypes.DELETE_USER_REQUEST,
 });
 
-const deleteUserSuccess = () => ({
-  type: actionTypes.DELETE_USER_SUCCESS,
-});
+const deleteUserSuccess = () => {
+  toast.success('Account successfully deleted');
+  return {
+    type: actionTypes.DELETE_USER_SUCCESS,
+  };
+};
 
-const deleteUserFail = (error: Error) => ({
-  type: actionTypes.DELETE_USER_FAIL,
-  error: error,
-});
+const deleteUserFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.DELETE_USER_FAIL,
+    error: error,
+  };
+};
 
 export const deleteUser =
   (userId: string) =>

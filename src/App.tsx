@@ -36,9 +36,9 @@ const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
 
   return (
     <div className='App'>
-      <ToastContainer />
       <Header />
       <div className='main'>
+        <ToastContainer autoClose={3000} />
         <Routes>
           <Route path='/movies/*' element={<MoviePage user={user} />} />
           <Route path='/projections/*' element={<ProjectionPage user={user} />} />

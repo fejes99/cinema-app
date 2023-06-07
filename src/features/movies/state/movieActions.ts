@@ -4,6 +4,7 @@ import { AppDispatch } from 'store/store';
 import { Movie } from '../types/Movie';
 import * as actionTypes from './movieTypes';
 import { MovieUpdateDto } from '../types/MovieUpdateDto';
+import { toast } from 'react-toastify';
 
 const fetchMoviesRequest = () => ({
   type: actionTypes.FETCH_MOVIES_REQUEST,
@@ -57,15 +58,23 @@ const createMovieRequest = () => ({
   type: actionTypes.CREATE_MOVIE_REQUEST,
 });
 
-const createMovieSuccess = (newMovie: Movie) => ({
-  type: actionTypes.CREATE_MOVIE_SUCCESS,
-  selectedMovie: newMovie,
-});
+const createMovieSuccess = (newMovie: Movie) => {
+  toast.success('Movie successfully created');
+  return {
+    type: actionTypes.CREATE_MOVIE_SUCCESS,
+    selectedMovie: newMovie,
+  };
+};
 
-const createMovieFail = (error: Error) => ({
-  type: actionTypes.CREATE_MOVIE_FAIL,
-  error: error,
-});
+const createMovieFail = (error: Error) => {
+  // TODO: Handle errors
+
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.CREATE_MOVIE_FAIL,
+    error: error,
+  };
+};
 
 const addMovie = (movieCreateDto: MovieCreateDto) => (dispatch: AppDispatch) => {
   dispatch(createMovieRequest());
@@ -86,15 +95,21 @@ const updateMovieRequest = () => ({
   type: actionTypes.UPDATE_MOVIE_REQUEST,
 });
 
-const updateMovieSuccess = (editedMovie: Movie) => ({
-  type: actionTypes.UPDATE_MOVIE_SUCCESS,
-  selectedMovie: editedMovie,
-});
+const updateMovieSuccess = (editedMovie: Movie) => {
+  toast.success('Movie successfully updated');
+  return {
+    type: actionTypes.UPDATE_MOVIE_SUCCESS,
+    selectedMovie: editedMovie,
+  };
+};
 
-const updateMovieFail = (error: Error) => ({
-  type: actionTypes.UPDATE_MOVIE_FAIL,
-  error: error,
-});
+const updateMovieFail = (error: Error) => {
+  toast.error('Something went wrong');
+  return {
+    type: actionTypes.UPDATE_MOVIE_FAIL,
+    error: error,
+  };
+};
 
 const editMovie = (movieId: string, movieUpdateDto: MovieUpdateDto) => (dispatch: AppDispatch) => {
   dispatch(updateMovieRequest());
@@ -114,14 +129,20 @@ const deleteMovieRequest = () => ({
   type: actionTypes.DELETE_MOVIE_REQUEST,
 });
 
-const deleteMovieSuccess = () => ({
-  type: actionTypes.DELETE_MOVIE_SUCCESS,
-});
+const deleteMovieSuccess = () => {
+  toast.success('Movie successfully deleted');
+  return {
+    type: actionTypes.DELETE_MOVIE_SUCCESS,
+  };
+};
 
-const deleteMovieFail = (error: Error) => ({
-  type: actionTypes.DELETE_MOVIE_FAIL,
-  error: error,
-});
+const deleteMovieFail = (error: Error) => {
+  toast.success('Something went wrong');
+  return {
+    type: actionTypes.DELETE_MOVIE_FAIL,
+    error: error,
+  };
+};
 
 const removeMovie = (movieId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteMovieRequest());
