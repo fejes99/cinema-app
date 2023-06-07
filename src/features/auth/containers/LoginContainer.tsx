@@ -1,37 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
-import { AppDispatch } from 'store/store';
-import { login } from '../state/authActions';
+import { Error } from 'common/types/Error';
 import { LoginDto } from '../types/LoginDto';
+
+import { login } from '../state/authActions';
+import { AppDispatch, StoreState } from 'store/store';
+
 import { useProjectionRedirect } from 'features/projections/hooks/projectionRedirects';
+
 import LoginForm from '../components/LoginForm/LoginForm';
 
 interface Props {
-  onLogin: (loginData: LoginDto) => void;
+  error: Error | null;
+  onLogin: (loginData: LoginDto) => any;
 }
 
-const LoginContainer: React.FC<Props> = ({ onLogin }) => {
-  const navigate = useNavigate();
+const LoginContainer: React.FC<Props> = ({ error, onLogin }) => {
   const { redirectToProjectionList } = useProjectionRedirect();
 
-  const handleLogin = (loginData: LoginDto): void => {
-    onLogin(loginData);
-    redirectToProjectionList();
-    // navigate(-1);
+  const handleLogin = async (loginData: LoginDto) => {
+    try {
+      await onLogin(loginData);
+      redirectToProjectionList();
+    } catch (err: any) {
+      toast.error(error?.detail);
+    }
   };
 
   return (
     <>
       <div className='page-header'>Login</div>
-      <LoginForm onSubmit={handleLogin} />;
+      <LoginForm onSubmit={handleLogin} />
     </>
   );
 };
+
+const mapStateToProps = (state: StoreState) => ({
+  error: state.auth.error,
+});
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onLogin: (loginData: LoginDto) => dispatch(login(loginData)),
 });
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -68,7 +68,7 @@ const createProjectionSuccess = (newProjection: Projection) => {
 };
 
 const createProjectionFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.CREATE_PROJECTION_FAIL,
     error: error,
@@ -80,7 +80,7 @@ const addProjection = (projectionCreateDto: ProjectionCreateDto) => (dispatch: A
   return axios
     .post('/projections', projectionCreateDto)
     .then((response) => dispatch(createProjectionSuccess(response.data)))
-    .catch((error) => dispatch(createProjectionFail(error)));
+    .catch((error) => dispatch(createProjectionFail(error.response.data)));
 };
 
 export const createProjection =
@@ -134,7 +134,7 @@ const deleteProjectionSuccess = () => {
 };
 
 const deleteProjectionFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.DELETE_PROJECTION_FAIL,
     error: error,
@@ -145,11 +145,11 @@ const removeProjection = (projectionId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteProjectionRequest());
   return axios
     .delete(`/projections/${projectionId}`)
-    .then((response) => {
+    .then(() => {
       dispatch(deleteProjectionSuccess());
       dispatch(fetchProjections());
     })
-    .catch((error) => dispatch(deleteProjectionFail(error)));
+    .catch((error) => dispatch(deleteProjectionFail(error.response.data)));
 };
 
 export const deleteProjection = (projectionId: string) => async (dispatch: AppDispatch) => {

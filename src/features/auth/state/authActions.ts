@@ -75,8 +75,7 @@ const registerSuccess = () => {
 };
 
 const registerFail = (error: Error) => {
-  toast.error('Something went wrong');
-  console.log(error);
+  toast.error(error.detail);
   return {
     type: actionTypes.REGISTER_FAIL,
     error: error,
@@ -89,8 +88,8 @@ export const register =
     dispatch(registerRequest());
     axios
       .post(`/auth/register`, registerData)
-      .then((response) => dispatch(registerSuccess()))
-      .catch((error) => dispatch(registerFail(error)));
+      .then(() => dispatch(registerSuccess()))
+      .catch((error) => dispatch(registerFail(error.response.data)));
   };
 
 const loginRequest = () => ({
@@ -108,32 +107,33 @@ const loginFail = (error: Error) => ({
   error: error,
 });
 
-export const login =
-  (loginData: LoginDto) =>
-  (dispatch: AppDispatch): void => {
-    dispatch(loginRequest());
-    axios
-      .post(`/auth/login`, loginData)
-      .then((response) => {
-        const { userId, firstName, lastName, username, email, created, role, exp }: Jwt = parseJwt(
-          response.data.token
-        );
-        const expirationDate: string = new Date(exp * 1000).toString();
+export const login = (loginData: LoginDto) => (dispatch: AppDispatch) => {
+  dispatch(loginRequest());
+  return axios
+    .post(`/auth/login`, loginData)
+    .then((response) => {
+      const { userId, firstName, lastName, username, email, created, role, exp }: Jwt = parseJwt(
+        response.data.token
+      );
+      const expirationDate: string = new Date(exp * 1000).toString();
 
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', userId);
-        localStorage.setItem('firstName', firstName);
-        localStorage.setItem('lastName', lastName);
-        localStorage.setItem('username', username);
-        localStorage.setItem('email', email);
-        localStorage.setItem('created', created);
-        localStorage.setItem('role', role);
-        localStorage.setItem('expirationDate', expirationDate);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('firstName', firstName);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+      localStorage.setItem('created', created);
+      localStorage.setItem('role', role);
+      localStorage.setItem('expirationDate', expirationDate);
 
-        dispatch(loginSuccess(response.data));
-      })
-      .catch((error) => dispatch(loginFail(error)));
-  };
+      dispatch(loginSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(loginFail(error.response.data));
+      throw error;
+    });
+};
 
 export const authCheck =
   () =>
@@ -215,7 +215,7 @@ const updateUserSuccess = (user: User) => {
 };
 
 const updateUserFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.UPDATE_USER_FAIL,
     error: error,
@@ -229,7 +229,7 @@ export const updateUser =
     axios
       .put(`/users/${userId}`, userUpdateDto)
       .then((response) => dispatch(updateUserSuccess(response.data)))
-      .catch((error) => dispatch(updateUserFail(error)));
+      .catch((error) => dispatch(updateUserFail(error.response.data)));
   };
 
 const deleteUserRequest = () => ({
@@ -244,7 +244,7 @@ const deleteUserSuccess = () => {
 };
 
 const deleteUserFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.DELETE_USER_FAIL,
     error: error,
@@ -258,5 +258,5 @@ export const deleteUser =
     axios
       .delete(`/users/${userId}`)
       .then(() => dispatch(deleteUserSuccess()))
-      .catch((error) => dispatch(deleteUserFail(error)));
+      .catch((error) => dispatch(deleteUserFail(error.response.data)));
   };

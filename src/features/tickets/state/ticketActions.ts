@@ -77,7 +77,7 @@ const createTicketSuccess = () => {
 };
 
 const createTicketFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.CREATE_TICKET_FAIL,
     error: error,
@@ -88,8 +88,8 @@ export const createTicket = (ticketCreateDto: TicketCreateDto) => (dispatch: App
   dispatch(createTicketRequest());
   axios
     .post('/tickets', ticketCreateDto)
-    .then((response) => dispatch(createTicketSuccess()))
-    .catch((error) => dispatch(createTicketFail(error)));
+    .then(() => dispatch(createTicketSuccess()))
+    .catch((error) => dispatch(createTicketFail(error.response.data)));
 };
 
 const deleteTicketRequest = () => ({
@@ -104,7 +104,7 @@ const deleteTicketSuccess = () => {
 };
 
 const deleteTicketFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.DELETE_TICKET_FAIL,
     error: error,
@@ -116,7 +116,7 @@ export const deleteTicket = (ticketId: string) => (dispatch: AppDispatch) => {
   axios
     .delete(`/tickets/${ticketId}`)
     .then(() => dispatch(deleteTicketSuccess()))
-    .catch((error) => dispatch(deleteTicketFail(error)));
+    .catch((error) => dispatch(deleteTicketFail(error.response.data)));
 };
 
 const fetchUserTicketsRequest = () => ({

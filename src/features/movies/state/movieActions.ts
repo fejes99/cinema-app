@@ -5,6 +5,7 @@ import { Movie } from '../types/Movie';
 import * as actionTypes from './movieTypes';
 import { MovieUpdateDto } from '../types/MovieUpdateDto';
 import { toast } from 'react-toastify';
+import { Error } from 'common/types/Error';
 
 const fetchMoviesRequest = () => ({
   type: actionTypes.FETCH_MOVIES_REQUEST,
@@ -67,9 +68,7 @@ const createMovieSuccess = (newMovie: Movie) => {
 };
 
 const createMovieFail = (error: Error) => {
-  // TODO: Handle errors
-
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.CREATE_MOVIE_FAIL,
     error: error,
@@ -81,7 +80,7 @@ const addMovie = (movieCreateDto: MovieCreateDto) => (dispatch: AppDispatch) => 
   return axios
     .post('/movies', movieCreateDto)
     .then((response) => dispatch(createMovieSuccess(response.data)))
-    .catch((error) => dispatch(createMovieFail(error)));
+    .catch((error) => dispatch(createMovieFail(error.response.data)));
 };
 
 export const createMovie =
@@ -104,7 +103,7 @@ const updateMovieSuccess = (editedMovie: Movie) => {
 };
 
 const updateMovieFail = (error: Error) => {
-  toast.error('Something went wrong');
+  toast.error(error.detail);
   return {
     type: actionTypes.UPDATE_MOVIE_FAIL,
     error: error,
@@ -116,7 +115,7 @@ const editMovie = (movieId: string, movieUpdateDto: MovieUpdateDto) => (dispatch
   return axios
     .put(`/movies/${movieId}`, movieUpdateDto)
     .then((response) => dispatch(updateMovieSuccess(response.data)))
-    .catch((error) => dispatch(updateMovieFail(error)));
+    .catch((error) => dispatch(updateMovieFail(error.response.data)));
 };
 
 export const updateMovie =
