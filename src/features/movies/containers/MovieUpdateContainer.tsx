@@ -17,7 +17,7 @@ import MovieUpdateForm from '../components/MovieUpdateForm/MovieUpdateForm';
 interface Props {
   movie: Movie | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchMovie: (id: string) => void;
   onUpdateMovie: (id: string, movieUpdateDto: MovieUpdateDto) => void;
 }
@@ -37,7 +37,7 @@ const MovieUpdateContainer: React.FC<Props> = ({
   }, [id, movie, onFetchMovie]);
 
   if (loading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleMovieUpdate = (id: string, movieUpdateDto: MovieUpdateDto): void => {
     onUpdateMovie(id, movieUpdateDto);

@@ -76,6 +76,7 @@ const registerSuccess = () => {
 
 const registerFail = (error: Error) => {
   toast.error('Something went wrong');
+  console.log(error);
   return {
     type: actionTypes.REGISTER_FAIL,
     error: error,

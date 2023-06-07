@@ -12,11 +12,12 @@ import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import UserRoleChangeModal from '../components/UserRoleChangeModal/UserRoleChangeModal';
 import { UserUpdateDto } from '../types/UserUpdateDto';
+import { Error } from 'common/types/Error';
 
 interface Props {
   users: User[];
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchUsers: () => void;
   onUpdateUser: (userId: string, userUpdateDto: UserUpdateDto) => void;
   onDeleteUser: (userId: string) => void;
@@ -41,7 +42,7 @@ const UserListContainer: React.FC<Props> = ({
   useEffect(() => onFetchUsers(), [onFetchUsers]);
 
   if (loading) return <Loader />;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const roles: string[] = [...new Set(users.map((user) => user.role))];
 

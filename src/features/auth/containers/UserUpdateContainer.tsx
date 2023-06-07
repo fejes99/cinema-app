@@ -13,7 +13,7 @@ import UserUpdateForm from '../components/UserUpdateForm/UserUpdateForm';
 interface Props {
   user: User | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchUser: (id: string) => void;
   onUpdateUser: (id: string, userUpdateDto: UserUpdateDto) => void;
 }
@@ -33,7 +33,7 @@ const UserUpdateContainer: React.FC<Props> = ({
   }, [id, onFetchUser, user]);
 
   if (loading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleUserUpdate = (id: string, userUpdateDto: UserUpdateDto): void => {
     onUpdateUser(id, userUpdateDto);

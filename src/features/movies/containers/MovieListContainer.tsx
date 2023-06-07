@@ -27,7 +27,7 @@ interface Props {
   user: User | null;
   movies: Movie[];
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchMovies: () => void;
   onBuyTicket: (movie: Movie) => void;
 }
@@ -71,7 +71,7 @@ const MovieListContainer: React.FC<Props> = ({
   }, [loading, movies]);
 
   if (loading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const distributors: string[] = [...new Set(movies.map((movie) => movie.distributor))];
   const countries: string[] = [...new Set(movies.map((movie) => movie.country))];

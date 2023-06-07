@@ -1,3 +1,4 @@
+import { Error } from 'common/types/Error';
 import { Theater } from '../types/Theater';
 
 export const FETCH_THEATER_REQUEST = 'FETCH_THEATER_REQUEST';

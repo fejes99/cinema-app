@@ -8,11 +8,12 @@ import Loader from 'common/components/UI/Loader/Loader';
 import UserDetails from '../components/UserDetails/UserDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
 import { useAuthRedirect } from '../hooks/authRedirects';
+import { Error } from 'common/types/Error';
 
 interface Props {
   selectedUser: User | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchUser: (id: string) => void;
 }
 
@@ -27,7 +28,7 @@ const UserDetailsContainer: React.FC<Props> = ({ selectedUser, loading, error, o
 
   if (loading) return <Loader />;
   if (selectedUser === null) return <div>No user</div>;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleEditClick = (): void => redirectToUserUpdate(selectedUser.id);
   const handleDeleteClick = (): void => {};

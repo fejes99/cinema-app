@@ -1,1 +1,6 @@
-export type Error = any;
+export type Error = {
+  status: number;
+  type: string;
+  title: string;
+  detail: string;
+};

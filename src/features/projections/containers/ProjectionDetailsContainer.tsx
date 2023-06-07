@@ -24,12 +24,13 @@ import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import TicketsTable from '../components/ProjectionDetails/TicketsTable/TicketsTable';
 import ProjectionDetails from '../components/ProjectionDetails/ProjectionDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
+import { Error } from 'common/types/Error';
 
 interface Props {
   user: User | null;
   selectedProjection: Projection | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchProjection: (id: string) => void;
   onDeleteProjection: (id: string) => void;
   onTicketProjection: (projection: Projection) => void;
@@ -58,7 +59,7 @@ const ProjectionDetailsContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (selectedProjection === null) return <div>No projection</div>;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleEditClick = (): void => redirectToProjectionUpdate(selectedProjection.id);
 

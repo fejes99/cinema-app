@@ -12,13 +12,14 @@ import { Projection } from '../types/Projection';
 import ProjectionUpdateForm from '../components/ProjectionUpdateForm/ProjectionUpdateForm';
 import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import Loader from 'common/components/UI/Loader/Loader';
+import { Error } from 'common/types/Error';
 
 interface Props {
   projection: Projection | null;
   projectionTypes: ProjectionType[];
   theaters: Theater[];
   loading: boolean;
-  error: string | null;
+  error: Error | null;
   onFetchProjectionTypes: () => void;
   onFetchTheaters: () => void;
   onFetchProjection: (id: string) => void;
@@ -51,7 +52,7 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   }, [onFetchProjection, onFetchProjectionTypes, onFetchTheaters]);
 
   if (!projection || loading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleProjectionUpdate = (id: string, projectionUpdateDto: ProjectionUpdateDto): void => {
     onUpdateProjection(id, projectionUpdateDto);
@@ -81,7 +82,7 @@ const mapStateToProps = (state: StoreState) => {
   const projection = state.projections.selectedProjection;
 
   let loading = projectionTypesLoading || theatersLoading;
-  let error = projectionTypesError?.message || theatersError?.message || null;
+  let error = projectionTypesError || theatersError || null;
 
   return {
     projection,

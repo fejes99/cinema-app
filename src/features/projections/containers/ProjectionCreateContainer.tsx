@@ -17,13 +17,14 @@ import { fetchProjectionTypes } from 'features/projectionTypes/state/projectionT
 
 import Loader from 'common/components/UI/Loader/Loader';
 import ProjectionCreateForm from '../components/ProjectionCreateForm/ProjectionCreateForm';
+import { Error } from 'common/types/Error';
 
 interface Props {
   movies: Movie[];
   projectionTypes: ProjectionType[];
   theaters: Theater[];
   isLoading: boolean;
-  error: string | null;
+  error: Error | null;
   onCreateProjection: (projectionCreateDto: ProjectionCreateDto) => void;
   onFetchMovies: () => void;
   onFetchProjectionTypes: () => void;
@@ -52,7 +53,7 @@ const ProjectionCreateContainer: React.FC<Props> = ({
   }, [onFetchMovies, onFetchProjectionTypes, onFetchTheaters]);
 
   if (isLoading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleProjectionCreate = (projectionCreateDto: ProjectionCreateDto): void => {
     onCreateProjection(projectionCreateDto);
@@ -94,8 +95,7 @@ const mapStateToProps = (state: StoreState) => {
   const { theaters, loading: theatersLoading, error: theatersError } = state.theaters;
 
   let isLoading = moviesLoading || projectionTypesLoading || theatersLoading;
-  let error =
-    moviesError?.message || projectionTypesError?.message || theatersError?.message || null;
+  let error = moviesError || projectionTypesError || theatersError || null;
 
   return {
     movies,

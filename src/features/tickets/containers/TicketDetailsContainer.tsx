@@ -14,7 +14,7 @@ import TicketDetails from '../components/TicketDetails/TicketDetails';
 interface Props {
   selectedTicket: Ticket | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchTicket: (id: string) => void;
 }
 
@@ -32,7 +32,7 @@ const TicketDetailsContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (selectedTicket === null) return <div>No ticket</div>;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   return (
     <>

@@ -12,7 +12,6 @@ import { User } from 'features/auth/types/User';
 import { useAuthRedirect } from 'features/auth/hooks/authRedirects';
 import { useMovieRedirect } from '../hooks/movieRedirects';
 import { useTicketRedirect } from 'features/tickets/hooks/ticketRedirects';
-import { extractYoutubeVideoId } from '../helpers/movieGetVideoIdFromTrailer';
 import { isAdmin } from 'features/auth/helpers/isAdmin';
 
 import Loader from 'common/components/UI/Loader/Loader';
@@ -20,13 +19,13 @@ import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import MovieDetails from '../components/MovieDetails/MovieDetails';
 import AdminButtonGroup from 'common/components/UI/AdminButtonGroup/AdminButtonGroup';
-import { JsxElement } from 'typescript';
+import { Error } from 'common/types/Error';
 
 interface Props {
   user: User | null;
   selectedMovie: Movie | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchMovie: (id: string) => void;
   onDeleteMovie: (id: string) => void;
   onBuyTicket: (movie: Movie) => void;
@@ -63,7 +62,7 @@ const MovieDetailsContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (selectedMovie === null) return <div>No movie</div>;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleBuyTicketClick = (movie: Movie): void =>
     !user ? redirectToLogin() : (onBuyTicket(movie), redirectToTicketCreate());

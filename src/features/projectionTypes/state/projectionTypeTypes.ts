@@ -1,3 +1,4 @@
+import { Error } from 'common/types/Error';
 import { ProjectionType } from '../types/ProjectionType';
 
 export const FETCH_PROJECTIONTYPES_REQUEST = 'FETCH_PROJECTIONTYPES_REQUEST';

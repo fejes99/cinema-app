@@ -24,12 +24,13 @@ import useModal from 'common/hooks/useModal';
 import DeleteModal from 'common/components/UI/Modals/DeleteModal/DeleteModal';
 import ProjectionsTable from '../components/ProjectionsTable/ProjectionsTable';
 import ProjectionFilter from '../components/ProjectionFilter/ProjectionFilter';
+import { Error } from 'common/types/Error';
 
 interface Props {
   user: User | null;
   projections: Projection[];
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchProjection: (id: string) => void;
   onFetchProjections: () => void;
   onDeleteProjection: (id: string) => Promise<void>;
@@ -74,7 +75,7 @@ const ProjectionListContainer: React.FC<Props> = ({
   }, [loading, projections]);
 
   if (loading) return <Loader />;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const movies: string[] = [...new Set(projections.map((projection) => projection.movie!.name))];
   const theaters: string[] = [...new Set(projections.map((projection) => projection.theater.name))];

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { AppDispatch, StoreState } from 'store/store';
 
 import { User } from '../types/User';
+import { Error } from 'common/types/Error';
 import { Ticket } from 'features/tickets/types/Ticket';
 
 import { logout } from '../state/authActions';
@@ -24,7 +25,7 @@ interface Props {
   user: User | null;
   userTickets: Ticket[] | null;
   loading: boolean;
-  error: Error;
+  error: Error | null;
   onFetchUserTickets: (userId: string) => void;
   onTicketDelete: (ticketId: string) => void;
   onLogout: () => void;
@@ -51,7 +52,7 @@ const ProfileContainer: React.FC<Props> = ({
 
   if (loading) return <Loader />;
   if (user === null) return <div>No user</div>;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.detail}</div>;
 
   const handleEditProfileClick = (): void => redirectToUserUpdate(user.id);
 
