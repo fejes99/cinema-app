@@ -15,11 +15,9 @@ export const projectionSearchFilter = (
   projections: Projection[],
   filters: ProjectionFilters
 ): Projection[] => {
-  return projections.filter((projection) => {
-    const now = new Date();
-
-    return (
-      new Date(projection.time) >= now &&
+  return projections.filter(
+    (projection) =>
+      new Date(projection.time) >= new Date() &&
       (filters.movie === defaultProjectionFilters.movie ||
         projection.movie?.name === filters.movie) &&
       (filters.theater === defaultProjectionFilters.theater ||
@@ -30,6 +28,5 @@ export const projectionSearchFilter = (
         projection.price >= filters.minPrice) &&
       (filters.maxPrice === defaultProjectionFilters.maxPriceFixed ||
         projection.price <= filters.maxPrice)
-    );
-  });
+  );
 };
