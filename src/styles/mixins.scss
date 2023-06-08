@@ -1,0 +1,11 @@
+@mixin button($height, $padding, $font-size) {
+  height: $height;
+  padding: 0 $padding;
+  font-size: $font-size;
+}
+
+@mixin button-type($background-color, $color, $border) {
+  background-color: $background-color;
+  color: $color;
+  border: $border;
+}

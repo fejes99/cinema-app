@@ -1,4 +1,5 @@
-@import 'variables.scss';
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 // Height
 $button-height-small: 40px;
@@ -23,27 +24,19 @@ $button-height-large: 60px;
   color: $color-white;
 
   &-small {
-    height: $button-height-small;
-    padding: 0 15px;
-    font-size: 14px;
+    @include button($button-height-small, $spacing-small, 14px);
   }
 
   &-medium {
-    height: $button-height-medium;
-    padding: 0 $spacing-medium;
-    font-size: 16px;
+    @include button($button-height-medium, $spacing-medium, 16px);
   }
 
   &-large {
-    height: $button-height-large;
-    padding: 0 $spacing-large;
-    font-size: 18px;
+    @include button($button-height-large, $spacing-large, 18px);
   }
 
   &-primary {
-    background-color: $color-primary;
-    color: $color-white;
-    border: none;
+    @include button-type($color-primary, $color-white, none);
 
     &:hover {
       background-color: darken($color-primary, 10%);
@@ -51,9 +44,7 @@ $button-height-large: 60px;
   }
 
   &-secondary {
-    background-color: $color-secondary;
-    color: $color-white;
-    border: none;
+    @include button-type($color-secondary, $color-white, none);
 
     &:hover {
       background-color: darken($color-secondary, 10%);
@@ -61,9 +52,7 @@ $button-height-large: 60px;
   }
 
   &-success {
-    background-color: $color-success;
-    color: $color-white;
-    border: none;
+    @include button-type($color-success, $color-white, none);
 
     &:hover {
       background-color: darken($color-success, 10%);
@@ -71,9 +60,7 @@ $button-height-large: 60px;
   }
 
   &-error {
-    background-color: $color-error;
-    color: $color-white;
-    border: none;
+    @include button-type($color-error, $color-white, none);
 
     &:hover {
       background-color: darken($color-error, 10%);
@@ -81,10 +68,8 @@ $button-height-large: 60px;
   }
 
   &-disabled {
-    background-color: $color-disabled;
-    color: $text-color-disabled;
+    @include button-type($color-disabled, $text-color-disabled, none);
     cursor: not-allowed;
-    border: none;
 
     &:hover {
       background-color: $color-disabled;
