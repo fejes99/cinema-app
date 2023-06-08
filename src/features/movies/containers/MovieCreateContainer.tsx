@@ -21,9 +21,6 @@ const MovieCreateContainer: React.FC<Props> = ({ onCreateMovie }) => {
     redirectToMovieList();
   };
 
-  // TODO: Fetch country list
-  // if (loading) return <Loader />;
-
   return (
     <>
       <div className='page-header'>Create Movie</div>
