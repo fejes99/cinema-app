@@ -16,7 +16,10 @@ export const projectionSearchFilter = (
   filters: ProjectionFilters
 ): Projection[] => {
   return projections.filter((projection) => {
+    const now = new Date();
+
     return (
+      new Date(projection.time) >= now &&
       (filters.movie === defaultProjectionFilters.movie ||
         projection.movie?.name === filters.movie) &&
       (filters.theater === defaultProjectionFilters.theater ||

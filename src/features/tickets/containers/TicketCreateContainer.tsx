@@ -82,7 +82,10 @@ const TicketCreateContainer: React.FC<Props> = ({
       <TicketCreateNavigation
         title={step === 1 ? 'Projections' : step === 2 ? 'Seats' : 'Details'}
         backTitle={step === 1 ? 'Back' : step === 2 ? 'Projections' : 'Seats'}
-        backDisabled={step === 1}
+        backDisabled={
+          step === 1 ||
+          (!movie?.projections?.length && !pickedProjection?.movie?.projections?.length)
+        }
         onBack={handleBack}
         nextTitle={
           step === 1
