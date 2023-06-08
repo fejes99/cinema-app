@@ -39,18 +39,12 @@ const createTicketInit = (movie: Movie) => ({
 export const ticketInit = (movie: Movie) => (dispatch: AppDispatch) =>
   dispatch(createTicketInit(movie));
 
-const ticketAddMovie = (movie: Movie) => ({
-  type: actionTypes.TICKET_ADD_MOVIE,
-  movie: movie,
-});
-
 const ticketAddProjection = (projection: Projection) => ({
   type: actionTypes.TICKET_ADD_PROJECTION,
   projection: projection,
 });
 
 export const ticketProjection = (projection: Projection) => (dispatch: AppDispatch) => {
-  dispatch(ticketAddMovie(projection.movie!));
   dispatch(ticketAddProjection(projection));
 };
 

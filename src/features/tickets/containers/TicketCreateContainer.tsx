@@ -52,7 +52,9 @@ const TicketCreateContainer: React.FC<Props> = ({
     setIsEmptySeats(pickedSeats === null || pickedSeats!.length === 0);
   }, [pickedSeats]);
 
-  const handleProjectionSelect = (projection: Projection): void => onTicketProjection(projection);
+  const handleProjectionSelect = (projection: Projection): void => {
+    onTicketProjection(projection);
+  };
 
   const handleNext = (): void => {
     if (step === 1) {

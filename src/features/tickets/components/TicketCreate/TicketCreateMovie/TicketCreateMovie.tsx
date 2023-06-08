@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import './TicketCreateMovie.scss';
 
@@ -13,23 +13,17 @@ interface Props {
   selectProjection: (projection: Projection) => void;
 }
 
-const TicketCreateMovie: React.FC<Props> = ({
-  movie: { name, director, distributor, duration, country, year, projections },
-  selectProjection,
-}) => {
+const TicketCreateMovie: React.FC<Props> = ({ movie, selectProjection }) => {
   const [activeProjection, setActiveProjection] = useState<Projection | null>(null);
 
   const handleProjectionClick = (projection: Projection): void => {
     setActiveProjection(projection);
+    selectProjection(projection);
   };
 
-  useEffect(() => {
-    activeProjection && selectProjection(activeProjection);
-  }, [activeProjection]);
-
   const projectionList =
-    projections && projections.length > 0 ? (
-      projections.map((projection) => (
+    movie.projections && movie.projections.length > 0 ? (
+      movie.projections.map((projection) => (
         <div
           key={projection.id}
           className={
@@ -50,20 +44,20 @@ const TicketCreateMovie: React.FC<Props> = ({
 
   return (
     <div className='ticket-create-movie'>
-      <div className='ticket-create-movie__title'>{name}</div>
+      <div className='ticket-create-movie__title'>{movie.name}</div>
       <div className='ticket-create-movie__row'>
         <div className='ticket-create-movie__content'>
-          <span className='bold'>Director:</span> {director}
+          <span className='bold'>Director:</span> {movie.director}
         </div>
         <div className='ticket-create-movie__content'>
-          <span className='bold'>Distributor:</span> {distributor}
+          <span className='bold'>Distributor:</span> {movie.distributor}
         </div>
         <div className='ticket-create-movie__content'>
-          <span className='bold'>Duration:</span> {formatDuration(duration)}
+          <span className='bold'>Duration:</span> {formatDuration(movie.duration)}
         </div>
         <div className='ticket-create-movie__content'>
           <span className='bold'>
-            {country} {year}
+            {movie.country} {movie.year}
           </span>
         </div>
       </div>

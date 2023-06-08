@@ -83,11 +83,11 @@ $button-height-large: 60px;
   &-disabled {
     background-color: $color-disabled;
     color: $text-color-disabled;
-    cursor: default;
+    cursor: not-allowed;
     border: none;
 
     &:hover {
-      background-color: darken($color-disabled, 10%);
+      background-color: $color-disabled;
     }
   }
 
