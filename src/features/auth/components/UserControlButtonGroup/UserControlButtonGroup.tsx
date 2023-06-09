@@ -16,13 +16,13 @@ const UserControlButtonGroup: React.FC<Props> = ({ onEdit, onLogout }) => (
     <Button size='large' type='secondary' onClick={onEdit}>
       Edit Profile
       <div className='icon'>
-        <ModeEditOutlinedIcon fontSize='small' />
+        <ModeEditOutlinedIcon fontSize='large' />
       </div>
     </Button>
     <Button size='large' type='secondary' onClick={onLogout}>
       Logout
       <div className='icon'>
-        <LogoutIcon fontSize='small' />
+        <LogoutIcon fontSize='large' />
       </div>
     </Button>
   </div>

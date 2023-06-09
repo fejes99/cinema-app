@@ -104,13 +104,13 @@ const MovieFilter: React.FC<Props> = ({
         <Button size='medium' type='secondary'>
           Sort
           <div className='icon'>
-            <SortIcon />
+            <SortIcon fontSize='large' />
           </div>
         </Button>
         <Button size='medium' type='secondary' onClick={resetFilters}>
           Reset
           <div className='icon'>
-            <RestartAltIcon />
+            <RestartAltIcon fontSize='large' />
           </div>
         </Button>
       </div>

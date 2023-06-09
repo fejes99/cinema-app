@@ -31,7 +31,11 @@ const InputPassword: React.FC<Props> = ({ confirmPassword, value, onChange, erro
           className='input-password__field-toggle'
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          {showPassword ? (
+            <VisibilityOffIcon fontSize='large' />
+          ) : (
+            <VisibilityIcon fontSize='large' />
+          )}
         </div>
       </div>
       {error && <div className='input-password__error'>{error}</div>}

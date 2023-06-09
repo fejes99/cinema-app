@@ -51,10 +51,10 @@ const ProjectionsTable: React.FC<Props> = ({
             {isAdmin ? (
               <td className='icons'>
                 <div onClick={() => onEdit(projection.id)}>
-                  <ModeEditOutlinedIcon className='edit-icon' />
+                  <ModeEditOutlinedIcon fontSize='large' className='edit-icon' />
                 </div>
                 <div onClick={() => onDelete(projection.id)}>
-                  <DeleteOutlinedIcon className='delete-icon' />
+                  <DeleteOutlinedIcon fontSize='large' className='delete-icon' />
                 </div>
               </td>
             ) : null}

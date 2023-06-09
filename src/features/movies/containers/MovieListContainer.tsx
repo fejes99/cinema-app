@@ -105,7 +105,7 @@ const MovieListContainer: React.FC<Props> = ({
       <Button size='large' type='primary' onClick={redirectToMovieCreate}>
         Add Movie
         <div className='icon'>
-          <AddIcon />
+          <AddIcon fontSize='large' />
         </div>
       </Button>
     ) : null;

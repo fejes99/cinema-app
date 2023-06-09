@@ -49,7 +49,7 @@ const UserTicketsTable: React.FC<Props> = ({
           <td>{ticket.seat.number}</td>
           <td>
             <div onClick={() => onDelete(ticket.id)}>
-              <DeleteOutlinedIcon className='delete-icon' />
+              <DeleteOutlinedIcon fontSize='large' className='delete-icon' />
             </div>
           </td>
         </tr>

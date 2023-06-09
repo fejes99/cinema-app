@@ -39,7 +39,7 @@ const UserFilter: React.FC<Props> = ({
       <Button size='medium' type='secondary' onClick={resetFilters}>
         Reset
         <div className='icon'>
-          <RestartAltIcon />
+          <RestartAltIcon fontSize='large' />
         </div>
       </Button>
     </div>

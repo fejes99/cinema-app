@@ -38,10 +38,10 @@ const UsersTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
               <td className='align-center'>{user.role}</td>
               <td className='icons'>
                 <div onClick={() => onEdit(user.id)}>
-                  <ModeEditOutlinedIcon className='edit-icon' />
+                  <ModeEditOutlinedIcon fontSize='large' className='edit-icon' />
                 </div>
                 <div onClick={() => onDelete(user.id)}>
-                  <DeleteOutlinedIcon className='delete-icon' />
+                  <DeleteOutlinedIcon fontSize='large' className='delete-icon' />
                 </div>
               </td>
             </tr>

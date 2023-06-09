@@ -130,7 +130,7 @@ const ProjectionListContainer: React.FC<Props> = ({
       <Button size='large' type='primary' onClick={redirectToProjectionCreate}>
         Add Projection
         <div className='icon'>
-          <AddIcon />
+          <AddIcon fontSize='large' />
         </div>
       </Button>
     ) : null;
