@@ -73,7 +73,7 @@ const ProjectionCreateContainer: React.FC<Props> = ({
 
   return (
     <>
-      <div className='page-header'>Create projection</div>
+      <div className='page-header'>Create Projection</div>
       <ProjectionCreateForm
         movies={movies}
         projectionTypes={updatedProjectionTypes}
