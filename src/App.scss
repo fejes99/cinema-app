@@ -1,10 +1,16 @@
-@import 'styles/variables.scss';
+@import 'styles/global.scss';
 
 .main {
   width: 100%;
   max-width: 1300px;
   padding: 120px 0;
   margin: 0 auto;
+
+  @include lg {
+    padding: 10vh vw;
+    margin: 0;
+    width: 100%;
+  }
 }
 
 .bold {
@@ -45,12 +51,6 @@
 
 .icon {
   margin-left: 10px;
-}
-
-.flex-space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* Icons */

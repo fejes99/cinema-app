@@ -1,8 +1,16 @@
-@import 'styles/variables.scss';
+@import 'styles/global.scss';
 
 .movie-list {
   display: flex;
   flex-wrap: wrap;
   margin-top: $spacing-large;
   justify-content: space-between;
+
+  @include lg {
+    justify-content: space-around;
+  }
+
+  @include md {
+    flex-direction: column;
+  }
 }

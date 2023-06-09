@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@import 'styles/global.scss';
 
 .movie-filter {
   display: flex;
@@ -7,6 +7,10 @@
   margin-bottom: $spacing-large;
   padding: 10px 0;
   border-radius: $border-radius-large;
+
+  // @include lg {
+  //   display: none;
+  // }
 
   &__row {
     width: 100%;

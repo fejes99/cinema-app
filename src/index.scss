@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@import 'styles/global.scss';
 
 body {
   margin: 0;
@@ -8,15 +8,17 @@ body {
   color: $text-color;
 
   /* Background image */
-  padding: 0;
-  margin: 0;
   background-image: url('/common/assets/background-image.jpg');
-  background-color: $background-color-primary;
   background-size: cover;
   background-position: center;
   position: relative;
   background-attachment: fixed;
   z-index: -100;
+
+  @include lg {
+    // background-image: none;
+    // background-color: $background-color-primary;
+  }
 
   &::before {
     content: '';
@@ -27,8 +29,13 @@ body {
     width: 100%;
     min-height: 100vh;
     height: 100%;
+
     z-index: -99;
     background-color: rgba($background-color-primary, 0.96);
+
+    @include lg {
+      // display: none;
+    }
   }
 }
 

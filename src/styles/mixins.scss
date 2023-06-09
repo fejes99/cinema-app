@@ -1,3 +1,31 @@
+@import 'variables.scss';
+
+// Breakpoint mixins
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}
+
+// Button mixins
 @mixin button($height, $padding, $font-size) {
   height: $height;
   padding: 0 $padding;
