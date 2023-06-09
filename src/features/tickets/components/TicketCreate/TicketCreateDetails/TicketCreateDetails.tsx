@@ -23,7 +23,7 @@ const TicketCreateDetails: React.FC<Props> = ({ projection, seats }) => {
       <div className='ticket-create-details__title'>Projection details</div>
       <div className='ticket-create-details__row'>
         <div className='ticket-create-details__section'>
-          <div className='ticket-create-details__subtitle'>Projection:</div>
+          <div className='ticket-create-details__subtitle'>Projection</div>
           <div className='ticket-create-details__content'>
             <span className='bold'>Movie:</span>
             {projection.movie?.name}
@@ -42,7 +42,7 @@ const TicketCreateDetails: React.FC<Props> = ({ projection, seats }) => {
           </div>
         </div>
         <div className='ticket-create-details__section'>
-          <div className='ticket-create-details__subtitle'>Tickets:</div>
+          <div className='ticket-create-details__subtitle'>Tickets</div>
           <div className='ticket-create-details__content'>
             <span className='bold'>Number of tickets:</span>
             {seats.length}
@@ -57,7 +57,7 @@ const TicketCreateDetails: React.FC<Props> = ({ projection, seats }) => {
           </div>
         </div>
         <div className='ticket-create-details__section'>
-          <div className='ticket-create-details__subtitle'>Price:</div>
+          <div className='ticket-create-details__subtitle'>Price</div>
           <div className='ticket-create-details__content'>
             <span className='bold'>Total price:</span>
             {formatPrice(projection.price * seats.length)}

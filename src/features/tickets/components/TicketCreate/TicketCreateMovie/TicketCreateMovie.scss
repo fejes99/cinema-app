@@ -1,9 +1,9 @@
 @import 'styles/global.scss';
 
 .ticket-create-movie {
-  margin-top: 30px;
+  margin-top: $spacing-large;
   background-color: $background-color-secondary;
-  padding: 40px 60px;
+  padding: 4rem 6rem;
   border-radius: $border-radius-large;
   box-shadow: $box-shadow;
 
@@ -24,7 +24,7 @@
     margin-bottom: $spacing-large;
 
     &:last-child {
-      margin-bottom: 0px;
+      margin-bottom: 0rem;
     }
 
     &-content {
@@ -33,13 +33,14 @@
   }
 
   &__title {
-    font-size: 64px;
-    font-weight: bold;
+    font-size: $font-size-header;
     text-align: center;
-    margin-bottom: $spacing-large;
+    font-weight: bold;
+    margin-bottom: 4.5rem;
   }
 
   &__content {
+    font-size: $font-size-small;
     .bold {
       margin-right: 5px;
     }
@@ -56,11 +57,11 @@
     border: 1px solid $background-color-primary;
     background-color: $color-primary;
     color: white;
-    width: 55px;
     text-align: center;
     font-weight: 600;
-    padding: 20px;
+    padding: $spacing-small $spacing-large;
     border-radius: $border-radius;
+    font-size: $font-size-small;
     transition: all 0.2s ease-in-out;
 
     &-sold {
