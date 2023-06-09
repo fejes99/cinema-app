@@ -8,9 +8,9 @@
   padding: 10px 0;
   border-radius: $border-radius-large;
 
-  // @include lg {
-  //   display: none;
-  // }
+  @include xl {
+    display: none;
+  }
 
   &__row {
     width: 100%;

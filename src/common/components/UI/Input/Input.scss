@@ -3,9 +3,10 @@
 .input {
   display: flex;
   flex-direction: column;
-  height: 70px; // Set a fixed height for the component
+  height: 7rem;
   margin-bottom: $spacing-medium;
   color: $text-color;
+  font-size: $font-medium;
 
   &__label {
     margin-bottom: $spacing-small;
@@ -14,12 +15,12 @@
   &__field {
     box-sizing: border-box;
     width: 100%;
+    font-size: $font-small;
     display: inline-block;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f2f2f2;
+    padding: $spacing-small;
+    border: 0.1rem solid $color-gray;
+    background-color: $color-background-input-field;
     border-radius: $border-radius;
-    font-size: 16px;
     transition: $transition;
 
     &.error {
@@ -34,7 +35,7 @@
 
   &__error {
     color: red;
-    font-size: 14px;
+    font-size: 1.2rem;
     margin-top: $spacing-small;
   }
 }

@@ -19,6 +19,10 @@ $color-secondary: #1f221a;
 $color-success: #28a745;
 $color-error: #4f2857;
 $color-disabled: #e9ecef;
+$color-gray: #ccc;
+
+$color-placeholder: #aaa;
+$color-background-input-field: #f2f2f2;
 
 $color-white: #fff;
 
@@ -34,29 +38,29 @@ $text-color-disabled: #6c757d;
 $font-header: 'Inter', sans-serif;
 $font-text: 'Montserrat', sans-serif;
 
+// Font sizes
+$font-small: 1.5rem;
+$font-medium: 1.8rem;
+$font-large: 2.1rem;
+
 // Spacing
-$spacing-small: 15px;
-$spacing-medium: 25px;
-$spacing-large: 35px;
+$spacing-small: 1.5rem;
+$spacing-medium: 2.5rem;
+$spacing-large: 3.5rem;
 
 // Border
-$border-radius: 5px;
-$border-radius-large: 10px;
+$border-radius: 0.5rem;
+$border-radius-large: 1rem;
 
 // Shadows
-$box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-$box-shadow-hover: 0px 3px 6px rgba(0, 0, 0, 0.3);
+$box-shadow: 0rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+$box-shadow-hover: 0rem 0.3rem 0.6rem rgba(0, 0, 0, 0.3);
 
-$box-shadow-large: 0px 3px 6px rgba(0, 0, 0, 0.2);
-$box-shadow-large-hover: 0px 5px 8px rgba(0, 0, 0, 0.3);
+$box-shadow-large: 0rem 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
+$box-shadow-large-hover: 0rem 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
 
 // Sizes
 $page-content-max-width: 1300px;
-
-// Spacing
-$spacing-small: 10px;
-$spacing-medium: 20px;
-$spacing-large: 30px;
 
 // Transitions
 $transition: all 0.2 ease;

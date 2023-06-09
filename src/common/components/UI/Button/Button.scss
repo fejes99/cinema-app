@@ -1,38 +1,39 @@
 @import 'styles/global.scss';
-@import 'styles/mixins.scss';
 
 // Height
-$button-height-small: 40px;
-$button-height-medium: 50px;
-$button-height-large: 60px;
+$button-height-small: 4rem;
+$button-height-medium: 5rem;
+$button-height-large: 6rem;
 
 .button {
   white-space: nowrap;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  padding: 0 25px;
+
+  color: $color-white;
+  padding: 0rem $spacing-medium;
+  height: 5rem;
   border-radius: $border-radius;
-  font-size: 16px;
+
   font-weight: bold;
   text-align: center;
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
-  color: $color-white;
 
   &-small {
-    @include button($button-height-small, $spacing-small, 14px);
+    @include button($button-height-small, $spacing-small, $font-small);
   }
 
   &-medium {
-    @include button($button-height-medium, $spacing-medium, 16px);
+    @include button($button-height-medium, $spacing-medium, $font-medium);
   }
 
   &-large {
-    @include button($button-height-large, $spacing-large, 18px);
+    @include button($button-height-large, $spacing-large, $font-large);
   }
 
   &-primary {

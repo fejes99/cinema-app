@@ -1,5 +1,7 @@
+@import 'styles/global.scss';
+
 .admin-button-group {
-  margin-bottom: 30px;
+  margin-bottom: $spacing-large;
   display: flex;
   justify-content: space-around;
   text-align: center;

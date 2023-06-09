@@ -1,12 +1,10 @@
+@import 'styles/global.scss';
+
 .navbar {
   height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  margin-right: 20px;
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  margin-right: $spacing-medium;
 }

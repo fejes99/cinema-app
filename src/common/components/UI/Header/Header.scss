@@ -2,7 +2,7 @@
 
 .header {
   background-color: #1a1a1a;
-  height: 70px;
+  height: 7rem;
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,8 +10,8 @@
 
   &__title {
     color: white;
-    margin-left: 10px;
-    font-size: 33px;
+    margin-left: $spacing-small;
+    font-size: 3rem;
     font-weight: 500;
     font-family: $font-header;
     cursor: default;

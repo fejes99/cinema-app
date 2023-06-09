@@ -6,11 +6,11 @@
   margin-top: $spacing-large;
   justify-content: space-between;
 
-  @include lg {
+  @include xl {
     justify-content: space-around;
   }
 
-  @include md {
+  @include lg {
     flex-direction: column;
   }
 }

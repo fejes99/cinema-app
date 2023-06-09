@@ -29,7 +29,7 @@
       width: 40%;
       border-radius: 10px;
 
-      @include lg {
+      @include xl {
         width: 100%;
       }
     }
@@ -39,12 +39,12 @@
       display: flex;
       justify-content: space-between;
 
-      @include lg {
+      @include xl {
         width: 100%;
       }
     }
 
-    @include lg {
+    @include xl {
       align-items: center;
     }
   }
@@ -67,13 +67,13 @@
   }
 
   &__image {
-    background-image: url('https://picsum.photos/200/250');
+    background-image: url('https://picsum.photos/300/250');
     background-size: cover;
     width: 200px;
     height: 250px;
     border-radius: $border-radius-large;
 
-    @include lg {
+    @include xl {
       width: 300px;
     }
   }
@@ -104,17 +104,18 @@
     width: 100%;
   }
 
-  @include lg {
+  @include xl {
     flex-direction: column;
     align-items: center;
     height: 550px;
-    width: 380px;
-    padding: 15px 30px;
+    width: 450px;
+    padding: 15px 50px;
   }
 
-  @include md {
+  @include lg {
     width: 100%;
     flex-direction: row;
     height: 320px;
+    border-radius: 0;
   }
 }

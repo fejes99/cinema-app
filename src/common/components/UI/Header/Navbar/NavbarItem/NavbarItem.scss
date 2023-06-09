@@ -2,8 +2,9 @@
 
 .navbar-item {
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: calc(100% - 5px);
+  height: calc(100% - 0.5rem);
   padding: 0 $spacing-medium;
   position: relative;
 
@@ -15,7 +16,7 @@
     justify-content: center;
     text-decoration: none;
     color: #fff;
-    font-size: 16px;
+    font-size: $font-medium;
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
@@ -27,7 +28,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 0;
-      height: 3px;
+      height: 0.3rem;
       background-color: white;
       transition: width 0.2s ease-in-out;
     }

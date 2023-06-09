@@ -3,7 +3,7 @@
 .main {
   width: 100%;
   max-width: 1300px;
-  padding: 120px 0;
+  padding: 12rem 0;
   margin: 0 auto;
 
   @include lg {
@@ -18,7 +18,7 @@
 }
 
 .padding-right {
-  padding-right: 50px;
+  padding-right: 5rem;
 }
 
 .align-left {
@@ -50,7 +50,7 @@
 }
 
 .icon {
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 
 /* Icons */
@@ -66,9 +66,10 @@
 
 /* Table styles */
 table {
-  margin-top: 30px;
+  margin-top: $spacing-large;
   width: 100%;
-  max-width: 1300px;
+  max-width: 130rem;
+  font-size: $font-small;
   border-radius: $border-radius;
   background-color: $background-color-secondary;
   border-spacing: 0;
@@ -80,8 +81,9 @@ th {
   background-color: $background-color-primary;
   font-weight: bold;
   text-align: center;
-  padding: 10px 50px;
-  height: 40px;
+  font-size: $font-medium;
+  padding: 1rem 5rem;
+  height: 4rem;
 
   &:first-child {
     border-top-left-radius: $border-radius;
@@ -94,7 +96,7 @@ th {
 
 tr th,
 td {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0.1rem solid #ccc;
 }
 
 tr {
@@ -110,12 +112,11 @@ tr {
 }
 
 td {
-  padding: 10px 15px;
+  padding: 1.5rem 1rem;
   text-align: center;
-  height: 40px;
 
   &:first-of-type {
-    padding-left: 50px;
+    padding-left: 5rem;
   }
 
   &.icons {
@@ -146,16 +147,16 @@ td {
 .modal {
   background-color: $background-color-secondary;
   border-radius: $border-radius-large;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  padding: 50px;
-  width: 550px;
+  box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.2);
+  padding: 5rem;
+  width: 55rem;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
 
   &__title {
-    font-size: 24px;
+    font-size: $font-large;
     font-weight: bold;
     margin-bottom: $spacing-large;
     text-transform: uppercase;
@@ -169,10 +170,9 @@ td {
   }
 }
 
-/* Page header */
 .page-header {
   font-family: $font-header;
   font-weight: bold;
-  font-size: 60px;
-  margin-bottom: 30px;
+  font-size: 6rem;
+  margin-bottom: $spacing-large;
 }
