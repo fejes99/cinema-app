@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px;
+  padding: 5rem;
   background-color: $background-color-secondary;
   border-radius: $border-radius-large;
   box-shadow: $box-shadow;
 
   &__title {
-    font-size: 30px;
+    font-size: $font-header;
     text-transform: uppercase;
     margin-bottom: $spacing-large;
   }
@@ -24,7 +24,7 @@
 
   &__field {
     width: 100%;
-    max-width: 600px;
+    max-width: 60rem;
     border-radius: $border-radius;
 
     padding-bottom: $spacing-medium;
@@ -32,7 +32,7 @@
 
   &__register {
     cursor: default;
-    font-size: 14px;
+    font-size: $font-small;
     text-align: center;
     margin-top: $spacing-medium;
     transition: $transition;
@@ -42,8 +42,8 @@
       cursor: pointer;
       text-decoration: none;
       color: black;
-      border-bottom: 1px solid #28a745;
-      margin: 5px;
+      border-bottom: 0.1rem solid #28a745;
+      margin: 0.5rem;
       transition: $transition;
 
       &:hover {

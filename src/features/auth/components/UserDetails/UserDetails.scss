@@ -3,8 +3,8 @@
 .user-details {
   background-color: $background-color-secondary;
 
-  margin-bottom: 30px;
-  padding: 40px 60px;
+  margin-bottom: $spacing-large;
+  padding: 4rem 6rem;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
 
@@ -15,7 +15,7 @@
   }
 
   &__title {
-    font-size: 30px;
+    font-size: $font-header;
     margin-bottom: $spacing-large;
   }
 
