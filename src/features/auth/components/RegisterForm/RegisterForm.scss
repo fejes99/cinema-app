@@ -9,12 +9,6 @@
   border-radius: $border-radius-large;
   box-shadow: $box-shadow;
 
-  &__title {
-    font-size: $font-header;
-    text-transform: uppercase;
-    margin-bottom: $spacing-large;
-  }
-
   &__form {
     display: flex;
     flex-direction: column;
@@ -45,7 +39,7 @@
 
   &__login {
     cursor: default;
-    font-size: $font-small;
+    font-size: $font-size-small;
     text-align: center;
     margin-top: $spacing-medium;
     transition: $transition;

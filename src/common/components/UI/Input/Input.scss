@@ -6,7 +6,7 @@
   height: 7rem;
   margin-bottom: $spacing-medium;
   color: $text-color;
-  font-size: $font-medium;
+  font-size: $font-size-medium;
 
   &__label {
     margin-bottom: $spacing-small;
@@ -15,9 +15,9 @@
   &__field {
     box-sizing: border-box;
     width: 100%;
-    font-size: $font-small;
+    font-size: $font-size-small;
     display: inline-block;
-    padding: $spacing-small;
+    padding: 1rem;
     border: 0.1rem solid $color-gray;
     background-color: $color-background-input-field;
     border-radius: $border-radius;

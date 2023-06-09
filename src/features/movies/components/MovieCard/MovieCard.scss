@@ -1,10 +1,10 @@
 @import 'styles/global.scss';
 
 .movie-card {
-  padding: 35px;
+  padding: $spacing-large;
   width: 47.5%;
   box-sizing: border-box;
-  height: 320px;
+  height: 32rem;
   background-color: $background-color-secondary;
   display: flex;
   justify-content: space-evenly;
@@ -27,7 +27,7 @@
 
     &-image {
       width: 40%;
-      border-radius: 10px;
+      border-radius: $border-radius-large;
 
       @include xl {
         width: 100%;
@@ -59,7 +59,7 @@
   }
 
   &__name {
-    font-size: 24px;
+    font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: $spacing-medium;
@@ -69,18 +69,18 @@
   &__image {
     background-image: url('https://picsum.photos/300/250');
     background-size: cover;
-    width: 200px;
-    height: 250px;
+    width: 20rem;
+    height: 25rem;
     border-radius: $border-radius-large;
 
     @include xl {
-      width: 300px;
+      width: 30rem;
     }
   }
 
   &__content {
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: $font-size-small;
+    margin-bottom: 0.8rem;
     width: 100%;
 
     &-row {
@@ -108,14 +108,14 @@
     flex-direction: column;
     align-items: center;
     height: 550px;
-    width: 450px;
-    padding: 15px 50px;
+    width: 45rem;
+    padding: 1.5rem 5rem;
   }
 
   @include lg {
     width: 100%;
     flex-direction: row;
-    height: 320px;
+    height: 320rem;
     border-radius: 0;
   }
 }

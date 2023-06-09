@@ -25,15 +25,15 @@ $button-height-large: 6rem;
   transition: all 0.2s ease-in-out;
 
   &-small {
-    @include button($button-height-small, $spacing-small, $font-small);
+    @include button($button-height-small, $spacing-small, $font-size-small);
   }
 
   &-medium {
-    @include button($button-height-medium, $spacing-medium, $font-medium);
+    @include button($button-height-medium, $spacing-medium, $font-size-medium);
   }
 
   &-large {
-    @include button($button-height-large, $spacing-large, $font-large);
+    @include button($button-height-large, $spacing-large, $font-size-large);
   }
 
   &-primary {

@@ -69,7 +69,7 @@ table {
   margin-top: $spacing-large;
   width: 100%;
   max-width: 130rem;
-  font-size: $font-small;
+  font-size: $font-size-small;
   border-radius: $border-radius;
   background-color: $background-color-secondary;
   border-spacing: 0;
@@ -81,7 +81,7 @@ th {
   background-color: $background-color-primary;
   font-weight: bold;
   text-align: center;
-  font-size: $font-medium;
+  font-size: $font-size-medium;
   padding: 1rem 5rem;
   height: 4rem;
 
@@ -156,7 +156,7 @@ td {
   justify-content: center;
 
   &__title {
-    font-size: $font-large;
+    font-size: $font-size-large;
     font-weight: bold;
     margin-bottom: $spacing-large;
     text-transform: uppercase;
@@ -171,8 +171,8 @@ td {
 }
 
 .page-header {
-  font-family: $font-header;
+  font-family: $font-family-header;
   font-weight: bold;
-  font-size: 6rem;
+  font-size: $font-size-page-title;
   margin-bottom: $spacing-large;
 }

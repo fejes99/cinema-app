@@ -3,7 +3,7 @@
 .range-slider {
   width: 100%;
   max-width: 40rem;
-  font-size: $font-medium;
+  font-size: $font-size-medium;
 
   .MuiSlider {
     &-root {
@@ -13,7 +13,7 @@
 
     &-markLabel {
       color: $text-color;
-      font-size: $font-small;
+      font-size: $font-size-small;
       font-weight: 500;
 
       &-active {

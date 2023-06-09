@@ -11,9 +11,9 @@
   &__title {
     color: white;
     margin-left: $spacing-small;
-    font-size: 3rem;
+    font-size: $font-size-header;
     font-weight: 500;
-    font-family: $font-header;
+    font-family: $font-family-header;
     cursor: default;
   }
 

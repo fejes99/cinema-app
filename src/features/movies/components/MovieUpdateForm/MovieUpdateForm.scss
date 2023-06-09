@@ -4,17 +4,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px;
+  padding: 5rem;
   background-color: $background-color-secondary;
   border-radius: $border-radius-large;
   box-shadow: $box-shadow;
-
-  &__title {
-    font-size: 30px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    color: $text-color;
-  }
 
   &__form {
     display: flex;
@@ -25,13 +18,13 @@
 
   &__field {
     width: 100%;
-    max-width: 600px;
+    max-width: 6rem;
     border-radius: $border-radius;
     padding: $spacing-small;
   }
 
   &__video {
     width: 100%;
-    max-width: 600px;
+    max-width: 6rem;
   }
 }
