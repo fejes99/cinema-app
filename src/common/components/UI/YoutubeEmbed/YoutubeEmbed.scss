@@ -15,5 +15,13 @@
     height: 100%;
     border-radius: $border-radius-large;
     border: none;
+
+    @include xl {
+      border-radius: 0;
+    }
+  }
+
+  @include xl {
+    margin-bottom: 0;
   }
 }

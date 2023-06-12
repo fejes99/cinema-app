@@ -21,6 +21,11 @@
     flex-direction: row;
     gap: $spacing-large;
     align-items: stretch;
+
+    @include xl {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__trailer {
@@ -44,6 +49,10 @@
       font-size: $font-size-header;
       font-weight: bold;
       margin-bottom: 2rem;
+    }
+
+    @include xl {
+      border-radius: 0;
     }
   }
 
@@ -87,6 +96,10 @@
       line-height: 1.6;
       font-size: $font-size-small;
       position: relative;
+    }
+
+    @include xl {
+      border-radius: 0;
     }
   }
 

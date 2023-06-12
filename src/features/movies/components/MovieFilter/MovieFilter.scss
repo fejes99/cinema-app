@@ -6,37 +6,57 @@
   align-items: flex-start;
   margin-bottom: $spacing-large;
 
-  @include xl {
-    display: none;
-  }
-
   &__row {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-medium;
+
+    @include xl {
+      flex-direction: column;
+    }
+
+    @include md {
+      flex-direction: row;
+    }
   }
 
   &__input {
     display: flex;
     gap: $spacing-small;
+
+    @include md {
+      flex-direction: column;
+    }
   }
 
   &__search {
     width: 30rem;
+
+    @include md {
+      width: 25rem;
+    }
   }
 
   &__filters {
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-small;
+
+    @include md {
+      flex-direction: column;
+    }
   }
 
   &__filter {
     width: 18rem;
     display: flex;
     justify-content: center;
+
+    @include md {
+      width: 25rem;
+    }
   }
 
   &__sliders {
@@ -44,12 +64,21 @@
     align-items: center;
     gap: 5rem;
     width: 50rem;
+
+    @include md {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 
   &__slider {
     width: 100%;
     display: flex;
     justify-content: flex-start;
+
+    @include md {
+      width: 25rem;
+    }
   }
 
   &__buttons {
@@ -59,5 +88,21 @@
     justify-content: flex-start;
     width: fit-content;
     gap: $spacing-medium;
+
+    @include xl {
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-around;
+    }
+
+    @include md {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  @include xl {
+    flex-direction: row;
+    margin-bottom: 0;
   }
 }
