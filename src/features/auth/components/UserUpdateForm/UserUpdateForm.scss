@@ -27,4 +27,8 @@
     width: 100%;
     max-width: 60rem;
   }
+
+  @include xl {
+    border-radius: 0%;
+  }
 }

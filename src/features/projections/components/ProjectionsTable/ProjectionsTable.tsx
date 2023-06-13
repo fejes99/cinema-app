@@ -25,31 +25,31 @@ const ProjectionsTable: React.FC<Props> = ({
   <table>
     <thead>
       <tr>
-        <th className='align-left'>Movie</th>
+        <th className='important align-left'>Movie</th>
         <th>Time</th>
         <th>Projection</th>
-        <th>Theater</th>
-        <th className='padding-right'>Price</th>
-        {isAdmin ? <th>Action</th> : null}
+        <th className='important'>Theater</th>
+        <th className='important padding-right'>Price</th>
+        {isAdmin ? <th className='important'>Action</th> : null}
       </tr>
     </thead>
     <tbody>
       {projections &&
         projections.map((projection: Projection) => (
           <tr key={projection.id} className={projection.isSold ? 'sold' : ''}>
-            <td className='align-left'>
+            <td className='important align-left'>
               <span className='pointer' onClick={() => redirect(projection.id)}>
                 {projection.movie?.name}
               </span>
             </td>
             <td className='align-right'>{formatDate(projection.time)}</td>
             <td>{projection.projectionType.name}</td>
-            <td>{projection.theater.name}</td>
-            <td className='align-right padding-right'>
+            <td className='important'>{projection.theater.name}</td>
+            <td className='important align-right padding-right'>
               <span className='bold'>{formatPrice(projection.price)}</span>
             </td>
             {isAdmin ? (
-              <td className='icons'>
+              <td className='actions icons'>
                 <div onClick={() => onEdit(projection.id)}>
                   <ModeEditOutlinedIcon fontSize='large' className='edit-icon' />
                 </div>

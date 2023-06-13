@@ -30,7 +30,6 @@ const UserUpdateForm: React.FC<Props> = ({ user, update }) => {
 
   return (
     <div className='user-update'>
-      <div className='user-update__title'>Update Profile</div>
       <form className='user-update__form' onSubmit={handleSubmit}>
         <div className='user-update__field'>
           <Input

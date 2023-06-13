@@ -55,7 +55,7 @@ const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
               path='/users/*'
               element={
                 <PrivateRoute isAuthenticated={Boolean(user)}>
-                  <UserPage />
+                  <UserPage user={user!} />
                 </PrivateRoute>
               }
             />
@@ -71,7 +71,7 @@ const App: React.FC<Props> = ({ token, user, onTryAutoLogin }) => {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/' element={<Navigate to={'/projections'} replace />} />
-          <Route path='*' element={<Navigate to={'/'} replace />} />
+          {/* <Route path='*' element={<Navigate to={'/'} replace />} /> */}
         </Routes>
       </div>
     </div>

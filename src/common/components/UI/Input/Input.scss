@@ -21,7 +21,7 @@
     border: 0.1rem solid $color-gray;
     background-color: $color-background-input-field;
     border-radius: $border-radius;
-    transition: $transition;
+    transition: border-color 2s ease;
 
     &.error {
       border-color: red;

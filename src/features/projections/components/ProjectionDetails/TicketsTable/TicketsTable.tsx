@@ -14,25 +14,25 @@ const TicketsTable: React.FC<Props> = ({ tickets, onTicketClick, onUserClick }) 
   <table>
     <thead>
       <tr>
-        <th>Projection Time</th>
-        <th>User</th>
-        <th>Seat</th>
+        <th className='important'>Projection Time</th>
+        <th className='important'>User</th>
+        <th className='important'>Seat</th>
       </tr>
     </thead>
     <tbody>
       {tickets.map((ticket: Ticket) => (
         <tr key={ticket.id}>
-          <td>
+          <td className='important'>
             <span className='pointer' onClick={() => onTicketClick(ticket.id)}>
               {formatDate(ticket.created)}
             </span>
           </td>
-          <td className='pointer'>
+          <td className='important pointer'>
             <span className='pointer' onClick={() => onUserClick(ticket.user.id)}>
               {ticket.user.username}
             </span>
           </td>
-          <td>{ticket.seat.number}</td>
+          <td className='important'>{ticket.seat.number}</td>
         </tr>
       ))}
     </tbody>

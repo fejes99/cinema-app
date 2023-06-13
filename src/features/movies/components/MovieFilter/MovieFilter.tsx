@@ -27,6 +27,7 @@ const MovieFilter: React.FC<Props> = ({
   countries,
   distributors,
   filters: {
+    query,
     country,
     distributor,
     minDuration,
@@ -46,7 +47,10 @@ const MovieFilter: React.FC<Props> = ({
       <div className='movie-filter__row'>
         <div className='movie-filter__input'>
           <div className='movie-filter__search'>
-            <Search onChange={(value) => onFiltersChange(MovieFilterName.Query, value)} />
+            <Search
+              value={query}
+              onChange={(value) => onFiltersChange(MovieFilterName.Query, value)}
+            />
           </div>
           <div className='movie-filter__filters'>
             <div className='movie-filter__filter'>

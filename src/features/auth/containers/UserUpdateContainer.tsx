@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
 import { AppDispatch, StoreState } from 'store/store';
 import { fetchUser, updateUser } from '../state/authActions';
 import { UserUpdateDto } from '../types/UserUpdateDto';
 import { User } from '../types/User';
 import { Error } from 'common/types/Error';
-import { useParams } from 'react-router';
 import { useAuthRedirect } from '../hooks/authRedirects';
 import Loader from 'common/components/UI/Loader/Loader';
 import UserUpdateForm from '../components/UserUpdateForm/UserUpdateForm';
@@ -40,7 +40,14 @@ const UserUpdateContainer: React.FC<Props> = ({
     redirectToProfile();
   };
 
-  return user && <UserUpdateForm user={user} update={handleUserUpdate} />;
+  return (
+    user && (
+      <div>
+        <div className='page-header'>User Update</div>
+        <UserUpdateForm user={user} update={handleUserUpdate} />
+      </div>
+    )
+  );
 };
 
 const mapStateToProps = (state: StoreState) => ({

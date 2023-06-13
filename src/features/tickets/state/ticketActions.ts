@@ -107,7 +107,9 @@ export const deleteTicket = (ticketId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteTicketRequest());
   axios
     .delete(`/tickets/${ticketId}`)
-    .then(() => dispatch(deleteTicketSuccess()))
+    .then(() => {
+      dispatch(deleteTicketSuccess());
+    })
     .catch((error) => dispatch(deleteTicketFail(error.response.data)));
 };
 

@@ -48,7 +48,11 @@ const ProfileContainer: React.FC<Props> = ({
   const { redirectToTicketDetails } = useTicketRedirect();
   const { redirectToUserUpdate } = useAuthRedirect();
 
-  useEffect(() => onFetchUserTickets(user!.id), [onFetchUserTickets, user]);
+  useEffect(() => {
+    if (user) {
+      onFetchUserTickets(user.id);
+    }
+  }, [onFetchUserTickets, user]);
 
   if (loading) return <Loader />;
   if (user === null) return <div>No user</div>;
@@ -64,8 +68,8 @@ const ProfileContainer: React.FC<Props> = ({
 
   const deleteModalConfirmation = (): void => {
     onTicketDelete(ticketToDelete!.id);
-    closeAllModals();
     onFetchUserTickets(user.id);
+    closeAllModals();
   };
 
   const handleLogoutClick = (): void => {

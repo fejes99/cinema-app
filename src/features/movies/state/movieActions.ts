@@ -147,10 +147,7 @@ const removeMovie = (movieId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteMovieRequest());
   return axios
     .delete(`/movies/${movieId}`)
-    .then((response) => {
-      dispatch(deleteMovieSuccess());
-      dispatch(fetchMovies());
-    })
+    .then(() => dispatch(deleteMovieSuccess()))
     .catch((error) => dispatch(deleteMovieFail(error)));
 };
 

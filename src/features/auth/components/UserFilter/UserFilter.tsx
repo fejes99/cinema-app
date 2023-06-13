@@ -25,7 +25,10 @@ const UserFilter: React.FC<Props> = ({
     <div className='user-filter'>
       <div className='user-filter__input'>
         <div className='user-filter__search'>
-          <Search onChange={(value) => onFiltersChange(UserFilterName.Query, value)} />
+          <Search
+            value={query}
+            onChange={(value) => onFiltersChange(UserFilterName.Query, value)}
+          />
         </div>
         <div className='user-filter__filter'>
           <Dropdown

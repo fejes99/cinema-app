@@ -19,6 +19,10 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: $spacing-small;
+
+    @include xl {
+      flex-direction: column;
+    }
   }
 
   &__filter {

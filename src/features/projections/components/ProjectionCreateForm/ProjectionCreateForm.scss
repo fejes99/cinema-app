@@ -32,4 +32,8 @@
       margin-bottom: $spacing-medium;
     }
   }
+
+  @include xl {
+    border-radius: 0%;
+  }
 }

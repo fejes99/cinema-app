@@ -145,10 +145,7 @@ const removeProjection = (projectionId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteProjectionRequest());
   return axios
     .delete(`/projections/${projectionId}`)
-    .then(() => {
-      dispatch(deleteProjectionSuccess());
-      dispatch(fetchProjections());
-    })
+    .then(() => dispatch(deleteProjectionSuccess()))
     .catch((error) => dispatch(deleteProjectionFail(error.response.data)));
 };
 

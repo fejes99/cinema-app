@@ -19,24 +19,24 @@ const UsersTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
     <table>
       <thead>
         <tr>
-          <th className='align-left'>Username</th>
+          <th className='important align-left'>Username</th>
           <th>Created</th>
-          <th>Role</th>
-          <th>Action</th>
+          <th className='important'>Role</th>
+          <th className='important'>Action</th>
         </tr>
       </thead>
       <tbody>
         {users &&
           users.map((user: User) => (
             <tr key={user.id}>
-              <td className='align-left'>
+              <td className='important align-left'>
                 <span className='pointer' onClick={() => redirectToUserDetails(user.id)}>
                   {user.username}
                 </span>
               </td>
               <td>{formatDate(user.created)}</td>
-              <td className='align-center'>{user.role}</td>
-              <td className='icons'>
+              <td className='important align-center'>{user.role}</td>
+              <td className='actions icons'>
                 <div onClick={() => onEdit(user.id)}>
                   <ModeEditOutlinedIcon fontSize='large' className='edit-icon' />
                 </div>

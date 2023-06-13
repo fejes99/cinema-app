@@ -21,33 +21,33 @@ const UserTicketsTable: React.FC<Props> = ({
   <table>
     <thead>
       <tr>
-        <th className='align-left'>Created</th>
-        <th className='align-left'>Movie</th>
+        <th className='important align-left'>Created</th>
+        <th className='important align-left'>Movie</th>
         <th>Projection Type</th>
-        <th>Price</th>
+        <th className='important'>Price</th>
         <th>Theater</th>
-        <th>Seat</th>
-        <th>Action</th>
+        <th className='important'>Seat</th>
+        <th className='important'>Action</th>
       </tr>
     </thead>
     <tbody>
       {tickets.map((ticket: Ticket) => (
         <tr key={ticket.id}>
-          <td className='align-left'>
+          <td className='important align-left'>
             <span className='pointer' onClick={() => ticketDetails(ticket.id)}>
               {formatDate(ticket.created)}
             </span>
           </td>
-          <td className='align-left'>
+          <td className='important align-left'>
             <span className='pointer' onClick={() => projectionDetails(ticket.projection.id)}>
               {ticket.projection.movie?.name}
             </span>
           </td>
           <td>{ticket.projection.projectionType.name}</td>
-          <td className='align-right'>{formatPrice(ticket.projection.price)}</td>
+          <td className='important align-right'>{formatPrice(ticket.projection.price)}</td>
           <td>{ticket.projection.theater.name}</td>
-          <td>{ticket.seat.number}</td>
-          <td>
+          <td className='important'>{ticket.seat.number}</td>
+          <td className='important'>
             <div onClick={() => onDelete(ticket.id)}>
               <DeleteOutlinedIcon fontSize='large' className='delete-icon' />
             </div>

@@ -18,13 +18,17 @@
 
   &__field {
     width: 100%;
-    max-width: 6rem;
+    max-width: 60rem;
     border-radius: $border-radius;
     padding: $spacing-small;
   }
 
   &__video {
     width: 100%;
-    max-width: 6rem;
+    max-width: 60rem;
+  }
+
+  @include xl {
+    border-radius: 0%;
   }
 }

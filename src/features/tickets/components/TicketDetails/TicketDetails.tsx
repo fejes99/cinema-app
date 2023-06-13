@@ -6,12 +6,17 @@ import { Ticket } from '../../types/Ticket';
 
 import { formatDate } from 'common/helpers/formatDate';
 import { formatPrice } from 'common/helpers/formatPrice';
+import { useMovieRedirect } from 'features/movies/hooks/movieRedirects';
+import { useUserRedirect } from 'features/auth/hooks/userRedirects';
 
 interface Props {
   ticket: Ticket;
 }
 
 const TicketDetails: React.FC<Props> = ({ ticket }) => {
+  const { redirectToMovieDetails } = useMovieRedirect();
+  const { redirectToUserDetails } = useUserRedirect();
+
   return (
     <div className='ticket-details'>
       <div className='ticket-details__title'>Created: {formatDate(ticket.created)}</div>
@@ -20,7 +25,12 @@ const TicketDetails: React.FC<Props> = ({ ticket }) => {
           <div className='ticket-details__subtitle'>Projection</div>
           <div className='ticket-details__content'>
             <span className='bold'>Movie:</span>{' '}
-            <span className='underline pointer'>{ticket.projection.movie?.name}</span>
+            <span
+              className='underline pointer'
+              onClick={() => redirectToMovieDetails(ticket.projection.movie?.id!)}
+            >
+              {ticket.projection.movie?.name}
+            </span>
           </div>
           <div className='ticket-details__content'>
             <span className='bold'>Time:</span> {formatDate(ticket.projection.time)}
@@ -38,7 +48,10 @@ const TicketDetails: React.FC<Props> = ({ ticket }) => {
           <div className='ticket-details__subtitle'>User</div>
           <div className='ticket-details__content'>
             <span className='bold'>Name:</span>{' '}
-            <span className='underline pointer'>
+            <span
+              className='underline pointer'
+              onClick={() => redirectToUserDetails(ticket.user.id)}
+            >
               {ticket.user.firstName} {ticket.user.lastName}
             </span>
           </div>
