@@ -7,13 +7,24 @@ interface Props {
   type: string;
   name: string;
   value: string | number;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   min?: number | string;
   max?: number;
   error?: string;
 }
 
-const Input: React.FC<Props> = ({ label, type, value, name, onChange, min, max, error }) => {
+const Input: React.FC<Props> = ({
+  label,
+  type,
+  value,
+  disabled,
+  name,
+  onChange,
+  min,
+  max,
+  error,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
 
@@ -29,10 +40,11 @@ const Input: React.FC<Props> = ({ label, type, value, name, onChange, min, max, 
         type={type}
         value={value}
         name={name}
-        className={`input__field ${error ? 'error' : ''}`}
+        className={`input__field ${error ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
         onChange={handleChange}
         min={min}
         max={max}
+        disabled={disabled}
       />
       {error && <div className='input__error'>{error}</div>}
     </div>

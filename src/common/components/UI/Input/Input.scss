@@ -23,6 +23,12 @@
     border-radius: $border-radius;
     transition: border-color 2s ease;
 
+    &.disabled {
+      background-color: $color-disabled;
+      color: $text-color-disabled;
+      cursor: not-allowed;
+    }
+
     &.error {
       border-color: red;
     }

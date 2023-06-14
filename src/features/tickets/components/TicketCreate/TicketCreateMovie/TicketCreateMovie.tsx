@@ -42,7 +42,9 @@ const TicketCreateMovie: React.FC<Props> = ({ movie, selectProjection }) => {
           )
       )
     ) : (
-      <div className='bold'>There are no projections at the moment.</div>
+      <div className='ticket-create-movie__content bold'>
+        There are no projections at the moment.
+      </div>
     );
 
   return (

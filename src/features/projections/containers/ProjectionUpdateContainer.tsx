@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import { ProjectionUpdateDto } from '../types/ProjectionUpdateDto';
@@ -37,6 +37,8 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
   onFetchProjection,
   onUpdateProjection,
 }) => {
+  const [updatedProjectionTypes, setUpdatedProjectionTypes] =
+    useState<ProjectionType[]>(projectionTypes);
   const { id } = useParams();
   const { redirectToProjectionList } = useProjectionRedirect();
 
@@ -59,13 +61,25 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
     redirectToProjectionList();
   };
 
+  const updateProjectionTypes = (theaterName: string): void => {
+    const theater: Theater | undefined = theaters.find((theater) => theater.name === theaterName);
+    if (theater) {
+      const updatedTypes: ProjectionType[] = projectionTypes.filter((projectionType) =>
+        theater.projectionTypes.some((type) => type.name === projectionType.name)
+      );
+
+      setUpdatedProjectionTypes(updatedTypes);
+    }
+  };
+
   return (
     <>
       <div className='page-header'>Update Projection</div>
       <ProjectionUpdateForm
         projection={projection!}
-        projectionTypes={projectionTypes}
+        projectionTypes={updatedProjectionTypes}
         theaters={theaters}
+        theaterClick={updateProjectionTypes}
         update={handleProjectionUpdate}
       />
     </>

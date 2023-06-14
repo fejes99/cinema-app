@@ -15,6 +15,7 @@ interface Props {
   projection: Projection;
   projectionTypes: ProjectionType[];
   theaters: Theater[];
+  theaterClick: (theater: string) => void;
   update: (id: string, ProjectionUpdateDto: ProjectionUpdateDto) => void;
 }
 
@@ -22,6 +23,7 @@ const ProjectionUpdateForm: React.FC<Props> = ({
   projection,
   projectionTypes,
   theaters,
+  theaterClick,
   update,
 }) => {
   const [projectionUpdate, setProjectionUpdate] = useState<ProjectionUpdateDto>({
@@ -63,6 +65,16 @@ const ProjectionUpdateForm: React.FC<Props> = ({
       <div className='projection-update__form'>
         <div className='projection-update__field'>
           <Input
+            label='Movie'
+            type='text'
+            name=''
+            value={projection.movie?.name!}
+            disabled={true}
+            onChange={() => {}}
+          />
+        </div>
+        <div className='projection-update__field'>
+          <Input
             label='Time'
             type='datetime-local'
             name='time'
@@ -82,20 +94,24 @@ const ProjectionUpdateForm: React.FC<Props> = ({
         </div>
         <div className='projection-update__field'>
           <Dropdown
+            title='Theaters'
+            value={getNameById(projectionUpdate.theaterId, theaters)}
+            options={theaters.map((theater) => theater.name)}
+            onChange={(value) => {
+              theaterClick(value);
+              handleDropdownChange('theaterId', value);
+            }}
+          />
+        </div>
+        <div className='projection-update__field'>
+          <Dropdown
             title='Projection Types'
             value={getNameById(projectionUpdate.projectionTypeId, projectionTypes)}
             options={projectionTypes.map((projectionType) => projectionType.name)}
             onChange={(value) => handleDropdownChange('projectionTypeId', value)}
           />
         </div>
-        <div className='projection-update__field'>
-          <Dropdown
-            title='Theaters'
-            value={getNameById(projectionUpdate.theaterId, theaters)}
-            options={theaters.map((theater) => theater.name)}
-            onChange={(value) => handleDropdownChange('theaterId', value)}
-          />
-        </div>
+
         <Button size='medium' type='success' disabled={!isFormValid} onClick={handleSubmit}>
           Update Projection
         </Button>

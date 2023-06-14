@@ -3,7 +3,7 @@
 .youtube-embed {
   position: relative;
   width: 100%;
-  height: 0;
+  height: 100%;
   padding-bottom: calc(100% / (16 / 9));
   margin-bottom: $spacing-large;
 
@@ -19,6 +19,17 @@
     @include xl {
       border-radius: 0;
     }
+  }
+
+  img.default-image {
+    position: absolute;
+    background-image: url('https://picsum.photos/800/500');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-radius: $border-radius-large;
   }
 
   @include xl {
