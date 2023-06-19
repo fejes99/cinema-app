@@ -8,7 +8,7 @@ interface Props {
 const YoutubeEmbed: React.FC<Props> = ({ videoId }) => (
   <div className='youtube-embed'>
     {!videoId ? (
-      <img alt='' className='default-image' src='https://picsum.photos/800/500' />
+      <img alt='' className='default-image' src='https://picsum.photos/850/475' />
     ) : (
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
