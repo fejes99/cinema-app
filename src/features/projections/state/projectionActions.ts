@@ -21,15 +21,13 @@ const fetchProjectionsFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchProjections =
-  () =>
-  (dispatch: AppDispatch): void => {
-    dispatch(fetchProjectionsRequest());
-    axios
-      .get('/projections')
-      .then((response) => dispatch(fetchProjectionsSuccess(response.data)))
-      .catch((error) => dispatch(fetchProjectionsFail(error)));
-  };
+export const fetchProjections = () => (dispatch: AppDispatch) => {
+  dispatch(fetchProjectionsRequest());
+  axios
+    .get('/projections')
+    .then((response) => dispatch(fetchProjectionsSuccess(response.data)))
+    .catch((error) => dispatch(fetchProjectionsFail(error)));
+};
 
 const fetchProjectionRequest = () => ({
   type: actionTypes.FETCH_PROJECTION_REQUEST,
@@ -119,7 +117,7 @@ export const updateProjection =
   (projectionId: string, projectionUpdateDto: ProjectionUpdateDto) =>
   async (dispatch: AppDispatch) => {
     await dispatch(editProjection(projectionId, projectionUpdateDto));
-    dispatch(fetchProjection(projectionId));
+    dispatch(fetchProjections());
   };
 
 const deleteProjectionRequest = () => ({

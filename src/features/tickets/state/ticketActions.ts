@@ -103,14 +103,19 @@ const deleteTicketFail = (error: Error) => {
   };
 };
 
-export const deleteTicket = (ticketId: string) => (dispatch: AppDispatch) => {
+export const removeTicket = (ticketId: string) => (dispatch: AppDispatch) => {
   dispatch(deleteTicketRequest());
-  axios
+  return axios
     .delete(`/tickets/${ticketId}`)
     .then(() => {
       dispatch(deleteTicketSuccess());
     })
     .catch((error) => dispatch(deleteTicketFail(error.response.data)));
+};
+
+export const deleteTicket = (ticketId: string, userId: string) => async (dispatch: AppDispatch) => {
+  await dispatch(removeTicket(ticketId));
+  dispatch(fetchUserTickets(userId));
 };
 
 const fetchUserTicketsRequest = () => ({

@@ -27,7 +27,7 @@ interface Props {
   loading: boolean;
   error: Error | null;
   onFetchUserTickets: (userId: string) => void;
-  onTicketDelete: (ticketId: string) => void;
+  onTicketDelete: (ticketId: string, userId: string) => void;
   onLogout: () => void;
 }
 
@@ -67,7 +67,7 @@ const ProfileContainer: React.FC<Props> = ({
   };
 
   const deleteModalConfirmation = (): void => {
-    onTicketDelete(ticketToDelete!.id);
+    onTicketDelete(ticketToDelete!.id, user.id);
     onFetchUserTickets(user.id);
     closeAllModals();
   };
@@ -82,9 +82,9 @@ const ProfileContainer: React.FC<Props> = ({
       <UserControlButtonGroup onEdit={handleEditProfileClick} onLogout={handleLogoutClick} />
       <div className='page-header'>Profile</div>
       <UserDetails user={user} />
-      {userTickets && (
+      {userTickets?.length! > 0 && (
         <UserTicketsTable
-          tickets={userTickets}
+          tickets={userTickets!}
           ticketDetails={redirectToTicketDetails}
           projectionDetails={redirectToProjectionDetails}
           onDelete={handleTicketDeleteClick}
@@ -109,7 +109,7 @@ const mapStateToProps = (state: StoreState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchUserTickets: (userId: string) => dispatch(fetchUserTickets(userId)),
-  onTicketDelete: (ticketId: string) => dispatch(deleteTicket(ticketId)),
+  onTicketDelete: (ticketId: string, userId: string) => dispatch(deleteTicket(ticketId, userId)),
   onLogout: () => dispatch(logout()),
 });
 

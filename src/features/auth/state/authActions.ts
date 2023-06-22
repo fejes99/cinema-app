@@ -226,14 +226,18 @@ const updateUserFail = (error: Error) => {
   };
 };
 
+const editUser = (userId: string, userUpdateDto: UserUpdateDto) => (dispatch: AppDispatch) => {
+  dispatch(updateUserRequest());
+  return axios
+    .put(`/users/${userId}`, userUpdateDto)
+    .then((response) => dispatch(updateUserSuccess(response.data)))
+    .catch((error) => dispatch(updateUserFail(error.response.data)));
+};
+
 export const updateUser =
-  (userId: string, userUpdateDto: UserUpdateDto) =>
-  (dispatch: AppDispatch): void => {
-    dispatch(updateUserRequest());
-    axios
-      .put(`/users/${userId}`, userUpdateDto)
-      .then((response) => dispatch(updateUserSuccess(response.data)))
-      .catch((error) => dispatch(updateUserFail(error.response.data)));
+  (userId: string, userUpdateDto: UserUpdateDto) => async (dispatch: AppDispatch) => {
+    await dispatch(editUser(userId, userUpdateDto));
+    dispatch(fetchUsers());
   };
 
 const deleteUserRequest = () => ({
@@ -255,12 +259,15 @@ const deleteUserFail = (error: Error) => {
   };
 };
 
-export const deleteUser =
-  (userId: string) =>
-  (dispatch: AppDispatch): void => {
-    dispatch(deleteUserRequest());
-    axios
-      .delete(`/users/${userId}`)
-      .then(() => dispatch(deleteUserSuccess()))
-      .catch((error) => dispatch(deleteUserFail(error.response.data)));
-  };
+const removeUser = (userId: string) => (dispatch: AppDispatch) => {
+  dispatch(deleteUserRequest());
+  return axios
+    .delete(`/users/${userId}`)
+    .then(() => dispatch(deleteUserSuccess()))
+    .catch((error) => dispatch(deleteUserFail(error.response.data)));
+};
+
+export const deleteUser = (userId: string) => async (dispatch: AppDispatch) => {
+  await dispatch(removeUser(userId));
+  dispatch(fetchUsers());
+};
