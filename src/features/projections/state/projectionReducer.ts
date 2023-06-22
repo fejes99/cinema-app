@@ -31,7 +31,7 @@ const projectionReducer: Reducer<ProjectionState, actionTypes.ProjectionActionTy
     case actionTypes.CREATE_PROJECTION_REQUEST:
       return { ...state, loading: true, selectedProjection: null, error: null };
     case actionTypes.CREATE_PROJECTION_SUCCESS:
-      return { ...state, loading: false, selectedProjection: action.newProjection };
+      return { ...state, loading: false };
     case actionTypes.CREATE_PROJECTION_FAIL:
       return { ...state, loading: false, error: action.error };
 
