@@ -1,0 +1,9 @@
+@import 'styles/global.scss';
+
+.page-navigator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-large;
+}

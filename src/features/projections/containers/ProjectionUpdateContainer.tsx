@@ -13,6 +13,7 @@ import ProjectionUpdateForm from '../components/ProjectionUpdateForm/ProjectionU
 import { useProjectionRedirect } from '../hooks/projectionRedirects';
 import Loader from 'common/components/UI/Loader/Loader';
 import { Error } from 'common/types/Error';
+import PageNavigator from 'common/components/PageNavigator/PageNavigator';
 
 interface Props {
   projection: Projection | null;
@@ -74,7 +75,7 @@ const ProjectionUpdateContainer: React.FC<Props> = ({
 
   return (
     <>
-      <div className='page-header'>Update Projection</div>
+      <PageNavigator title='Update Projection' />
       <ProjectionUpdateForm
         projection={projection!}
         projectionTypes={updatedProjectionTypes}

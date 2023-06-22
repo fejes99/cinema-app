@@ -13,6 +13,7 @@ import { MovieUpdateDto } from '../types/MovieUpdateDto';
 
 import Loader from 'common/components/UI/Loader/Loader';
 import MovieUpdateForm from '../components/MovieUpdateForm/MovieUpdateForm';
+import PageNavigator from 'common/components/PageNavigator/PageNavigator';
 
 interface Props {
   movie: Movie | null;
@@ -46,7 +47,7 @@ const MovieUpdateContainer: React.FC<Props> = ({
 
   return (
     <>
-      <div className='page-header'>Update Movie</div>
+      <PageNavigator title='Update Movie' />
       {movie && <MovieUpdateForm movie={movie} update={handleMovieUpdate} />}
     </>
   );

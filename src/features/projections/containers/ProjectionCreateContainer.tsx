@@ -18,6 +18,7 @@ import { fetchProjectionTypes } from 'features/projectionTypes/state/projectionT
 import Loader from 'common/components/UI/Loader/Loader';
 import ProjectionCreateForm from '../components/ProjectionCreateForm/ProjectionCreateForm';
 import { Error } from 'common/types/Error';
+import PageNavigator from 'common/components/PageNavigator/PageNavigator';
 
 interface Props {
   movies: Movie[];
@@ -73,7 +74,7 @@ const ProjectionCreateContainer: React.FC<Props> = ({
 
   return (
     <>
-      <div className='page-header'>Create Projection</div>
+      <PageNavigator title='Create Projection' />
       <ProjectionCreateForm
         movies={movies}
         projectionTypes={updatedProjectionTypes}

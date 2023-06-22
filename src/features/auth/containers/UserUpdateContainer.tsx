@@ -9,6 +9,7 @@ import { Error } from 'common/types/Error';
 import { useAuthRedirect } from '../hooks/authRedirects';
 import Loader from 'common/components/UI/Loader/Loader';
 import UserUpdateForm from '../components/UserUpdateForm/UserUpdateForm';
+import PageNavigator from 'common/components/PageNavigator/PageNavigator';
 
 interface Props {
   user: User | null;
@@ -43,7 +44,7 @@ const UserUpdateContainer: React.FC<Props> = ({
   return (
     user && (
       <div>
-        <div className='page-header'>User Update</div>
+        <PageNavigator title={'User Update'} />
         <UserUpdateForm user={user} update={handleUserUpdate} />
       </div>
     )
