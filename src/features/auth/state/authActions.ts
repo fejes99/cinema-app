@@ -118,15 +118,21 @@ export const login = (loginData: LoginDto) => (dispatch: AppDispatch) => {
       );
       const expirationDate: string = new Date(exp * 1000).toString();
 
+      const userData = {
+        userId: userId,
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        created: created,
+        role: role,
+      };
+
+      const userDataJson = JSON.stringify(userData);
+
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userId', userId);
-      localStorage.setItem('firstName', firstName);
-      localStorage.setItem('lastName', lastName);
-      localStorage.setItem('username', username);
-      localStorage.setItem('email', email);
-      localStorage.setItem('created', created);
-      localStorage.setItem('role', role);
       localStorage.setItem('expirationDate', expirationDate);
+      localStorage.setItem('user', userDataJson);
 
       dispatch(loginSuccess(response.data));
     })
@@ -153,13 +159,10 @@ export const authCheck =
       return;
     }
 
-    const userId: string | null = localStorage.getItem('userId');
-    const firstName: string | null = localStorage.getItem('firstName');
-    const lastName: string | null = localStorage.getItem('lastName');
-    const username: string | null = localStorage.getItem('username');
-    const email: string | null = localStorage.getItem('email');
-    const created: string | null = localStorage.getItem('created');
-    const role: string | null = localStorage.getItem('role');
+    const userDataJson = localStorage.getItem('user');
+    const { userId, firstName, lastName, username, email, created, role } = JSON.parse(
+      userDataJson!
+    );
 
     const user: User = {
       id: userId!,
